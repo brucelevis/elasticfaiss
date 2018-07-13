@@ -1,0 +1,52 @@
+syntax="proto2";
+package elasticfaiss;
+option cc_generic_services = true;
+
+message TrainShard{
+    required string index_name = 1;
+    required string index_type = 2;
+    optional bool   is_leader  = 3;
+}
+
+message DataShard{
+    required string index_name = 1;
+    required string index_type = 2;
+    required int32  index_idx  = 3;
+    optional bool   is_leader  = 4;
+}
+
+message WorkNode{
+    required string peer_id = 1;
+    optional int64 last_hb_ms = 2;
+    optional int64 last_state_ms = 3;
+    repeated TrainShard train_shards = 4;
+    repeated DataShard  data_shards = 5;
+}
+
+
+message BootstrapRequest {
+    required string node_peer = 1;
+};
+
+message BootstrapResponse {
+    required bool success = 1;
+    optional string redirect = 2;
+    repeated WorkNode nodes = 3; 
+};
+
+message HeartbeatRequest {
+    required string node_peer = 1;
+};
+
+message HeartbeatResponse {
+    required bool success = 1;
+    optional string redirect = 2;
+    repeated WorkNode nodes = 3; 
+};
+
+
+service MasterService {
+    rpc bootstrap(BootstrapRequest) returns (BootstrapResponse);
+    rpc heartbeat(HeartbeatRequest) returns (HeartbeatResponse);
+};
+
