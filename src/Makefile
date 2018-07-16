@@ -66,9 +66,9 @@ GFLAGS_VER=2.2.1
 GFLAGS_PATH=${LIB_PATH}/gflags-${GFLAGS_VER}
 GFLAGS_FILE=${GFLAGS_PATH}.tar.gz
 GFLAGS_REMOTE_FILE=https://github.com/gflags/gflags/archive/v${GFLAGS_VER}.tar.gz
-GFLAGS_LIBA=${GFLAGS_PATH}/build/lib/libgflags.a
-GFLAGS_INCLUDE=${GFLAGS_PATH}/build/include
-GFLAGS_LIBPATH=${GFLAGS_PATH}/build/lib
+GFLAGS_LIBA=${GFLAGS_PATH}/build_dir/lib/libgflags.a
+GFLAGS_INCLUDE=${GFLAGS_PATH}/build_dir/include
+GFLAGS_LIBPATH=${GFLAGS_PATH}/build_dir/lib
 DEP_LIBS+= ${GFLAGS_LIBA}
 
 GLOG_VER=0.3.5
@@ -88,7 +88,9 @@ PROTOBUF_REMOTE_FILE=https://github.com/google/protobuf/releases/download/v${PRO
 PROTOBUF_LIBA=${PROTOBUF_PATH}/src/.libs/libprotobuf.a
 PROTOBUF_INCLUDE=${PROTOBUF_PATH}/src
 PROTOBUF_LIBPATH=${PROTOBUF_PATH}/src/.libs/
-#DEP_LIBS+= ${PROTOBUF_LIBA}
+PROTOBUF_COMPILER=${PROTOBUF_PATH}/src/protoc
+DEP_LIBS+= ${PROTOBUF_LIBA}
+export PATH := ${PROTOBUF_INCLUDE}:$(PATH)
 
 
 BRPC_VER=master
@@ -97,8 +99,8 @@ BRPC_FILE=${BRPC_PATH}.zip
 BRPC_REMOTE_FILE=https://github.com/brpc/brpc/archive/${BRPC_VER}.zip
 BRPC_LIBA=${BRPC_PATH}/libbrpc.a
 BRPC_INCLUDE=${BRPC_PATH}/src
-BRPC_INCS=/usr/include /usr/local/include ${LEVELDB_INCLUDE} ${GFLAGS_INCLUDE} ${GLOG_INCLUDE}
-BRPC_LIBS=/usr/lib /usr/local/lib ${LEVELDB_LIBPATH} ${GFLAGS_LIBPATH} ${GLOG_LIBPATH}
+BRPC_INCS=${LEVELDB_INCLUDE} ${GFLAGS_INCLUDE} ${GLOG_INCLUDE} ${PROTOBUF_INCLUDE} /usr/include /usr/local/include 
+BRPC_LIBS=${LEVELDB_LIBPATH} ${GFLAGS_LIBPATH} ${GLOG_LIBPATH} ${PROTOBUF_LIBPATH} /usr/lib /usr/local/lib 
 DEP_LIBS+= ${BRPC_LIBA}
 
 BRAFT_VER=master
@@ -111,7 +113,7 @@ BRAFT_ENVS=-DLEVELDB_INCLUDE_PATH=${LEVELDB_INCLUDE} -DLEVELDB_LIB=${LEVELDB_LIB
 BRAFT_ENVS+= -DGFLAGS_INCLUDE_PATH=${GFLAGS_INCLUDE} -DGFLAGS_LIB=${GFLAGS_LIBA} 
 BRAFT_ENVS+=  -DGLOG_INCLUDE_PATH=${GLOG_INCLUDE} -DGLOG_LIB=${GLOG_LIBA} 
 BRAFT_ENVS+=  -DBRPC_INCLUDE_PATH=${BRPC_PATH}/src -DBRPC_LIB=${BRPC_LIBA} 
-BRAFT_ENVS+=  -DBRPC_WITH_GLOG=ON -DDYNAMIC_LIB=${SNAPPY_LIBA}
+BRAFT_ENVS+=  -DBRPC_WITH_GLOG=ON 
 DEP_LIBS+= ${BRAFT_LIBA}
 
 FAISS_VER=1.3.0
@@ -120,7 +122,7 @@ FAISS_FILE=${FAISS_PATH}.tar.gz
 FAISS_REMOTE_FILE=https://github.com/facebookresearch/faiss/archive/v${FAISS_VER}.tar.gz
 FAISS_LIBA=${FAISS_PATH}/libfaiss.a
 FAISS_INCLUDE=${FAISS_PATH}/
-DEP_LIBS+= ${FAISS_LIBA}
+#DEP_LIBS+= ${FAISS_LIBA}
 
 
 OPTIMIZATION?=-O2
@@ -136,7 +138,7 @@ LEVELDB_OPT=-g $(OPT)
 LUA_CFLAGS+= $(OPT) -Wall -DLUA_ANSI $(CCFLAGS)
 LUA_LDFLAGS+= $(LDFLAGS)
 
-INCS=-I./ -I${GFLAGS_INCLUDE} -I${GLOG_INCLUDE} -I${LEVELDB_INCLUDE} -I${BRPC_INCLUDE} -I${BRAFT_INCLUDE} -I${BRAFT_PATH}/build -I${FAISS_INCLUDE}
+INCS=-I./ -I${GFLAGS_INCLUDE} -I${GLOG_INCLUDE} -I${LEVELDB_INCLUDE} -I${BRPC_INCLUDE} -I${BRAFT_INCLUDE} -I${BRAFT_PATH}/build -I${FAISS_INCLUDE} -I${PROTOBUF_INCLUDE}
 
 ARDB_CC=$(QUIET_CC)$(CC) $(CCFLAGS)
 #ARDB_CXX=$(QUIET_CXX)$(CXX) $(CXXFLAGS)
@@ -169,7 +171,7 @@ endif
 
 storage_engine?=rocksdb
 
-LIBS= -Wl,--start-group ${DEP_LIBS} -Wl,--end-group ${MALLOC_LIBA} -lprotobuf -lz -lssl -lcrypto -lpthread -ldl
+LIBS= ${DEP_LIBS_PREFIX} ${DEP_LIBS} ${DEP_LIBS_POSFIX} ${MALLOC_LIBA} -lpthread -lssl -lcrypto -ldl -lz 
 
 # Default allocator
 ifeq ($(uname_S),Linux)
@@ -178,10 +180,17 @@ ifeq ($(uname_S),Linux)
 	CCFLAGS+=-DCORO_ASM
 	LIBS+=-lrt
 	CXXFLAGS+=-Werror
-else
-	MALLOC=libc
-	CXXFLAGS+=-DCORO_UCONTEXT -D_XOPEN_SOURCE
-	CCFLAGS+=-DCORO_UCONTEXT -D_XOPEN_SOURCE
+	DEP_LIBS_PREFIX=-Wl,--start-group
+	DEP_LIBS_POSFIX=-Wl,--end-group
+endif
+
+ifeq ($(uname_S),Darwin)
+	MALLOC=jemalloc
+	BRAFT_ENVS+=  -DCMAKE_CXX_FLAGS="-DNO_CLOCK_GETTIME_IN_MAC=1"
+	CXXFLAGS+=-DNO_CLOCK_GETTIME_IN_MAC=1
+	INCS+=  -I/usr/local/opt/openssl/include
+	DEP_LIBS_PREFIX=-L/usr/local/opt/openssl/lib
+	LIBS+= -framework CoreFoundation -framework CoreGraphics -framework CoreData -framework CoreText -framework Security -framework Foundation -Wl,-U,_MallocExtension_ReleaseFreeMemory -Wl,-U,_ProfilerStart -Wl,-U,_ProfilerStop -Wl,-U,_RegisterThriftProtocol
 endif
 
 %.o : %.cpp
@@ -201,7 +210,7 @@ COMMON_OBJECTS := $(patsubst %.cpp, %.o, $(COMMON_CPPFILES)) $(patsubst %.c, %.o
 
 CORE_OBJECTS := $(COMMON_OBJECTS)
 
-MASTEROBJ := master/master.o  proto/master.pb.o
+MASTEROBJ := master/master.o  proto/master.pb.o main.o
 CLIENTOBJ := counter/client.o  counter/counter.pb.o
 
 #
@@ -295,7 +304,7 @@ protobuf: $(PROTOBUF_LIBA)
 $(PROTOBUF_LIBA): $(PROTOBUF_PATH)
 	echo ">>>>> Building protobuf" && \
 	cd ${PROTOBUF_PATH} && \
-	./configure && $(MAKE)  && \
+	./configure --disable-shared && $(MAKE)  && \
 	echo "<<<<< Done building protobuf"
 
 $(PROTOBUF_PATH): ${PROTOBUF_FILE}
@@ -315,8 +324,8 @@ ${PROTOBUF_FILE}:
 gflags: $(GFLAGS_LIBA)
 $(GFLAGS_LIBA):$(GFLAGS_PATH)
 	echo ">>>>> Building gflags" && \
-	cd ${GFLAGS_PATH} && \
-	mkdir build && cd build  && \
+	cd ${GFLAGS_PATH} && mkdir build_dir && \
+	cd build_dir  && \
 	CXXFLAGS="-fPIC" cmake .. &&  $(MAKE) && \
 	touch $(GFLAGS_LIBA) && \
 	echo "<<<<< Done building gflags"
@@ -414,7 +423,11 @@ ${FAISS_FILE}:
 	echo "<<<<< Done dowloading faiss"
 
 .PHONY: deps
-deps: jemalloc leveldb gflags glog brpc braft
+deps: jemalloc leveldb gflags glog brpc braft protobuf gen_proto
+
+.PHONY: gen_proto
+gen_proto:
+	${PROTOBUF_COMPILER} --cpp_out=./ ./proto/*.proto
 
 
 clean_db_obj:
