@@ -1,0 +1,29 @@
+syntax="proto2";
+package elasticfaiss;
+option cc_generic_services = true;
+
+enum ShardState{
+    SHARD_LOADING  = 1; 
+    SHARD_ACTIVE  =  2;
+}
+
+message Shard{
+    required string   name = 1;
+    required int32    idx  = 2;
+    optional bool     is_leader  = 3;
+    required int32    state = 4;
+}
+
+message IndexConf{
+    required string name = 1;
+    required string type = 2;
+    required int32 number_of_shards = 3;
+    required int32 number_of_replicas = 4;
+}
+
+
+service ShardService {    
+    //rpc train(CreateIndexRequest) returns (CreateIndexResponse);
+    //rpc put(DeleteIndexRequest) returns (DeleteIndexResponse); 
+    //rpc search(DeleteIndexRequest) returns (DeleteIndexResponse); 
+};

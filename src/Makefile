@@ -128,15 +128,9 @@ FAISS_INCLUDE=${FAISS_PATH}/
 OPTIMIZATION?=-O2
 OPT=$(OPTIMIZATION)
 
-CXXFLAGS=-Wall -std=c++11 -g ${OPT}  -fPIC -D__STDC_FORMAT_MACROS -D__STDC_LIMIT_MACROS -DBRPC_WITH_GLOG=1 -DGFLAGS_NS=google  -DARDB_VERSION='"${ARDB_VERSION}"'
-CCFLAGS=-Wall -std=gnu99 ${OPT} -fPIC -pedantic -g -D__STDC_FORMAT_MACROS -DBRPC_WITH_GLOG=0 -DGFLAGS_NS=google  -DARDB_VERSION='"${ARDB_VERSION}"'
+CXXFLAGS=-Wall -std=c++11 -g ${OPT}  -fPIC -D__STDC_FORMAT_MACROS -D__STDC_LIMIT_MACROS -DBRPC_WITH_GLOG=1 -DGFLAGS_NS=google 
+CCFLAGS=-Wall -std=gnu99 ${OPT} -fPIC -pedantic -g -D__STDC_FORMAT_MACROS -DBRPC_WITH_GLOG=0 -DGFLAGS_NS=google 
 LDFLAGS=-g
-
-SNAPPY_CXXFLAGS=-g $(OPT)
-LEVELDB_OPT=-g $(OPT)
-
-LUA_CFLAGS+= $(OPT) -Wall -DLUA_ANSI $(CCFLAGS)
-LUA_LDFLAGS+= $(LDFLAGS)
 
 INCS=-I./ -I${GFLAGS_INCLUDE} -I${GLOG_INCLUDE} -I${LEVELDB_INCLUDE} -I${BRPC_INCLUDE} -I${BRAFT_INCLUDE} -I${BRAFT_PATH}/build -I${FAISS_INCLUDE} -I${PROTOBUF_INCLUDE}
 
@@ -210,7 +204,7 @@ COMMON_OBJECTS := $(patsubst %.cpp, %.o, $(COMMON_CPPFILES)) $(patsubst %.c, %.o
 
 CORE_OBJECTS := $(COMMON_OBJECTS)
 
-MASTEROBJ := master/master.o  proto/master.pb.o main.o
+MASTEROBJ := master/master.o worker/node_service.o worker/shard_service.o proto/master.pb.o proto/work_node.pb.o proto/shard.pb.o main.o
 CLIENTOBJ := counter/client.o  counter/counter.pb.o
 
 #
@@ -365,7 +359,7 @@ $(BRPC_LIBA): ${BRPC_PATH}
 	echo ">>>>> Building brpc" && \
 	cd ${LIB_PATH} && \
 	cd ${BRPC_PATH}  && \
-	sh config_brpc.sh --headers="${BRPC_INCS}" --libs="${BRPC_LIBS}"  && \
+	sh config_brpc.sh --headers="${BRPC_INCS}" --libs="${BRPC_LIBS}" --with-glog && \
 	$(MAKE) libbrpc.a && \
 	echo "<<<<< Done building brpc"
 
@@ -427,7 +421,7 @@ deps: jemalloc leveldb gflags glog brpc braft protobuf gen_proto
 
 .PHONY: gen_proto
 gen_proto:
-	${PROTOBUF_COMPILER} --cpp_out=./ ./proto/*.proto
+	${PROTOBUF_COMPILER} --cpp_out=./proto ./proto/*.proto -I./proto
 
 
 clean_db_obj:
@@ -447,7 +441,6 @@ dist:clean all
 	tar czvf ardb-bin-${ARDB_VERSION}.tar.gz ardb-${ARDB_VERSION}; rm -rf ardb-${ARDB_VERSION};
 
 clean:
-	rm -f  ${CORE_OBJECTS} $(SERVEROBJ) ${STORAGE_ENGINE_ALL_OBJ} ${TESTOBJ} ${REPAIR_TOOL_OBJ} ${DIST_LIBA} ${DIST_LIB} \
-	       ardb-test  ardb-server ardb-repair
+	rm -f  ${MASTEROBJ}  
 
 clobber: clean_deps clean
