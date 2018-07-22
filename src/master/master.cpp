@@ -153,6 +153,59 @@ namespace elasticfaiss
         return 0;
     }
 
+    void Master::check_cluster_index_shard(const std::string& cluster, IndexConf& conf, int32_t idx,  braft::Configuration& cluster_conf,
+                        const ShardNodeMetaArray& nodes)
+    {
+    	StringSet current;
+    	ShardNodeMetaArray valid_nodes;
+        for (int32_t i = 0; i < nodes.size(); i++)
+        {
+            butil::EndPoint node_peer;
+            butil::str2endpoint(nodes[i].node_peer.c_str(), &node_peer);
+            braft::PeerId id(node_peer);
+            if (!cluster_conf.contains(id))
+            {
+                rpc_delete_index_shard(cluster, conf.name(), idx, nodes[i].node_peer);
+            }
+            else
+            {
+            	valid_nodes.push_back(nodes[i]);
+            	current.insert(nodes[i].node_peer);
+            }
+        }
+        if(!valid_nodes.empty())
+        {
+        	LOG(ERROR) << "No valid nodes exist for index:" << cluster << "_" << conf.name() << "_" << idx;
+        	return;
+        }
+        if(!valid_nodes[0].is_leader)
+        {
+        	//reset cluster
+        }
+        else
+        {
+        	if(valid_nodes.size() == conf.number_of_replicas())
+        	{
+        		return;
+        	}
+        	if(valid_nodes.size() < conf.number_of_replicas())
+        	{
+        		std::vector<std::string> new_nodes;
+                if (0 == select_nodes4index(cluster, conf.number_of_replicas(), current, new_nodes))
+                {
+                	for(size_t i = 0; i < new_nodes.size(); i++)
+                	{
+
+                	}
+                }
+        	}
+        	else
+        	{
+        		//not possible
+        	}
+        }
+    }
+
     void Master::check_index(const ShardNodeMetaTable& index_nodes)
     {
         std::lock_guard<std::mutex> guard(_index_mutex);
@@ -176,15 +229,16 @@ namespace elasticfaiss
                     if (found != index_nodes.end())
                     {
                         const ShardNodeMetaArray& nodes = found->second;
-                        if (nodes.size() == conf->number_of_replicas())
-                        {
-                            continue;
-                        }
                         if (nodes.empty())
                         {
                             LOG(ERROR) << "No nodes exist for index:" << cluster_name << "_" << index_name;
                             continue;
                         }
+                        if (nodes.size() == conf->number_of_replicas())
+                        {
+                            continue;
+                        }
+
                         if (nodes.size() < conf->number_of_replicas())
                         {
                             add_index_shard(cluster_name, *conf, key.idx, nodes);

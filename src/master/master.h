@@ -180,6 +180,7 @@ namespace elasticfaiss
                 }
             }
         private:
+            int handle_surplus_index_shards();
             int transaction_create_index(const std::string& cluster, const IndexConf& conf);
             int rpc_delete_index_shard(const std::string& cluster, const std::string& name, int32_t idx,
                     const std::string& node);
@@ -191,6 +192,8 @@ namespace elasticfaiss
             int add_index_shard(const std::string& cluster, IndexConf& conf, int32_t idx, const ShardNodeMetaArray& nodes);
             int select_nodes4index(const std::string& cluster, int32_t replica_count, const StringSet& current_nodes,
                     std::vector<std::string>& nodes);
+            void check_cluster_index_shard(const std::string& cluster, IndexConf& conf, int32_t idx,  braft::Configuration& cluster_conf,
+                    const ShardNodeMetaArray& nodes);
             void check_node_timeout(ShardNodeMetaTable& index_nodes);
             void check_index(const ShardNodeMetaTable& index_nodes);
             void routine();
