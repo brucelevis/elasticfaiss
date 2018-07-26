@@ -14,6 +14,7 @@
 #include <braft/util.h>                  // braft::AsyncClosureGuard
 #include <braft/protobuf_file.h>         // braft::ProtoBufFile
 #include "proto/work_node.pb.h"                 // CounterService
+#include "proto/master.pb.h"
 
 namespace elasticfaiss
 {
@@ -22,14 +23,16 @@ namespace elasticfaiss
         private:
             butil::WaitableEvent _bg_event;
             std::atomic<bool> _running;
-            bool _booted;
+            BootstrapResponse _boot_res;
             void Run();
+            int report_bootstrap();
             void report_heartbeat();
         public:
             explicit WorkNodeServiceImpl()
-                    : butil::SimpleThread("node_background"), _bg_event(false, false), _running(true), _booted(false)
+                    : butil::SimpleThread("node_background"), _bg_event(false, false), _running(false)
             {
             }
+            int init();
             void shutdown();
             void create_shard(::google::protobuf::RpcController* controller,
                     const ::elasticfaiss::CreateShardRequest* request, ::elasticfaiss::CreateShardResponse* response,
@@ -37,6 +40,10 @@ namespace elasticfaiss
             void delete_shard(::google::protobuf::RpcController* controller,
                     const ::elasticfaiss::DeleteShardRequest* request, ::elasticfaiss::DeleteShardResponse* response,
                     ::google::protobuf::Closure* done);
+            BootstrapResponse& get_boost_response()
+            {
+                return _boot_res;
+            }
     };
 }
 

@@ -15,12 +15,13 @@
 #include "proto/master.pb.h"
 #include "shard_service.h"
 
-DEFINE_string(cluster, "default", "Cluster name of nodes.");
+
 
 namespace elasticfaiss
 {
     void WorkNodeServiceImpl::Run()
     {
+        _running = true;
         braft::rtb::update_configuration(g_master_group, g_masters);
         butil::TimeDelta wtime = butil::TimeDelta::FromMilliseconds(3000);
         while (_running)
@@ -54,6 +55,51 @@ namespace elasticfaiss
         return false;
     }
 
+    int WorkNodeServiceImpl::init()
+    {
+        if(0 != report_bootstrap())
+        {
+            LOG(ERROR) << "Fail to report boot to master.";
+            return -1;
+        }
+        return g_shards.init(_boot_res);
+    }
+
+    int WorkNodeServiceImpl::report_bootstrap()
+    {
+        braft::PeerId leader;
+        if (braft::rtb::select_leader(g_master_group, &leader) != 0)
+        {
+            butil::Status st = braft::rtb::refresh_leader(g_master_group, 2000);
+            if (!st.ok())
+            {
+                LOG(ERROR) << "Fail to refresh_leader : " << st;
+                return -1;
+            }
+        }
+
+        // Now we known who is the leader, construct Stub and then sending
+        // rpc
+        brpc::Channel channel;
+        if (channel.Init(leader.addr, NULL) != 0)
+        {
+            LOG(ERROR) << "Fail to init channel to " << leader;
+            return -1;
+        }
+        elasticfaiss::MasterService_Stub stub(&channel);
+        brpc::Controller cntl;
+        cntl.set_timeout_ms(2000);
+        ::elasticfaiss::BootstrapRequest request;
+        request.set_node_peer(g_listen);
+        request.set_boot_ms(butil::gettimeofday_ms());
+        stub.bootstrap(&cntl, &request, &_boot_res, NULL);
+        if (handle_master_err_res(cntl, leader, _boot_res))
+        {
+            return -1;
+        }
+        return 0;
+    }
+
     void WorkNodeServiceImpl::report_heartbeat()
     {
         //LOG(ERROR) << "report heatbeat";
@@ -81,33 +127,15 @@ namespace elasticfaiss
             return;
         }
         elasticfaiss::MasterService_Stub stub(&channel);
-
         brpc::Controller cntl;
         cntl.set_timeout_ms(2000);
-        if (_booted)
-        {
-            ::elasticfaiss::NodeHeartbeatRequest request;
-            request.set_cluster(FLAGS_cluster);
-            request.set_node_peer(g_listen);
-            request.set_active_ms(butil::gettimeofday_ms());
-            g_shards.fill_heartbeat_request(request);
-            ::elasticfaiss::NodeHeartbeatResponse response;
-            stub.node_heartbeat(&cntl, &request, &response, NULL);
-            handle_master_err_res(cntl, leader, response);
-        }
-        else
-        {
-            ::elasticfaiss::BootstrapRequest request;
-            request.set_cluster(FLAGS_cluster);
-            request.set_node_peer(g_listen);
-            request.set_boot_ms(butil::gettimeofday_ms());
-            ::elasticfaiss::BootstrapResponse response;
-            stub.bootstrap(&cntl, &request, &response, NULL);
-            if (!handle_master_err_res(cntl, leader, response))
-            {
-                _booted = true;
-            }
-        }
+        ::elasticfaiss::NodeHeartbeatRequest request;
+        request.set_node_peer(g_listen);
+        request.set_active_ms(butil::gettimeofday_ms());
+        g_shards.fill_heartbeat_request(request);
+        ::elasticfaiss::NodeHeartbeatResponse response;
+        stub.node_heartbeat(&cntl, &request, &response, NULL);
+        handle_master_err_res(cntl, leader, response);
     }
     void WorkNodeServiceImpl::shutdown()
     {
@@ -123,7 +151,7 @@ namespace elasticfaiss
             ::google::protobuf::Closure* done)
     {
         brpc::ClosureGuard done_guard(done);
-        if (0 != g_shards.create_shard(*request))
+        if (0 != g_shards.create_shard(request->conf()))
         {
             response->set_success(false);
         }

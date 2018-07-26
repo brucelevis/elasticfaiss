@@ -19,6 +19,9 @@
 #endif
 // @@protoc_insertion_point(includes)
 
+namespace protobuf_shard_2eproto {
+extern PROTOBUF_INTERNAL_EXPORT_protobuf_shard_2eproto ::google::protobuf::internal::SCCInfo<0> scc_info_IndexConf;
+}  // namespace protobuf_shard_2eproto
 namespace elasticfaiss {
 class ShardDefaultTypeInternal {
  public:
@@ -30,6 +33,11 @@ class IndexConfDefaultTypeInternal {
   ::google::protobuf::internal::ExplicitlyConstructed<IndexConf>
       _instance;
 } _IndexConf_default_instance_;
+class IndexShardConfDefaultTypeInternal {
+ public:
+  ::google::protobuf::internal::ExplicitlyConstructed<IndexShardConf>
+      _instance;
+} _IndexShardConf_default_instance_;
 }  // namespace elasticfaiss
 namespace protobuf_shard_2eproto {
 static void InitDefaultsShard() {
@@ -60,12 +68,28 @@ static void InitDefaultsIndexConf() {
 ::google::protobuf::internal::SCCInfo<0> scc_info_IndexConf =
     {{ATOMIC_VAR_INIT(::google::protobuf::internal::SCCInfoBase::kUninitialized), 0, InitDefaultsIndexConf}, {}};
 
+static void InitDefaultsIndexShardConf() {
+  GOOGLE_PROTOBUF_VERIFY_VERSION;
+
+  {
+    void* ptr = &::elasticfaiss::_IndexShardConf_default_instance_;
+    new (ptr) ::elasticfaiss::IndexShardConf();
+    ::google::protobuf::internal::OnShutdownDestroyMessage(ptr);
+  }
+  ::elasticfaiss::IndexShardConf::InitAsDefaultInstance();
+}
+
+::google::protobuf::internal::SCCInfo<1> scc_info_IndexShardConf =
+    {{ATOMIC_VAR_INIT(::google::protobuf::internal::SCCInfoBase::kUninitialized), 1, InitDefaultsIndexShardConf}, {
+      &protobuf_shard_2eproto::scc_info_IndexConf.base,}};
+
 void InitDefaults() {
   ::google::protobuf::internal::InitSCC(&scc_info_Shard.base);
   ::google::protobuf::internal::InitSCC(&scc_info_IndexConf.base);
+  ::google::protobuf::internal::InitSCC(&scc_info_IndexShardConf.base);
 }
 
-::google::protobuf::Metadata file_level_metadata[2];
+::google::protobuf::Metadata file_level_metadata[3];
 const ::google::protobuf::EnumDescriptor* file_level_enum_descriptors[1];
 const ::google::protobuf::ServiceDescriptor* file_level_service_descriptors[1];
 
@@ -76,15 +100,15 @@ const ::google::protobuf::uint32 TableStruct::offsets[] GOOGLE_PROTOBUF_ATTRIBUT
   ~0u,  // no _oneof_case_
   ~0u,  // no _weak_field_map_
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::elasticfaiss::Shard, name_),
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::elasticfaiss::Shard, type_),
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::elasticfaiss::Shard, idx_),
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::elasticfaiss::Shard, is_leader_),
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::elasticfaiss::Shard, state_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::elasticfaiss::Shard, nodes_),
   0,
   1,
   2,
   3,
-  4,
+  ~0u,
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::elasticfaiss::IndexConf, _has_bits_),
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::elasticfaiss::IndexConf, _internal_metadata_),
   ~0u,  // no _extensions_
@@ -98,15 +122,28 @@ const ::google::protobuf::uint32 TableStruct::offsets[] GOOGLE_PROTOBUF_ATTRIBUT
   1,
   2,
   3,
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::elasticfaiss::IndexShardConf, _has_bits_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::elasticfaiss::IndexShardConf, _internal_metadata_),
+  ~0u,  // no _extensions_
+  ~0u,  // no _oneof_case_
+  ~0u,  // no _weak_field_map_
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::elasticfaiss::IndexShardConf, conf_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::elasticfaiss::IndexShardConf, shard_idx_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::elasticfaiss::IndexShardConf, nodes_),
+  0,
+  1,
+  ~0u,
 };
 static const ::google::protobuf::internal::MigrationSchema schemas[] GOOGLE_PROTOBUF_ATTRIBUTE_SECTION_VARIABLE(protodesc_cold) = {
   { 0, 10, sizeof(::elasticfaiss::Shard)},
   { 15, 24, sizeof(::elasticfaiss::IndexConf)},
+  { 28, 36, sizeof(::elasticfaiss::IndexShardConf)},
 };
 
 static ::google::protobuf::Message const * const file_default_instances[] = {
   reinterpret_cast<const ::google::protobuf::Message*>(&::elasticfaiss::_Shard_default_instance_),
   reinterpret_cast<const ::google::protobuf::Message*>(&::elasticfaiss::_IndexConf_default_instance_),
+  reinterpret_cast<const ::google::protobuf::Message*>(&::elasticfaiss::_IndexShardConf_default_instance_),
 };
 
 void protobuf_AssignDescriptors() {
@@ -124,22 +161,25 @@ void protobuf_AssignDescriptorsOnce() {
 void protobuf_RegisterTypes(const ::std::string&) GOOGLE_PROTOBUF_ATTRIBUTE_COLD;
 void protobuf_RegisterTypes(const ::std::string&) {
   protobuf_AssignDescriptorsOnce();
-  ::google::protobuf::internal::RegisterAllTypes(file_level_metadata, 2);
+  ::google::protobuf::internal::RegisterAllTypes(file_level_metadata, 3);
 }
 
 void AddDescriptorsImpl() {
   InitDefaults();
   static const char descriptor[] GOOGLE_PROTOBUF_ATTRIBUTE_SECTION_VARIABLE(protodesc_cold) = {
-      "\n\013shard.proto\022\014elasticfaiss\"R\n\005Shard\022\014\n\004"
-      "name\030\001 \002(\t\022\014\n\004type\030\002 \002(\t\022\013\n\003idx\030\003 \002(\005\022\021\n"
-      "\tis_leader\030\004 \001(\010\022\r\n\005state\030\005 \002(\005\"]\n\tIndex"
-      "Conf\022\014\n\004name\030\001 \002(\t\022\014\n\004type\030\002 \002(\t\022\030\n\020numb"
-      "er_of_shards\030\003 \002(\003\022\032\n\022number_of_replicas"
-      "\030\004 \002(\003*1\n\nShardState\022\021\n\rSHARD_LOADING\020\001\022"
-      "\020\n\014SHARD_ACTIVE\020\0022\016\n\014ShardServiceB\003\200\001\001"
+      "\n\013shard.proto\022\014elasticfaiss\"S\n\005Shard\022\014\n\004"
+      "name\030\001 \002(\t\022\013\n\003idx\030\002 \002(\005\022\021\n\tis_leader\030\003 \001"
+      "(\010\022\r\n\005state\030\004 \002(\005\022\r\n\005nodes\030\005 \003(\t\"]\n\tInde"
+      "xConf\022\014\n\004name\030\001 \002(\t\022\014\n\004type\030\002 \002(\t\022\030\n\020num"
+      "ber_of_shards\030\003 \002(\005\022\032\n\022number_of_replica"
+      "s\030\004 \002(\005\"Y\n\016IndexShardConf\022%\n\004conf\030\001 \002(\0132"
+      "\027.elasticfaiss.IndexConf\022\021\n\tshard_idx\030\002 "
+      "\002(\005\022\r\n\005nodes\030\003 \003(\t*1\n\nShardState\022\021\n\rSHAR"
+      "D_LOADING\020\001\022\020\n\014SHARD_ACTIVE\020\0022\016\n\014ShardSe"
+      "rviceB\003\200\001\001"
   };
   ::google::protobuf::DescriptorPool::InternalAddGeneratedFile(
-      descriptor, 278);
+      descriptor, 370);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "shard.proto", &protobuf_RegisterTypes);
 }
@@ -177,10 +217,10 @@ void Shard::InitAsDefaultInstance() {
 }
 #if !defined(_MSC_VER) || _MSC_VER >= 1900
 const int Shard::kNameFieldNumber;
-const int Shard::kTypeFieldNumber;
 const int Shard::kIdxFieldNumber;
 const int Shard::kIsLeaderFieldNumber;
 const int Shard::kStateFieldNumber;
+const int Shard::kNodesFieldNumber;
 #endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
 
 Shard::Shard()
@@ -193,15 +233,12 @@ Shard::Shard()
 Shard::Shard(const Shard& from)
   : ::google::protobuf::Message(),
       _internal_metadata_(NULL),
-      _has_bits_(from._has_bits_) {
+      _has_bits_(from._has_bits_),
+      nodes_(from.nodes_) {
   _internal_metadata_.MergeFrom(from._internal_metadata_);
   name_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   if (from.has_name()) {
     name_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.name_);
-  }
-  type_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  if (from.has_type()) {
-    type_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.type_);
   }
   ::memcpy(&idx_, &from.idx_,
     static_cast<size_t>(reinterpret_cast<char*>(&state_) -
@@ -211,7 +248,6 @@ Shard::Shard(const Shard& from)
 
 void Shard::SharedCtor() {
   name_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  type_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   ::memset(&idx_, 0, static_cast<size_t>(
       reinterpret_cast<char*>(&state_) -
       reinterpret_cast<char*>(&idx_)) + sizeof(state_));
@@ -224,7 +260,6 @@ Shard::~Shard() {
 
 void Shard::SharedDtor() {
   name_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  type_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
 
 void Shard::SetCachedSize(int size) const {
@@ -247,16 +282,12 @@ void Shard::Clear() {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
+  nodes_.Clear();
   cached_has_bits = _has_bits_[0];
-  if (cached_has_bits & 3u) {
-    if (cached_has_bits & 0x00000001u) {
-      name_.ClearNonDefaultToEmptyNoArena();
-    }
-    if (cached_has_bits & 0x00000002u) {
-      type_.ClearNonDefaultToEmptyNoArena();
-    }
+  if (cached_has_bits & 0x00000001u) {
+    name_.ClearNonDefaultToEmptyNoArena();
   }
-  if (cached_has_bits & 28u) {
+  if (cached_has_bits & 14u) {
     ::memset(&idx_, 0, static_cast<size_t>(
         reinterpret_cast<char*>(&state_) -
         reinterpret_cast<char*>(&idx_)) + sizeof(state_));
@@ -291,26 +322,10 @@ bool Shard::MergePartialFromCodedStream(
         break;
       }
 
-      // required string type = 2;
+      // required int32 idx = 2;
       case 2: {
         if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(18u /* 18 & 0xFF */)) {
-          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
-                input, this->mutable_type()));
-          ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
-            this->type().data(), static_cast<int>(this->type().length()),
-            ::google::protobuf::internal::WireFormat::PARSE,
-            "elasticfaiss.Shard.type");
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
-      // required int32 idx = 3;
-      case 3: {
-        if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(24u /* 24 & 0xFF */)) {
+            static_cast< ::google::protobuf::uint8>(16u /* 16 & 0xFF */)) {
           set_has_idx();
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
@@ -321,10 +336,10 @@ bool Shard::MergePartialFromCodedStream(
         break;
       }
 
-      // optional bool is_leader = 4;
-      case 4: {
+      // optional bool is_leader = 3;
+      case 3: {
         if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(32u /* 32 & 0xFF */)) {
+            static_cast< ::google::protobuf::uint8>(24u /* 24 & 0xFF */)) {
           set_has_is_leader();
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    bool, ::google::protobuf::internal::WireFormatLite::TYPE_BOOL>(
@@ -335,14 +350,31 @@ bool Shard::MergePartialFromCodedStream(
         break;
       }
 
-      // required int32 state = 5;
-      case 5: {
+      // required int32 state = 4;
+      case 4: {
         if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(40u /* 40 & 0xFF */)) {
+            static_cast< ::google::protobuf::uint8>(32u /* 32 & 0xFF */)) {
           set_has_state();
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
                  input, &state_)));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      // repeated string nodes = 5;
+      case 5: {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(42u /* 42 & 0xFF */)) {
+          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
+                input, this->add_nodes()));
+          ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
+            this->nodes(this->nodes_size() - 1).data(),
+            static_cast<int>(this->nodes(this->nodes_size() - 1).length()),
+            ::google::protobuf::internal::WireFormat::PARSE,
+            "elasticfaiss.Shard.nodes");
         } else {
           goto handle_unusual;
         }
@@ -386,29 +418,29 @@ void Shard::SerializeWithCachedSizes(
       1, this->name(), output);
   }
 
-  // required string type = 2;
+  // required int32 idx = 2;
   if (cached_has_bits & 0x00000002u) {
-    ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
-      this->type().data(), static_cast<int>(this->type().length()),
-      ::google::protobuf::internal::WireFormat::SERIALIZE,
-      "elasticfaiss.Shard.type");
-    ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
-      2, this->type(), output);
+    ::google::protobuf::internal::WireFormatLite::WriteInt32(2, this->idx(), output);
   }
 
-  // required int32 idx = 3;
+  // optional bool is_leader = 3;
   if (cached_has_bits & 0x00000004u) {
-    ::google::protobuf::internal::WireFormatLite::WriteInt32(3, this->idx(), output);
+    ::google::protobuf::internal::WireFormatLite::WriteBool(3, this->is_leader(), output);
   }
 
-  // optional bool is_leader = 4;
+  // required int32 state = 4;
   if (cached_has_bits & 0x00000008u) {
-    ::google::protobuf::internal::WireFormatLite::WriteBool(4, this->is_leader(), output);
+    ::google::protobuf::internal::WireFormatLite::WriteInt32(4, this->state(), output);
   }
 
-  // required int32 state = 5;
-  if (cached_has_bits & 0x00000010u) {
-    ::google::protobuf::internal::WireFormatLite::WriteInt32(5, this->state(), output);
+  // repeated string nodes = 5;
+  for (int i = 0, n = this->nodes_size(); i < n; i++) {
+    ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
+      this->nodes(i).data(), static_cast<int>(this->nodes(i).length()),
+      ::google::protobuf::internal::WireFormat::SERIALIZE,
+      "elasticfaiss.Shard.nodes");
+    ::google::protobuf::internal::WireFormatLite::WriteString(
+      5, this->nodes(i), output);
   }
 
   if (_internal_metadata_.have_unknown_fields()) {
@@ -437,30 +469,29 @@ void Shard::SerializeWithCachedSizes(
         1, this->name(), target);
   }
 
-  // required string type = 2;
+  // required int32 idx = 2;
   if (cached_has_bits & 0x00000002u) {
-    ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
-      this->type().data(), static_cast<int>(this->type().length()),
-      ::google::protobuf::internal::WireFormat::SERIALIZE,
-      "elasticfaiss.Shard.type");
-    target =
-      ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
-        2, this->type(), target);
+    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(2, this->idx(), target);
   }
 
-  // required int32 idx = 3;
+  // optional bool is_leader = 3;
   if (cached_has_bits & 0x00000004u) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(3, this->idx(), target);
+    target = ::google::protobuf::internal::WireFormatLite::WriteBoolToArray(3, this->is_leader(), target);
   }
 
-  // optional bool is_leader = 4;
+  // required int32 state = 4;
   if (cached_has_bits & 0x00000008u) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteBoolToArray(4, this->is_leader(), target);
+    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(4, this->state(), target);
   }
 
-  // required int32 state = 5;
-  if (cached_has_bits & 0x00000010u) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(5, this->state(), target);
+  // repeated string nodes = 5;
+  for (int i = 0, n = this->nodes_size(); i < n; i++) {
+    ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
+      this->nodes(i).data(), static_cast<int>(this->nodes(i).length()),
+      ::google::protobuf::internal::WireFormat::SERIALIZE,
+      "elasticfaiss.Shard.nodes");
+    target = ::google::protobuf::internal::WireFormatLite::
+      WriteStringToArray(5, this->nodes(i), target);
   }
 
   if (_internal_metadata_.have_unknown_fields()) {
@@ -482,22 +513,15 @@ size_t Shard::RequiredFieldsByteSizeFallback() const {
         this->name());
   }
 
-  if (has_type()) {
-    // required string type = 2;
-    total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::StringSize(
-        this->type());
-  }
-
   if (has_idx()) {
-    // required int32 idx = 3;
+    // required int32 idx = 2;
     total_size += 1 +
       ::google::protobuf::internal::WireFormatLite::Int32Size(
         this->idx());
   }
 
   if (has_state()) {
-    // required int32 state = 5;
+    // required int32 state = 4;
     total_size += 1 +
       ::google::protobuf::internal::WireFormatLite::Int32Size(
         this->state());
@@ -514,23 +538,18 @@ size_t Shard::ByteSizeLong() const {
       ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
         _internal_metadata_.unknown_fields());
   }
-  if (((_has_bits_[0] & 0x00000017) ^ 0x00000017) == 0) {  // All required fields are present.
+  if (((_has_bits_[0] & 0x0000000b) ^ 0x0000000b) == 0) {  // All required fields are present.
     // required string name = 1;
     total_size += 1 +
       ::google::protobuf::internal::WireFormatLite::StringSize(
         this->name());
 
-    // required string type = 2;
-    total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::StringSize(
-        this->type());
-
-    // required int32 idx = 3;
+    // required int32 idx = 2;
     total_size += 1 +
       ::google::protobuf::internal::WireFormatLite::Int32Size(
         this->idx());
 
-    // required int32 state = 5;
+    // required int32 state = 4;
     total_size += 1 +
       ::google::protobuf::internal::WireFormatLite::Int32Size(
         this->state());
@@ -538,7 +557,15 @@ size_t Shard::ByteSizeLong() const {
   } else {
     total_size += RequiredFieldsByteSizeFallback();
   }
-  // optional bool is_leader = 4;
+  // repeated string nodes = 5;
+  total_size += 1 *
+      ::google::protobuf::internal::FromIntSize(this->nodes_size());
+  for (int i = 0, n = this->nodes_size(); i < n; i++) {
+    total_size += ::google::protobuf::internal::WireFormatLite::StringSize(
+      this->nodes(i));
+  }
+
+  // optional bool is_leader = 3;
   if (has_is_leader()) {
     total_size += 1 + 1;
   }
@@ -570,23 +597,20 @@ void Shard::MergeFrom(const Shard& from) {
   ::google::protobuf::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
+  nodes_.MergeFrom(from.nodes_);
   cached_has_bits = from._has_bits_[0];
-  if (cached_has_bits & 31u) {
+  if (cached_has_bits & 15u) {
     if (cached_has_bits & 0x00000001u) {
       set_has_name();
       name_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.name_);
     }
     if (cached_has_bits & 0x00000002u) {
-      set_has_type();
-      type_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.type_);
-    }
-    if (cached_has_bits & 0x00000004u) {
       idx_ = from.idx_;
     }
-    if (cached_has_bits & 0x00000008u) {
+    if (cached_has_bits & 0x00000004u) {
       is_leader_ = from.is_leader_;
     }
-    if (cached_has_bits & 0x00000010u) {
+    if (cached_has_bits & 0x00000008u) {
       state_ = from.state_;
     }
     _has_bits_[0] |= cached_has_bits;
@@ -608,7 +632,7 @@ void Shard::CopyFrom(const Shard& from) {
 }
 
 bool Shard::IsInitialized() const {
-  if ((_has_bits_[0] & 0x00000017) != 0x00000017) return false;
+  if ((_has_bits_[0] & 0x0000000b) != 0x0000000b) return false;
   return true;
 }
 
@@ -618,9 +642,8 @@ void Shard::Swap(Shard* other) {
 }
 void Shard::InternalSwap(Shard* other) {
   using std::swap;
+  nodes_.InternalSwap(CastToBase(&other->nodes_));
   name_.Swap(&other->name_, &::google::protobuf::internal::GetEmptyStringAlreadyInited(),
-    GetArenaNoVirtual());
-  type_.Swap(&other->type_, &::google::protobuf::internal::GetEmptyStringAlreadyInited(),
     GetArenaNoVirtual());
   swap(idx_, other->idx_);
   swap(is_leader_, other->is_leader_);
@@ -770,13 +793,13 @@ bool IndexConf::MergePartialFromCodedStream(
         break;
       }
 
-      // required int64 number_of_shards = 3;
+      // required int32 number_of_shards = 3;
       case 3: {
         if (static_cast< ::google::protobuf::uint8>(tag) ==
             static_cast< ::google::protobuf::uint8>(24u /* 24 & 0xFF */)) {
           set_has_number_of_shards();
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   ::google::protobuf::int64, ::google::protobuf::internal::WireFormatLite::TYPE_INT64>(
+                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
                  input, &number_of_shards_)));
         } else {
           goto handle_unusual;
@@ -784,13 +807,13 @@ bool IndexConf::MergePartialFromCodedStream(
         break;
       }
 
-      // required int64 number_of_replicas = 4;
+      // required int32 number_of_replicas = 4;
       case 4: {
         if (static_cast< ::google::protobuf::uint8>(tag) ==
             static_cast< ::google::protobuf::uint8>(32u /* 32 & 0xFF */)) {
           set_has_number_of_replicas();
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   ::google::protobuf::int64, ::google::protobuf::internal::WireFormatLite::TYPE_INT64>(
+                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
                  input, &number_of_replicas_)));
         } else {
           goto handle_unusual;
@@ -845,14 +868,14 @@ void IndexConf::SerializeWithCachedSizes(
       2, this->type(), output);
   }
 
-  // required int64 number_of_shards = 3;
+  // required int32 number_of_shards = 3;
   if (cached_has_bits & 0x00000004u) {
-    ::google::protobuf::internal::WireFormatLite::WriteInt64(3, this->number_of_shards(), output);
+    ::google::protobuf::internal::WireFormatLite::WriteInt32(3, this->number_of_shards(), output);
   }
 
-  // required int64 number_of_replicas = 4;
+  // required int32 number_of_replicas = 4;
   if (cached_has_bits & 0x00000008u) {
-    ::google::protobuf::internal::WireFormatLite::WriteInt64(4, this->number_of_replicas(), output);
+    ::google::protobuf::internal::WireFormatLite::WriteInt32(4, this->number_of_replicas(), output);
   }
 
   if (_internal_metadata_.have_unknown_fields()) {
@@ -892,14 +915,14 @@ void IndexConf::SerializeWithCachedSizes(
         2, this->type(), target);
   }
 
-  // required int64 number_of_shards = 3;
+  // required int32 number_of_shards = 3;
   if (cached_has_bits & 0x00000004u) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteInt64ToArray(3, this->number_of_shards(), target);
+    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(3, this->number_of_shards(), target);
   }
 
-  // required int64 number_of_replicas = 4;
+  // required int32 number_of_replicas = 4;
   if (cached_has_bits & 0x00000008u) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteInt64ToArray(4, this->number_of_replicas(), target);
+    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(4, this->number_of_replicas(), target);
   }
 
   if (_internal_metadata_.have_unknown_fields()) {
@@ -929,16 +952,16 @@ size_t IndexConf::RequiredFieldsByteSizeFallback() const {
   }
 
   if (has_number_of_shards()) {
-    // required int64 number_of_shards = 3;
+    // required int32 number_of_shards = 3;
     total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::Int64Size(
+      ::google::protobuf::internal::WireFormatLite::Int32Size(
         this->number_of_shards());
   }
 
   if (has_number_of_replicas()) {
-    // required int64 number_of_replicas = 4;
+    // required int32 number_of_replicas = 4;
     total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::Int64Size(
+      ::google::protobuf::internal::WireFormatLite::Int32Size(
         this->number_of_replicas());
   }
 
@@ -964,14 +987,14 @@ size_t IndexConf::ByteSizeLong() const {
       ::google::protobuf::internal::WireFormatLite::StringSize(
         this->type());
 
-    // required int64 number_of_shards = 3;
+    // required int32 number_of_shards = 3;
     total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::Int64Size(
+      ::google::protobuf::internal::WireFormatLite::Int32Size(
         this->number_of_shards());
 
-    // required int64 number_of_replicas = 4;
+    // required int32 number_of_replicas = 4;
     total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::Int64Size(
+      ::google::protobuf::internal::WireFormatLite::Int32Size(
         this->number_of_replicas());
 
   } else {
@@ -1067,6 +1090,364 @@ void IndexConf::InternalSwap(IndexConf* other) {
 
 // ===================================================================
 
+void IndexShardConf::InitAsDefaultInstance() {
+  ::elasticfaiss::_IndexShardConf_default_instance_._instance.get_mutable()->conf_ = const_cast< ::elasticfaiss::IndexConf*>(
+      ::elasticfaiss::IndexConf::internal_default_instance());
+}
+#if !defined(_MSC_VER) || _MSC_VER >= 1900
+const int IndexShardConf::kConfFieldNumber;
+const int IndexShardConf::kShardIdxFieldNumber;
+const int IndexShardConf::kNodesFieldNumber;
+#endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
+
+IndexShardConf::IndexShardConf()
+  : ::google::protobuf::Message(), _internal_metadata_(NULL) {
+  ::google::protobuf::internal::InitSCC(
+      &protobuf_shard_2eproto::scc_info_IndexShardConf.base);
+  SharedCtor();
+  // @@protoc_insertion_point(constructor:elasticfaiss.IndexShardConf)
+}
+IndexShardConf::IndexShardConf(const IndexShardConf& from)
+  : ::google::protobuf::Message(),
+      _internal_metadata_(NULL),
+      _has_bits_(from._has_bits_),
+      nodes_(from.nodes_) {
+  _internal_metadata_.MergeFrom(from._internal_metadata_);
+  if (from.has_conf()) {
+    conf_ = new ::elasticfaiss::IndexConf(*from.conf_);
+  } else {
+    conf_ = NULL;
+  }
+  shard_idx_ = from.shard_idx_;
+  // @@protoc_insertion_point(copy_constructor:elasticfaiss.IndexShardConf)
+}
+
+void IndexShardConf::SharedCtor() {
+  ::memset(&conf_, 0, static_cast<size_t>(
+      reinterpret_cast<char*>(&shard_idx_) -
+      reinterpret_cast<char*>(&conf_)) + sizeof(shard_idx_));
+}
+
+IndexShardConf::~IndexShardConf() {
+  // @@protoc_insertion_point(destructor:elasticfaiss.IndexShardConf)
+  SharedDtor();
+}
+
+void IndexShardConf::SharedDtor() {
+  if (this != internal_default_instance()) delete conf_;
+}
+
+void IndexShardConf::SetCachedSize(int size) const {
+  _cached_size_.Set(size);
+}
+const ::google::protobuf::Descriptor* IndexShardConf::descriptor() {
+  ::protobuf_shard_2eproto::protobuf_AssignDescriptorsOnce();
+  return ::protobuf_shard_2eproto::file_level_metadata[kIndexInFileMessages].descriptor;
+}
+
+const IndexShardConf& IndexShardConf::default_instance() {
+  ::google::protobuf::internal::InitSCC(&protobuf_shard_2eproto::scc_info_IndexShardConf.base);
+  return *internal_default_instance();
+}
+
+
+void IndexShardConf::Clear() {
+// @@protoc_insertion_point(message_clear_start:elasticfaiss.IndexShardConf)
+  ::google::protobuf::uint32 cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  nodes_.Clear();
+  cached_has_bits = _has_bits_[0];
+  if (cached_has_bits & 0x00000001u) {
+    GOOGLE_DCHECK(conf_ != NULL);
+    conf_->Clear();
+  }
+  shard_idx_ = 0;
+  _has_bits_.Clear();
+  _internal_metadata_.Clear();
+}
+
+bool IndexShardConf::MergePartialFromCodedStream(
+    ::google::protobuf::io::CodedInputStream* input) {
+#define DO_(EXPRESSION) if (!GOOGLE_PREDICT_TRUE(EXPRESSION)) goto failure
+  ::google::protobuf::uint32 tag;
+  // @@protoc_insertion_point(parse_start:elasticfaiss.IndexShardConf)
+  for (;;) {
+    ::std::pair<::google::protobuf::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(127u);
+    tag = p.first;
+    if (!p.second) goto handle_unusual;
+    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
+      // required .elasticfaiss.IndexConf conf = 1;
+      case 1: {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(10u /* 10 & 0xFF */)) {
+          DO_(::google::protobuf::internal::WireFormatLite::ReadMessage(
+               input, mutable_conf()));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      // required int32 shard_idx = 2;
+      case 2: {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(16u /* 16 & 0xFF */)) {
+          set_has_shard_idx();
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
+                 input, &shard_idx_)));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      // repeated string nodes = 3;
+      case 3: {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(26u /* 26 & 0xFF */)) {
+          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
+                input, this->add_nodes()));
+          ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
+            this->nodes(this->nodes_size() - 1).data(),
+            static_cast<int>(this->nodes(this->nodes_size() - 1).length()),
+            ::google::protobuf::internal::WireFormat::PARSE,
+            "elasticfaiss.IndexShardConf.nodes");
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      default: {
+      handle_unusual:
+        if (tag == 0) {
+          goto success;
+        }
+        DO_(::google::protobuf::internal::WireFormat::SkipField(
+              input, tag, _internal_metadata_.mutable_unknown_fields()));
+        break;
+      }
+    }
+  }
+success:
+  // @@protoc_insertion_point(parse_success:elasticfaiss.IndexShardConf)
+  return true;
+failure:
+  // @@protoc_insertion_point(parse_failure:elasticfaiss.IndexShardConf)
+  return false;
+#undef DO_
+}
+
+void IndexShardConf::SerializeWithCachedSizes(
+    ::google::protobuf::io::CodedOutputStream* output) const {
+  // @@protoc_insertion_point(serialize_start:elasticfaiss.IndexShardConf)
+  ::google::protobuf::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  cached_has_bits = _has_bits_[0];
+  // required .elasticfaiss.IndexConf conf = 1;
+  if (cached_has_bits & 0x00000001u) {
+    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
+      1, this->_internal_conf(), output);
+  }
+
+  // required int32 shard_idx = 2;
+  if (cached_has_bits & 0x00000002u) {
+    ::google::protobuf::internal::WireFormatLite::WriteInt32(2, this->shard_idx(), output);
+  }
+
+  // repeated string nodes = 3;
+  for (int i = 0, n = this->nodes_size(); i < n; i++) {
+    ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
+      this->nodes(i).data(), static_cast<int>(this->nodes(i).length()),
+      ::google::protobuf::internal::WireFormat::SERIALIZE,
+      "elasticfaiss.IndexShardConf.nodes");
+    ::google::protobuf::internal::WireFormatLite::WriteString(
+      3, this->nodes(i), output);
+  }
+
+  if (_internal_metadata_.have_unknown_fields()) {
+    ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
+        _internal_metadata_.unknown_fields(), output);
+  }
+  // @@protoc_insertion_point(serialize_end:elasticfaiss.IndexShardConf)
+}
+
+::google::protobuf::uint8* IndexShardConf::InternalSerializeWithCachedSizesToArray(
+    bool deterministic, ::google::protobuf::uint8* target) const {
+  (void)deterministic; // Unused
+  // @@protoc_insertion_point(serialize_to_array_start:elasticfaiss.IndexShardConf)
+  ::google::protobuf::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  cached_has_bits = _has_bits_[0];
+  // required .elasticfaiss.IndexConf conf = 1;
+  if (cached_has_bits & 0x00000001u) {
+    target = ::google::protobuf::internal::WireFormatLite::
+      InternalWriteMessageToArray(
+        1, this->_internal_conf(), deterministic, target);
+  }
+
+  // required int32 shard_idx = 2;
+  if (cached_has_bits & 0x00000002u) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(2, this->shard_idx(), target);
+  }
+
+  // repeated string nodes = 3;
+  for (int i = 0, n = this->nodes_size(); i < n; i++) {
+    ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
+      this->nodes(i).data(), static_cast<int>(this->nodes(i).length()),
+      ::google::protobuf::internal::WireFormat::SERIALIZE,
+      "elasticfaiss.IndexShardConf.nodes");
+    target = ::google::protobuf::internal::WireFormatLite::
+      WriteStringToArray(3, this->nodes(i), target);
+  }
+
+  if (_internal_metadata_.have_unknown_fields()) {
+    target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
+        _internal_metadata_.unknown_fields(), target);
+  }
+  // @@protoc_insertion_point(serialize_to_array_end:elasticfaiss.IndexShardConf)
+  return target;
+}
+
+size_t IndexShardConf::RequiredFieldsByteSizeFallback() const {
+// @@protoc_insertion_point(required_fields_byte_size_fallback_start:elasticfaiss.IndexShardConf)
+  size_t total_size = 0;
+
+  if (has_conf()) {
+    // required .elasticfaiss.IndexConf conf = 1;
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::MessageSize(
+        *conf_);
+  }
+
+  if (has_shard_idx()) {
+    // required int32 shard_idx = 2;
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::Int32Size(
+        this->shard_idx());
+  }
+
+  return total_size;
+}
+size_t IndexShardConf::ByteSizeLong() const {
+// @@protoc_insertion_point(message_byte_size_start:elasticfaiss.IndexShardConf)
+  size_t total_size = 0;
+
+  if (_internal_metadata_.have_unknown_fields()) {
+    total_size +=
+      ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
+        _internal_metadata_.unknown_fields());
+  }
+  if (((_has_bits_[0] & 0x00000003) ^ 0x00000003) == 0) {  // All required fields are present.
+    // required .elasticfaiss.IndexConf conf = 1;
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::MessageSize(
+        *conf_);
+
+    // required int32 shard_idx = 2;
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::Int32Size(
+        this->shard_idx());
+
+  } else {
+    total_size += RequiredFieldsByteSizeFallback();
+  }
+  // repeated string nodes = 3;
+  total_size += 1 *
+      ::google::protobuf::internal::FromIntSize(this->nodes_size());
+  for (int i = 0, n = this->nodes_size(); i < n; i++) {
+    total_size += ::google::protobuf::internal::WireFormatLite::StringSize(
+      this->nodes(i));
+  }
+
+  int cached_size = ::google::protobuf::internal::ToCachedSize(total_size);
+  SetCachedSize(cached_size);
+  return total_size;
+}
+
+void IndexShardConf::MergeFrom(const ::google::protobuf::Message& from) {
+// @@protoc_insertion_point(generalized_merge_from_start:elasticfaiss.IndexShardConf)
+  GOOGLE_DCHECK_NE(&from, this);
+  const IndexShardConf* source =
+      ::google::protobuf::internal::DynamicCastToGenerated<const IndexShardConf>(
+          &from);
+  if (source == NULL) {
+  // @@protoc_insertion_point(generalized_merge_from_cast_fail:elasticfaiss.IndexShardConf)
+    ::google::protobuf::internal::ReflectionOps::Merge(from, this);
+  } else {
+  // @@protoc_insertion_point(generalized_merge_from_cast_success:elasticfaiss.IndexShardConf)
+    MergeFrom(*source);
+  }
+}
+
+void IndexShardConf::MergeFrom(const IndexShardConf& from) {
+// @@protoc_insertion_point(class_specific_merge_from_start:elasticfaiss.IndexShardConf)
+  GOOGLE_DCHECK_NE(&from, this);
+  _internal_metadata_.MergeFrom(from._internal_metadata_);
+  ::google::protobuf::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  nodes_.MergeFrom(from.nodes_);
+  cached_has_bits = from._has_bits_[0];
+  if (cached_has_bits & 3u) {
+    if (cached_has_bits & 0x00000001u) {
+      mutable_conf()->::elasticfaiss::IndexConf::MergeFrom(from.conf());
+    }
+    if (cached_has_bits & 0x00000002u) {
+      shard_idx_ = from.shard_idx_;
+    }
+    _has_bits_[0] |= cached_has_bits;
+  }
+}
+
+void IndexShardConf::CopyFrom(const ::google::protobuf::Message& from) {
+// @@protoc_insertion_point(generalized_copy_from_start:elasticfaiss.IndexShardConf)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+void IndexShardConf::CopyFrom(const IndexShardConf& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:elasticfaiss.IndexShardConf)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+bool IndexShardConf::IsInitialized() const {
+  if ((_has_bits_[0] & 0x00000003) != 0x00000003) return false;
+  if (has_conf()) {
+    if (!this->conf_->IsInitialized()) return false;
+  }
+  return true;
+}
+
+void IndexShardConf::Swap(IndexShardConf* other) {
+  if (other == this) return;
+  InternalSwap(other);
+}
+void IndexShardConf::InternalSwap(IndexShardConf* other) {
+  using std::swap;
+  nodes_.InternalSwap(CastToBase(&other->nodes_));
+  swap(conf_, other->conf_);
+  swap(shard_idx_, other->shard_idx_);
+  swap(_has_bits_[0], other->_has_bits_[0]);
+  _internal_metadata_.Swap(&other->_internal_metadata_);
+}
+
+::google::protobuf::Metadata IndexShardConf::GetMetadata() const {
+  protobuf_shard_2eproto::protobuf_AssignDescriptorsOnce();
+  return ::protobuf_shard_2eproto::file_level_metadata[kIndexInFileMessages];
+}
+
+
+// ===================================================================
+
 ShardService::~ShardService() {}
 
 const ::google::protobuf::ServiceDescriptor* ShardService::descriptor() {
@@ -1134,6 +1515,9 @@ template<> GOOGLE_PROTOBUF_ATTRIBUTE_NOINLINE ::elasticfaiss::Shard* Arena::Crea
 }
 template<> GOOGLE_PROTOBUF_ATTRIBUTE_NOINLINE ::elasticfaiss::IndexConf* Arena::CreateMaybeMessage< ::elasticfaiss::IndexConf >(Arena* arena) {
   return Arena::CreateInternal< ::elasticfaiss::IndexConf >(arena);
+}
+template<> GOOGLE_PROTOBUF_ATTRIBUTE_NOINLINE ::elasticfaiss::IndexShardConf* Arena::CreateMaybeMessage< ::elasticfaiss::IndexShardConf >(Arena* arena) {
+  return Arena::CreateInternal< ::elasticfaiss::IndexShardConf >(arena);
 }
 }  // namespace protobuf
 }  // namespace google

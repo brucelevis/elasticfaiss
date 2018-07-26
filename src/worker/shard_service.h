@@ -38,13 +38,50 @@ namespace elasticfaiss
             }
     };
 
-    struct ShardNodeMeta
+//    struct ShardNodeMeta
+//    {
+//            std::string node_peer;
+//            bool is_leader;
+//            ShardNodeMeta()
+//                    : is_leader(false)
+//            {
+//            }
+//
+//            bool operator<(const ShardNodeMeta& other) const
+//            {
+//                return node_peer < other.node_peer;
+//            }
+//    };
+
+    struct ShardConfig
     {
-            std::string node_peer;
-            bool is_leader;
-            ShardNodeMeta()
-                    : is_leader(false)
+            const IndexConf* index_conf;
+            int32_t shard_idx;
+            braft::Configuration conf;
+            std::string leader;
+            std::set<std::string> nodes;
+            ShardConfig()
+                    : index_conf(NULL), shard_idx(0)
             {
+            }
+    };
+
+    struct ShardNodes
+    {
+            int32_t shard_idx;
+            const WorkNode* leader;
+            std::set<const WorkNode*> nodes;
+            ShardNodes()
+                    : shard_idx(0), leader(NULL)
+            {
+            }
+            bool has_leader() const
+            {
+                if (NULL == leader)
+                {
+                    return false;
+                }
+                return leader->state() == WNODE_ACTIVE;
             }
     };
 
@@ -61,12 +98,12 @@ namespace elasticfaiss
                 delete _node;
             }
 
-            const CreateShardRequest& get_init_conf()
+            const IndexShardConf& get_init_conf()
             {
                 return _init_conf;
             }
             // Starts this node
-            int start(const CreateShardRequest& req);
+            int start(const IndexShardConf& req);
 
             bool is_leader() const
             {
@@ -135,7 +172,7 @@ namespace elasticfaiss
             // end of @braft::StateMachine
 
         private:
-            CreateShardRequest _init_conf;
+            IndexShardConf _init_conf;
             braft::Node* volatile _node;
             butil::atomic<int64_t> _leader_term;
             ShardState _state;
@@ -148,17 +185,15 @@ namespace elasticfaiss
             std::string _init_conf_path;
             std::mutex _shards_mutex;
             ShardNodeTable _shards;
-            WorkNodeInitConf _init_conf;
-            int sync_shards_info();
-            int load_shards();
+            int load_shards(const BootstrapResponse& conf);
         public:
-            int init();
-            int create_shard(const CreateShardRequest& req);
+            int init(const BootstrapResponse& conf);
+            int create_shard(const IndexShardConf& req);
             int remove_shard(const DeleteShardRequest& req);
             void fill_heartbeat_request(NodeHeartbeatRequest& req);
     };
 
-    std::string cluster_group_name(const std::string& cluster, const std::string& index, int32_t shard_idx);
+    std::string shard_cluster_name(const std::string& index, int32_t shard_idx);
 
     extern ShardManager g_shards;
 

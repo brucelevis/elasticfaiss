@@ -26,8 +26,14 @@ extern PROTOBUF_INTERNAL_EXPORT_protobuf_master_2eproto ::google::protobuf::inte
 namespace protobuf_shard_2eproto {
 extern PROTOBUF_INTERNAL_EXPORT_protobuf_shard_2eproto ::google::protobuf::internal::SCCInfo<0> scc_info_IndexConf;
 extern PROTOBUF_INTERNAL_EXPORT_protobuf_shard_2eproto ::google::protobuf::internal::SCCInfo<0> scc_info_Shard;
+extern PROTOBUF_INTERNAL_EXPORT_protobuf_shard_2eproto ::google::protobuf::internal::SCCInfo<1> scc_info_IndexShardConf;
 }  // namespace protobuf_shard_2eproto
 namespace elasticfaiss {
+class ClusterSettingsDefaultTypeInternal {
+ public:
+  ::google::protobuf::internal::ExplicitlyConstructed<ClusterSettings>
+      _instance;
+} _ClusterSettings_default_instance_;
 class WorkNodeDefaultTypeInternal {
  public:
   ::google::protobuf::internal::ExplicitlyConstructed<WorkNode>
@@ -105,6 +111,20 @@ class UpdateIndexResponseDefaultTypeInternal {
 } _UpdateIndexResponse_default_instance_;
 }  // namespace elasticfaiss
 namespace protobuf_master_2eproto {
+static void InitDefaultsClusterSettings() {
+  GOOGLE_PROTOBUF_VERIFY_VERSION;
+
+  {
+    void* ptr = &::elasticfaiss::_ClusterSettings_default_instance_;
+    new (ptr) ::elasticfaiss::ClusterSettings();
+    ::google::protobuf::internal::OnShutdownDestroyMessage(ptr);
+  }
+  ::elasticfaiss::ClusterSettings::InitAsDefaultInstance();
+}
+
+::google::protobuf::internal::SCCInfo<0> scc_info_ClusterSettings =
+    {{ATOMIC_VAR_INIT(::google::protobuf::internal::SCCInfoBase::kUninitialized), 0, InitDefaultsClusterSettings}, {}};
+
 static void InitDefaultsWorkNode() {
   GOOGLE_PROTOBUF_VERIFY_VERSION;
 
@@ -146,9 +166,10 @@ static void InitDefaultsMasterSnapshot() {
   ::elasticfaiss::MasterSnapshot::InitAsDefaultInstance();
 }
 
-::google::protobuf::internal::SCCInfo<1> scc_info_MasterSnapshot =
-    {{ATOMIC_VAR_INIT(::google::protobuf::internal::SCCInfoBase::kUninitialized), 1, InitDefaultsMasterSnapshot}, {
-      &protobuf_master_2eproto::scc_info_ClusterState.base,}};
+::google::protobuf::internal::SCCInfo<2> scc_info_MasterSnapshot =
+    {{ATOMIC_VAR_INIT(::google::protobuf::internal::SCCInfoBase::kUninitialized), 2, InitDefaultsMasterSnapshot}, {
+      &protobuf_master_2eproto::scc_info_ClusterState.base,
+      &protobuf_shard_2eproto::scc_info_IndexConf.base,}};
 
 static void InitDefaultsBootstrapRequest() {
   GOOGLE_PROTOBUF_VERIFY_VERSION;
@@ -175,9 +196,10 @@ static void InitDefaultsBootstrapResponse() {
   ::elasticfaiss::BootstrapResponse::InitAsDefaultInstance();
 }
 
-::google::protobuf::internal::SCCInfo<1> scc_info_BootstrapResponse =
-    {{ATOMIC_VAR_INIT(::google::protobuf::internal::SCCInfoBase::kUninitialized), 1, InitDefaultsBootstrapResponse}, {
-      &protobuf_master_2eproto::scc_info_WorkNode.base,}};
+::google::protobuf::internal::SCCInfo<2> scc_info_BootstrapResponse =
+    {{ATOMIC_VAR_INIT(::google::protobuf::internal::SCCInfoBase::kUninitialized), 2, InitDefaultsBootstrapResponse}, {
+      &protobuf_master_2eproto::scc_info_WorkNode.base,
+      &protobuf_shard_2eproto::scc_info_IndexShardConf.base,}};
 
 static void InitDefaultsNodeHeartbeatRequest() {
   GOOGLE_PROTOBUF_VERIFY_VERSION;
@@ -325,6 +347,7 @@ static void InitDefaultsUpdateIndexResponse() {
     {{ATOMIC_VAR_INIT(::google::protobuf::internal::SCCInfoBase::kUninitialized), 0, InitDefaultsUpdateIndexResponse}, {}};
 
 void InitDefaults() {
+  ::google::protobuf::internal::InitSCC(&scc_info_ClusterSettings.base);
   ::google::protobuf::internal::InitSCC(&scc_info_WorkNode.base);
   ::google::protobuf::internal::InitSCC(&scc_info_ClusterState.base);
   ::google::protobuf::internal::InitSCC(&scc_info_MasterSnapshot.base);
@@ -342,11 +365,16 @@ void InitDefaults() {
   ::google::protobuf::internal::InitSCC(&scc_info_UpdateIndexResponse.base);
 }
 
-::google::protobuf::Metadata file_level_metadata[15];
+::google::protobuf::Metadata file_level_metadata[16];
 const ::google::protobuf::EnumDescriptor* file_level_enum_descriptors[1];
 const ::google::protobuf::ServiceDescriptor* file_level_service_descriptors[1];
 
 const ::google::protobuf::uint32 TableStruct::offsets[] GOOGLE_PROTOBUF_ATTRIBUTE_SECTION_VARIABLE(protodesc_cold) = {
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::elasticfaiss::ClusterSettings, _has_bits_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::elasticfaiss::ClusterSettings, _internal_metadata_),
+  ~0u,  // no _extensions_
+  ~0u,  // no _oneof_case_
+  ~0u,  // no _weak_field_map_
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::elasticfaiss::WorkNode, _has_bits_),
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::elasticfaiss::WorkNode, _internal_metadata_),
   ~0u,  // no _extensions_
@@ -367,30 +395,28 @@ const ::google::protobuf::uint32 TableStruct::offsets[] GOOGLE_PROTOBUF_ATTRIBUT
   ~0u,  // no _extensions_
   ~0u,  // no _oneof_case_
   ~0u,  // no _weak_field_map_
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::elasticfaiss::ClusterState, name_),
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::elasticfaiss::ClusterState, update_ms_),
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::elasticfaiss::ClusterState, nodes_),
   0,
-  1,
   ~0u,
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::elasticfaiss::MasterSnapshot, _has_bits_),
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::elasticfaiss::MasterSnapshot, _internal_metadata_),
   ~0u,  // no _extensions_
   ~0u,  // no _oneof_case_
   ~0u,  // no _weak_field_map_
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::elasticfaiss::MasterSnapshot, states_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::elasticfaiss::MasterSnapshot, state_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::elasticfaiss::MasterSnapshot, index_),
+  0,
   ~0u,
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::elasticfaiss::BootstrapRequest, _has_bits_),
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::elasticfaiss::BootstrapRequest, _internal_metadata_),
   ~0u,  // no _extensions_
   ~0u,  // no _oneof_case_
   ~0u,  // no _weak_field_map_
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::elasticfaiss::BootstrapRequest, cluster_),
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::elasticfaiss::BootstrapRequest, node_peer_),
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::elasticfaiss::BootstrapRequest, boot_ms_),
   0,
   1,
-  2,
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::elasticfaiss::BootstrapResponse, _has_bits_),
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::elasticfaiss::BootstrapResponse, _internal_metadata_),
   ~0u,  // no _extensions_
@@ -399,21 +425,21 @@ const ::google::protobuf::uint32 TableStruct::offsets[] GOOGLE_PROTOBUF_ATTRIBUT
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::elasticfaiss::BootstrapResponse, success_),
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::elasticfaiss::BootstrapResponse, redirect_),
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::elasticfaiss::BootstrapResponse, nodes_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::elasticfaiss::BootstrapResponse, shards_),
   1,
   0,
+  ~0u,
   ~0u,
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::elasticfaiss::NodeHeartbeatRequest, _has_bits_),
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::elasticfaiss::NodeHeartbeatRequest, _internal_metadata_),
   ~0u,  // no _extensions_
   ~0u,  // no _oneof_case_
   ~0u,  // no _weak_field_map_
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::elasticfaiss::NodeHeartbeatRequest, cluster_),
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::elasticfaiss::NodeHeartbeatRequest, node_peer_),
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::elasticfaiss::NodeHeartbeatRequest, active_ms_),
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::elasticfaiss::NodeHeartbeatRequest, shards_),
   0,
   1,
-  2,
   ~0u,
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::elasticfaiss::NodeHeartbeatResponse, _has_bits_),
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::elasticfaiss::NodeHeartbeatResponse, _internal_metadata_),
@@ -449,10 +475,8 @@ const ::google::protobuf::uint32 TableStruct::offsets[] GOOGLE_PROTOBUF_ATTRIBUT
   ~0u,  // no _extensions_
   ~0u,  // no _oneof_case_
   ~0u,  // no _weak_field_map_
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::elasticfaiss::CreateIndexRequest, cluster_),
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::elasticfaiss::CreateIndexRequest, conf_),
   0,
-  1,
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::elasticfaiss::CreateIndexResponse, _has_bits_),
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::elasticfaiss::CreateIndexResponse, _internal_metadata_),
   ~0u,  // no _extensions_
@@ -469,10 +493,8 @@ const ::google::protobuf::uint32 TableStruct::offsets[] GOOGLE_PROTOBUF_ATTRIBUT
   ~0u,  // no _extensions_
   ~0u,  // no _oneof_case_
   ~0u,  // no _weak_field_map_
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::elasticfaiss::DeleteIndexRequest, cluster_),
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::elasticfaiss::DeleteIndexRequest, index_name_),
   0,
-  1,
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::elasticfaiss::DeleteIndexResponse, _has_bits_),
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::elasticfaiss::DeleteIndexResponse, _internal_metadata_),
   ~0u,  // no _extensions_
@@ -489,10 +511,8 @@ const ::google::protobuf::uint32 TableStruct::offsets[] GOOGLE_PROTOBUF_ATTRIBUT
   ~0u,  // no _extensions_
   ~0u,  // no _oneof_case_
   ~0u,  // no _weak_field_map_
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::elasticfaiss::UpdateIndexRequest, cluster_),
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::elasticfaiss::UpdateIndexRequest, conf_),
   0,
-  1,
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::elasticfaiss::UpdateIndexResponse, _has_bits_),
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::elasticfaiss::UpdateIndexResponse, _internal_metadata_),
   ~0u,  // no _extensions_
@@ -506,24 +526,26 @@ const ::google::protobuf::uint32 TableStruct::offsets[] GOOGLE_PROTOBUF_ATTRIBUT
   1,
 };
 static const ::google::protobuf::internal::MigrationSchema schemas[] GOOGLE_PROTOBUF_ATTRIBUTE_SECTION_VARIABLE(protodesc_cold) = {
-  { 0, 10, sizeof(::elasticfaiss::WorkNode)},
-  { 15, 23, sizeof(::elasticfaiss::ClusterState)},
-  { 26, 32, sizeof(::elasticfaiss::MasterSnapshot)},
-  { 33, 41, sizeof(::elasticfaiss::BootstrapRequest)},
-  { 44, 52, sizeof(::elasticfaiss::BootstrapResponse)},
-  { 55, 64, sizeof(::elasticfaiss::NodeHeartbeatRequest)},
-  { 68, 76, sizeof(::elasticfaiss::NodeHeartbeatResponse)},
-  { 79, 85, sizeof(::elasticfaiss::GetClusterStateRequest)},
-  { 86, 94, sizeof(::elasticfaiss::GetClusterStateResponse)},
-  { 97, 104, sizeof(::elasticfaiss::CreateIndexRequest)},
-  { 106, 114, sizeof(::elasticfaiss::CreateIndexResponse)},
-  { 117, 124, sizeof(::elasticfaiss::DeleteIndexRequest)},
-  { 126, 134, sizeof(::elasticfaiss::DeleteIndexResponse)},
-  { 137, 144, sizeof(::elasticfaiss::UpdateIndexRequest)},
-  { 146, 154, sizeof(::elasticfaiss::UpdateIndexResponse)},
+  { 0, 5, sizeof(::elasticfaiss::ClusterSettings)},
+  { 5, 15, sizeof(::elasticfaiss::WorkNode)},
+  { 20, 27, sizeof(::elasticfaiss::ClusterState)},
+  { 29, 36, sizeof(::elasticfaiss::MasterSnapshot)},
+  { 38, 45, sizeof(::elasticfaiss::BootstrapRequest)},
+  { 47, 56, sizeof(::elasticfaiss::BootstrapResponse)},
+  { 60, 68, sizeof(::elasticfaiss::NodeHeartbeatRequest)},
+  { 71, 79, sizeof(::elasticfaiss::NodeHeartbeatResponse)},
+  { 82, 88, sizeof(::elasticfaiss::GetClusterStateRequest)},
+  { 89, 97, sizeof(::elasticfaiss::GetClusterStateResponse)},
+  { 100, 106, sizeof(::elasticfaiss::CreateIndexRequest)},
+  { 107, 115, sizeof(::elasticfaiss::CreateIndexResponse)},
+  { 118, 124, sizeof(::elasticfaiss::DeleteIndexRequest)},
+  { 125, 133, sizeof(::elasticfaiss::DeleteIndexResponse)},
+  { 136, 142, sizeof(::elasticfaiss::UpdateIndexRequest)},
+  { 143, 151, sizeof(::elasticfaiss::UpdateIndexResponse)},
 };
 
 static ::google::protobuf::Message const * const file_default_instances[] = {
+  reinterpret_cast<const ::google::protobuf::Message*>(&::elasticfaiss::_ClusterSettings_default_instance_),
   reinterpret_cast<const ::google::protobuf::Message*>(&::elasticfaiss::_WorkNode_default_instance_),
   reinterpret_cast<const ::google::protobuf::Message*>(&::elasticfaiss::_ClusterState_default_instance_),
   reinterpret_cast<const ::google::protobuf::Message*>(&::elasticfaiss::_MasterSnapshot_default_instance_),
@@ -556,63 +578,63 @@ void protobuf_AssignDescriptorsOnce() {
 void protobuf_RegisterTypes(const ::std::string&) GOOGLE_PROTOBUF_ATTRIBUTE_COLD;
 void protobuf_RegisterTypes(const ::std::string&) {
   protobuf_AssignDescriptorsOnce();
-  ::google::protobuf::internal::RegisterAllTypes(file_level_metadata, 15);
+  ::google::protobuf::internal::RegisterAllTypes(file_level_metadata, 16);
 }
 
 void AddDescriptorsImpl() {
   InitDefaults();
   static const char descriptor[] GOOGLE_PROTOBUF_ATTRIBUTE_SECTION_VARIABLE(protodesc_cold) = {
       "\n\014master.proto\022\014elasticfaiss\032\013shard.prot"
-      "o\"~\n\010WorkNode\022\017\n\007peer_id\030\001 \002(\t\022\026\n\016last_a"
-      "ctive_ms\030\002 \001(\003\022\025\n\rlast_state_ms\030\003 \001(\003\022#\n"
-      "\006shards\030\004 \003(\0132\023.elasticfaiss.Shard\022\r\n\005st"
-      "ate\030\005 \002(\005\"V\n\014ClusterState\022\014\n\004name\030\001 \001(\t\022"
-      "\021\n\tupdate_ms\030\002 \001(\003\022%\n\005nodes\030\003 \003(\0132\026.elas"
-      "ticfaiss.WorkNode\"<\n\016MasterSnapshot\022*\n\006s"
-      "tates\030\001 \003(\0132\032.elasticfaiss.ClusterState\""
-      "G\n\020BootstrapRequest\022\017\n\007cluster\030\001 \002(\t\022\021\n\t"
-      "node_peer\030\002 \002(\t\022\017\n\007boot_ms\030\003 \001(\003\"]\n\021Boot"
-      "strapResponse\022\017\n\007success\030\001 \002(\010\022\020\n\010redire"
-      "ct\030\002 \001(\t\022%\n\005nodes\030\003 \003(\0132\026.elasticfaiss.W"
-      "orkNode\"r\n\024NodeHeartbeatRequest\022\017\n\007clust"
-      "er\030\001 \002(\t\022\021\n\tnode_peer\030\002 \002(\t\022\021\n\tactive_ms"
-      "\030\003 \001(\003\022#\n\006shards\030\004 \003(\0132\023.elasticfaiss.Sh"
-      "ard\"a\n\025NodeHeartbeatResponse\022\017\n\007success\030"
-      "\001 \002(\010\022\020\n\010redirect\030\002 \001(\t\022%\n\005nodes\030\003 \003(\0132\026"
-      ".elasticfaiss.WorkNode\")\n\026GetClusterStat"
-      "eRequest\022\017\n\007cluster\030\001 \002(\t\"g\n\027GetClusterS"
-      "tateResponse\022\017\n\007success\030\001 \002(\010\022\020\n\010redirec"
-      "t\030\002 \001(\t\022)\n\005state\030\003 \001(\0132\032.elasticfaiss.Cl"
-      "usterState\"L\n\022CreateIndexRequest\022\017\n\007clus"
-      "ter\030\001 \002(\t\022%\n\004conf\030\002 \002(\0132\027.elasticfaiss.I"
+      "o\"\021\n\017ClusterSettings\"~\n\010WorkNode\022\017\n\007peer"
+      "_id\030\001 \002(\t\022\026\n\016last_active_ms\030\002 \001(\003\022\025\n\rlas"
+      "t_state_ms\030\003 \001(\003\022#\n\006shards\030\004 \003(\0132\023.elast"
+      "icfaiss.Shard\022\r\n\005state\030\005 \002(\005\"H\n\014ClusterS"
+      "tate\022\021\n\tupdate_ms\030\001 \001(\003\022%\n\005nodes\030\002 \003(\0132\026"
+      ".elasticfaiss.WorkNode\"c\n\016MasterSnapshot"
+      "\022)\n\005state\030\001 \001(\0132\032.elasticfaiss.ClusterSt"
+      "ate\022&\n\005index\030\002 \003(\0132\027.elasticfaiss.IndexC"
+      "onf\"6\n\020BootstrapRequest\022\021\n\tnode_peer\030\001 \002"
+      "(\t\022\017\n\007boot_ms\030\002 \001(\003\"\213\001\n\021BootstrapRespons"
+      "e\022\017\n\007success\030\001 \002(\010\022\020\n\010redirect\030\002 \001(\t\022%\n\005"
+      "nodes\030\003 \003(\0132\026.elasticfaiss.WorkNode\022,\n\006s"
+      "hards\030\004 \003(\0132\034.elasticfaiss.IndexShardCon"
+      "f\"a\n\024NodeHeartbeatRequest\022\021\n\tnode_peer\030\001"
+      " \002(\t\022\021\n\tactive_ms\030\002 \001(\003\022#\n\006shards\030\003 \003(\0132"
+      "\023.elasticfaiss.Shard\"a\n\025NodeHeartbeatRes"
+      "ponse\022\017\n\007success\030\001 \002(\010\022\020\n\010redirect\030\002 \001(\t"
+      "\022%\n\005nodes\030\003 \003(\0132\026.elasticfaiss.WorkNode\""
+      ")\n\026GetClusterStateRequest\022\017\n\007cluster\030\001 \002"
+      "(\t\"g\n\027GetClusterStateResponse\022\017\n\007success"
+      "\030\001 \002(\010\022\020\n\010redirect\030\002 \001(\t\022)\n\005state\030\003 \001(\0132"
+      "\032.elasticfaiss.ClusterState\";\n\022CreateInd"
+      "exRequest\022%\n\004conf\030\001 \002(\0132\027.elasticfaiss.I"
       "ndexConf\"G\n\023CreateIndexResponse\022\017\n\007succe"
       "ss\030\001 \002(\010\022\020\n\010redirect\030\002 \001(\t\022\r\n\005error\030\003 \001("
-      "\t\"9\n\022DeleteIndexRequest\022\017\n\007cluster\030\001 \002(\t"
-      "\022\022\n\nindex_name\030\002 \002(\t\"G\n\023DeleteIndexRespo"
-      "nse\022\017\n\007success\030\001 \002(\010\022\020\n\010redirect\030\002 \001(\t\022\r"
-      "\n\005error\030\003 \001(\t\"L\n\022UpdateIndexRequest\022\017\n\007c"
-      "luster\030\001 \002(\t\022%\n\004conf\030\002 \002(\0132\027.elasticfais"
-      "s.IndexConf\"G\n\023UpdateIndexResponse\022\017\n\007su"
-      "ccess\030\001 \002(\010\022\020\n\010redirect\030\002 \001(\t\022\r\n\005error\030\003"
-      " \001(\t*4\n\rWorkNodeState\022\020\n\014WNODE_ACTIVE\020\001\022"
-      "\021\n\rWNODE_TIMEOUT\020\0022\231\004\n\rMasterService\022L\n\t"
-      "bootstrap\022\036.elasticfaiss.BootstrapReques"
-      "t\032\037.elasticfaiss.BootstrapResponse\022Y\n\016no"
-      "de_heartbeat\022\".elasticfaiss.NodeHeartbea"
-      "tRequest\032#.elasticfaiss.NodeHeartbeatRes"
-      "ponse\022`\n\021get_cluster_state\022$.elasticfais"
-      "s.GetClusterStateRequest\032%.elasticfaiss."
-      "GetClusterStateResponse\022S\n\014create_index\022"
-      " .elasticfaiss.CreateIndexRequest\032!.elas"
-      "ticfaiss.CreateIndexResponse\022S\n\014delete_i"
-      "ndex\022 .elasticfaiss.DeleteIndexRequest\032!"
-      ".elasticfaiss.DeleteIndexResponse\022S\n\014upd"
-      "ate_index\022 .elasticfaiss.UpdateIndexRequ"
-      "est\032!.elasticfaiss.UpdateIndexResponseB\003"
-      "\200\001\001"
+      "\t\"(\n\022DeleteIndexRequest\022\022\n\nindex_name\030\001 "
+      "\002(\t\"G\n\023DeleteIndexResponse\022\017\n\007success\030\001 "
+      "\002(\010\022\020\n\010redirect\030\002 \001(\t\022\r\n\005error\030\003 \001(\t\";\n\022"
+      "UpdateIndexRequest\022%\n\004conf\030\001 \002(\0132\027.elast"
+      "icfaiss.IndexConf\"G\n\023UpdateIndexResponse"
+      "\022\017\n\007success\030\001 \002(\010\022\020\n\010redirect\030\002 \001(\t\022\r\n\005e"
+      "rror\030\003 \001(\t*4\n\rWorkNodeState\022\020\n\014WNODE_ACT"
+      "IVE\020\001\022\021\n\rWNODE_TIMEOUT\020\0022\231\004\n\rMasterServi"
+      "ce\022L\n\tbootstrap\022\036.elasticfaiss.Bootstrap"
+      "Request\032\037.elasticfaiss.BootstrapResponse"
+      "\022Y\n\016node_heartbeat\022\".elasticfaiss.NodeHe"
+      "artbeatRequest\032#.elasticfaiss.NodeHeartb"
+      "eatResponse\022`\n\021get_cluster_state\022$.elast"
+      "icfaiss.GetClusterStateRequest\032%.elastic"
+      "faiss.GetClusterStateResponse\022S\n\014create_"
+      "index\022 .elasticfaiss.CreateIndexRequest\032"
+      "!.elasticfaiss.CreateIndexResponse\022S\n\014de"
+      "lete_index\022 .elasticfaiss.DeleteIndexReq"
+      "uest\032!.elasticfaiss.DeleteIndexResponse\022"
+      "S\n\014update_index\022 .elasticfaiss.UpdateInd"
+      "exRequest\032!.elasticfaiss.UpdateIndexResp"
+      "onseB\003\200\001\001"
   };
   ::google::protobuf::DescriptorPool::InternalAddGeneratedFile(
-      descriptor, 1883);
+      descriptor, 1889);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "master.proto", &protobuf_RegisterTypes);
   ::protobuf_shard_2eproto::AddDescriptors();
@@ -642,6 +664,188 @@ bool WorkNodeState_IsValid(int value) {
     default:
       return false;
   }
+}
+
+
+// ===================================================================
+
+void ClusterSettings::InitAsDefaultInstance() {
+}
+#if !defined(_MSC_VER) || _MSC_VER >= 1900
+#endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
+
+ClusterSettings::ClusterSettings()
+  : ::google::protobuf::Message(), _internal_metadata_(NULL) {
+  ::google::protobuf::internal::InitSCC(
+      &protobuf_master_2eproto::scc_info_ClusterSettings.base);
+  SharedCtor();
+  // @@protoc_insertion_point(constructor:elasticfaiss.ClusterSettings)
+}
+ClusterSettings::ClusterSettings(const ClusterSettings& from)
+  : ::google::protobuf::Message(),
+      _internal_metadata_(NULL),
+      _has_bits_(from._has_bits_) {
+  _internal_metadata_.MergeFrom(from._internal_metadata_);
+  // @@protoc_insertion_point(copy_constructor:elasticfaiss.ClusterSettings)
+}
+
+void ClusterSettings::SharedCtor() {
+}
+
+ClusterSettings::~ClusterSettings() {
+  // @@protoc_insertion_point(destructor:elasticfaiss.ClusterSettings)
+  SharedDtor();
+}
+
+void ClusterSettings::SharedDtor() {
+}
+
+void ClusterSettings::SetCachedSize(int size) const {
+  _cached_size_.Set(size);
+}
+const ::google::protobuf::Descriptor* ClusterSettings::descriptor() {
+  ::protobuf_master_2eproto::protobuf_AssignDescriptorsOnce();
+  return ::protobuf_master_2eproto::file_level_metadata[kIndexInFileMessages].descriptor;
+}
+
+const ClusterSettings& ClusterSettings::default_instance() {
+  ::google::protobuf::internal::InitSCC(&protobuf_master_2eproto::scc_info_ClusterSettings.base);
+  return *internal_default_instance();
+}
+
+
+void ClusterSettings::Clear() {
+// @@protoc_insertion_point(message_clear_start:elasticfaiss.ClusterSettings)
+  ::google::protobuf::uint32 cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  _has_bits_.Clear();
+  _internal_metadata_.Clear();
+}
+
+bool ClusterSettings::MergePartialFromCodedStream(
+    ::google::protobuf::io::CodedInputStream* input) {
+#define DO_(EXPRESSION) if (!GOOGLE_PREDICT_TRUE(EXPRESSION)) goto failure
+  ::google::protobuf::uint32 tag;
+  // @@protoc_insertion_point(parse_start:elasticfaiss.ClusterSettings)
+  for (;;) {
+    ::std::pair<::google::protobuf::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(127u);
+    tag = p.first;
+    if (!p.second) goto handle_unusual;
+  handle_unusual:
+    if (tag == 0) {
+      goto success;
+    }
+    DO_(::google::protobuf::internal::WireFormat::SkipField(
+          input, tag, _internal_metadata_.mutable_unknown_fields()));
+  }
+success:
+  // @@protoc_insertion_point(parse_success:elasticfaiss.ClusterSettings)
+  return true;
+failure:
+  // @@protoc_insertion_point(parse_failure:elasticfaiss.ClusterSettings)
+  return false;
+#undef DO_
+}
+
+void ClusterSettings::SerializeWithCachedSizes(
+    ::google::protobuf::io::CodedOutputStream* output) const {
+  // @@protoc_insertion_point(serialize_start:elasticfaiss.ClusterSettings)
+  ::google::protobuf::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  if (_internal_metadata_.have_unknown_fields()) {
+    ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
+        _internal_metadata_.unknown_fields(), output);
+  }
+  // @@protoc_insertion_point(serialize_end:elasticfaiss.ClusterSettings)
+}
+
+::google::protobuf::uint8* ClusterSettings::InternalSerializeWithCachedSizesToArray(
+    bool deterministic, ::google::protobuf::uint8* target) const {
+  (void)deterministic; // Unused
+  // @@protoc_insertion_point(serialize_to_array_start:elasticfaiss.ClusterSettings)
+  ::google::protobuf::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  if (_internal_metadata_.have_unknown_fields()) {
+    target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
+        _internal_metadata_.unknown_fields(), target);
+  }
+  // @@protoc_insertion_point(serialize_to_array_end:elasticfaiss.ClusterSettings)
+  return target;
+}
+
+size_t ClusterSettings::ByteSizeLong() const {
+// @@protoc_insertion_point(message_byte_size_start:elasticfaiss.ClusterSettings)
+  size_t total_size = 0;
+
+  if (_internal_metadata_.have_unknown_fields()) {
+    total_size +=
+      ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
+        _internal_metadata_.unknown_fields());
+  }
+  int cached_size = ::google::protobuf::internal::ToCachedSize(total_size);
+  SetCachedSize(cached_size);
+  return total_size;
+}
+
+void ClusterSettings::MergeFrom(const ::google::protobuf::Message& from) {
+// @@protoc_insertion_point(generalized_merge_from_start:elasticfaiss.ClusterSettings)
+  GOOGLE_DCHECK_NE(&from, this);
+  const ClusterSettings* source =
+      ::google::protobuf::internal::DynamicCastToGenerated<const ClusterSettings>(
+          &from);
+  if (source == NULL) {
+  // @@protoc_insertion_point(generalized_merge_from_cast_fail:elasticfaiss.ClusterSettings)
+    ::google::protobuf::internal::ReflectionOps::Merge(from, this);
+  } else {
+  // @@protoc_insertion_point(generalized_merge_from_cast_success:elasticfaiss.ClusterSettings)
+    MergeFrom(*source);
+  }
+}
+
+void ClusterSettings::MergeFrom(const ClusterSettings& from) {
+// @@protoc_insertion_point(class_specific_merge_from_start:elasticfaiss.ClusterSettings)
+  GOOGLE_DCHECK_NE(&from, this);
+  _internal_metadata_.MergeFrom(from._internal_metadata_);
+  ::google::protobuf::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+}
+
+void ClusterSettings::CopyFrom(const ::google::protobuf::Message& from) {
+// @@protoc_insertion_point(generalized_copy_from_start:elasticfaiss.ClusterSettings)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+void ClusterSettings::CopyFrom(const ClusterSettings& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:elasticfaiss.ClusterSettings)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+bool ClusterSettings::IsInitialized() const {
+  return true;
+}
+
+void ClusterSettings::Swap(ClusterSettings* other) {
+  if (other == this) return;
+  InternalSwap(other);
+}
+void ClusterSettings::InternalSwap(ClusterSettings* other) {
+  using std::swap;
+  swap(_has_bits_[0], other->_has_bits_[0]);
+  _internal_metadata_.Swap(&other->_internal_metadata_);
+}
+
+::google::protobuf::Metadata ClusterSettings::GetMetadata() const {
+  protobuf_master_2eproto::protobuf_AssignDescriptorsOnce();
+  return ::protobuf_master_2eproto::file_level_metadata[kIndexInFileMessages];
 }
 
 
@@ -1095,7 +1299,6 @@ void WorkNode::InternalSwap(WorkNode* other) {
 void ClusterState::InitAsDefaultInstance() {
 }
 #if !defined(_MSC_VER) || _MSC_VER >= 1900
-const int ClusterState::kNameFieldNumber;
 const int ClusterState::kUpdateMsFieldNumber;
 const int ClusterState::kNodesFieldNumber;
 #endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
@@ -1113,16 +1316,11 @@ ClusterState::ClusterState(const ClusterState& from)
       _has_bits_(from._has_bits_),
       nodes_(from.nodes_) {
   _internal_metadata_.MergeFrom(from._internal_metadata_);
-  name_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  if (from.has_name()) {
-    name_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.name_);
-  }
   update_ms_ = from.update_ms_;
   // @@protoc_insertion_point(copy_constructor:elasticfaiss.ClusterState)
 }
 
 void ClusterState::SharedCtor() {
-  name_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   update_ms_ = GOOGLE_LONGLONG(0);
 }
 
@@ -1132,7 +1330,6 @@ ClusterState::~ClusterState() {
 }
 
 void ClusterState::SharedDtor() {
-  name_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
 
 void ClusterState::SetCachedSize(int size) const {
@@ -1156,10 +1353,6 @@ void ClusterState::Clear() {
   (void) cached_has_bits;
 
   nodes_.Clear();
-  cached_has_bits = _has_bits_[0];
-  if (cached_has_bits & 0x00000001u) {
-    name_.ClearNonDefaultToEmptyNoArena();
-  }
   update_ms_ = GOOGLE_LONGLONG(0);
   _has_bits_.Clear();
   _internal_metadata_.Clear();
@@ -1175,26 +1368,10 @@ bool ClusterState::MergePartialFromCodedStream(
     tag = p.first;
     if (!p.second) goto handle_unusual;
     switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
-      // optional string name = 1;
+      // optional int64 update_ms = 1;
       case 1: {
         if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(10u /* 10 & 0xFF */)) {
-          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
-                input, this->mutable_name()));
-          ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
-            this->name().data(), static_cast<int>(this->name().length()),
-            ::google::protobuf::internal::WireFormat::PARSE,
-            "elasticfaiss.ClusterState.name");
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
-      // optional int64 update_ms = 2;
-      case 2: {
-        if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(16u /* 16 & 0xFF */)) {
+            static_cast< ::google::protobuf::uint8>(8u /* 8 & 0xFF */)) {
           set_has_update_ms();
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    ::google::protobuf::int64, ::google::protobuf::internal::WireFormatLite::TYPE_INT64>(
@@ -1205,10 +1382,10 @@ bool ClusterState::MergePartialFromCodedStream(
         break;
       }
 
-      // repeated .elasticfaiss.WorkNode nodes = 3;
-      case 3: {
+      // repeated .elasticfaiss.WorkNode nodes = 2;
+      case 2: {
         if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(26u /* 26 & 0xFF */)) {
+            static_cast< ::google::protobuf::uint8>(18u /* 18 & 0xFF */)) {
           DO_(::google::protobuf::internal::WireFormatLite::ReadMessage(
                 input, add_nodes()));
         } else {
@@ -1244,26 +1421,16 @@ void ClusterState::SerializeWithCachedSizes(
   (void) cached_has_bits;
 
   cached_has_bits = _has_bits_[0];
-  // optional string name = 1;
+  // optional int64 update_ms = 1;
   if (cached_has_bits & 0x00000001u) {
-    ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
-      this->name().data(), static_cast<int>(this->name().length()),
-      ::google::protobuf::internal::WireFormat::SERIALIZE,
-      "elasticfaiss.ClusterState.name");
-    ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
-      1, this->name(), output);
+    ::google::protobuf::internal::WireFormatLite::WriteInt64(1, this->update_ms(), output);
   }
 
-  // optional int64 update_ms = 2;
-  if (cached_has_bits & 0x00000002u) {
-    ::google::protobuf::internal::WireFormatLite::WriteInt64(2, this->update_ms(), output);
-  }
-
-  // repeated .elasticfaiss.WorkNode nodes = 3;
+  // repeated .elasticfaiss.WorkNode nodes = 2;
   for (unsigned int i = 0,
       n = static_cast<unsigned int>(this->nodes_size()); i < n; i++) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
-      3,
+      2,
       this->nodes(static_cast<int>(i)),
       output);
   }
@@ -1283,28 +1450,17 @@ void ClusterState::SerializeWithCachedSizes(
   (void) cached_has_bits;
 
   cached_has_bits = _has_bits_[0];
-  // optional string name = 1;
+  // optional int64 update_ms = 1;
   if (cached_has_bits & 0x00000001u) {
-    ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
-      this->name().data(), static_cast<int>(this->name().length()),
-      ::google::protobuf::internal::WireFormat::SERIALIZE,
-      "elasticfaiss.ClusterState.name");
-    target =
-      ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
-        1, this->name(), target);
+    target = ::google::protobuf::internal::WireFormatLite::WriteInt64ToArray(1, this->update_ms(), target);
   }
 
-  // optional int64 update_ms = 2;
-  if (cached_has_bits & 0x00000002u) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteInt64ToArray(2, this->update_ms(), target);
-  }
-
-  // repeated .elasticfaiss.WorkNode nodes = 3;
+  // repeated .elasticfaiss.WorkNode nodes = 2;
   for (unsigned int i = 0,
       n = static_cast<unsigned int>(this->nodes_size()); i < n; i++) {
     target = ::google::protobuf::internal::WireFormatLite::
       InternalWriteMessageToArray(
-        3, this->nodes(static_cast<int>(i)), deterministic, target);
+        2, this->nodes(static_cast<int>(i)), deterministic, target);
   }
 
   if (_internal_metadata_.have_unknown_fields()) {
@@ -1324,7 +1480,7 @@ size_t ClusterState::ByteSizeLong() const {
       ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
         _internal_metadata_.unknown_fields());
   }
-  // repeated .elasticfaiss.WorkNode nodes = 3;
+  // repeated .elasticfaiss.WorkNode nodes = 2;
   {
     unsigned int count = static_cast<unsigned int>(this->nodes_size());
     total_size += 1UL * count;
@@ -1335,22 +1491,13 @@ size_t ClusterState::ByteSizeLong() const {
     }
   }
 
-  if (_has_bits_[0 / 32] & 3u) {
-    // optional string name = 1;
-    if (has_name()) {
-      total_size += 1 +
-        ::google::protobuf::internal::WireFormatLite::StringSize(
-          this->name());
-    }
-
-    // optional int64 update_ms = 2;
-    if (has_update_ms()) {
-      total_size += 1 +
-        ::google::protobuf::internal::WireFormatLite::Int64Size(
-          this->update_ms());
-    }
-
+  // optional int64 update_ms = 1;
+  if (has_update_ms()) {
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::Int64Size(
+        this->update_ms());
   }
+
   int cached_size = ::google::protobuf::internal::ToCachedSize(total_size);
   SetCachedSize(cached_size);
   return total_size;
@@ -1379,16 +1526,8 @@ void ClusterState::MergeFrom(const ClusterState& from) {
   (void) cached_has_bits;
 
   nodes_.MergeFrom(from.nodes_);
-  cached_has_bits = from._has_bits_[0];
-  if (cached_has_bits & 3u) {
-    if (cached_has_bits & 0x00000001u) {
-      set_has_name();
-      name_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.name_);
-    }
-    if (cached_has_bits & 0x00000002u) {
-      update_ms_ = from.update_ms_;
-    }
-    _has_bits_[0] |= cached_has_bits;
+  if (from.has_update_ms()) {
+    set_update_ms(from.update_ms());
   }
 }
 
@@ -1418,8 +1557,6 @@ void ClusterState::Swap(ClusterState* other) {
 void ClusterState::InternalSwap(ClusterState* other) {
   using std::swap;
   CastToBase(&nodes_)->InternalSwap(CastToBase(&other->nodes_));
-  name_.Swap(&other->name_, &::google::protobuf::internal::GetEmptyStringAlreadyInited(),
-    GetArenaNoVirtual());
   swap(update_ms_, other->update_ms_);
   swap(_has_bits_[0], other->_has_bits_[0]);
   _internal_metadata_.Swap(&other->_internal_metadata_);
@@ -1434,9 +1571,15 @@ void ClusterState::InternalSwap(ClusterState* other) {
 // ===================================================================
 
 void MasterSnapshot::InitAsDefaultInstance() {
+  ::elasticfaiss::_MasterSnapshot_default_instance_._instance.get_mutable()->state_ = const_cast< ::elasticfaiss::ClusterState*>(
+      ::elasticfaiss::ClusterState::internal_default_instance());
+}
+void MasterSnapshot::clear_index() {
+  index_.Clear();
 }
 #if !defined(_MSC_VER) || _MSC_VER >= 1900
-const int MasterSnapshot::kStatesFieldNumber;
+const int MasterSnapshot::kStateFieldNumber;
+const int MasterSnapshot::kIndexFieldNumber;
 #endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
 
 MasterSnapshot::MasterSnapshot()
@@ -1450,12 +1593,18 @@ MasterSnapshot::MasterSnapshot(const MasterSnapshot& from)
   : ::google::protobuf::Message(),
       _internal_metadata_(NULL),
       _has_bits_(from._has_bits_),
-      states_(from.states_) {
+      index_(from.index_) {
   _internal_metadata_.MergeFrom(from._internal_metadata_);
+  if (from.has_state()) {
+    state_ = new ::elasticfaiss::ClusterState(*from.state_);
+  } else {
+    state_ = NULL;
+  }
   // @@protoc_insertion_point(copy_constructor:elasticfaiss.MasterSnapshot)
 }
 
 void MasterSnapshot::SharedCtor() {
+  state_ = NULL;
 }
 
 MasterSnapshot::~MasterSnapshot() {
@@ -1464,6 +1613,7 @@ MasterSnapshot::~MasterSnapshot() {
 }
 
 void MasterSnapshot::SharedDtor() {
+  if (this != internal_default_instance()) delete state_;
 }
 
 void MasterSnapshot::SetCachedSize(int size) const {
@@ -1486,7 +1636,12 @@ void MasterSnapshot::Clear() {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  states_.Clear();
+  index_.Clear();
+  cached_has_bits = _has_bits_[0];
+  if (cached_has_bits & 0x00000001u) {
+    GOOGLE_DCHECK(state_ != NULL);
+    state_->Clear();
+  }
   _has_bits_.Clear();
   _internal_metadata_.Clear();
 }
@@ -1501,12 +1656,24 @@ bool MasterSnapshot::MergePartialFromCodedStream(
     tag = p.first;
     if (!p.second) goto handle_unusual;
     switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
-      // repeated .elasticfaiss.ClusterState states = 1;
+      // optional .elasticfaiss.ClusterState state = 1;
       case 1: {
         if (static_cast< ::google::protobuf::uint8>(tag) ==
             static_cast< ::google::protobuf::uint8>(10u /* 10 & 0xFF */)) {
           DO_(::google::protobuf::internal::WireFormatLite::ReadMessage(
-                input, add_states()));
+               input, mutable_state()));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      // repeated .elasticfaiss.IndexConf index = 2;
+      case 2: {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(18u /* 18 & 0xFF */)) {
+          DO_(::google::protobuf::internal::WireFormatLite::ReadMessage(
+                input, add_index()));
         } else {
           goto handle_unusual;
         }
@@ -1539,12 +1706,19 @@ void MasterSnapshot::SerializeWithCachedSizes(
   ::google::protobuf::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
-  // repeated .elasticfaiss.ClusterState states = 1;
-  for (unsigned int i = 0,
-      n = static_cast<unsigned int>(this->states_size()); i < n; i++) {
+  cached_has_bits = _has_bits_[0];
+  // optional .elasticfaiss.ClusterState state = 1;
+  if (cached_has_bits & 0x00000001u) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
-      1,
-      this->states(static_cast<int>(i)),
+      1, this->_internal_state(), output);
+  }
+
+  // repeated .elasticfaiss.IndexConf index = 2;
+  for (unsigned int i = 0,
+      n = static_cast<unsigned int>(this->index_size()); i < n; i++) {
+    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
+      2,
+      this->index(static_cast<int>(i)),
       output);
   }
 
@@ -1562,12 +1736,20 @@ void MasterSnapshot::SerializeWithCachedSizes(
   ::google::protobuf::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
-  // repeated .elasticfaiss.ClusterState states = 1;
-  for (unsigned int i = 0,
-      n = static_cast<unsigned int>(this->states_size()); i < n; i++) {
+  cached_has_bits = _has_bits_[0];
+  // optional .elasticfaiss.ClusterState state = 1;
+  if (cached_has_bits & 0x00000001u) {
     target = ::google::protobuf::internal::WireFormatLite::
       InternalWriteMessageToArray(
-        1, this->states(static_cast<int>(i)), deterministic, target);
+        1, this->_internal_state(), deterministic, target);
+  }
+
+  // repeated .elasticfaiss.IndexConf index = 2;
+  for (unsigned int i = 0,
+      n = static_cast<unsigned int>(this->index_size()); i < n; i++) {
+    target = ::google::protobuf::internal::WireFormatLite::
+      InternalWriteMessageToArray(
+        2, this->index(static_cast<int>(i)), deterministic, target);
   }
 
   if (_internal_metadata_.have_unknown_fields()) {
@@ -1587,15 +1769,22 @@ size_t MasterSnapshot::ByteSizeLong() const {
       ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
         _internal_metadata_.unknown_fields());
   }
-  // repeated .elasticfaiss.ClusterState states = 1;
+  // repeated .elasticfaiss.IndexConf index = 2;
   {
-    unsigned int count = static_cast<unsigned int>(this->states_size());
+    unsigned int count = static_cast<unsigned int>(this->index_size());
     total_size += 1UL * count;
     for (unsigned int i = 0; i < count; i++) {
       total_size +=
         ::google::protobuf::internal::WireFormatLite::MessageSize(
-          this->states(static_cast<int>(i)));
+          this->index(static_cast<int>(i)));
     }
+  }
+
+  // optional .elasticfaiss.ClusterState state = 1;
+  if (has_state()) {
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::MessageSize(
+        *state_);
   }
 
   int cached_size = ::google::protobuf::internal::ToCachedSize(total_size);
@@ -1625,7 +1814,10 @@ void MasterSnapshot::MergeFrom(const MasterSnapshot& from) {
   ::google::protobuf::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
-  states_.MergeFrom(from.states_);
+  index_.MergeFrom(from.index_);
+  if (from.has_state()) {
+    mutable_state()->::elasticfaiss::ClusterState::MergeFrom(from.state());
+  }
 }
 
 void MasterSnapshot::CopyFrom(const ::google::protobuf::Message& from) {
@@ -1643,7 +1835,10 @@ void MasterSnapshot::CopyFrom(const MasterSnapshot& from) {
 }
 
 bool MasterSnapshot::IsInitialized() const {
-  if (!::google::protobuf::internal::AllAreInitialized(this->states())) return false;
+  if (!::google::protobuf::internal::AllAreInitialized(this->index())) return false;
+  if (has_state()) {
+    if (!this->state_->IsInitialized()) return false;
+  }
   return true;
 }
 
@@ -1653,7 +1848,8 @@ void MasterSnapshot::Swap(MasterSnapshot* other) {
 }
 void MasterSnapshot::InternalSwap(MasterSnapshot* other) {
   using std::swap;
-  CastToBase(&states_)->InternalSwap(CastToBase(&other->states_));
+  CastToBase(&index_)->InternalSwap(CastToBase(&other->index_));
+  swap(state_, other->state_);
   swap(_has_bits_[0], other->_has_bits_[0]);
   _internal_metadata_.Swap(&other->_internal_metadata_);
 }
@@ -1669,7 +1865,6 @@ void MasterSnapshot::InternalSwap(MasterSnapshot* other) {
 void BootstrapRequest::InitAsDefaultInstance() {
 }
 #if !defined(_MSC_VER) || _MSC_VER >= 1900
-const int BootstrapRequest::kClusterFieldNumber;
 const int BootstrapRequest::kNodePeerFieldNumber;
 const int BootstrapRequest::kBootMsFieldNumber;
 #endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
@@ -1686,10 +1881,6 @@ BootstrapRequest::BootstrapRequest(const BootstrapRequest& from)
       _internal_metadata_(NULL),
       _has_bits_(from._has_bits_) {
   _internal_metadata_.MergeFrom(from._internal_metadata_);
-  cluster_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  if (from.has_cluster()) {
-    cluster_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.cluster_);
-  }
   node_peer_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   if (from.has_node_peer()) {
     node_peer_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.node_peer_);
@@ -1699,7 +1890,6 @@ BootstrapRequest::BootstrapRequest(const BootstrapRequest& from)
 }
 
 void BootstrapRequest::SharedCtor() {
-  cluster_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   node_peer_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   boot_ms_ = GOOGLE_LONGLONG(0);
 }
@@ -1710,7 +1900,6 @@ BootstrapRequest::~BootstrapRequest() {
 }
 
 void BootstrapRequest::SharedDtor() {
-  cluster_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   node_peer_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
 
@@ -1735,13 +1924,8 @@ void BootstrapRequest::Clear() {
   (void) cached_has_bits;
 
   cached_has_bits = _has_bits_[0];
-  if (cached_has_bits & 3u) {
-    if (cached_has_bits & 0x00000001u) {
-      cluster_.ClearNonDefaultToEmptyNoArena();
-    }
-    if (cached_has_bits & 0x00000002u) {
-      node_peer_.ClearNonDefaultToEmptyNoArena();
-    }
+  if (cached_has_bits & 0x00000001u) {
+    node_peer_.ClearNonDefaultToEmptyNoArena();
   }
   boot_ms_ = GOOGLE_LONGLONG(0);
   _has_bits_.Clear();
@@ -1758,26 +1942,10 @@ bool BootstrapRequest::MergePartialFromCodedStream(
     tag = p.first;
     if (!p.second) goto handle_unusual;
     switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
-      // required string cluster = 1;
+      // required string node_peer = 1;
       case 1: {
         if (static_cast< ::google::protobuf::uint8>(tag) ==
             static_cast< ::google::protobuf::uint8>(10u /* 10 & 0xFF */)) {
-          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
-                input, this->mutable_cluster()));
-          ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
-            this->cluster().data(), static_cast<int>(this->cluster().length()),
-            ::google::protobuf::internal::WireFormat::PARSE,
-            "elasticfaiss.BootstrapRequest.cluster");
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
-      // required string node_peer = 2;
-      case 2: {
-        if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(18u /* 18 & 0xFF */)) {
           DO_(::google::protobuf::internal::WireFormatLite::ReadString(
                 input, this->mutable_node_peer()));
           ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
@@ -1790,10 +1958,10 @@ bool BootstrapRequest::MergePartialFromCodedStream(
         break;
       }
 
-      // optional int64 boot_ms = 3;
-      case 3: {
+      // optional int64 boot_ms = 2;
+      case 2: {
         if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(24u /* 24 & 0xFF */)) {
+            static_cast< ::google::protobuf::uint8>(16u /* 16 & 0xFF */)) {
           set_has_boot_ms();
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    ::google::protobuf::int64, ::google::protobuf::internal::WireFormatLite::TYPE_INT64>(
@@ -1831,29 +1999,19 @@ void BootstrapRequest::SerializeWithCachedSizes(
   (void) cached_has_bits;
 
   cached_has_bits = _has_bits_[0];
-  // required string cluster = 1;
+  // required string node_peer = 1;
   if (cached_has_bits & 0x00000001u) {
-    ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
-      this->cluster().data(), static_cast<int>(this->cluster().length()),
-      ::google::protobuf::internal::WireFormat::SERIALIZE,
-      "elasticfaiss.BootstrapRequest.cluster");
-    ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
-      1, this->cluster(), output);
-  }
-
-  // required string node_peer = 2;
-  if (cached_has_bits & 0x00000002u) {
     ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
       this->node_peer().data(), static_cast<int>(this->node_peer().length()),
       ::google::protobuf::internal::WireFormat::SERIALIZE,
       "elasticfaiss.BootstrapRequest.node_peer");
     ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
-      2, this->node_peer(), output);
+      1, this->node_peer(), output);
   }
 
-  // optional int64 boot_ms = 3;
-  if (cached_has_bits & 0x00000004u) {
-    ::google::protobuf::internal::WireFormatLite::WriteInt64(3, this->boot_ms(), output);
+  // optional int64 boot_ms = 2;
+  if (cached_has_bits & 0x00000002u) {
+    ::google::protobuf::internal::WireFormatLite::WriteInt64(2, this->boot_ms(), output);
   }
 
   if (_internal_metadata_.have_unknown_fields()) {
@@ -1871,31 +2029,20 @@ void BootstrapRequest::SerializeWithCachedSizes(
   (void) cached_has_bits;
 
   cached_has_bits = _has_bits_[0];
-  // required string cluster = 1;
+  // required string node_peer = 1;
   if (cached_has_bits & 0x00000001u) {
-    ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
-      this->cluster().data(), static_cast<int>(this->cluster().length()),
-      ::google::protobuf::internal::WireFormat::SERIALIZE,
-      "elasticfaiss.BootstrapRequest.cluster");
-    target =
-      ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
-        1, this->cluster(), target);
-  }
-
-  // required string node_peer = 2;
-  if (cached_has_bits & 0x00000002u) {
     ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
       this->node_peer().data(), static_cast<int>(this->node_peer().length()),
       ::google::protobuf::internal::WireFormat::SERIALIZE,
       "elasticfaiss.BootstrapRequest.node_peer");
     target =
       ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
-        2, this->node_peer(), target);
+        1, this->node_peer(), target);
   }
 
-  // optional int64 boot_ms = 3;
-  if (cached_has_bits & 0x00000004u) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteInt64ToArray(3, this->boot_ms(), target);
+  // optional int64 boot_ms = 2;
+  if (cached_has_bits & 0x00000002u) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteInt64ToArray(2, this->boot_ms(), target);
   }
 
   if (_internal_metadata_.have_unknown_fields()) {
@@ -1906,26 +2053,6 @@ void BootstrapRequest::SerializeWithCachedSizes(
   return target;
 }
 
-size_t BootstrapRequest::RequiredFieldsByteSizeFallback() const {
-// @@protoc_insertion_point(required_fields_byte_size_fallback_start:elasticfaiss.BootstrapRequest)
-  size_t total_size = 0;
-
-  if (has_cluster()) {
-    // required string cluster = 1;
-    total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::StringSize(
-        this->cluster());
-  }
-
-  if (has_node_peer()) {
-    // required string node_peer = 2;
-    total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::StringSize(
-        this->node_peer());
-  }
-
-  return total_size;
-}
 size_t BootstrapRequest::ByteSizeLong() const {
 // @@protoc_insertion_point(message_byte_size_start:elasticfaiss.BootstrapRequest)
   size_t total_size = 0;
@@ -1935,21 +2062,13 @@ size_t BootstrapRequest::ByteSizeLong() const {
       ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
         _internal_metadata_.unknown_fields());
   }
-  if (((_has_bits_[0] & 0x00000003) ^ 0x00000003) == 0) {  // All required fields are present.
-    // required string cluster = 1;
-    total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::StringSize(
-        this->cluster());
-
-    // required string node_peer = 2;
+  // required string node_peer = 1;
+  if (has_node_peer()) {
     total_size += 1 +
       ::google::protobuf::internal::WireFormatLite::StringSize(
         this->node_peer());
-
-  } else {
-    total_size += RequiredFieldsByteSizeFallback();
   }
-  // optional int64 boot_ms = 3;
+  // optional int64 boot_ms = 2;
   if (has_boot_ms()) {
     total_size += 1 +
       ::google::protobuf::internal::WireFormatLite::Int64Size(
@@ -1984,16 +2103,12 @@ void BootstrapRequest::MergeFrom(const BootstrapRequest& from) {
   (void) cached_has_bits;
 
   cached_has_bits = from._has_bits_[0];
-  if (cached_has_bits & 7u) {
+  if (cached_has_bits & 3u) {
     if (cached_has_bits & 0x00000001u) {
-      set_has_cluster();
-      cluster_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.cluster_);
-    }
-    if (cached_has_bits & 0x00000002u) {
       set_has_node_peer();
       node_peer_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.node_peer_);
     }
-    if (cached_has_bits & 0x00000004u) {
+    if (cached_has_bits & 0x00000002u) {
       boot_ms_ = from.boot_ms_;
     }
     _has_bits_[0] |= cached_has_bits;
@@ -2015,7 +2130,7 @@ void BootstrapRequest::CopyFrom(const BootstrapRequest& from) {
 }
 
 bool BootstrapRequest::IsInitialized() const {
-  if ((_has_bits_[0] & 0x00000003) != 0x00000003) return false;
+  if ((_has_bits_[0] & 0x00000001) != 0x00000001) return false;
   return true;
 }
 
@@ -2025,8 +2140,6 @@ void BootstrapRequest::Swap(BootstrapRequest* other) {
 }
 void BootstrapRequest::InternalSwap(BootstrapRequest* other) {
   using std::swap;
-  cluster_.Swap(&other->cluster_, &::google::protobuf::internal::GetEmptyStringAlreadyInited(),
-    GetArenaNoVirtual());
   node_peer_.Swap(&other->node_peer_, &::google::protobuf::internal::GetEmptyStringAlreadyInited(),
     GetArenaNoVirtual());
   swap(boot_ms_, other->boot_ms_);
@@ -2044,10 +2157,14 @@ void BootstrapRequest::InternalSwap(BootstrapRequest* other) {
 
 void BootstrapResponse::InitAsDefaultInstance() {
 }
+void BootstrapResponse::clear_shards() {
+  shards_.Clear();
+}
 #if !defined(_MSC_VER) || _MSC_VER >= 1900
 const int BootstrapResponse::kSuccessFieldNumber;
 const int BootstrapResponse::kRedirectFieldNumber;
 const int BootstrapResponse::kNodesFieldNumber;
+const int BootstrapResponse::kShardsFieldNumber;
 #endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
 
 BootstrapResponse::BootstrapResponse()
@@ -2061,7 +2178,8 @@ BootstrapResponse::BootstrapResponse(const BootstrapResponse& from)
   : ::google::protobuf::Message(),
       _internal_metadata_(NULL),
       _has_bits_(from._has_bits_),
-      nodes_(from.nodes_) {
+      nodes_(from.nodes_),
+      shards_(from.shards_) {
   _internal_metadata_.MergeFrom(from._internal_metadata_);
   redirect_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   if (from.has_redirect()) {
@@ -2106,6 +2224,7 @@ void BootstrapResponse::Clear() {
   (void) cached_has_bits;
 
   nodes_.Clear();
+  shards_.Clear();
   cached_has_bits = _has_bits_[0];
   if (cached_has_bits & 0x00000001u) {
     redirect_.ClearNonDefaultToEmptyNoArena();
@@ -2167,6 +2286,18 @@ bool BootstrapResponse::MergePartialFromCodedStream(
         break;
       }
 
+      // repeated .elasticfaiss.IndexShardConf shards = 4;
+      case 4: {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(34u /* 34 & 0xFF */)) {
+          DO_(::google::protobuf::internal::WireFormatLite::ReadMessage(
+                input, add_shards()));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
       default: {
       handle_unusual:
         if (tag == 0) {
@@ -2218,6 +2349,15 @@ void BootstrapResponse::SerializeWithCachedSizes(
       output);
   }
 
+  // repeated .elasticfaiss.IndexShardConf shards = 4;
+  for (unsigned int i = 0,
+      n = static_cast<unsigned int>(this->shards_size()); i < n; i++) {
+    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
+      4,
+      this->shards(static_cast<int>(i)),
+      output);
+  }
+
   if (_internal_metadata_.have_unknown_fields()) {
     ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
         _internal_metadata_.unknown_fields(), output);
@@ -2257,6 +2397,14 @@ void BootstrapResponse::SerializeWithCachedSizes(
         3, this->nodes(static_cast<int>(i)), deterministic, target);
   }
 
+  // repeated .elasticfaiss.IndexShardConf shards = 4;
+  for (unsigned int i = 0,
+      n = static_cast<unsigned int>(this->shards_size()); i < n; i++) {
+    target = ::google::protobuf::internal::WireFormatLite::
+      InternalWriteMessageToArray(
+        4, this->shards(static_cast<int>(i)), deterministic, target);
+  }
+
   if (_internal_metadata_.have_unknown_fields()) {
     target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
         _internal_metadata_.unknown_fields(), target);
@@ -2286,6 +2434,17 @@ size_t BootstrapResponse::ByteSizeLong() const {
       total_size +=
         ::google::protobuf::internal::WireFormatLite::MessageSize(
           this->nodes(static_cast<int>(i)));
+    }
+  }
+
+  // repeated .elasticfaiss.IndexShardConf shards = 4;
+  {
+    unsigned int count = static_cast<unsigned int>(this->shards_size());
+    total_size += 1UL * count;
+    for (unsigned int i = 0; i < count; i++) {
+      total_size +=
+        ::google::protobuf::internal::WireFormatLite::MessageSize(
+          this->shards(static_cast<int>(i)));
     }
   }
 
@@ -2324,6 +2483,7 @@ void BootstrapResponse::MergeFrom(const BootstrapResponse& from) {
   (void) cached_has_bits;
 
   nodes_.MergeFrom(from.nodes_);
+  shards_.MergeFrom(from.shards_);
   cached_has_bits = from._has_bits_[0];
   if (cached_has_bits & 3u) {
     if (cached_has_bits & 0x00000001u) {
@@ -2354,6 +2514,7 @@ void BootstrapResponse::CopyFrom(const BootstrapResponse& from) {
 bool BootstrapResponse::IsInitialized() const {
   if ((_has_bits_[0] & 0x00000002) != 0x00000002) return false;
   if (!::google::protobuf::internal::AllAreInitialized(this->nodes())) return false;
+  if (!::google::protobuf::internal::AllAreInitialized(this->shards())) return false;
   return true;
 }
 
@@ -2364,6 +2525,7 @@ void BootstrapResponse::Swap(BootstrapResponse* other) {
 void BootstrapResponse::InternalSwap(BootstrapResponse* other) {
   using std::swap;
   CastToBase(&nodes_)->InternalSwap(CastToBase(&other->nodes_));
+  CastToBase(&shards_)->InternalSwap(CastToBase(&other->shards_));
   redirect_.Swap(&other->redirect_, &::google::protobuf::internal::GetEmptyStringAlreadyInited(),
     GetArenaNoVirtual());
   swap(success_, other->success_);
@@ -2385,7 +2547,6 @@ void NodeHeartbeatRequest::clear_shards() {
   shards_.Clear();
 }
 #if !defined(_MSC_VER) || _MSC_VER >= 1900
-const int NodeHeartbeatRequest::kClusterFieldNumber;
 const int NodeHeartbeatRequest::kNodePeerFieldNumber;
 const int NodeHeartbeatRequest::kActiveMsFieldNumber;
 const int NodeHeartbeatRequest::kShardsFieldNumber;
@@ -2404,10 +2565,6 @@ NodeHeartbeatRequest::NodeHeartbeatRequest(const NodeHeartbeatRequest& from)
       _has_bits_(from._has_bits_),
       shards_(from.shards_) {
   _internal_metadata_.MergeFrom(from._internal_metadata_);
-  cluster_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  if (from.has_cluster()) {
-    cluster_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.cluster_);
-  }
   node_peer_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   if (from.has_node_peer()) {
     node_peer_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.node_peer_);
@@ -2417,7 +2574,6 @@ NodeHeartbeatRequest::NodeHeartbeatRequest(const NodeHeartbeatRequest& from)
 }
 
 void NodeHeartbeatRequest::SharedCtor() {
-  cluster_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   node_peer_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   active_ms_ = GOOGLE_LONGLONG(0);
 }
@@ -2428,7 +2584,6 @@ NodeHeartbeatRequest::~NodeHeartbeatRequest() {
 }
 
 void NodeHeartbeatRequest::SharedDtor() {
-  cluster_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   node_peer_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
 
@@ -2454,13 +2609,8 @@ void NodeHeartbeatRequest::Clear() {
 
   shards_.Clear();
   cached_has_bits = _has_bits_[0];
-  if (cached_has_bits & 3u) {
-    if (cached_has_bits & 0x00000001u) {
-      cluster_.ClearNonDefaultToEmptyNoArena();
-    }
-    if (cached_has_bits & 0x00000002u) {
-      node_peer_.ClearNonDefaultToEmptyNoArena();
-    }
+  if (cached_has_bits & 0x00000001u) {
+    node_peer_.ClearNonDefaultToEmptyNoArena();
   }
   active_ms_ = GOOGLE_LONGLONG(0);
   _has_bits_.Clear();
@@ -2477,26 +2627,10 @@ bool NodeHeartbeatRequest::MergePartialFromCodedStream(
     tag = p.first;
     if (!p.second) goto handle_unusual;
     switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
-      // required string cluster = 1;
+      // required string node_peer = 1;
       case 1: {
         if (static_cast< ::google::protobuf::uint8>(tag) ==
             static_cast< ::google::protobuf::uint8>(10u /* 10 & 0xFF */)) {
-          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
-                input, this->mutable_cluster()));
-          ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
-            this->cluster().data(), static_cast<int>(this->cluster().length()),
-            ::google::protobuf::internal::WireFormat::PARSE,
-            "elasticfaiss.NodeHeartbeatRequest.cluster");
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
-      // required string node_peer = 2;
-      case 2: {
-        if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(18u /* 18 & 0xFF */)) {
           DO_(::google::protobuf::internal::WireFormatLite::ReadString(
                 input, this->mutable_node_peer()));
           ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
@@ -2509,10 +2643,10 @@ bool NodeHeartbeatRequest::MergePartialFromCodedStream(
         break;
       }
 
-      // optional int64 active_ms = 3;
-      case 3: {
+      // optional int64 active_ms = 2;
+      case 2: {
         if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(24u /* 24 & 0xFF */)) {
+            static_cast< ::google::protobuf::uint8>(16u /* 16 & 0xFF */)) {
           set_has_active_ms();
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    ::google::protobuf::int64, ::google::protobuf::internal::WireFormatLite::TYPE_INT64>(
@@ -2523,10 +2657,10 @@ bool NodeHeartbeatRequest::MergePartialFromCodedStream(
         break;
       }
 
-      // repeated .elasticfaiss.Shard shards = 4;
-      case 4: {
+      // repeated .elasticfaiss.Shard shards = 3;
+      case 3: {
         if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(34u /* 34 & 0xFF */)) {
+            static_cast< ::google::protobuf::uint8>(26u /* 26 & 0xFF */)) {
           DO_(::google::protobuf::internal::WireFormatLite::ReadMessage(
                 input, add_shards()));
         } else {
@@ -2562,36 +2696,26 @@ void NodeHeartbeatRequest::SerializeWithCachedSizes(
   (void) cached_has_bits;
 
   cached_has_bits = _has_bits_[0];
-  // required string cluster = 1;
+  // required string node_peer = 1;
   if (cached_has_bits & 0x00000001u) {
-    ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
-      this->cluster().data(), static_cast<int>(this->cluster().length()),
-      ::google::protobuf::internal::WireFormat::SERIALIZE,
-      "elasticfaiss.NodeHeartbeatRequest.cluster");
-    ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
-      1, this->cluster(), output);
-  }
-
-  // required string node_peer = 2;
-  if (cached_has_bits & 0x00000002u) {
     ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
       this->node_peer().data(), static_cast<int>(this->node_peer().length()),
       ::google::protobuf::internal::WireFormat::SERIALIZE,
       "elasticfaiss.NodeHeartbeatRequest.node_peer");
     ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
-      2, this->node_peer(), output);
+      1, this->node_peer(), output);
   }
 
-  // optional int64 active_ms = 3;
-  if (cached_has_bits & 0x00000004u) {
-    ::google::protobuf::internal::WireFormatLite::WriteInt64(3, this->active_ms(), output);
+  // optional int64 active_ms = 2;
+  if (cached_has_bits & 0x00000002u) {
+    ::google::protobuf::internal::WireFormatLite::WriteInt64(2, this->active_ms(), output);
   }
 
-  // repeated .elasticfaiss.Shard shards = 4;
+  // repeated .elasticfaiss.Shard shards = 3;
   for (unsigned int i = 0,
       n = static_cast<unsigned int>(this->shards_size()); i < n; i++) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
-      4,
+      3,
       this->shards(static_cast<int>(i)),
       output);
   }
@@ -2611,39 +2735,28 @@ void NodeHeartbeatRequest::SerializeWithCachedSizes(
   (void) cached_has_bits;
 
   cached_has_bits = _has_bits_[0];
-  // required string cluster = 1;
+  // required string node_peer = 1;
   if (cached_has_bits & 0x00000001u) {
-    ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
-      this->cluster().data(), static_cast<int>(this->cluster().length()),
-      ::google::protobuf::internal::WireFormat::SERIALIZE,
-      "elasticfaiss.NodeHeartbeatRequest.cluster");
-    target =
-      ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
-        1, this->cluster(), target);
-  }
-
-  // required string node_peer = 2;
-  if (cached_has_bits & 0x00000002u) {
     ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
       this->node_peer().data(), static_cast<int>(this->node_peer().length()),
       ::google::protobuf::internal::WireFormat::SERIALIZE,
       "elasticfaiss.NodeHeartbeatRequest.node_peer");
     target =
       ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
-        2, this->node_peer(), target);
+        1, this->node_peer(), target);
   }
 
-  // optional int64 active_ms = 3;
-  if (cached_has_bits & 0x00000004u) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteInt64ToArray(3, this->active_ms(), target);
+  // optional int64 active_ms = 2;
+  if (cached_has_bits & 0x00000002u) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteInt64ToArray(2, this->active_ms(), target);
   }
 
-  // repeated .elasticfaiss.Shard shards = 4;
+  // repeated .elasticfaiss.Shard shards = 3;
   for (unsigned int i = 0,
       n = static_cast<unsigned int>(this->shards_size()); i < n; i++) {
     target = ::google::protobuf::internal::WireFormatLite::
       InternalWriteMessageToArray(
-        4, this->shards(static_cast<int>(i)), deterministic, target);
+        3, this->shards(static_cast<int>(i)), deterministic, target);
   }
 
   if (_internal_metadata_.have_unknown_fields()) {
@@ -2654,26 +2767,6 @@ void NodeHeartbeatRequest::SerializeWithCachedSizes(
   return target;
 }
 
-size_t NodeHeartbeatRequest::RequiredFieldsByteSizeFallback() const {
-// @@protoc_insertion_point(required_fields_byte_size_fallback_start:elasticfaiss.NodeHeartbeatRequest)
-  size_t total_size = 0;
-
-  if (has_cluster()) {
-    // required string cluster = 1;
-    total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::StringSize(
-        this->cluster());
-  }
-
-  if (has_node_peer()) {
-    // required string node_peer = 2;
-    total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::StringSize(
-        this->node_peer());
-  }
-
-  return total_size;
-}
 size_t NodeHeartbeatRequest::ByteSizeLong() const {
 // @@protoc_insertion_point(message_byte_size_start:elasticfaiss.NodeHeartbeatRequest)
   size_t total_size = 0;
@@ -2683,21 +2776,13 @@ size_t NodeHeartbeatRequest::ByteSizeLong() const {
       ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
         _internal_metadata_.unknown_fields());
   }
-  if (((_has_bits_[0] & 0x00000003) ^ 0x00000003) == 0) {  // All required fields are present.
-    // required string cluster = 1;
-    total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::StringSize(
-        this->cluster());
-
-    // required string node_peer = 2;
+  // required string node_peer = 1;
+  if (has_node_peer()) {
     total_size += 1 +
       ::google::protobuf::internal::WireFormatLite::StringSize(
         this->node_peer());
-
-  } else {
-    total_size += RequiredFieldsByteSizeFallback();
   }
-  // repeated .elasticfaiss.Shard shards = 4;
+  // repeated .elasticfaiss.Shard shards = 3;
   {
     unsigned int count = static_cast<unsigned int>(this->shards_size());
     total_size += 1UL * count;
@@ -2708,7 +2793,7 @@ size_t NodeHeartbeatRequest::ByteSizeLong() const {
     }
   }
 
-  // optional int64 active_ms = 3;
+  // optional int64 active_ms = 2;
   if (has_active_ms()) {
     total_size += 1 +
       ::google::protobuf::internal::WireFormatLite::Int64Size(
@@ -2744,16 +2829,12 @@ void NodeHeartbeatRequest::MergeFrom(const NodeHeartbeatRequest& from) {
 
   shards_.MergeFrom(from.shards_);
   cached_has_bits = from._has_bits_[0];
-  if (cached_has_bits & 7u) {
+  if (cached_has_bits & 3u) {
     if (cached_has_bits & 0x00000001u) {
-      set_has_cluster();
-      cluster_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.cluster_);
-    }
-    if (cached_has_bits & 0x00000002u) {
       set_has_node_peer();
       node_peer_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.node_peer_);
     }
-    if (cached_has_bits & 0x00000004u) {
+    if (cached_has_bits & 0x00000002u) {
       active_ms_ = from.active_ms_;
     }
     _has_bits_[0] |= cached_has_bits;
@@ -2775,7 +2856,7 @@ void NodeHeartbeatRequest::CopyFrom(const NodeHeartbeatRequest& from) {
 }
 
 bool NodeHeartbeatRequest::IsInitialized() const {
-  if ((_has_bits_[0] & 0x00000003) != 0x00000003) return false;
+  if ((_has_bits_[0] & 0x00000001) != 0x00000001) return false;
   if (!::google::protobuf::internal::AllAreInitialized(this->shards())) return false;
   return true;
 }
@@ -2787,8 +2868,6 @@ void NodeHeartbeatRequest::Swap(NodeHeartbeatRequest* other) {
 void NodeHeartbeatRequest::InternalSwap(NodeHeartbeatRequest* other) {
   using std::swap;
   CastToBase(&shards_)->InternalSwap(CastToBase(&other->shards_));
-  cluster_.Swap(&other->cluster_, &::google::protobuf::internal::GetEmptyStringAlreadyInited(),
-    GetArenaNoVirtual());
   node_peer_.Swap(&other->node_peer_, &::google::protobuf::internal::GetEmptyStringAlreadyInited(),
     GetArenaNoVirtual());
   swap(active_ms_, other->active_ms_);
@@ -3749,7 +3828,6 @@ void CreateIndexRequest::clear_conf() {
   clear_has_conf();
 }
 #if !defined(_MSC_VER) || _MSC_VER >= 1900
-const int CreateIndexRequest::kClusterFieldNumber;
 const int CreateIndexRequest::kConfFieldNumber;
 #endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
 
@@ -3765,10 +3843,6 @@ CreateIndexRequest::CreateIndexRequest(const CreateIndexRequest& from)
       _internal_metadata_(NULL),
       _has_bits_(from._has_bits_) {
   _internal_metadata_.MergeFrom(from._internal_metadata_);
-  cluster_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  if (from.has_cluster()) {
-    cluster_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.cluster_);
-  }
   if (from.has_conf()) {
     conf_ = new ::elasticfaiss::IndexConf(*from.conf_);
   } else {
@@ -3778,7 +3852,6 @@ CreateIndexRequest::CreateIndexRequest(const CreateIndexRequest& from)
 }
 
 void CreateIndexRequest::SharedCtor() {
-  cluster_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   conf_ = NULL;
 }
 
@@ -3788,7 +3861,6 @@ CreateIndexRequest::~CreateIndexRequest() {
 }
 
 void CreateIndexRequest::SharedDtor() {
-  cluster_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   if (this != internal_default_instance()) delete conf_;
 }
 
@@ -3813,14 +3885,9 @@ void CreateIndexRequest::Clear() {
   (void) cached_has_bits;
 
   cached_has_bits = _has_bits_[0];
-  if (cached_has_bits & 3u) {
-    if (cached_has_bits & 0x00000001u) {
-      cluster_.ClearNonDefaultToEmptyNoArena();
-    }
-    if (cached_has_bits & 0x00000002u) {
-      GOOGLE_DCHECK(conf_ != NULL);
-      conf_->Clear();
-    }
+  if (cached_has_bits & 0x00000001u) {
+    GOOGLE_DCHECK(conf_ != NULL);
+    conf_->Clear();
   }
   _has_bits_.Clear();
   _internal_metadata_.Clear();
@@ -3836,26 +3903,10 @@ bool CreateIndexRequest::MergePartialFromCodedStream(
     tag = p.first;
     if (!p.second) goto handle_unusual;
     switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
-      // required string cluster = 1;
+      // required .elasticfaiss.IndexConf conf = 1;
       case 1: {
         if (static_cast< ::google::protobuf::uint8>(tag) ==
             static_cast< ::google::protobuf::uint8>(10u /* 10 & 0xFF */)) {
-          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
-                input, this->mutable_cluster()));
-          ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
-            this->cluster().data(), static_cast<int>(this->cluster().length()),
-            ::google::protobuf::internal::WireFormat::PARSE,
-            "elasticfaiss.CreateIndexRequest.cluster");
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
-      // required .elasticfaiss.IndexConf conf = 2;
-      case 2: {
-        if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(18u /* 18 & 0xFF */)) {
           DO_(::google::protobuf::internal::WireFormatLite::ReadMessage(
                input, mutable_conf()));
         } else {
@@ -3891,20 +3942,10 @@ void CreateIndexRequest::SerializeWithCachedSizes(
   (void) cached_has_bits;
 
   cached_has_bits = _has_bits_[0];
-  // required string cluster = 1;
+  // required .elasticfaiss.IndexConf conf = 1;
   if (cached_has_bits & 0x00000001u) {
-    ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
-      this->cluster().data(), static_cast<int>(this->cluster().length()),
-      ::google::protobuf::internal::WireFormat::SERIALIZE,
-      "elasticfaiss.CreateIndexRequest.cluster");
-    ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
-      1, this->cluster(), output);
-  }
-
-  // required .elasticfaiss.IndexConf conf = 2;
-  if (cached_has_bits & 0x00000002u) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
-      2, this->_internal_conf(), output);
+      1, this->_internal_conf(), output);
   }
 
   if (_internal_metadata_.have_unknown_fields()) {
@@ -3922,22 +3963,11 @@ void CreateIndexRequest::SerializeWithCachedSizes(
   (void) cached_has_bits;
 
   cached_has_bits = _has_bits_[0];
-  // required string cluster = 1;
+  // required .elasticfaiss.IndexConf conf = 1;
   if (cached_has_bits & 0x00000001u) {
-    ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
-      this->cluster().data(), static_cast<int>(this->cluster().length()),
-      ::google::protobuf::internal::WireFormat::SERIALIZE,
-      "elasticfaiss.CreateIndexRequest.cluster");
-    target =
-      ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
-        1, this->cluster(), target);
-  }
-
-  // required .elasticfaiss.IndexConf conf = 2;
-  if (cached_has_bits & 0x00000002u) {
     target = ::google::protobuf::internal::WireFormatLite::
       InternalWriteMessageToArray(
-        2, this->_internal_conf(), deterministic, target);
+        1, this->_internal_conf(), deterministic, target);
   }
 
   if (_internal_metadata_.have_unknown_fields()) {
@@ -3948,26 +3978,6 @@ void CreateIndexRequest::SerializeWithCachedSizes(
   return target;
 }
 
-size_t CreateIndexRequest::RequiredFieldsByteSizeFallback() const {
-// @@protoc_insertion_point(required_fields_byte_size_fallback_start:elasticfaiss.CreateIndexRequest)
-  size_t total_size = 0;
-
-  if (has_cluster()) {
-    // required string cluster = 1;
-    total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::StringSize(
-        this->cluster());
-  }
-
-  if (has_conf()) {
-    // required .elasticfaiss.IndexConf conf = 2;
-    total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::MessageSize(
-        *conf_);
-  }
-
-  return total_size;
-}
 size_t CreateIndexRequest::ByteSizeLong() const {
 // @@protoc_insertion_point(message_byte_size_start:elasticfaiss.CreateIndexRequest)
   size_t total_size = 0;
@@ -3977,19 +3987,11 @@ size_t CreateIndexRequest::ByteSizeLong() const {
       ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
         _internal_metadata_.unknown_fields());
   }
-  if (((_has_bits_[0] & 0x00000003) ^ 0x00000003) == 0) {  // All required fields are present.
-    // required string cluster = 1;
-    total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::StringSize(
-        this->cluster());
-
-    // required .elasticfaiss.IndexConf conf = 2;
+  // required .elasticfaiss.IndexConf conf = 1;
+  if (has_conf()) {
     total_size += 1 +
       ::google::protobuf::internal::WireFormatLite::MessageSize(
         *conf_);
-
-  } else {
-    total_size += RequiredFieldsByteSizeFallback();
   }
   int cached_size = ::google::protobuf::internal::ToCachedSize(total_size);
   SetCachedSize(cached_size);
@@ -4018,15 +4020,8 @@ void CreateIndexRequest::MergeFrom(const CreateIndexRequest& from) {
   ::google::protobuf::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
-  cached_has_bits = from._has_bits_[0];
-  if (cached_has_bits & 3u) {
-    if (cached_has_bits & 0x00000001u) {
-      set_has_cluster();
-      cluster_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.cluster_);
-    }
-    if (cached_has_bits & 0x00000002u) {
-      mutable_conf()->::elasticfaiss::IndexConf::MergeFrom(from.conf());
-    }
+  if (from.has_conf()) {
+    mutable_conf()->::elasticfaiss::IndexConf::MergeFrom(from.conf());
   }
 }
 
@@ -4045,7 +4040,7 @@ void CreateIndexRequest::CopyFrom(const CreateIndexRequest& from) {
 }
 
 bool CreateIndexRequest::IsInitialized() const {
-  if ((_has_bits_[0] & 0x00000003) != 0x00000003) return false;
+  if ((_has_bits_[0] & 0x00000001) != 0x00000001) return false;
   if (has_conf()) {
     if (!this->conf_->IsInitialized()) return false;
   }
@@ -4058,8 +4053,6 @@ void CreateIndexRequest::Swap(CreateIndexRequest* other) {
 }
 void CreateIndexRequest::InternalSwap(CreateIndexRequest* other) {
   using std::swap;
-  cluster_.Swap(&other->cluster_, &::google::protobuf::internal::GetEmptyStringAlreadyInited(),
-    GetArenaNoVirtual());
   swap(conf_, other->conf_);
   swap(_has_bits_[0], other->_has_bits_[0]);
   _internal_metadata_.Swap(&other->_internal_metadata_);
@@ -4431,7 +4424,6 @@ void CreateIndexResponse::InternalSwap(CreateIndexResponse* other) {
 void DeleteIndexRequest::InitAsDefaultInstance() {
 }
 #if !defined(_MSC_VER) || _MSC_VER >= 1900
-const int DeleteIndexRequest::kClusterFieldNumber;
 const int DeleteIndexRequest::kIndexNameFieldNumber;
 #endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
 
@@ -4447,10 +4439,6 @@ DeleteIndexRequest::DeleteIndexRequest(const DeleteIndexRequest& from)
       _internal_metadata_(NULL),
       _has_bits_(from._has_bits_) {
   _internal_metadata_.MergeFrom(from._internal_metadata_);
-  cluster_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  if (from.has_cluster()) {
-    cluster_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.cluster_);
-  }
   index_name_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   if (from.has_index_name()) {
     index_name_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.index_name_);
@@ -4459,7 +4447,6 @@ DeleteIndexRequest::DeleteIndexRequest(const DeleteIndexRequest& from)
 }
 
 void DeleteIndexRequest::SharedCtor() {
-  cluster_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   index_name_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
 
@@ -4469,7 +4456,6 @@ DeleteIndexRequest::~DeleteIndexRequest() {
 }
 
 void DeleteIndexRequest::SharedDtor() {
-  cluster_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   index_name_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
 
@@ -4494,13 +4480,8 @@ void DeleteIndexRequest::Clear() {
   (void) cached_has_bits;
 
   cached_has_bits = _has_bits_[0];
-  if (cached_has_bits & 3u) {
-    if (cached_has_bits & 0x00000001u) {
-      cluster_.ClearNonDefaultToEmptyNoArena();
-    }
-    if (cached_has_bits & 0x00000002u) {
-      index_name_.ClearNonDefaultToEmptyNoArena();
-    }
+  if (cached_has_bits & 0x00000001u) {
+    index_name_.ClearNonDefaultToEmptyNoArena();
   }
   _has_bits_.Clear();
   _internal_metadata_.Clear();
@@ -4516,26 +4497,10 @@ bool DeleteIndexRequest::MergePartialFromCodedStream(
     tag = p.first;
     if (!p.second) goto handle_unusual;
     switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
-      // required string cluster = 1;
+      // required string index_name = 1;
       case 1: {
         if (static_cast< ::google::protobuf::uint8>(tag) ==
             static_cast< ::google::protobuf::uint8>(10u /* 10 & 0xFF */)) {
-          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
-                input, this->mutable_cluster()));
-          ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
-            this->cluster().data(), static_cast<int>(this->cluster().length()),
-            ::google::protobuf::internal::WireFormat::PARSE,
-            "elasticfaiss.DeleteIndexRequest.cluster");
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
-      // required string index_name = 2;
-      case 2: {
-        if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(18u /* 18 & 0xFF */)) {
           DO_(::google::protobuf::internal::WireFormatLite::ReadString(
                 input, this->mutable_index_name()));
           ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
@@ -4575,24 +4540,14 @@ void DeleteIndexRequest::SerializeWithCachedSizes(
   (void) cached_has_bits;
 
   cached_has_bits = _has_bits_[0];
-  // required string cluster = 1;
+  // required string index_name = 1;
   if (cached_has_bits & 0x00000001u) {
-    ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
-      this->cluster().data(), static_cast<int>(this->cluster().length()),
-      ::google::protobuf::internal::WireFormat::SERIALIZE,
-      "elasticfaiss.DeleteIndexRequest.cluster");
-    ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
-      1, this->cluster(), output);
-  }
-
-  // required string index_name = 2;
-  if (cached_has_bits & 0x00000002u) {
     ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
       this->index_name().data(), static_cast<int>(this->index_name().length()),
       ::google::protobuf::internal::WireFormat::SERIALIZE,
       "elasticfaiss.DeleteIndexRequest.index_name");
     ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
-      2, this->index_name(), output);
+      1, this->index_name(), output);
   }
 
   if (_internal_metadata_.have_unknown_fields()) {
@@ -4610,26 +4565,15 @@ void DeleteIndexRequest::SerializeWithCachedSizes(
   (void) cached_has_bits;
 
   cached_has_bits = _has_bits_[0];
-  // required string cluster = 1;
+  // required string index_name = 1;
   if (cached_has_bits & 0x00000001u) {
-    ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
-      this->cluster().data(), static_cast<int>(this->cluster().length()),
-      ::google::protobuf::internal::WireFormat::SERIALIZE,
-      "elasticfaiss.DeleteIndexRequest.cluster");
-    target =
-      ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
-        1, this->cluster(), target);
-  }
-
-  // required string index_name = 2;
-  if (cached_has_bits & 0x00000002u) {
     ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
       this->index_name().data(), static_cast<int>(this->index_name().length()),
       ::google::protobuf::internal::WireFormat::SERIALIZE,
       "elasticfaiss.DeleteIndexRequest.index_name");
     target =
       ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
-        2, this->index_name(), target);
+        1, this->index_name(), target);
   }
 
   if (_internal_metadata_.have_unknown_fields()) {
@@ -4640,26 +4584,6 @@ void DeleteIndexRequest::SerializeWithCachedSizes(
   return target;
 }
 
-size_t DeleteIndexRequest::RequiredFieldsByteSizeFallback() const {
-// @@protoc_insertion_point(required_fields_byte_size_fallback_start:elasticfaiss.DeleteIndexRequest)
-  size_t total_size = 0;
-
-  if (has_cluster()) {
-    // required string cluster = 1;
-    total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::StringSize(
-        this->cluster());
-  }
-
-  if (has_index_name()) {
-    // required string index_name = 2;
-    total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::StringSize(
-        this->index_name());
-  }
-
-  return total_size;
-}
 size_t DeleteIndexRequest::ByteSizeLong() const {
 // @@protoc_insertion_point(message_byte_size_start:elasticfaiss.DeleteIndexRequest)
   size_t total_size = 0;
@@ -4669,19 +4593,11 @@ size_t DeleteIndexRequest::ByteSizeLong() const {
       ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
         _internal_metadata_.unknown_fields());
   }
-  if (((_has_bits_[0] & 0x00000003) ^ 0x00000003) == 0) {  // All required fields are present.
-    // required string cluster = 1;
-    total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::StringSize(
-        this->cluster());
-
-    // required string index_name = 2;
+  // required string index_name = 1;
+  if (has_index_name()) {
     total_size += 1 +
       ::google::protobuf::internal::WireFormatLite::StringSize(
         this->index_name());
-
-  } else {
-    total_size += RequiredFieldsByteSizeFallback();
   }
   int cached_size = ::google::protobuf::internal::ToCachedSize(total_size);
   SetCachedSize(cached_size);
@@ -4710,16 +4626,9 @@ void DeleteIndexRequest::MergeFrom(const DeleteIndexRequest& from) {
   ::google::protobuf::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
-  cached_has_bits = from._has_bits_[0];
-  if (cached_has_bits & 3u) {
-    if (cached_has_bits & 0x00000001u) {
-      set_has_cluster();
-      cluster_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.cluster_);
-    }
-    if (cached_has_bits & 0x00000002u) {
-      set_has_index_name();
-      index_name_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.index_name_);
-    }
+  if (from.has_index_name()) {
+    set_has_index_name();
+    index_name_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.index_name_);
   }
 }
 
@@ -4738,7 +4647,7 @@ void DeleteIndexRequest::CopyFrom(const DeleteIndexRequest& from) {
 }
 
 bool DeleteIndexRequest::IsInitialized() const {
-  if ((_has_bits_[0] & 0x00000003) != 0x00000003) return false;
+  if ((_has_bits_[0] & 0x00000001) != 0x00000001) return false;
   return true;
 }
 
@@ -4748,8 +4657,6 @@ void DeleteIndexRequest::Swap(DeleteIndexRequest* other) {
 }
 void DeleteIndexRequest::InternalSwap(DeleteIndexRequest* other) {
   using std::swap;
-  cluster_.Swap(&other->cluster_, &::google::protobuf::internal::GetEmptyStringAlreadyInited(),
-    GetArenaNoVirtual());
   index_name_.Swap(&other->index_name_, &::google::protobuf::internal::GetEmptyStringAlreadyInited(),
     GetArenaNoVirtual());
   swap(_has_bits_[0], other->_has_bits_[0]);
@@ -5128,7 +5035,6 @@ void UpdateIndexRequest::clear_conf() {
   clear_has_conf();
 }
 #if !defined(_MSC_VER) || _MSC_VER >= 1900
-const int UpdateIndexRequest::kClusterFieldNumber;
 const int UpdateIndexRequest::kConfFieldNumber;
 #endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
 
@@ -5144,10 +5050,6 @@ UpdateIndexRequest::UpdateIndexRequest(const UpdateIndexRequest& from)
       _internal_metadata_(NULL),
       _has_bits_(from._has_bits_) {
   _internal_metadata_.MergeFrom(from._internal_metadata_);
-  cluster_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  if (from.has_cluster()) {
-    cluster_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.cluster_);
-  }
   if (from.has_conf()) {
     conf_ = new ::elasticfaiss::IndexConf(*from.conf_);
   } else {
@@ -5157,7 +5059,6 @@ UpdateIndexRequest::UpdateIndexRequest(const UpdateIndexRequest& from)
 }
 
 void UpdateIndexRequest::SharedCtor() {
-  cluster_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   conf_ = NULL;
 }
 
@@ -5167,7 +5068,6 @@ UpdateIndexRequest::~UpdateIndexRequest() {
 }
 
 void UpdateIndexRequest::SharedDtor() {
-  cluster_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   if (this != internal_default_instance()) delete conf_;
 }
 
@@ -5192,14 +5092,9 @@ void UpdateIndexRequest::Clear() {
   (void) cached_has_bits;
 
   cached_has_bits = _has_bits_[0];
-  if (cached_has_bits & 3u) {
-    if (cached_has_bits & 0x00000001u) {
-      cluster_.ClearNonDefaultToEmptyNoArena();
-    }
-    if (cached_has_bits & 0x00000002u) {
-      GOOGLE_DCHECK(conf_ != NULL);
-      conf_->Clear();
-    }
+  if (cached_has_bits & 0x00000001u) {
+    GOOGLE_DCHECK(conf_ != NULL);
+    conf_->Clear();
   }
   _has_bits_.Clear();
   _internal_metadata_.Clear();
@@ -5215,26 +5110,10 @@ bool UpdateIndexRequest::MergePartialFromCodedStream(
     tag = p.first;
     if (!p.second) goto handle_unusual;
     switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
-      // required string cluster = 1;
+      // required .elasticfaiss.IndexConf conf = 1;
       case 1: {
         if (static_cast< ::google::protobuf::uint8>(tag) ==
             static_cast< ::google::protobuf::uint8>(10u /* 10 & 0xFF */)) {
-          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
-                input, this->mutable_cluster()));
-          ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
-            this->cluster().data(), static_cast<int>(this->cluster().length()),
-            ::google::protobuf::internal::WireFormat::PARSE,
-            "elasticfaiss.UpdateIndexRequest.cluster");
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
-      // required .elasticfaiss.IndexConf conf = 2;
-      case 2: {
-        if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(18u /* 18 & 0xFF */)) {
           DO_(::google::protobuf::internal::WireFormatLite::ReadMessage(
                input, mutable_conf()));
         } else {
@@ -5270,20 +5149,10 @@ void UpdateIndexRequest::SerializeWithCachedSizes(
   (void) cached_has_bits;
 
   cached_has_bits = _has_bits_[0];
-  // required string cluster = 1;
+  // required .elasticfaiss.IndexConf conf = 1;
   if (cached_has_bits & 0x00000001u) {
-    ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
-      this->cluster().data(), static_cast<int>(this->cluster().length()),
-      ::google::protobuf::internal::WireFormat::SERIALIZE,
-      "elasticfaiss.UpdateIndexRequest.cluster");
-    ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
-      1, this->cluster(), output);
-  }
-
-  // required .elasticfaiss.IndexConf conf = 2;
-  if (cached_has_bits & 0x00000002u) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
-      2, this->_internal_conf(), output);
+      1, this->_internal_conf(), output);
   }
 
   if (_internal_metadata_.have_unknown_fields()) {
@@ -5301,22 +5170,11 @@ void UpdateIndexRequest::SerializeWithCachedSizes(
   (void) cached_has_bits;
 
   cached_has_bits = _has_bits_[0];
-  // required string cluster = 1;
+  // required .elasticfaiss.IndexConf conf = 1;
   if (cached_has_bits & 0x00000001u) {
-    ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
-      this->cluster().data(), static_cast<int>(this->cluster().length()),
-      ::google::protobuf::internal::WireFormat::SERIALIZE,
-      "elasticfaiss.UpdateIndexRequest.cluster");
-    target =
-      ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
-        1, this->cluster(), target);
-  }
-
-  // required .elasticfaiss.IndexConf conf = 2;
-  if (cached_has_bits & 0x00000002u) {
     target = ::google::protobuf::internal::WireFormatLite::
       InternalWriteMessageToArray(
-        2, this->_internal_conf(), deterministic, target);
+        1, this->_internal_conf(), deterministic, target);
   }
 
   if (_internal_metadata_.have_unknown_fields()) {
@@ -5327,26 +5185,6 @@ void UpdateIndexRequest::SerializeWithCachedSizes(
   return target;
 }
 
-size_t UpdateIndexRequest::RequiredFieldsByteSizeFallback() const {
-// @@protoc_insertion_point(required_fields_byte_size_fallback_start:elasticfaiss.UpdateIndexRequest)
-  size_t total_size = 0;
-
-  if (has_cluster()) {
-    // required string cluster = 1;
-    total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::StringSize(
-        this->cluster());
-  }
-
-  if (has_conf()) {
-    // required .elasticfaiss.IndexConf conf = 2;
-    total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::MessageSize(
-        *conf_);
-  }
-
-  return total_size;
-}
 size_t UpdateIndexRequest::ByteSizeLong() const {
 // @@protoc_insertion_point(message_byte_size_start:elasticfaiss.UpdateIndexRequest)
   size_t total_size = 0;
@@ -5356,19 +5194,11 @@ size_t UpdateIndexRequest::ByteSizeLong() const {
       ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
         _internal_metadata_.unknown_fields());
   }
-  if (((_has_bits_[0] & 0x00000003) ^ 0x00000003) == 0) {  // All required fields are present.
-    // required string cluster = 1;
-    total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::StringSize(
-        this->cluster());
-
-    // required .elasticfaiss.IndexConf conf = 2;
+  // required .elasticfaiss.IndexConf conf = 1;
+  if (has_conf()) {
     total_size += 1 +
       ::google::protobuf::internal::WireFormatLite::MessageSize(
         *conf_);
-
-  } else {
-    total_size += RequiredFieldsByteSizeFallback();
   }
   int cached_size = ::google::protobuf::internal::ToCachedSize(total_size);
   SetCachedSize(cached_size);
@@ -5397,15 +5227,8 @@ void UpdateIndexRequest::MergeFrom(const UpdateIndexRequest& from) {
   ::google::protobuf::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
-  cached_has_bits = from._has_bits_[0];
-  if (cached_has_bits & 3u) {
-    if (cached_has_bits & 0x00000001u) {
-      set_has_cluster();
-      cluster_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.cluster_);
-    }
-    if (cached_has_bits & 0x00000002u) {
-      mutable_conf()->::elasticfaiss::IndexConf::MergeFrom(from.conf());
-    }
+  if (from.has_conf()) {
+    mutable_conf()->::elasticfaiss::IndexConf::MergeFrom(from.conf());
   }
 }
 
@@ -5424,7 +5247,7 @@ void UpdateIndexRequest::CopyFrom(const UpdateIndexRequest& from) {
 }
 
 bool UpdateIndexRequest::IsInitialized() const {
-  if ((_has_bits_[0] & 0x00000003) != 0x00000003) return false;
+  if ((_has_bits_[0] & 0x00000001) != 0x00000001) return false;
   if (has_conf()) {
     if (!this->conf_->IsInitialized()) return false;
   }
@@ -5437,8 +5260,6 @@ void UpdateIndexRequest::Swap(UpdateIndexRequest* other) {
 }
 void UpdateIndexRequest::InternalSwap(UpdateIndexRequest* other) {
   using std::swap;
-  cluster_.Swap(&other->cluster_, &::google::protobuf::internal::GetEmptyStringAlreadyInited(),
-    GetArenaNoVirtual());
   swap(conf_, other->conf_);
   swap(_has_bits_[0], other->_has_bits_[0]);
   _internal_metadata_.Swap(&other->_internal_metadata_);
@@ -6019,6 +5840,9 @@ void MasterService_Stub::update_index(::google::protobuf::RpcController* control
 }  // namespace elasticfaiss
 namespace google {
 namespace protobuf {
+template<> GOOGLE_PROTOBUF_ATTRIBUTE_NOINLINE ::elasticfaiss::ClusterSettings* Arena::CreateMaybeMessage< ::elasticfaiss::ClusterSettings >(Arena* arena) {
+  return Arena::CreateInternal< ::elasticfaiss::ClusterSettings >(arena);
+}
 template<> GOOGLE_PROTOBUF_ATTRIBUTE_NOINLINE ::elasticfaiss::WorkNode* Arena::CreateMaybeMessage< ::elasticfaiss::WorkNode >(Arena* arena) {
   return Arena::CreateInternal< ::elasticfaiss::WorkNode >(arena);
 }

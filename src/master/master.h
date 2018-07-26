@@ -63,38 +63,36 @@ namespace elasticfaiss
 
     struct ShardIndexKey
     {
-            std::string cluster;
             std::string index;
-            int32_t idx;
+            int32_t shard_idx;
             ShardIndexKey()
-                    : idx(0)
+                    : shard_idx(0)
             {
             }
             bool operator<(const ShardIndexKey& other) const
             {
-                int ret = cluster.compare(other.cluster);
+                int ret = index.compare(other.index);
                 if (0 != ret)
                 {
                     return ret < 0 ? true : false;
                 }
-                ret = index.compare(other.index);
-                if (0 != ret)
-                {
-                    return ret < 0 ? true : false;
-                }
-                return idx < other.idx;
+                return shard_idx < other.shard_idx;
             }
     };
 
-    typedef std::deque<ShardNodeMeta> ShardNodeMetaArray;
-    typedef std::map<ShardIndexKey, ShardNodeMetaArray> ShardNodeMetaTable;
     typedef std::unordered_map<std::string, WorkNode*> WorkNodeTable;
-    typedef std::unordered_map<std::string, IndexConf*> IndexConfTable;
-    typedef std::unordered_map<std::string, WorkNodeTable> ClusterWorkNodeTable;
-    typedef std::unordered_map<std::string, IndexConfTable> ClusterIndexConfTable;
-    typedef std::unordered_map<std::string, ClusterState*> ClusterStateTable;
-    typedef std::map<ShardIndexKey, braft::Configuration> ShardConfTable;
-    //typedef std::unordered_map<std::string, brpc::Channel*> NodeChannelTable;
+    //typedef std::unordered_map<std::string, ClusterState*> ClusterStateTable;
+    typedef std::map<ShardIndexKey, ShardNodes*> ShardNodeTable;
+    typedef std::map<std::string, IndexConf*> DataIndexConfTable;
+
+    struct RoutineContext
+    {
+            bool need_check_index;
+            RoutineContext()
+                    : need_check_index(true)
+            {
+            }
+    };
 
     class Master: public braft::StateMachine, public butil::SimpleThread
     {
@@ -180,22 +178,19 @@ namespace elasticfaiss
                 }
             }
         private:
-            int handle_surplus_index_shards();
-            int transaction_create_index(const std::string& cluster, const IndexConf& conf);
-            int rpc_delete_index_shard(const std::string& cluster, const std::string& name, int32_t idx,
-                    const std::string& node);
-            int rpc_create_index_shard(const std::string& cluster, const IndexConf& conf, int32_t idx,
-                    const std::string& node, const std::string& all_nodes);
-            int index_shard_add_peer(const std::string& cluster, const IndexConf& conf, int32_t idx,
-                    const std::string& node, const std::string& all_nodes);
-            int remove_index_shards(const std::string& cluster, IndexConf& conf, int32_t idx, const ShardNodeMetaArray& nodes);
-            int add_index_shard(const std::string& cluster, IndexConf& conf, int32_t idx, const ShardNodeMetaArray& nodes);
-            int select_nodes4index(const std::string& cluster, int32_t replica_count, const StringSet& current_nodes,
-                    std::vector<std::string>& nodes);
-            void check_cluster_index_shard(const std::string& cluster, IndexConf& conf, int32_t idx,  braft::Configuration& cluster_conf,
-                    const ShardNodeMetaArray& nodes);
-            void check_node_timeout(ShardNodeMetaTable& index_nodes);
-            void check_index(const ShardNodeMetaTable& index_nodes);
+            WorkNode* get_node(const std::string& name);
+            bool get_index_conf(const std::string& name, IndexConf& conf);
+            void update_data_shard_nodes(const WorkNode* node,
+                    const ::google::protobuf::RepeatedPtrField<Shard>& shards);
+            int transaction_create_index(const IndexConf& conf);
+            int rpc_delete_index_shard(const std::string& name, int32_t idx, const std::string& node);
+            int rpc_create_index_shard(const IndexConf& conf, int32_t shard_idx, const std::string& node,
+                    const StringSet& nodes);
+            int allocate_nodes4index(const IndexConf& conf, const StringSet& current_nodes, StringSet& nodes,
+                    int limit = -1);
+            void check_index_shard(const IndexConf& conf, ShardNodes& snodes);
+            void check_node_timeout(RoutineContext& ctx);
+            void check_index(RoutineContext& ctx);
             void routine();
             void Run();
             // @braft::StateMachine
@@ -230,15 +225,13 @@ namespace elasticfaiss
             butil::atomic<int64_t> _leader_term;
             butil::WaitableEvent _routine_event;
 
-            ClusterWorkNodeTable _cluster_workers;
-            ClusterStateTable _cluster_states;
-            ClusterIndexConfTable _cluster_index_confs;
-            ShardConfTable _cluster_shard_confs;
-            std::mutex _cluster_mutex;
-            std::mutex _index_mutex;
-
-            //NodeChannelTable _node_channels;
-            std::mutex _channel_mutex;
+            WorkNodeTable _all_nodes;
+            ClusterState _cluster_state;
+            DataIndexConfTable _data_index_confs;
+            ShardNodeTable _shard_nodes;
+            //DataShardConfTable _data_shard_confs;
+            bthread::Mutex _cluster_mutex;
+            bthread::Mutex _index_mutex;
 
             bool _check_term;
             std::atomic<bool> _running;

@@ -41,7 +41,7 @@ namespace protobuf_master_2eproto {
 struct TableStruct {
   static const ::google::protobuf::internal::ParseTableField entries[];
   static const ::google::protobuf::internal::AuxillaryParseTableField aux[];
-  static const ::google::protobuf::internal::ParseTable schema[15];
+  static const ::google::protobuf::internal::ParseTable schema[16];
   static const ::google::protobuf::internal::FieldMetadata field_metadata[];
   static const ::google::protobuf::internal::SerializationTable serialization_table[];
   static const ::google::protobuf::uint32 offsets[];
@@ -55,6 +55,9 @@ extern BootstrapRequestDefaultTypeInternal _BootstrapRequest_default_instance_;
 class BootstrapResponse;
 class BootstrapResponseDefaultTypeInternal;
 extern BootstrapResponseDefaultTypeInternal _BootstrapResponse_default_instance_;
+class ClusterSettings;
+class ClusterSettingsDefaultTypeInternal;
+extern ClusterSettingsDefaultTypeInternal _ClusterSettings_default_instance_;
 class ClusterState;
 class ClusterStateDefaultTypeInternal;
 extern ClusterStateDefaultTypeInternal _ClusterState_default_instance_;
@@ -99,6 +102,7 @@ namespace google {
 namespace protobuf {
 template<> ::elasticfaiss::BootstrapRequest* Arena::CreateMaybeMessage<::elasticfaiss::BootstrapRequest>(Arena*);
 template<> ::elasticfaiss::BootstrapResponse* Arena::CreateMaybeMessage<::elasticfaiss::BootstrapResponse>(Arena*);
+template<> ::elasticfaiss::ClusterSettings* Arena::CreateMaybeMessage<::elasticfaiss::ClusterSettings>(Arena*);
 template<> ::elasticfaiss::ClusterState* Arena::CreateMaybeMessage<::elasticfaiss::ClusterState>(Arena*);
 template<> ::elasticfaiss::CreateIndexRequest* Arena::CreateMaybeMessage<::elasticfaiss::CreateIndexRequest>(Arena*);
 template<> ::elasticfaiss::CreateIndexResponse* Arena::CreateMaybeMessage<::elasticfaiss::CreateIndexResponse>(Arena*);
@@ -136,6 +140,110 @@ inline bool WorkNodeState_Parse(
     WorkNodeState_descriptor(), name, value);
 }
 // ===================================================================
+
+class ClusterSettings : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:elasticfaiss.ClusterSettings) */ {
+ public:
+  ClusterSettings();
+  virtual ~ClusterSettings();
+
+  ClusterSettings(const ClusterSettings& from);
+
+  inline ClusterSettings& operator=(const ClusterSettings& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  #if LANG_CXX11
+  ClusterSettings(ClusterSettings&& from) noexcept
+    : ClusterSettings() {
+    *this = ::std::move(from);
+  }
+
+  inline ClusterSettings& operator=(ClusterSettings&& from) noexcept {
+    if (GetArenaNoVirtual() == from.GetArenaNoVirtual()) {
+      if (this != &from) InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+  #endif
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _internal_metadata_.unknown_fields();
+  }
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return _internal_metadata_.mutable_unknown_fields();
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const ClusterSettings& default_instance();
+
+  static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
+  static inline const ClusterSettings* internal_default_instance() {
+    return reinterpret_cast<const ClusterSettings*>(
+               &_ClusterSettings_default_instance_);
+  }
+  static constexpr int kIndexInFileMessages =
+    0;
+
+  void Swap(ClusterSettings* other);
+  friend void swap(ClusterSettings& a, ClusterSettings& b) {
+    a.Swap(&b);
+  }
+
+  // implements Message ----------------------------------------------
+
+  inline ClusterSettings* New() const final {
+    return CreateMaybeMessage<ClusterSettings>(NULL);
+  }
+
+  ClusterSettings* New(::google::protobuf::Arena* arena) const final {
+    return CreateMaybeMessage<ClusterSettings>(arena);
+  }
+  void CopyFrom(const ::google::protobuf::Message& from) final;
+  void MergeFrom(const ::google::protobuf::Message& from) final;
+  void CopyFrom(const ClusterSettings& from);
+  void MergeFrom(const ClusterSettings& from);
+  void Clear() final;
+  bool IsInitialized() const final;
+
+  size_t ByteSizeLong() const final;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input) final;
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const final;
+  ::google::protobuf::uint8* InternalSerializeWithCachedSizesToArray(
+      bool deterministic, ::google::protobuf::uint8* target) const final;
+  int GetCachedSize() const final { return _cached_size_.Get(); }
+
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const final;
+  void InternalSwap(ClusterSettings* other);
+  private:
+  inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
+    return NULL;
+  }
+  inline void* MaybeArenaPtr() const {
+    return NULL;
+  }
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const final;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // @@protoc_insertion_point(class_scope:elasticfaiss.ClusterSettings)
+ private:
+
+  ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
+  ::google::protobuf::internal::HasBits<1> _has_bits_;
+  mutable ::google::protobuf::internal::CachedSize _cached_size_;
+  friend struct ::protobuf_master_2eproto::TableStruct;
+};
+// -------------------------------------------------------------------
 
 class WorkNode : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:elasticfaiss.WorkNode) */ {
  public:
@@ -179,7 +287,7 @@ class WorkNode : public ::google::protobuf::Message /* @@protoc_insertion_point(
                &_WorkNode_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    0;
+    1;
 
   void Swap(WorkNode* other);
   friend void swap(WorkNode& a, WorkNode& b) {
@@ -347,7 +455,7 @@ class ClusterState : public ::google::protobuf::Message /* @@protoc_insertion_po
                &_ClusterState_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    1;
+    2;
 
   void Swap(ClusterState* other);
   friend void swap(ClusterState& a, ClusterState& b) {
@@ -399,10 +507,10 @@ class ClusterState : public ::google::protobuf::Message /* @@protoc_insertion_po
 
   // accessors -------------------------------------------------------
 
-  // repeated .elasticfaiss.WorkNode nodes = 3;
+  // repeated .elasticfaiss.WorkNode nodes = 2;
   int nodes_size() const;
   void clear_nodes();
-  static const int kNodesFieldNumber = 3;
+  static const int kNodesFieldNumber = 2;
   ::elasticfaiss::WorkNode* mutable_nodes(int index);
   ::google::protobuf::RepeatedPtrField< ::elasticfaiss::WorkNode >*
       mutable_nodes();
@@ -411,32 +519,15 @@ class ClusterState : public ::google::protobuf::Message /* @@protoc_insertion_po
   const ::google::protobuf::RepeatedPtrField< ::elasticfaiss::WorkNode >&
       nodes() const;
 
-  // optional string name = 1;
-  bool has_name() const;
-  void clear_name();
-  static const int kNameFieldNumber = 1;
-  const ::std::string& name() const;
-  void set_name(const ::std::string& value);
-  #if LANG_CXX11
-  void set_name(::std::string&& value);
-  #endif
-  void set_name(const char* value);
-  void set_name(const char* value, size_t size);
-  ::std::string* mutable_name();
-  ::std::string* release_name();
-  void set_allocated_name(::std::string* name);
-
-  // optional int64 update_ms = 2;
+  // optional int64 update_ms = 1;
   bool has_update_ms() const;
   void clear_update_ms();
-  static const int kUpdateMsFieldNumber = 2;
+  static const int kUpdateMsFieldNumber = 1;
   ::google::protobuf::int64 update_ms() const;
   void set_update_ms(::google::protobuf::int64 value);
 
   // @@protoc_insertion_point(class_scope:elasticfaiss.ClusterState)
  private:
-  void set_has_name();
-  void clear_has_name();
   void set_has_update_ms();
   void clear_has_update_ms();
 
@@ -444,7 +535,6 @@ class ClusterState : public ::google::protobuf::Message /* @@protoc_insertion_po
   ::google::protobuf::internal::HasBits<1> _has_bits_;
   mutable ::google::protobuf::internal::CachedSize _cached_size_;
   ::google::protobuf::RepeatedPtrField< ::elasticfaiss::WorkNode > nodes_;
-  ::google::protobuf::internal::ArenaStringPtr name_;
   ::google::protobuf::int64 update_ms_;
   friend struct ::protobuf_master_2eproto::TableStruct;
 };
@@ -492,7 +582,7 @@ class MasterSnapshot : public ::google::protobuf::Message /* @@protoc_insertion_
                &_MasterSnapshot_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    2;
+    3;
 
   void Swap(MasterSnapshot* other);
   friend void swap(MasterSnapshot& a, MasterSnapshot& b) {
@@ -544,25 +634,40 @@ class MasterSnapshot : public ::google::protobuf::Message /* @@protoc_insertion_
 
   // accessors -------------------------------------------------------
 
-  // repeated .elasticfaiss.ClusterState states = 1;
-  int states_size() const;
-  void clear_states();
-  static const int kStatesFieldNumber = 1;
-  ::elasticfaiss::ClusterState* mutable_states(int index);
-  ::google::protobuf::RepeatedPtrField< ::elasticfaiss::ClusterState >*
-      mutable_states();
-  const ::elasticfaiss::ClusterState& states(int index) const;
-  ::elasticfaiss::ClusterState* add_states();
-  const ::google::protobuf::RepeatedPtrField< ::elasticfaiss::ClusterState >&
-      states() const;
+  // repeated .elasticfaiss.IndexConf index = 2;
+  int index_size() const;
+  void clear_index();
+  static const int kIndexFieldNumber = 2;
+  ::elasticfaiss::IndexConf* mutable_index(int index);
+  ::google::protobuf::RepeatedPtrField< ::elasticfaiss::IndexConf >*
+      mutable_index();
+  const ::elasticfaiss::IndexConf& index(int index) const;
+  ::elasticfaiss::IndexConf* add_index();
+  const ::google::protobuf::RepeatedPtrField< ::elasticfaiss::IndexConf >&
+      index() const;
+
+  // optional .elasticfaiss.ClusterState state = 1;
+  bool has_state() const;
+  void clear_state();
+  static const int kStateFieldNumber = 1;
+  private:
+  const ::elasticfaiss::ClusterState& _internal_state() const;
+  public:
+  const ::elasticfaiss::ClusterState& state() const;
+  ::elasticfaiss::ClusterState* release_state();
+  ::elasticfaiss::ClusterState* mutable_state();
+  void set_allocated_state(::elasticfaiss::ClusterState* state);
 
   // @@protoc_insertion_point(class_scope:elasticfaiss.MasterSnapshot)
  private:
+  void set_has_state();
+  void clear_has_state();
 
   ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
   ::google::protobuf::internal::HasBits<1> _has_bits_;
   mutable ::google::protobuf::internal::CachedSize _cached_size_;
-  ::google::protobuf::RepeatedPtrField< ::elasticfaiss::ClusterState > states_;
+  ::google::protobuf::RepeatedPtrField< ::elasticfaiss::IndexConf > index_;
+  ::elasticfaiss::ClusterState* state_;
   friend struct ::protobuf_master_2eproto::TableStruct;
 };
 // -------------------------------------------------------------------
@@ -609,7 +714,7 @@ class BootstrapRequest : public ::google::protobuf::Message /* @@protoc_insertio
                &_BootstrapRequest_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    3;
+    4;
 
   void Swap(BootstrapRequest* other);
   friend void swap(BootstrapRequest& a, BootstrapRequest& b) {
@@ -661,25 +766,10 @@ class BootstrapRequest : public ::google::protobuf::Message /* @@protoc_insertio
 
   // accessors -------------------------------------------------------
 
-  // required string cluster = 1;
-  bool has_cluster() const;
-  void clear_cluster();
-  static const int kClusterFieldNumber = 1;
-  const ::std::string& cluster() const;
-  void set_cluster(const ::std::string& value);
-  #if LANG_CXX11
-  void set_cluster(::std::string&& value);
-  #endif
-  void set_cluster(const char* value);
-  void set_cluster(const char* value, size_t size);
-  ::std::string* mutable_cluster();
-  ::std::string* release_cluster();
-  void set_allocated_cluster(::std::string* cluster);
-
-  // required string node_peer = 2;
+  // required string node_peer = 1;
   bool has_node_peer() const;
   void clear_node_peer();
-  static const int kNodePeerFieldNumber = 2;
+  static const int kNodePeerFieldNumber = 1;
   const ::std::string& node_peer() const;
   void set_node_peer(const ::std::string& value);
   #if LANG_CXX11
@@ -691,29 +781,23 @@ class BootstrapRequest : public ::google::protobuf::Message /* @@protoc_insertio
   ::std::string* release_node_peer();
   void set_allocated_node_peer(::std::string* node_peer);
 
-  // optional int64 boot_ms = 3;
+  // optional int64 boot_ms = 2;
   bool has_boot_ms() const;
   void clear_boot_ms();
-  static const int kBootMsFieldNumber = 3;
+  static const int kBootMsFieldNumber = 2;
   ::google::protobuf::int64 boot_ms() const;
   void set_boot_ms(::google::protobuf::int64 value);
 
   // @@protoc_insertion_point(class_scope:elasticfaiss.BootstrapRequest)
  private:
-  void set_has_cluster();
-  void clear_has_cluster();
   void set_has_node_peer();
   void clear_has_node_peer();
   void set_has_boot_ms();
   void clear_has_boot_ms();
 
-  // helper for ByteSizeLong()
-  size_t RequiredFieldsByteSizeFallback() const;
-
   ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
   ::google::protobuf::internal::HasBits<1> _has_bits_;
   mutable ::google::protobuf::internal::CachedSize _cached_size_;
-  ::google::protobuf::internal::ArenaStringPtr cluster_;
   ::google::protobuf::internal::ArenaStringPtr node_peer_;
   ::google::protobuf::int64 boot_ms_;
   friend struct ::protobuf_master_2eproto::TableStruct;
@@ -762,7 +846,7 @@ class BootstrapResponse : public ::google::protobuf::Message /* @@protoc_inserti
                &_BootstrapResponse_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    4;
+    5;
 
   void Swap(BootstrapResponse* other);
   friend void swap(BootstrapResponse& a, BootstrapResponse& b) {
@@ -826,6 +910,18 @@ class BootstrapResponse : public ::google::protobuf::Message /* @@protoc_inserti
   const ::google::protobuf::RepeatedPtrField< ::elasticfaiss::WorkNode >&
       nodes() const;
 
+  // repeated .elasticfaiss.IndexShardConf shards = 4;
+  int shards_size() const;
+  void clear_shards();
+  static const int kShardsFieldNumber = 4;
+  ::elasticfaiss::IndexShardConf* mutable_shards(int index);
+  ::google::protobuf::RepeatedPtrField< ::elasticfaiss::IndexShardConf >*
+      mutable_shards();
+  const ::elasticfaiss::IndexShardConf& shards(int index) const;
+  ::elasticfaiss::IndexShardConf* add_shards();
+  const ::google::protobuf::RepeatedPtrField< ::elasticfaiss::IndexShardConf >&
+      shards() const;
+
   // optional string redirect = 2;
   bool has_redirect() const;
   void clear_redirect();
@@ -859,6 +955,7 @@ class BootstrapResponse : public ::google::protobuf::Message /* @@protoc_inserti
   ::google::protobuf::internal::HasBits<1> _has_bits_;
   mutable ::google::protobuf::internal::CachedSize _cached_size_;
   ::google::protobuf::RepeatedPtrField< ::elasticfaiss::WorkNode > nodes_;
+  ::google::protobuf::RepeatedPtrField< ::elasticfaiss::IndexShardConf > shards_;
   ::google::protobuf::internal::ArenaStringPtr redirect_;
   bool success_;
   friend struct ::protobuf_master_2eproto::TableStruct;
@@ -907,7 +1004,7 @@ class NodeHeartbeatRequest : public ::google::protobuf::Message /* @@protoc_inse
                &_NodeHeartbeatRequest_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    5;
+    6;
 
   void Swap(NodeHeartbeatRequest* other);
   friend void swap(NodeHeartbeatRequest& a, NodeHeartbeatRequest& b) {
@@ -959,10 +1056,10 @@ class NodeHeartbeatRequest : public ::google::protobuf::Message /* @@protoc_inse
 
   // accessors -------------------------------------------------------
 
-  // repeated .elasticfaiss.Shard shards = 4;
+  // repeated .elasticfaiss.Shard shards = 3;
   int shards_size() const;
   void clear_shards();
-  static const int kShardsFieldNumber = 4;
+  static const int kShardsFieldNumber = 3;
   ::elasticfaiss::Shard* mutable_shards(int index);
   ::google::protobuf::RepeatedPtrField< ::elasticfaiss::Shard >*
       mutable_shards();
@@ -971,25 +1068,10 @@ class NodeHeartbeatRequest : public ::google::protobuf::Message /* @@protoc_inse
   const ::google::protobuf::RepeatedPtrField< ::elasticfaiss::Shard >&
       shards() const;
 
-  // required string cluster = 1;
-  bool has_cluster() const;
-  void clear_cluster();
-  static const int kClusterFieldNumber = 1;
-  const ::std::string& cluster() const;
-  void set_cluster(const ::std::string& value);
-  #if LANG_CXX11
-  void set_cluster(::std::string&& value);
-  #endif
-  void set_cluster(const char* value);
-  void set_cluster(const char* value, size_t size);
-  ::std::string* mutable_cluster();
-  ::std::string* release_cluster();
-  void set_allocated_cluster(::std::string* cluster);
-
-  // required string node_peer = 2;
+  // required string node_peer = 1;
   bool has_node_peer() const;
   void clear_node_peer();
-  static const int kNodePeerFieldNumber = 2;
+  static const int kNodePeerFieldNumber = 1;
   const ::std::string& node_peer() const;
   void set_node_peer(const ::std::string& value);
   #if LANG_CXX11
@@ -1001,30 +1083,24 @@ class NodeHeartbeatRequest : public ::google::protobuf::Message /* @@protoc_inse
   ::std::string* release_node_peer();
   void set_allocated_node_peer(::std::string* node_peer);
 
-  // optional int64 active_ms = 3;
+  // optional int64 active_ms = 2;
   bool has_active_ms() const;
   void clear_active_ms();
-  static const int kActiveMsFieldNumber = 3;
+  static const int kActiveMsFieldNumber = 2;
   ::google::protobuf::int64 active_ms() const;
   void set_active_ms(::google::protobuf::int64 value);
 
   // @@protoc_insertion_point(class_scope:elasticfaiss.NodeHeartbeatRequest)
  private:
-  void set_has_cluster();
-  void clear_has_cluster();
   void set_has_node_peer();
   void clear_has_node_peer();
   void set_has_active_ms();
   void clear_has_active_ms();
 
-  // helper for ByteSizeLong()
-  size_t RequiredFieldsByteSizeFallback() const;
-
   ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
   ::google::protobuf::internal::HasBits<1> _has_bits_;
   mutable ::google::protobuf::internal::CachedSize _cached_size_;
   ::google::protobuf::RepeatedPtrField< ::elasticfaiss::Shard > shards_;
-  ::google::protobuf::internal::ArenaStringPtr cluster_;
   ::google::protobuf::internal::ArenaStringPtr node_peer_;
   ::google::protobuf::int64 active_ms_;
   friend struct ::protobuf_master_2eproto::TableStruct;
@@ -1073,7 +1149,7 @@ class NodeHeartbeatResponse : public ::google::protobuf::Message /* @@protoc_ins
                &_NodeHeartbeatResponse_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    6;
+    7;
 
   void Swap(NodeHeartbeatResponse* other);
   friend void swap(NodeHeartbeatResponse& a, NodeHeartbeatResponse& b) {
@@ -1218,7 +1294,7 @@ class GetClusterStateRequest : public ::google::protobuf::Message /* @@protoc_in
                &_GetClusterStateRequest_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    7;
+    8;
 
   void Swap(GetClusterStateRequest* other);
   friend void swap(GetClusterStateRequest& a, GetClusterStateRequest& b) {
@@ -1340,7 +1416,7 @@ class GetClusterStateResponse : public ::google::protobuf::Message /* @@protoc_i
                &_GetClusterStateResponse_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    8;
+    9;
 
   void Swap(GetClusterStateResponse* other);
   friend void swap(GetClusterStateResponse& a, GetClusterStateResponse& b) {
@@ -1487,7 +1563,7 @@ class CreateIndexRequest : public ::google::protobuf::Message /* @@protoc_insert
                &_CreateIndexRequest_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    9;
+    10;
 
   void Swap(CreateIndexRequest* other);
   friend void swap(CreateIndexRequest& a, CreateIndexRequest& b) {
@@ -1539,25 +1615,10 @@ class CreateIndexRequest : public ::google::protobuf::Message /* @@protoc_insert
 
   // accessors -------------------------------------------------------
 
-  // required string cluster = 1;
-  bool has_cluster() const;
-  void clear_cluster();
-  static const int kClusterFieldNumber = 1;
-  const ::std::string& cluster() const;
-  void set_cluster(const ::std::string& value);
-  #if LANG_CXX11
-  void set_cluster(::std::string&& value);
-  #endif
-  void set_cluster(const char* value);
-  void set_cluster(const char* value, size_t size);
-  ::std::string* mutable_cluster();
-  ::std::string* release_cluster();
-  void set_allocated_cluster(::std::string* cluster);
-
-  // required .elasticfaiss.IndexConf conf = 2;
+  // required .elasticfaiss.IndexConf conf = 1;
   bool has_conf() const;
   void clear_conf();
-  static const int kConfFieldNumber = 2;
+  static const int kConfFieldNumber = 1;
   private:
   const ::elasticfaiss::IndexConf& _internal_conf() const;
   public:
@@ -1568,18 +1629,12 @@ class CreateIndexRequest : public ::google::protobuf::Message /* @@protoc_insert
 
   // @@protoc_insertion_point(class_scope:elasticfaiss.CreateIndexRequest)
  private:
-  void set_has_cluster();
-  void clear_has_cluster();
   void set_has_conf();
   void clear_has_conf();
-
-  // helper for ByteSizeLong()
-  size_t RequiredFieldsByteSizeFallback() const;
 
   ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
   ::google::protobuf::internal::HasBits<1> _has_bits_;
   mutable ::google::protobuf::internal::CachedSize _cached_size_;
-  ::google::protobuf::internal::ArenaStringPtr cluster_;
   ::elasticfaiss::IndexConf* conf_;
   friend struct ::protobuf_master_2eproto::TableStruct;
 };
@@ -1627,7 +1682,7 @@ class CreateIndexResponse : public ::google::protobuf::Message /* @@protoc_inser
                &_CreateIndexResponse_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    10;
+    11;
 
   void Swap(CreateIndexResponse* other);
   friend void swap(CreateIndexResponse& a, CreateIndexResponse& b) {
@@ -1777,7 +1832,7 @@ class DeleteIndexRequest : public ::google::protobuf::Message /* @@protoc_insert
                &_DeleteIndexRequest_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    11;
+    12;
 
   void Swap(DeleteIndexRequest* other);
   friend void swap(DeleteIndexRequest& a, DeleteIndexRequest& b) {
@@ -1829,25 +1884,10 @@ class DeleteIndexRequest : public ::google::protobuf::Message /* @@protoc_insert
 
   // accessors -------------------------------------------------------
 
-  // required string cluster = 1;
-  bool has_cluster() const;
-  void clear_cluster();
-  static const int kClusterFieldNumber = 1;
-  const ::std::string& cluster() const;
-  void set_cluster(const ::std::string& value);
-  #if LANG_CXX11
-  void set_cluster(::std::string&& value);
-  #endif
-  void set_cluster(const char* value);
-  void set_cluster(const char* value, size_t size);
-  ::std::string* mutable_cluster();
-  ::std::string* release_cluster();
-  void set_allocated_cluster(::std::string* cluster);
-
-  // required string index_name = 2;
+  // required string index_name = 1;
   bool has_index_name() const;
   void clear_index_name();
-  static const int kIndexNameFieldNumber = 2;
+  static const int kIndexNameFieldNumber = 1;
   const ::std::string& index_name() const;
   void set_index_name(const ::std::string& value);
   #if LANG_CXX11
@@ -1861,18 +1901,12 @@ class DeleteIndexRequest : public ::google::protobuf::Message /* @@protoc_insert
 
   // @@protoc_insertion_point(class_scope:elasticfaiss.DeleteIndexRequest)
  private:
-  void set_has_cluster();
-  void clear_has_cluster();
   void set_has_index_name();
   void clear_has_index_name();
-
-  // helper for ByteSizeLong()
-  size_t RequiredFieldsByteSizeFallback() const;
 
   ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
   ::google::protobuf::internal::HasBits<1> _has_bits_;
   mutable ::google::protobuf::internal::CachedSize _cached_size_;
-  ::google::protobuf::internal::ArenaStringPtr cluster_;
   ::google::protobuf::internal::ArenaStringPtr index_name_;
   friend struct ::protobuf_master_2eproto::TableStruct;
 };
@@ -1920,7 +1954,7 @@ class DeleteIndexResponse : public ::google::protobuf::Message /* @@protoc_inser
                &_DeleteIndexResponse_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    12;
+    13;
 
   void Swap(DeleteIndexResponse* other);
   friend void swap(DeleteIndexResponse& a, DeleteIndexResponse& b) {
@@ -2070,7 +2104,7 @@ class UpdateIndexRequest : public ::google::protobuf::Message /* @@protoc_insert
                &_UpdateIndexRequest_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    13;
+    14;
 
   void Swap(UpdateIndexRequest* other);
   friend void swap(UpdateIndexRequest& a, UpdateIndexRequest& b) {
@@ -2122,25 +2156,10 @@ class UpdateIndexRequest : public ::google::protobuf::Message /* @@protoc_insert
 
   // accessors -------------------------------------------------------
 
-  // required string cluster = 1;
-  bool has_cluster() const;
-  void clear_cluster();
-  static const int kClusterFieldNumber = 1;
-  const ::std::string& cluster() const;
-  void set_cluster(const ::std::string& value);
-  #if LANG_CXX11
-  void set_cluster(::std::string&& value);
-  #endif
-  void set_cluster(const char* value);
-  void set_cluster(const char* value, size_t size);
-  ::std::string* mutable_cluster();
-  ::std::string* release_cluster();
-  void set_allocated_cluster(::std::string* cluster);
-
-  // required .elasticfaiss.IndexConf conf = 2;
+  // required .elasticfaiss.IndexConf conf = 1;
   bool has_conf() const;
   void clear_conf();
-  static const int kConfFieldNumber = 2;
+  static const int kConfFieldNumber = 1;
   private:
   const ::elasticfaiss::IndexConf& _internal_conf() const;
   public:
@@ -2151,18 +2170,12 @@ class UpdateIndexRequest : public ::google::protobuf::Message /* @@protoc_insert
 
   // @@protoc_insertion_point(class_scope:elasticfaiss.UpdateIndexRequest)
  private:
-  void set_has_cluster();
-  void clear_has_cluster();
   void set_has_conf();
   void clear_has_conf();
-
-  // helper for ByteSizeLong()
-  size_t RequiredFieldsByteSizeFallback() const;
 
   ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
   ::google::protobuf::internal::HasBits<1> _has_bits_;
   mutable ::google::protobuf::internal::CachedSize _cached_size_;
-  ::google::protobuf::internal::ArenaStringPtr cluster_;
   ::elasticfaiss::IndexConf* conf_;
   friend struct ::protobuf_master_2eproto::TableStruct;
 };
@@ -2210,7 +2223,7 @@ class UpdateIndexResponse : public ::google::protobuf::Message /* @@protoc_inser
                &_UpdateIndexResponse_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    14;
+    15;
 
   void Swap(UpdateIndexResponse* other);
   friend void swap(UpdateIndexResponse& a, UpdateIndexResponse& b) {
@@ -2424,6 +2437,10 @@ class MasterService_Stub : public MasterService {
   #pragma GCC diagnostic push
   #pragma GCC diagnostic ignored "-Wstrict-aliasing"
 #endif  // __GNUC__
+// ClusterSettings
+
+// -------------------------------------------------------------------
+
 // WorkNode
 
 // required string peer_id = 1;
@@ -2595,81 +2612,15 @@ inline void WorkNode::set_state(::google::protobuf::int32 value) {
 
 // ClusterState
 
-// optional string name = 1;
-inline bool ClusterState::has_name() const {
+// optional int64 update_ms = 1;
+inline bool ClusterState::has_update_ms() const {
   return (_has_bits_[0] & 0x00000001u) != 0;
 }
-inline void ClusterState::set_has_name() {
+inline void ClusterState::set_has_update_ms() {
   _has_bits_[0] |= 0x00000001u;
 }
-inline void ClusterState::clear_has_name() {
-  _has_bits_[0] &= ~0x00000001u;
-}
-inline void ClusterState::clear_name() {
-  name_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  clear_has_name();
-}
-inline const ::std::string& ClusterState::name() const {
-  // @@protoc_insertion_point(field_get:elasticfaiss.ClusterState.name)
-  return name_.GetNoArena();
-}
-inline void ClusterState::set_name(const ::std::string& value) {
-  set_has_name();
-  name_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
-  // @@protoc_insertion_point(field_set:elasticfaiss.ClusterState.name)
-}
-#if LANG_CXX11
-inline void ClusterState::set_name(::std::string&& value) {
-  set_has_name();
-  name_.SetNoArena(
-    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
-  // @@protoc_insertion_point(field_set_rvalue:elasticfaiss.ClusterState.name)
-}
-#endif
-inline void ClusterState::set_name(const char* value) {
-  GOOGLE_DCHECK(value != NULL);
-  set_has_name();
-  name_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
-  // @@protoc_insertion_point(field_set_char:elasticfaiss.ClusterState.name)
-}
-inline void ClusterState::set_name(const char* value, size_t size) {
-  set_has_name();
-  name_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
-      ::std::string(reinterpret_cast<const char*>(value), size));
-  // @@protoc_insertion_point(field_set_pointer:elasticfaiss.ClusterState.name)
-}
-inline ::std::string* ClusterState::mutable_name() {
-  set_has_name();
-  // @@protoc_insertion_point(field_mutable:elasticfaiss.ClusterState.name)
-  return name_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-}
-inline ::std::string* ClusterState::release_name() {
-  // @@protoc_insertion_point(field_release:elasticfaiss.ClusterState.name)
-  if (!has_name()) {
-    return NULL;
-  }
-  clear_has_name();
-  return name_.ReleaseNonDefaultNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-}
-inline void ClusterState::set_allocated_name(::std::string* name) {
-  if (name != NULL) {
-    set_has_name();
-  } else {
-    clear_has_name();
-  }
-  name_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), name);
-  // @@protoc_insertion_point(field_set_allocated:elasticfaiss.ClusterState.name)
-}
-
-// optional int64 update_ms = 2;
-inline bool ClusterState::has_update_ms() const {
-  return (_has_bits_[0] & 0x00000002u) != 0;
-}
-inline void ClusterState::set_has_update_ms() {
-  _has_bits_[0] |= 0x00000002u;
-}
 inline void ClusterState::clear_has_update_ms() {
-  _has_bits_[0] &= ~0x00000002u;
+  _has_bits_[0] &= ~0x00000001u;
 }
 inline void ClusterState::clear_update_ms() {
   update_ms_ = GOOGLE_LONGLONG(0);
@@ -2685,7 +2636,7 @@ inline void ClusterState::set_update_ms(::google::protobuf::int64 value) {
   // @@protoc_insertion_point(field_set:elasticfaiss.ClusterState.update_ms)
 }
 
-// repeated .elasticfaiss.WorkNode nodes = 3;
+// repeated .elasticfaiss.WorkNode nodes = 2;
 inline int ClusterState::nodes_size() const {
   return nodes_.size();
 }
@@ -2719,115 +2670,104 @@ ClusterState::nodes() const {
 
 // MasterSnapshot
 
-// repeated .elasticfaiss.ClusterState states = 1;
-inline int MasterSnapshot::states_size() const {
-  return states_.size();
+// optional .elasticfaiss.ClusterState state = 1;
+inline bool MasterSnapshot::has_state() const {
+  return (_has_bits_[0] & 0x00000001u) != 0;
 }
-inline void MasterSnapshot::clear_states() {
-  states_.Clear();
+inline void MasterSnapshot::set_has_state() {
+  _has_bits_[0] |= 0x00000001u;
 }
-inline ::elasticfaiss::ClusterState* MasterSnapshot::mutable_states(int index) {
-  // @@protoc_insertion_point(field_mutable:elasticfaiss.MasterSnapshot.states)
-  return states_.Mutable(index);
+inline void MasterSnapshot::clear_has_state() {
+  _has_bits_[0] &= ~0x00000001u;
 }
-inline ::google::protobuf::RepeatedPtrField< ::elasticfaiss::ClusterState >*
-MasterSnapshot::mutable_states() {
-  // @@protoc_insertion_point(field_mutable_list:elasticfaiss.MasterSnapshot.states)
-  return &states_;
+inline void MasterSnapshot::clear_state() {
+  if (state_ != NULL) state_->Clear();
+  clear_has_state();
 }
-inline const ::elasticfaiss::ClusterState& MasterSnapshot::states(int index) const {
-  // @@protoc_insertion_point(field_get:elasticfaiss.MasterSnapshot.states)
-  return states_.Get(index);
+inline const ::elasticfaiss::ClusterState& MasterSnapshot::_internal_state() const {
+  return *state_;
 }
-inline ::elasticfaiss::ClusterState* MasterSnapshot::add_states() {
-  // @@protoc_insertion_point(field_add:elasticfaiss.MasterSnapshot.states)
-  return states_.Add();
+inline const ::elasticfaiss::ClusterState& MasterSnapshot::state() const {
+  const ::elasticfaiss::ClusterState* p = state_;
+  // @@protoc_insertion_point(field_get:elasticfaiss.MasterSnapshot.state)
+  return p != NULL ? *p : *reinterpret_cast<const ::elasticfaiss::ClusterState*>(
+      &::elasticfaiss::_ClusterState_default_instance_);
 }
-inline const ::google::protobuf::RepeatedPtrField< ::elasticfaiss::ClusterState >&
-MasterSnapshot::states() const {
-  // @@protoc_insertion_point(field_list:elasticfaiss.MasterSnapshot.states)
-  return states_;
+inline ::elasticfaiss::ClusterState* MasterSnapshot::release_state() {
+  // @@protoc_insertion_point(field_release:elasticfaiss.MasterSnapshot.state)
+  clear_has_state();
+  ::elasticfaiss::ClusterState* temp = state_;
+  state_ = NULL;
+  return temp;
+}
+inline ::elasticfaiss::ClusterState* MasterSnapshot::mutable_state() {
+  set_has_state();
+  if (state_ == NULL) {
+    auto* p = CreateMaybeMessage<::elasticfaiss::ClusterState>(GetArenaNoVirtual());
+    state_ = p;
+  }
+  // @@protoc_insertion_point(field_mutable:elasticfaiss.MasterSnapshot.state)
+  return state_;
+}
+inline void MasterSnapshot::set_allocated_state(::elasticfaiss::ClusterState* state) {
+  ::google::protobuf::Arena* message_arena = GetArenaNoVirtual();
+  if (message_arena == NULL) {
+    delete state_;
+  }
+  if (state) {
+    ::google::protobuf::Arena* submessage_arena = NULL;
+    if (message_arena != submessage_arena) {
+      state = ::google::protobuf::internal::GetOwnedMessage(
+          message_arena, state, submessage_arena);
+    }
+    set_has_state();
+  } else {
+    clear_has_state();
+  }
+  state_ = state;
+  // @@protoc_insertion_point(field_set_allocated:elasticfaiss.MasterSnapshot.state)
+}
+
+// repeated .elasticfaiss.IndexConf index = 2;
+inline int MasterSnapshot::index_size() const {
+  return index_.size();
+}
+inline ::elasticfaiss::IndexConf* MasterSnapshot::mutable_index(int index) {
+  // @@protoc_insertion_point(field_mutable:elasticfaiss.MasterSnapshot.index)
+  return index_.Mutable(index);
+}
+inline ::google::protobuf::RepeatedPtrField< ::elasticfaiss::IndexConf >*
+MasterSnapshot::mutable_index() {
+  // @@protoc_insertion_point(field_mutable_list:elasticfaiss.MasterSnapshot.index)
+  return &index_;
+}
+inline const ::elasticfaiss::IndexConf& MasterSnapshot::index(int index) const {
+  // @@protoc_insertion_point(field_get:elasticfaiss.MasterSnapshot.index)
+  return index_.Get(index);
+}
+inline ::elasticfaiss::IndexConf* MasterSnapshot::add_index() {
+  // @@protoc_insertion_point(field_add:elasticfaiss.MasterSnapshot.index)
+  return index_.Add();
+}
+inline const ::google::protobuf::RepeatedPtrField< ::elasticfaiss::IndexConf >&
+MasterSnapshot::index() const {
+  // @@protoc_insertion_point(field_list:elasticfaiss.MasterSnapshot.index)
+  return index_;
 }
 
 // -------------------------------------------------------------------
 
 // BootstrapRequest
 
-// required string cluster = 1;
-inline bool BootstrapRequest::has_cluster() const {
+// required string node_peer = 1;
+inline bool BootstrapRequest::has_node_peer() const {
   return (_has_bits_[0] & 0x00000001u) != 0;
 }
-inline void BootstrapRequest::set_has_cluster() {
+inline void BootstrapRequest::set_has_node_peer() {
   _has_bits_[0] |= 0x00000001u;
 }
-inline void BootstrapRequest::clear_has_cluster() {
-  _has_bits_[0] &= ~0x00000001u;
-}
-inline void BootstrapRequest::clear_cluster() {
-  cluster_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  clear_has_cluster();
-}
-inline const ::std::string& BootstrapRequest::cluster() const {
-  // @@protoc_insertion_point(field_get:elasticfaiss.BootstrapRequest.cluster)
-  return cluster_.GetNoArena();
-}
-inline void BootstrapRequest::set_cluster(const ::std::string& value) {
-  set_has_cluster();
-  cluster_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
-  // @@protoc_insertion_point(field_set:elasticfaiss.BootstrapRequest.cluster)
-}
-#if LANG_CXX11
-inline void BootstrapRequest::set_cluster(::std::string&& value) {
-  set_has_cluster();
-  cluster_.SetNoArena(
-    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
-  // @@protoc_insertion_point(field_set_rvalue:elasticfaiss.BootstrapRequest.cluster)
-}
-#endif
-inline void BootstrapRequest::set_cluster(const char* value) {
-  GOOGLE_DCHECK(value != NULL);
-  set_has_cluster();
-  cluster_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
-  // @@protoc_insertion_point(field_set_char:elasticfaiss.BootstrapRequest.cluster)
-}
-inline void BootstrapRequest::set_cluster(const char* value, size_t size) {
-  set_has_cluster();
-  cluster_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
-      ::std::string(reinterpret_cast<const char*>(value), size));
-  // @@protoc_insertion_point(field_set_pointer:elasticfaiss.BootstrapRequest.cluster)
-}
-inline ::std::string* BootstrapRequest::mutable_cluster() {
-  set_has_cluster();
-  // @@protoc_insertion_point(field_mutable:elasticfaiss.BootstrapRequest.cluster)
-  return cluster_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-}
-inline ::std::string* BootstrapRequest::release_cluster() {
-  // @@protoc_insertion_point(field_release:elasticfaiss.BootstrapRequest.cluster)
-  if (!has_cluster()) {
-    return NULL;
-  }
-  clear_has_cluster();
-  return cluster_.ReleaseNonDefaultNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-}
-inline void BootstrapRequest::set_allocated_cluster(::std::string* cluster) {
-  if (cluster != NULL) {
-    set_has_cluster();
-  } else {
-    clear_has_cluster();
-  }
-  cluster_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), cluster);
-  // @@protoc_insertion_point(field_set_allocated:elasticfaiss.BootstrapRequest.cluster)
-}
-
-// required string node_peer = 2;
-inline bool BootstrapRequest::has_node_peer() const {
-  return (_has_bits_[0] & 0x00000002u) != 0;
-}
-inline void BootstrapRequest::set_has_node_peer() {
-  _has_bits_[0] |= 0x00000002u;
-}
 inline void BootstrapRequest::clear_has_node_peer() {
-  _has_bits_[0] &= ~0x00000002u;
+  _has_bits_[0] &= ~0x00000001u;
 }
 inline void BootstrapRequest::clear_node_peer() {
   node_peer_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
@@ -2885,15 +2825,15 @@ inline void BootstrapRequest::set_allocated_node_peer(::std::string* node_peer) 
   // @@protoc_insertion_point(field_set_allocated:elasticfaiss.BootstrapRequest.node_peer)
 }
 
-// optional int64 boot_ms = 3;
+// optional int64 boot_ms = 2;
 inline bool BootstrapRequest::has_boot_ms() const {
-  return (_has_bits_[0] & 0x00000004u) != 0;
+  return (_has_bits_[0] & 0x00000002u) != 0;
 }
 inline void BootstrapRequest::set_has_boot_ms() {
-  _has_bits_[0] |= 0x00000004u;
+  _has_bits_[0] |= 0x00000002u;
 }
 inline void BootstrapRequest::clear_has_boot_ms() {
-  _has_bits_[0] &= ~0x00000004u;
+  _has_bits_[0] &= ~0x00000002u;
 }
 inline void BootstrapRequest::clear_boot_ms() {
   boot_ms_ = GOOGLE_LONGLONG(0);
@@ -3033,85 +2973,46 @@ BootstrapResponse::nodes() const {
   return nodes_;
 }
 
+// repeated .elasticfaiss.IndexShardConf shards = 4;
+inline int BootstrapResponse::shards_size() const {
+  return shards_.size();
+}
+inline ::elasticfaiss::IndexShardConf* BootstrapResponse::mutable_shards(int index) {
+  // @@protoc_insertion_point(field_mutable:elasticfaiss.BootstrapResponse.shards)
+  return shards_.Mutable(index);
+}
+inline ::google::protobuf::RepeatedPtrField< ::elasticfaiss::IndexShardConf >*
+BootstrapResponse::mutable_shards() {
+  // @@protoc_insertion_point(field_mutable_list:elasticfaiss.BootstrapResponse.shards)
+  return &shards_;
+}
+inline const ::elasticfaiss::IndexShardConf& BootstrapResponse::shards(int index) const {
+  // @@protoc_insertion_point(field_get:elasticfaiss.BootstrapResponse.shards)
+  return shards_.Get(index);
+}
+inline ::elasticfaiss::IndexShardConf* BootstrapResponse::add_shards() {
+  // @@protoc_insertion_point(field_add:elasticfaiss.BootstrapResponse.shards)
+  return shards_.Add();
+}
+inline const ::google::protobuf::RepeatedPtrField< ::elasticfaiss::IndexShardConf >&
+BootstrapResponse::shards() const {
+  // @@protoc_insertion_point(field_list:elasticfaiss.BootstrapResponse.shards)
+  return shards_;
+}
+
 // -------------------------------------------------------------------
 
 // NodeHeartbeatRequest
 
-// required string cluster = 1;
-inline bool NodeHeartbeatRequest::has_cluster() const {
+// required string node_peer = 1;
+inline bool NodeHeartbeatRequest::has_node_peer() const {
   return (_has_bits_[0] & 0x00000001u) != 0;
 }
-inline void NodeHeartbeatRequest::set_has_cluster() {
+inline void NodeHeartbeatRequest::set_has_node_peer() {
   _has_bits_[0] |= 0x00000001u;
 }
-inline void NodeHeartbeatRequest::clear_has_cluster() {
-  _has_bits_[0] &= ~0x00000001u;
-}
-inline void NodeHeartbeatRequest::clear_cluster() {
-  cluster_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  clear_has_cluster();
-}
-inline const ::std::string& NodeHeartbeatRequest::cluster() const {
-  // @@protoc_insertion_point(field_get:elasticfaiss.NodeHeartbeatRequest.cluster)
-  return cluster_.GetNoArena();
-}
-inline void NodeHeartbeatRequest::set_cluster(const ::std::string& value) {
-  set_has_cluster();
-  cluster_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
-  // @@protoc_insertion_point(field_set:elasticfaiss.NodeHeartbeatRequest.cluster)
-}
-#if LANG_CXX11
-inline void NodeHeartbeatRequest::set_cluster(::std::string&& value) {
-  set_has_cluster();
-  cluster_.SetNoArena(
-    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
-  // @@protoc_insertion_point(field_set_rvalue:elasticfaiss.NodeHeartbeatRequest.cluster)
-}
-#endif
-inline void NodeHeartbeatRequest::set_cluster(const char* value) {
-  GOOGLE_DCHECK(value != NULL);
-  set_has_cluster();
-  cluster_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
-  // @@protoc_insertion_point(field_set_char:elasticfaiss.NodeHeartbeatRequest.cluster)
-}
-inline void NodeHeartbeatRequest::set_cluster(const char* value, size_t size) {
-  set_has_cluster();
-  cluster_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
-      ::std::string(reinterpret_cast<const char*>(value), size));
-  // @@protoc_insertion_point(field_set_pointer:elasticfaiss.NodeHeartbeatRequest.cluster)
-}
-inline ::std::string* NodeHeartbeatRequest::mutable_cluster() {
-  set_has_cluster();
-  // @@protoc_insertion_point(field_mutable:elasticfaiss.NodeHeartbeatRequest.cluster)
-  return cluster_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-}
-inline ::std::string* NodeHeartbeatRequest::release_cluster() {
-  // @@protoc_insertion_point(field_release:elasticfaiss.NodeHeartbeatRequest.cluster)
-  if (!has_cluster()) {
-    return NULL;
-  }
-  clear_has_cluster();
-  return cluster_.ReleaseNonDefaultNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-}
-inline void NodeHeartbeatRequest::set_allocated_cluster(::std::string* cluster) {
-  if (cluster != NULL) {
-    set_has_cluster();
-  } else {
-    clear_has_cluster();
-  }
-  cluster_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), cluster);
-  // @@protoc_insertion_point(field_set_allocated:elasticfaiss.NodeHeartbeatRequest.cluster)
-}
-
-// required string node_peer = 2;
-inline bool NodeHeartbeatRequest::has_node_peer() const {
-  return (_has_bits_[0] & 0x00000002u) != 0;
-}
-inline void NodeHeartbeatRequest::set_has_node_peer() {
-  _has_bits_[0] |= 0x00000002u;
-}
 inline void NodeHeartbeatRequest::clear_has_node_peer() {
-  _has_bits_[0] &= ~0x00000002u;
+  _has_bits_[0] &= ~0x00000001u;
 }
 inline void NodeHeartbeatRequest::clear_node_peer() {
   node_peer_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
@@ -3169,15 +3070,15 @@ inline void NodeHeartbeatRequest::set_allocated_node_peer(::std::string* node_pe
   // @@protoc_insertion_point(field_set_allocated:elasticfaiss.NodeHeartbeatRequest.node_peer)
 }
 
-// optional int64 active_ms = 3;
+// optional int64 active_ms = 2;
 inline bool NodeHeartbeatRequest::has_active_ms() const {
-  return (_has_bits_[0] & 0x00000004u) != 0;
+  return (_has_bits_[0] & 0x00000002u) != 0;
 }
 inline void NodeHeartbeatRequest::set_has_active_ms() {
-  _has_bits_[0] |= 0x00000004u;
+  _has_bits_[0] |= 0x00000002u;
 }
 inline void NodeHeartbeatRequest::clear_has_active_ms() {
-  _has_bits_[0] &= ~0x00000004u;
+  _has_bits_[0] &= ~0x00000002u;
 }
 inline void NodeHeartbeatRequest::clear_active_ms() {
   active_ms_ = GOOGLE_LONGLONG(0);
@@ -3193,7 +3094,7 @@ inline void NodeHeartbeatRequest::set_active_ms(::google::protobuf::int64 value)
   // @@protoc_insertion_point(field_set:elasticfaiss.NodeHeartbeatRequest.active_ms)
 }
 
-// repeated .elasticfaiss.Shard shards = 4;
+// repeated .elasticfaiss.Shard shards = 3;
 inline int NodeHeartbeatRequest::shards_size() const {
   return shards_.size();
 }
@@ -3570,81 +3471,15 @@ inline void GetClusterStateResponse::set_allocated_state(::elasticfaiss::Cluster
 
 // CreateIndexRequest
 
-// required string cluster = 1;
-inline bool CreateIndexRequest::has_cluster() const {
+// required .elasticfaiss.IndexConf conf = 1;
+inline bool CreateIndexRequest::has_conf() const {
   return (_has_bits_[0] & 0x00000001u) != 0;
 }
-inline void CreateIndexRequest::set_has_cluster() {
+inline void CreateIndexRequest::set_has_conf() {
   _has_bits_[0] |= 0x00000001u;
 }
-inline void CreateIndexRequest::clear_has_cluster() {
-  _has_bits_[0] &= ~0x00000001u;
-}
-inline void CreateIndexRequest::clear_cluster() {
-  cluster_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  clear_has_cluster();
-}
-inline const ::std::string& CreateIndexRequest::cluster() const {
-  // @@protoc_insertion_point(field_get:elasticfaiss.CreateIndexRequest.cluster)
-  return cluster_.GetNoArena();
-}
-inline void CreateIndexRequest::set_cluster(const ::std::string& value) {
-  set_has_cluster();
-  cluster_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
-  // @@protoc_insertion_point(field_set:elasticfaiss.CreateIndexRequest.cluster)
-}
-#if LANG_CXX11
-inline void CreateIndexRequest::set_cluster(::std::string&& value) {
-  set_has_cluster();
-  cluster_.SetNoArena(
-    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
-  // @@protoc_insertion_point(field_set_rvalue:elasticfaiss.CreateIndexRequest.cluster)
-}
-#endif
-inline void CreateIndexRequest::set_cluster(const char* value) {
-  GOOGLE_DCHECK(value != NULL);
-  set_has_cluster();
-  cluster_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
-  // @@protoc_insertion_point(field_set_char:elasticfaiss.CreateIndexRequest.cluster)
-}
-inline void CreateIndexRequest::set_cluster(const char* value, size_t size) {
-  set_has_cluster();
-  cluster_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
-      ::std::string(reinterpret_cast<const char*>(value), size));
-  // @@protoc_insertion_point(field_set_pointer:elasticfaiss.CreateIndexRequest.cluster)
-}
-inline ::std::string* CreateIndexRequest::mutable_cluster() {
-  set_has_cluster();
-  // @@protoc_insertion_point(field_mutable:elasticfaiss.CreateIndexRequest.cluster)
-  return cluster_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-}
-inline ::std::string* CreateIndexRequest::release_cluster() {
-  // @@protoc_insertion_point(field_release:elasticfaiss.CreateIndexRequest.cluster)
-  if (!has_cluster()) {
-    return NULL;
-  }
-  clear_has_cluster();
-  return cluster_.ReleaseNonDefaultNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-}
-inline void CreateIndexRequest::set_allocated_cluster(::std::string* cluster) {
-  if (cluster != NULL) {
-    set_has_cluster();
-  } else {
-    clear_has_cluster();
-  }
-  cluster_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), cluster);
-  // @@protoc_insertion_point(field_set_allocated:elasticfaiss.CreateIndexRequest.cluster)
-}
-
-// required .elasticfaiss.IndexConf conf = 2;
-inline bool CreateIndexRequest::has_conf() const {
-  return (_has_bits_[0] & 0x00000002u) != 0;
-}
-inline void CreateIndexRequest::set_has_conf() {
-  _has_bits_[0] |= 0x00000002u;
-}
 inline void CreateIndexRequest::clear_has_conf() {
-  _has_bits_[0] &= ~0x00000002u;
+  _has_bits_[0] &= ~0x00000001u;
 }
 inline const ::elasticfaiss::IndexConf& CreateIndexRequest::_internal_conf() const {
   return *conf_;
@@ -3854,81 +3689,15 @@ inline void CreateIndexResponse::set_allocated_error(::std::string* error) {
 
 // DeleteIndexRequest
 
-// required string cluster = 1;
-inline bool DeleteIndexRequest::has_cluster() const {
+// required string index_name = 1;
+inline bool DeleteIndexRequest::has_index_name() const {
   return (_has_bits_[0] & 0x00000001u) != 0;
 }
-inline void DeleteIndexRequest::set_has_cluster() {
+inline void DeleteIndexRequest::set_has_index_name() {
   _has_bits_[0] |= 0x00000001u;
 }
-inline void DeleteIndexRequest::clear_has_cluster() {
-  _has_bits_[0] &= ~0x00000001u;
-}
-inline void DeleteIndexRequest::clear_cluster() {
-  cluster_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  clear_has_cluster();
-}
-inline const ::std::string& DeleteIndexRequest::cluster() const {
-  // @@protoc_insertion_point(field_get:elasticfaiss.DeleteIndexRequest.cluster)
-  return cluster_.GetNoArena();
-}
-inline void DeleteIndexRequest::set_cluster(const ::std::string& value) {
-  set_has_cluster();
-  cluster_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
-  // @@protoc_insertion_point(field_set:elasticfaiss.DeleteIndexRequest.cluster)
-}
-#if LANG_CXX11
-inline void DeleteIndexRequest::set_cluster(::std::string&& value) {
-  set_has_cluster();
-  cluster_.SetNoArena(
-    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
-  // @@protoc_insertion_point(field_set_rvalue:elasticfaiss.DeleteIndexRequest.cluster)
-}
-#endif
-inline void DeleteIndexRequest::set_cluster(const char* value) {
-  GOOGLE_DCHECK(value != NULL);
-  set_has_cluster();
-  cluster_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
-  // @@protoc_insertion_point(field_set_char:elasticfaiss.DeleteIndexRequest.cluster)
-}
-inline void DeleteIndexRequest::set_cluster(const char* value, size_t size) {
-  set_has_cluster();
-  cluster_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
-      ::std::string(reinterpret_cast<const char*>(value), size));
-  // @@protoc_insertion_point(field_set_pointer:elasticfaiss.DeleteIndexRequest.cluster)
-}
-inline ::std::string* DeleteIndexRequest::mutable_cluster() {
-  set_has_cluster();
-  // @@protoc_insertion_point(field_mutable:elasticfaiss.DeleteIndexRequest.cluster)
-  return cluster_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-}
-inline ::std::string* DeleteIndexRequest::release_cluster() {
-  // @@protoc_insertion_point(field_release:elasticfaiss.DeleteIndexRequest.cluster)
-  if (!has_cluster()) {
-    return NULL;
-  }
-  clear_has_cluster();
-  return cluster_.ReleaseNonDefaultNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-}
-inline void DeleteIndexRequest::set_allocated_cluster(::std::string* cluster) {
-  if (cluster != NULL) {
-    set_has_cluster();
-  } else {
-    clear_has_cluster();
-  }
-  cluster_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), cluster);
-  // @@protoc_insertion_point(field_set_allocated:elasticfaiss.DeleteIndexRequest.cluster)
-}
-
-// required string index_name = 2;
-inline bool DeleteIndexRequest::has_index_name() const {
-  return (_has_bits_[0] & 0x00000002u) != 0;
-}
-inline void DeleteIndexRequest::set_has_index_name() {
-  _has_bits_[0] |= 0x00000002u;
-}
 inline void DeleteIndexRequest::clear_has_index_name() {
-  _has_bits_[0] &= ~0x00000002u;
+  _has_bits_[0] &= ~0x00000001u;
 }
 inline void DeleteIndexRequest::clear_index_name() {
   index_name_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
@@ -4150,81 +3919,15 @@ inline void DeleteIndexResponse::set_allocated_error(::std::string* error) {
 
 // UpdateIndexRequest
 
-// required string cluster = 1;
-inline bool UpdateIndexRequest::has_cluster() const {
+// required .elasticfaiss.IndexConf conf = 1;
+inline bool UpdateIndexRequest::has_conf() const {
   return (_has_bits_[0] & 0x00000001u) != 0;
 }
-inline void UpdateIndexRequest::set_has_cluster() {
+inline void UpdateIndexRequest::set_has_conf() {
   _has_bits_[0] |= 0x00000001u;
 }
-inline void UpdateIndexRequest::clear_has_cluster() {
-  _has_bits_[0] &= ~0x00000001u;
-}
-inline void UpdateIndexRequest::clear_cluster() {
-  cluster_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  clear_has_cluster();
-}
-inline const ::std::string& UpdateIndexRequest::cluster() const {
-  // @@protoc_insertion_point(field_get:elasticfaiss.UpdateIndexRequest.cluster)
-  return cluster_.GetNoArena();
-}
-inline void UpdateIndexRequest::set_cluster(const ::std::string& value) {
-  set_has_cluster();
-  cluster_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
-  // @@protoc_insertion_point(field_set:elasticfaiss.UpdateIndexRequest.cluster)
-}
-#if LANG_CXX11
-inline void UpdateIndexRequest::set_cluster(::std::string&& value) {
-  set_has_cluster();
-  cluster_.SetNoArena(
-    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
-  // @@protoc_insertion_point(field_set_rvalue:elasticfaiss.UpdateIndexRequest.cluster)
-}
-#endif
-inline void UpdateIndexRequest::set_cluster(const char* value) {
-  GOOGLE_DCHECK(value != NULL);
-  set_has_cluster();
-  cluster_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
-  // @@protoc_insertion_point(field_set_char:elasticfaiss.UpdateIndexRequest.cluster)
-}
-inline void UpdateIndexRequest::set_cluster(const char* value, size_t size) {
-  set_has_cluster();
-  cluster_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
-      ::std::string(reinterpret_cast<const char*>(value), size));
-  // @@protoc_insertion_point(field_set_pointer:elasticfaiss.UpdateIndexRequest.cluster)
-}
-inline ::std::string* UpdateIndexRequest::mutable_cluster() {
-  set_has_cluster();
-  // @@protoc_insertion_point(field_mutable:elasticfaiss.UpdateIndexRequest.cluster)
-  return cluster_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-}
-inline ::std::string* UpdateIndexRequest::release_cluster() {
-  // @@protoc_insertion_point(field_release:elasticfaiss.UpdateIndexRequest.cluster)
-  if (!has_cluster()) {
-    return NULL;
-  }
-  clear_has_cluster();
-  return cluster_.ReleaseNonDefaultNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-}
-inline void UpdateIndexRequest::set_allocated_cluster(::std::string* cluster) {
-  if (cluster != NULL) {
-    set_has_cluster();
-  } else {
-    clear_has_cluster();
-  }
-  cluster_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), cluster);
-  // @@protoc_insertion_point(field_set_allocated:elasticfaiss.UpdateIndexRequest.cluster)
-}
-
-// required .elasticfaiss.IndexConf conf = 2;
-inline bool UpdateIndexRequest::has_conf() const {
-  return (_has_bits_[0] & 0x00000002u) != 0;
-}
-inline void UpdateIndexRequest::set_has_conf() {
-  _has_bits_[0] |= 0x00000002u;
-}
 inline void UpdateIndexRequest::clear_has_conf() {
-  _has_bits_[0] &= ~0x00000002u;
+  _has_bits_[0] &= ~0x00000001u;
 }
 inline const ::elasticfaiss::IndexConf& UpdateIndexRequest::_internal_conf() const {
   return *conf_;
@@ -4433,6 +4136,8 @@ inline void UpdateIndexResponse::set_allocated_error(::std::string* error) {
 #ifdef __GNUC__
   #pragma GCC diagnostic pop
 #endif  // __GNUC__
+// -------------------------------------------------------------------
+
 // -------------------------------------------------------------------
 
 // -------------------------------------------------------------------

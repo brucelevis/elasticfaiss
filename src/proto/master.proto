@@ -4,6 +4,11 @@ option cc_generic_services = true;
 
 import "shard.proto";
 
+
+message ClusterSettings{
+   
+}
+
 enum WorkNodeState{
     WNODE_ACTIVE  = 1; 
     WNODE_TIMEOUT = 2;
@@ -18,32 +23,31 @@ message WorkNode{
 }
 
 message ClusterState{
-    optional string name = 1;
-    optional int64  update_ms = 2;
-    repeated WorkNode nodes = 3; 
+    optional int64  update_ms = 1;
+    repeated WorkNode nodes = 2; 
 }
 
 message MasterSnapshot{
-    repeated  ClusterState states = 1;
+    optional  ClusterState state = 1;
+    repeated  IndexConf index = 2;
 }
 
 message BootstrapRequest {
-    required string cluster   = 1;
-    required string node_peer = 2;
-    optional int64  boot_ms   = 3;
+    required string node_peer = 1;
+    optional int64  boot_ms   = 2;
 };
 
 message BootstrapResponse {
     required bool success = 1;
     optional string redirect = 2;
-    repeated WorkNode nodes = 3;    
+    repeated WorkNode nodes = 3;   
+    repeated IndexShardConf shards = 4; 
 };
 
 message NodeHeartbeatRequest {
-    required string cluster    = 1;
-    required string node_peer  = 2;
-    optional int64  active_ms  = 3;
-    repeated Shard  shards     = 4;
+    required string node_peer  = 1;
+    optional int64  active_ms  = 2;
+    repeated Shard  shards     = 3;
 };
 
 message NodeHeartbeatResponse {
@@ -62,11 +66,8 @@ message GetClusterStateResponse{
     optional ClusterState state   = 3;
 };
 
-
-
 message CreateIndexRequest {
-    required  string cluster    = 1;
-    required  IndexConf conf = 2;
+    required  IndexConf conf = 1;
 };
 
 message CreateIndexResponse {
@@ -76,8 +77,7 @@ message CreateIndexResponse {
 };
 
 message DeleteIndexRequest {
-    required  string cluster    = 1;
-    required string index_name = 2;
+    required string index_name = 1;
 };
 
 message DeleteIndexResponse {
@@ -87,8 +87,7 @@ message DeleteIndexResponse {
 };
 
 message UpdateIndexRequest {
-    required  string cluster    = 1;
-    required  IndexConf conf    = 2;
+    required  IndexConf conf    = 1;
 };
 
 message UpdateIndexResponse {

@@ -20,11 +20,8 @@
 // @@protoc_insertion_point(includes)
 
 namespace protobuf_shard_2eproto {
-extern PROTOBUF_INTERNAL_EXPORT_protobuf_shard_2eproto ::google::protobuf::internal::SCCInfo<0> scc_info_IndexConf;
+extern PROTOBUF_INTERNAL_EXPORT_protobuf_shard_2eproto ::google::protobuf::internal::SCCInfo<1> scc_info_IndexShardConf;
 }  // namespace protobuf_shard_2eproto
-namespace protobuf_work_5fnode_2eproto {
-extern PROTOBUF_INTERNAL_EXPORT_protobuf_work_5fnode_2eproto ::google::protobuf::internal::SCCInfo<1> scc_info_CreateShardRequest;
-}  // namespace protobuf_work_5fnode_2eproto
 namespace elasticfaiss {
 class CreateShardRequestDefaultTypeInternal {
  public:
@@ -36,11 +33,6 @@ class CreateShardResponseDefaultTypeInternal {
   ::google::protobuf::internal::ExplicitlyConstructed<CreateShardResponse>
       _instance;
 } _CreateShardResponse_default_instance_;
-class WorkNodeInitConfDefaultTypeInternal {
- public:
-  ::google::protobuf::internal::ExplicitlyConstructed<WorkNodeInitConf>
-      _instance;
-} _WorkNodeInitConf_default_instance_;
 class DeleteShardRequestDefaultTypeInternal {
  public:
   ::google::protobuf::internal::ExplicitlyConstructed<DeleteShardRequest>
@@ -66,7 +58,7 @@ static void InitDefaultsCreateShardRequest() {
 
 ::google::protobuf::internal::SCCInfo<1> scc_info_CreateShardRequest =
     {{ATOMIC_VAR_INIT(::google::protobuf::internal::SCCInfoBase::kUninitialized), 1, InitDefaultsCreateShardRequest}, {
-      &protobuf_shard_2eproto::scc_info_IndexConf.base,}};
+      &protobuf_shard_2eproto::scc_info_IndexShardConf.base,}};
 
 static void InitDefaultsCreateShardResponse() {
   GOOGLE_PROTOBUF_VERIFY_VERSION;
@@ -81,21 +73,6 @@ static void InitDefaultsCreateShardResponse() {
 
 ::google::protobuf::internal::SCCInfo<0> scc_info_CreateShardResponse =
     {{ATOMIC_VAR_INIT(::google::protobuf::internal::SCCInfoBase::kUninitialized), 0, InitDefaultsCreateShardResponse}, {}};
-
-static void InitDefaultsWorkNodeInitConf() {
-  GOOGLE_PROTOBUF_VERIFY_VERSION;
-
-  {
-    void* ptr = &::elasticfaiss::_WorkNodeInitConf_default_instance_;
-    new (ptr) ::elasticfaiss::WorkNodeInitConf();
-    ::google::protobuf::internal::OnShutdownDestroyMessage(ptr);
-  }
-  ::elasticfaiss::WorkNodeInitConf::InitAsDefaultInstance();
-}
-
-::google::protobuf::internal::SCCInfo<1> scc_info_WorkNodeInitConf =
-    {{ATOMIC_VAR_INIT(::google::protobuf::internal::SCCInfoBase::kUninitialized), 1, InitDefaultsWorkNodeInitConf}, {
-      &protobuf_work_5fnode_2eproto::scc_info_CreateShardRequest.base,}};
 
 static void InitDefaultsDeleteShardRequest() {
   GOOGLE_PROTOBUF_VERIFY_VERSION;
@@ -128,12 +105,11 @@ static void InitDefaultsDeleteShardResponse() {
 void InitDefaults() {
   ::google::protobuf::internal::InitSCC(&scc_info_CreateShardRequest.base);
   ::google::protobuf::internal::InitSCC(&scc_info_CreateShardResponse.base);
-  ::google::protobuf::internal::InitSCC(&scc_info_WorkNodeInitConf.base);
   ::google::protobuf::internal::InitSCC(&scc_info_DeleteShardRequest.base);
   ::google::protobuf::internal::InitSCC(&scc_info_DeleteShardResponse.base);
 }
 
-::google::protobuf::Metadata file_level_metadata[5];
+::google::protobuf::Metadata file_level_metadata[4];
 const ::google::protobuf::ServiceDescriptor* file_level_service_descriptors[1];
 
 const ::google::protobuf::uint32 TableStruct::offsets[] GOOGLE_PROTOBUF_ATTRIBUTE_SECTION_VARIABLE(protodesc_cold) = {
@@ -142,14 +118,8 @@ const ::google::protobuf::uint32 TableStruct::offsets[] GOOGLE_PROTOBUF_ATTRIBUT
   ~0u,  // no _extensions_
   ~0u,  // no _oneof_case_
   ~0u,  // no _weak_field_map_
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::elasticfaiss::CreateShardRequest, cluster_),
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::elasticfaiss::CreateShardRequest, conf_),
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::elasticfaiss::CreateShardRequest, idx_),
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::elasticfaiss::CreateShardRequest, shard_nodes_),
   0,
-  2,
-  3,
-  1,
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::elasticfaiss::CreateShardResponse, _has_bits_),
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::elasticfaiss::CreateShardResponse, _internal_metadata_),
   ~0u,  // no _extensions_
@@ -159,24 +129,15 @@ const ::google::protobuf::uint32 TableStruct::offsets[] GOOGLE_PROTOBUF_ATTRIBUT
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::elasticfaiss::CreateShardResponse, error_),
   1,
   0,
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::elasticfaiss::WorkNodeInitConf, _has_bits_),
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::elasticfaiss::WorkNodeInitConf, _internal_metadata_),
-  ~0u,  // no _extensions_
-  ~0u,  // no _oneof_case_
-  ~0u,  // no _weak_field_map_
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::elasticfaiss::WorkNodeInitConf, shards_),
-  ~0u,
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::elasticfaiss::DeleteShardRequest, _has_bits_),
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::elasticfaiss::DeleteShardRequest, _internal_metadata_),
   ~0u,  // no _extensions_
   ~0u,  // no _oneof_case_
   ~0u,  // no _weak_field_map_
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::elasticfaiss::DeleteShardRequest, cluster_),
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::elasticfaiss::DeleteShardRequest, name_),
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::elasticfaiss::DeleteShardRequest, idx_),
   0,
   1,
-  2,
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::elasticfaiss::DeleteShardResponse, _has_bits_),
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::elasticfaiss::DeleteShardResponse, _internal_metadata_),
   ~0u,  // no _extensions_
@@ -188,17 +149,15 @@ const ::google::protobuf::uint32 TableStruct::offsets[] GOOGLE_PROTOBUF_ATTRIBUT
   0,
 };
 static const ::google::protobuf::internal::MigrationSchema schemas[] GOOGLE_PROTOBUF_ATTRIBUTE_SECTION_VARIABLE(protodesc_cold) = {
-  { 0, 9, sizeof(::elasticfaiss::CreateShardRequest)},
-  { 13, 20, sizeof(::elasticfaiss::CreateShardResponse)},
-  { 22, 28, sizeof(::elasticfaiss::WorkNodeInitConf)},
-  { 29, 37, sizeof(::elasticfaiss::DeleteShardRequest)},
-  { 40, 47, sizeof(::elasticfaiss::DeleteShardResponse)},
+  { 0, 6, sizeof(::elasticfaiss::CreateShardRequest)},
+  { 7, 14, sizeof(::elasticfaiss::CreateShardResponse)},
+  { 16, 23, sizeof(::elasticfaiss::DeleteShardRequest)},
+  { 25, 32, sizeof(::elasticfaiss::DeleteShardResponse)},
 };
 
 static ::google::protobuf::Message const * const file_default_instances[] = {
   reinterpret_cast<const ::google::protobuf::Message*>(&::elasticfaiss::_CreateShardRequest_default_instance_),
   reinterpret_cast<const ::google::protobuf::Message*>(&::elasticfaiss::_CreateShardResponse_default_instance_),
-  reinterpret_cast<const ::google::protobuf::Message*>(&::elasticfaiss::_WorkNodeInitConf_default_instance_),
   reinterpret_cast<const ::google::protobuf::Message*>(&::elasticfaiss::_DeleteShardRequest_default_instance_),
   reinterpret_cast<const ::google::protobuf::Message*>(&::elasticfaiss::_DeleteShardResponse_default_instance_),
 };
@@ -218,30 +177,27 @@ void protobuf_AssignDescriptorsOnce() {
 void protobuf_RegisterTypes(const ::std::string&) GOOGLE_PROTOBUF_ATTRIBUTE_COLD;
 void protobuf_RegisterTypes(const ::std::string&) {
   protobuf_AssignDescriptorsOnce();
-  ::google::protobuf::internal::RegisterAllTypes(file_level_metadata, 5);
+  ::google::protobuf::internal::RegisterAllTypes(file_level_metadata, 4);
 }
 
 void AddDescriptorsImpl() {
   InitDefaults();
   static const char descriptor[] GOOGLE_PROTOBUF_ATTRIBUTE_SECTION_VARIABLE(protodesc_cold) = {
       "\n\017work_node.proto\022\014elasticfaiss\032\013shard.p"
-      "roto\"n\n\022CreateShardRequest\022\017\n\007cluster\030\001 "
-      "\002(\t\022%\n\004conf\030\002 \002(\0132\027.elasticfaiss.IndexCo"
-      "nf\022\013\n\003idx\030\003 \002(\005\022\023\n\013shard_nodes\030\004 \002(\t\"5\n\023"
-      "CreateShardResponse\022\017\n\007success\030\001 \002(\010\022\r\n\005"
-      "error\030\003 \001(\t\"D\n\020WorkNodeInitConf\0220\n\006shard"
-      "s\030\001 \003(\0132 .elasticfaiss.CreateShardReques"
-      "t\"@\n\022DeleteShardRequest\022\017\n\007cluster\030\001 \002(\t"
-      "\022\014\n\004name\030\002 \002(\t\022\013\n\003idx\030\003 \002(\005\"5\n\023DeleteSha"
-      "rdResponse\022\017\n\007success\030\001 \002(\010\022\r\n\005error\030\003 \001"
-      "(\t2\273\001\n\017WorkNodeService\022S\n\014create_shard\022 "
-      ".elasticfaiss.CreateShardRequest\032!.elast"
-      "icfaiss.CreateShardResponse\022S\n\014delete_sh"
-      "ard\022 .elasticfaiss.DeleteShardRequest\032!."
-      "elasticfaiss.DeleteShardResponseB\003\200\001\001"
+      "roto\"@\n\022CreateShardRequest\022*\n\004conf\030\001 \002(\013"
+      "2\034.elasticfaiss.IndexShardConf\"5\n\023Create"
+      "ShardResponse\022\017\n\007success\030\001 \002(\010\022\r\n\005error\030"
+      "\003 \001(\t\"/\n\022DeleteShardRequest\022\014\n\004name\030\001 \002("
+      "\t\022\013\n\003idx\030\002 \002(\005\"5\n\023DeleteShardResponse\022\017\n"
+      "\007success\030\001 \002(\010\022\r\n\005error\030\003 \001(\t2\273\001\n\017WorkNo"
+      "deService\022S\n\014create_shard\022 .elasticfaiss"
+      ".CreateShardRequest\032!.elasticfaiss.Creat"
+      "eShardResponse\022S\n\014delete_shard\022 .elastic"
+      "faiss.DeleteShardRequest\032!.elasticfaiss."
+      "DeleteShardResponseB\003\200\001\001"
   };
   ::google::protobuf::DescriptorPool::InternalAddGeneratedFile(
-      descriptor, 597);
+      descriptor, 464);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "work_node.proto", &protobuf_RegisterTypes);
   ::protobuf_shard_2eproto::AddDescriptors();
@@ -263,18 +219,15 @@ namespace elasticfaiss {
 // ===================================================================
 
 void CreateShardRequest::InitAsDefaultInstance() {
-  ::elasticfaiss::_CreateShardRequest_default_instance_._instance.get_mutable()->conf_ = const_cast< ::elasticfaiss::IndexConf*>(
-      ::elasticfaiss::IndexConf::internal_default_instance());
+  ::elasticfaiss::_CreateShardRequest_default_instance_._instance.get_mutable()->conf_ = const_cast< ::elasticfaiss::IndexShardConf*>(
+      ::elasticfaiss::IndexShardConf::internal_default_instance());
 }
 void CreateShardRequest::clear_conf() {
   if (conf_ != NULL) conf_->Clear();
   clear_has_conf();
 }
 #if !defined(_MSC_VER) || _MSC_VER >= 1900
-const int CreateShardRequest::kClusterFieldNumber;
 const int CreateShardRequest::kConfFieldNumber;
-const int CreateShardRequest::kIdxFieldNumber;
-const int CreateShardRequest::kShardNodesFieldNumber;
 #endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
 
 CreateShardRequest::CreateShardRequest()
@@ -289,29 +242,16 @@ CreateShardRequest::CreateShardRequest(const CreateShardRequest& from)
       _internal_metadata_(NULL),
       _has_bits_(from._has_bits_) {
   _internal_metadata_.MergeFrom(from._internal_metadata_);
-  cluster_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  if (from.has_cluster()) {
-    cluster_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.cluster_);
-  }
-  shard_nodes_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  if (from.has_shard_nodes()) {
-    shard_nodes_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.shard_nodes_);
-  }
   if (from.has_conf()) {
-    conf_ = new ::elasticfaiss::IndexConf(*from.conf_);
+    conf_ = new ::elasticfaiss::IndexShardConf(*from.conf_);
   } else {
     conf_ = NULL;
   }
-  idx_ = from.idx_;
   // @@protoc_insertion_point(copy_constructor:elasticfaiss.CreateShardRequest)
 }
 
 void CreateShardRequest::SharedCtor() {
-  cluster_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  shard_nodes_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  ::memset(&conf_, 0, static_cast<size_t>(
-      reinterpret_cast<char*>(&idx_) -
-      reinterpret_cast<char*>(&conf_)) + sizeof(idx_));
+  conf_ = NULL;
 }
 
 CreateShardRequest::~CreateShardRequest() {
@@ -320,8 +260,6 @@ CreateShardRequest::~CreateShardRequest() {
 }
 
 void CreateShardRequest::SharedDtor() {
-  cluster_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  shard_nodes_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   if (this != internal_default_instance()) delete conf_;
 }
 
@@ -346,19 +284,10 @@ void CreateShardRequest::Clear() {
   (void) cached_has_bits;
 
   cached_has_bits = _has_bits_[0];
-  if (cached_has_bits & 7u) {
-    if (cached_has_bits & 0x00000001u) {
-      cluster_.ClearNonDefaultToEmptyNoArena();
-    }
-    if (cached_has_bits & 0x00000002u) {
-      shard_nodes_.ClearNonDefaultToEmptyNoArena();
-    }
-    if (cached_has_bits & 0x00000004u) {
-      GOOGLE_DCHECK(conf_ != NULL);
-      conf_->Clear();
-    }
+  if (cached_has_bits & 0x00000001u) {
+    GOOGLE_DCHECK(conf_ != NULL);
+    conf_->Clear();
   }
-  idx_ = 0;
   _has_bits_.Clear();
   _internal_metadata_.Clear();
 }
@@ -373,58 +302,12 @@ bool CreateShardRequest::MergePartialFromCodedStream(
     tag = p.first;
     if (!p.second) goto handle_unusual;
     switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
-      // required string cluster = 1;
+      // required .elasticfaiss.IndexShardConf conf = 1;
       case 1: {
         if (static_cast< ::google::protobuf::uint8>(tag) ==
             static_cast< ::google::protobuf::uint8>(10u /* 10 & 0xFF */)) {
-          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
-                input, this->mutable_cluster()));
-          ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
-            this->cluster().data(), static_cast<int>(this->cluster().length()),
-            ::google::protobuf::internal::WireFormat::PARSE,
-            "elasticfaiss.CreateShardRequest.cluster");
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
-      // required .elasticfaiss.IndexConf conf = 2;
-      case 2: {
-        if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(18u /* 18 & 0xFF */)) {
           DO_(::google::protobuf::internal::WireFormatLite::ReadMessage(
                input, mutable_conf()));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
-      // required int32 idx = 3;
-      case 3: {
-        if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(24u /* 24 & 0xFF */)) {
-          set_has_idx();
-          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
-                 input, &idx_)));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
-      // required string shard_nodes = 4;
-      case 4: {
-        if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(34u /* 34 & 0xFF */)) {
-          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
-                input, this->mutable_shard_nodes()));
-          ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
-            this->shard_nodes().data(), static_cast<int>(this->shard_nodes().length()),
-            ::google::protobuf::internal::WireFormat::PARSE,
-            "elasticfaiss.CreateShardRequest.shard_nodes");
         } else {
           goto handle_unusual;
         }
@@ -458,35 +341,10 @@ void CreateShardRequest::SerializeWithCachedSizes(
   (void) cached_has_bits;
 
   cached_has_bits = _has_bits_[0];
-  // required string cluster = 1;
+  // required .elasticfaiss.IndexShardConf conf = 1;
   if (cached_has_bits & 0x00000001u) {
-    ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
-      this->cluster().data(), static_cast<int>(this->cluster().length()),
-      ::google::protobuf::internal::WireFormat::SERIALIZE,
-      "elasticfaiss.CreateShardRequest.cluster");
-    ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
-      1, this->cluster(), output);
-  }
-
-  // required .elasticfaiss.IndexConf conf = 2;
-  if (cached_has_bits & 0x00000004u) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
-      2, this->_internal_conf(), output);
-  }
-
-  // required int32 idx = 3;
-  if (cached_has_bits & 0x00000008u) {
-    ::google::protobuf::internal::WireFormatLite::WriteInt32(3, this->idx(), output);
-  }
-
-  // required string shard_nodes = 4;
-  if (cached_has_bits & 0x00000002u) {
-    ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
-      this->shard_nodes().data(), static_cast<int>(this->shard_nodes().length()),
-      ::google::protobuf::internal::WireFormat::SERIALIZE,
-      "elasticfaiss.CreateShardRequest.shard_nodes");
-    ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
-      4, this->shard_nodes(), output);
+      1, this->_internal_conf(), output);
   }
 
   if (_internal_metadata_.have_unknown_fields()) {
@@ -504,38 +362,11 @@ void CreateShardRequest::SerializeWithCachedSizes(
   (void) cached_has_bits;
 
   cached_has_bits = _has_bits_[0];
-  // required string cluster = 1;
+  // required .elasticfaiss.IndexShardConf conf = 1;
   if (cached_has_bits & 0x00000001u) {
-    ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
-      this->cluster().data(), static_cast<int>(this->cluster().length()),
-      ::google::protobuf::internal::WireFormat::SERIALIZE,
-      "elasticfaiss.CreateShardRequest.cluster");
-    target =
-      ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
-        1, this->cluster(), target);
-  }
-
-  // required .elasticfaiss.IndexConf conf = 2;
-  if (cached_has_bits & 0x00000004u) {
     target = ::google::protobuf::internal::WireFormatLite::
       InternalWriteMessageToArray(
-        2, this->_internal_conf(), deterministic, target);
-  }
-
-  // required int32 idx = 3;
-  if (cached_has_bits & 0x00000008u) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(3, this->idx(), target);
-  }
-
-  // required string shard_nodes = 4;
-  if (cached_has_bits & 0x00000002u) {
-    ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
-      this->shard_nodes().data(), static_cast<int>(this->shard_nodes().length()),
-      ::google::protobuf::internal::WireFormat::SERIALIZE,
-      "elasticfaiss.CreateShardRequest.shard_nodes");
-    target =
-      ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
-        4, this->shard_nodes(), target);
+        1, this->_internal_conf(), deterministic, target);
   }
 
   if (_internal_metadata_.have_unknown_fields()) {
@@ -546,40 +377,6 @@ void CreateShardRequest::SerializeWithCachedSizes(
   return target;
 }
 
-size_t CreateShardRequest::RequiredFieldsByteSizeFallback() const {
-// @@protoc_insertion_point(required_fields_byte_size_fallback_start:elasticfaiss.CreateShardRequest)
-  size_t total_size = 0;
-
-  if (has_cluster()) {
-    // required string cluster = 1;
-    total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::StringSize(
-        this->cluster());
-  }
-
-  if (has_shard_nodes()) {
-    // required string shard_nodes = 4;
-    total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::StringSize(
-        this->shard_nodes());
-  }
-
-  if (has_conf()) {
-    // required .elasticfaiss.IndexConf conf = 2;
-    total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::MessageSize(
-        *conf_);
-  }
-
-  if (has_idx()) {
-    // required int32 idx = 3;
-    total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::Int32Size(
-        this->idx());
-  }
-
-  return total_size;
-}
 size_t CreateShardRequest::ByteSizeLong() const {
 // @@protoc_insertion_point(message_byte_size_start:elasticfaiss.CreateShardRequest)
   size_t total_size = 0;
@@ -589,29 +386,11 @@ size_t CreateShardRequest::ByteSizeLong() const {
       ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
         _internal_metadata_.unknown_fields());
   }
-  if (((_has_bits_[0] & 0x0000000f) ^ 0x0000000f) == 0) {  // All required fields are present.
-    // required string cluster = 1;
-    total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::StringSize(
-        this->cluster());
-
-    // required string shard_nodes = 4;
-    total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::StringSize(
-        this->shard_nodes());
-
-    // required .elasticfaiss.IndexConf conf = 2;
+  // required .elasticfaiss.IndexShardConf conf = 1;
+  if (has_conf()) {
     total_size += 1 +
       ::google::protobuf::internal::WireFormatLite::MessageSize(
         *conf_);
-
-    // required int32 idx = 3;
-    total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::Int32Size(
-        this->idx());
-
-  } else {
-    total_size += RequiredFieldsByteSizeFallback();
   }
   int cached_size = ::google::protobuf::internal::ToCachedSize(total_size);
   SetCachedSize(cached_size);
@@ -640,23 +419,8 @@ void CreateShardRequest::MergeFrom(const CreateShardRequest& from) {
   ::google::protobuf::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
-  cached_has_bits = from._has_bits_[0];
-  if (cached_has_bits & 15u) {
-    if (cached_has_bits & 0x00000001u) {
-      set_has_cluster();
-      cluster_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.cluster_);
-    }
-    if (cached_has_bits & 0x00000002u) {
-      set_has_shard_nodes();
-      shard_nodes_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.shard_nodes_);
-    }
-    if (cached_has_bits & 0x00000004u) {
-      mutable_conf()->::elasticfaiss::IndexConf::MergeFrom(from.conf());
-    }
-    if (cached_has_bits & 0x00000008u) {
-      idx_ = from.idx_;
-    }
-    _has_bits_[0] |= cached_has_bits;
+  if (from.has_conf()) {
+    mutable_conf()->::elasticfaiss::IndexShardConf::MergeFrom(from.conf());
   }
 }
 
@@ -675,7 +439,7 @@ void CreateShardRequest::CopyFrom(const CreateShardRequest& from) {
 }
 
 bool CreateShardRequest::IsInitialized() const {
-  if ((_has_bits_[0] & 0x0000000f) != 0x0000000f) return false;
+  if ((_has_bits_[0] & 0x00000001) != 0x00000001) return false;
   if (has_conf()) {
     if (!this->conf_->IsInitialized()) return false;
   }
@@ -688,12 +452,7 @@ void CreateShardRequest::Swap(CreateShardRequest* other) {
 }
 void CreateShardRequest::InternalSwap(CreateShardRequest* other) {
   using std::swap;
-  cluster_.Swap(&other->cluster_, &::google::protobuf::internal::GetEmptyStringAlreadyInited(),
-    GetArenaNoVirtual());
-  shard_nodes_.Swap(&other->shard_nodes_, &::google::protobuf::internal::GetEmptyStringAlreadyInited(),
-    GetArenaNoVirtual());
   swap(conf_, other->conf_);
-  swap(idx_, other->idx_);
   swap(_has_bits_[0], other->_has_bits_[0]);
   _internal_metadata_.Swap(&other->_internal_metadata_);
 }
@@ -997,243 +756,9 @@ void CreateShardResponse::InternalSwap(CreateShardResponse* other) {
 
 // ===================================================================
 
-void WorkNodeInitConf::InitAsDefaultInstance() {
-}
-#if !defined(_MSC_VER) || _MSC_VER >= 1900
-const int WorkNodeInitConf::kShardsFieldNumber;
-#endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
-
-WorkNodeInitConf::WorkNodeInitConf()
-  : ::google::protobuf::Message(), _internal_metadata_(NULL) {
-  ::google::protobuf::internal::InitSCC(
-      &protobuf_work_5fnode_2eproto::scc_info_WorkNodeInitConf.base);
-  SharedCtor();
-  // @@protoc_insertion_point(constructor:elasticfaiss.WorkNodeInitConf)
-}
-WorkNodeInitConf::WorkNodeInitConf(const WorkNodeInitConf& from)
-  : ::google::protobuf::Message(),
-      _internal_metadata_(NULL),
-      _has_bits_(from._has_bits_),
-      shards_(from.shards_) {
-  _internal_metadata_.MergeFrom(from._internal_metadata_);
-  // @@protoc_insertion_point(copy_constructor:elasticfaiss.WorkNodeInitConf)
-}
-
-void WorkNodeInitConf::SharedCtor() {
-}
-
-WorkNodeInitConf::~WorkNodeInitConf() {
-  // @@protoc_insertion_point(destructor:elasticfaiss.WorkNodeInitConf)
-  SharedDtor();
-}
-
-void WorkNodeInitConf::SharedDtor() {
-}
-
-void WorkNodeInitConf::SetCachedSize(int size) const {
-  _cached_size_.Set(size);
-}
-const ::google::protobuf::Descriptor* WorkNodeInitConf::descriptor() {
-  ::protobuf_work_5fnode_2eproto::protobuf_AssignDescriptorsOnce();
-  return ::protobuf_work_5fnode_2eproto::file_level_metadata[kIndexInFileMessages].descriptor;
-}
-
-const WorkNodeInitConf& WorkNodeInitConf::default_instance() {
-  ::google::protobuf::internal::InitSCC(&protobuf_work_5fnode_2eproto::scc_info_WorkNodeInitConf.base);
-  return *internal_default_instance();
-}
-
-
-void WorkNodeInitConf::Clear() {
-// @@protoc_insertion_point(message_clear_start:elasticfaiss.WorkNodeInitConf)
-  ::google::protobuf::uint32 cached_has_bits = 0;
-  // Prevent compiler warnings about cached_has_bits being unused
-  (void) cached_has_bits;
-
-  shards_.Clear();
-  _has_bits_.Clear();
-  _internal_metadata_.Clear();
-}
-
-bool WorkNodeInitConf::MergePartialFromCodedStream(
-    ::google::protobuf::io::CodedInputStream* input) {
-#define DO_(EXPRESSION) if (!GOOGLE_PREDICT_TRUE(EXPRESSION)) goto failure
-  ::google::protobuf::uint32 tag;
-  // @@protoc_insertion_point(parse_start:elasticfaiss.WorkNodeInitConf)
-  for (;;) {
-    ::std::pair<::google::protobuf::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(127u);
-    tag = p.first;
-    if (!p.second) goto handle_unusual;
-    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
-      // repeated .elasticfaiss.CreateShardRequest shards = 1;
-      case 1: {
-        if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(10u /* 10 & 0xFF */)) {
-          DO_(::google::protobuf::internal::WireFormatLite::ReadMessage(
-                input, add_shards()));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
-      default: {
-      handle_unusual:
-        if (tag == 0) {
-          goto success;
-        }
-        DO_(::google::protobuf::internal::WireFormat::SkipField(
-              input, tag, _internal_metadata_.mutable_unknown_fields()));
-        break;
-      }
-    }
-  }
-success:
-  // @@protoc_insertion_point(parse_success:elasticfaiss.WorkNodeInitConf)
-  return true;
-failure:
-  // @@protoc_insertion_point(parse_failure:elasticfaiss.WorkNodeInitConf)
-  return false;
-#undef DO_
-}
-
-void WorkNodeInitConf::SerializeWithCachedSizes(
-    ::google::protobuf::io::CodedOutputStream* output) const {
-  // @@protoc_insertion_point(serialize_start:elasticfaiss.WorkNodeInitConf)
-  ::google::protobuf::uint32 cached_has_bits = 0;
-  (void) cached_has_bits;
-
-  // repeated .elasticfaiss.CreateShardRequest shards = 1;
-  for (unsigned int i = 0,
-      n = static_cast<unsigned int>(this->shards_size()); i < n; i++) {
-    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
-      1,
-      this->shards(static_cast<int>(i)),
-      output);
-  }
-
-  if (_internal_metadata_.have_unknown_fields()) {
-    ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
-        _internal_metadata_.unknown_fields(), output);
-  }
-  // @@protoc_insertion_point(serialize_end:elasticfaiss.WorkNodeInitConf)
-}
-
-::google::protobuf::uint8* WorkNodeInitConf::InternalSerializeWithCachedSizesToArray(
-    bool deterministic, ::google::protobuf::uint8* target) const {
-  (void)deterministic; // Unused
-  // @@protoc_insertion_point(serialize_to_array_start:elasticfaiss.WorkNodeInitConf)
-  ::google::protobuf::uint32 cached_has_bits = 0;
-  (void) cached_has_bits;
-
-  // repeated .elasticfaiss.CreateShardRequest shards = 1;
-  for (unsigned int i = 0,
-      n = static_cast<unsigned int>(this->shards_size()); i < n; i++) {
-    target = ::google::protobuf::internal::WireFormatLite::
-      InternalWriteMessageToArray(
-        1, this->shards(static_cast<int>(i)), deterministic, target);
-  }
-
-  if (_internal_metadata_.have_unknown_fields()) {
-    target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
-        _internal_metadata_.unknown_fields(), target);
-  }
-  // @@protoc_insertion_point(serialize_to_array_end:elasticfaiss.WorkNodeInitConf)
-  return target;
-}
-
-size_t WorkNodeInitConf::ByteSizeLong() const {
-// @@protoc_insertion_point(message_byte_size_start:elasticfaiss.WorkNodeInitConf)
-  size_t total_size = 0;
-
-  if (_internal_metadata_.have_unknown_fields()) {
-    total_size +=
-      ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
-        _internal_metadata_.unknown_fields());
-  }
-  // repeated .elasticfaiss.CreateShardRequest shards = 1;
-  {
-    unsigned int count = static_cast<unsigned int>(this->shards_size());
-    total_size += 1UL * count;
-    for (unsigned int i = 0; i < count; i++) {
-      total_size +=
-        ::google::protobuf::internal::WireFormatLite::MessageSize(
-          this->shards(static_cast<int>(i)));
-    }
-  }
-
-  int cached_size = ::google::protobuf::internal::ToCachedSize(total_size);
-  SetCachedSize(cached_size);
-  return total_size;
-}
-
-void WorkNodeInitConf::MergeFrom(const ::google::protobuf::Message& from) {
-// @@protoc_insertion_point(generalized_merge_from_start:elasticfaiss.WorkNodeInitConf)
-  GOOGLE_DCHECK_NE(&from, this);
-  const WorkNodeInitConf* source =
-      ::google::protobuf::internal::DynamicCastToGenerated<const WorkNodeInitConf>(
-          &from);
-  if (source == NULL) {
-  // @@protoc_insertion_point(generalized_merge_from_cast_fail:elasticfaiss.WorkNodeInitConf)
-    ::google::protobuf::internal::ReflectionOps::Merge(from, this);
-  } else {
-  // @@protoc_insertion_point(generalized_merge_from_cast_success:elasticfaiss.WorkNodeInitConf)
-    MergeFrom(*source);
-  }
-}
-
-void WorkNodeInitConf::MergeFrom(const WorkNodeInitConf& from) {
-// @@protoc_insertion_point(class_specific_merge_from_start:elasticfaiss.WorkNodeInitConf)
-  GOOGLE_DCHECK_NE(&from, this);
-  _internal_metadata_.MergeFrom(from._internal_metadata_);
-  ::google::protobuf::uint32 cached_has_bits = 0;
-  (void) cached_has_bits;
-
-  shards_.MergeFrom(from.shards_);
-}
-
-void WorkNodeInitConf::CopyFrom(const ::google::protobuf::Message& from) {
-// @@protoc_insertion_point(generalized_copy_from_start:elasticfaiss.WorkNodeInitConf)
-  if (&from == this) return;
-  Clear();
-  MergeFrom(from);
-}
-
-void WorkNodeInitConf::CopyFrom(const WorkNodeInitConf& from) {
-// @@protoc_insertion_point(class_specific_copy_from_start:elasticfaiss.WorkNodeInitConf)
-  if (&from == this) return;
-  Clear();
-  MergeFrom(from);
-}
-
-bool WorkNodeInitConf::IsInitialized() const {
-  if (!::google::protobuf::internal::AllAreInitialized(this->shards())) return false;
-  return true;
-}
-
-void WorkNodeInitConf::Swap(WorkNodeInitConf* other) {
-  if (other == this) return;
-  InternalSwap(other);
-}
-void WorkNodeInitConf::InternalSwap(WorkNodeInitConf* other) {
-  using std::swap;
-  CastToBase(&shards_)->InternalSwap(CastToBase(&other->shards_));
-  swap(_has_bits_[0], other->_has_bits_[0]);
-  _internal_metadata_.Swap(&other->_internal_metadata_);
-}
-
-::google::protobuf::Metadata WorkNodeInitConf::GetMetadata() const {
-  protobuf_work_5fnode_2eproto::protobuf_AssignDescriptorsOnce();
-  return ::protobuf_work_5fnode_2eproto::file_level_metadata[kIndexInFileMessages];
-}
-
-
-// ===================================================================
-
 void DeleteShardRequest::InitAsDefaultInstance() {
 }
 #if !defined(_MSC_VER) || _MSC_VER >= 1900
-const int DeleteShardRequest::kClusterFieldNumber;
 const int DeleteShardRequest::kNameFieldNumber;
 const int DeleteShardRequest::kIdxFieldNumber;
 #endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
@@ -1250,10 +775,6 @@ DeleteShardRequest::DeleteShardRequest(const DeleteShardRequest& from)
       _internal_metadata_(NULL),
       _has_bits_(from._has_bits_) {
   _internal_metadata_.MergeFrom(from._internal_metadata_);
-  cluster_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  if (from.has_cluster()) {
-    cluster_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.cluster_);
-  }
   name_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   if (from.has_name()) {
     name_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.name_);
@@ -1263,7 +784,6 @@ DeleteShardRequest::DeleteShardRequest(const DeleteShardRequest& from)
 }
 
 void DeleteShardRequest::SharedCtor() {
-  cluster_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   name_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   idx_ = 0;
 }
@@ -1274,7 +794,6 @@ DeleteShardRequest::~DeleteShardRequest() {
 }
 
 void DeleteShardRequest::SharedDtor() {
-  cluster_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   name_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
 
@@ -1299,13 +818,8 @@ void DeleteShardRequest::Clear() {
   (void) cached_has_bits;
 
   cached_has_bits = _has_bits_[0];
-  if (cached_has_bits & 3u) {
-    if (cached_has_bits & 0x00000001u) {
-      cluster_.ClearNonDefaultToEmptyNoArena();
-    }
-    if (cached_has_bits & 0x00000002u) {
-      name_.ClearNonDefaultToEmptyNoArena();
-    }
+  if (cached_has_bits & 0x00000001u) {
+    name_.ClearNonDefaultToEmptyNoArena();
   }
   idx_ = 0;
   _has_bits_.Clear();
@@ -1322,26 +836,10 @@ bool DeleteShardRequest::MergePartialFromCodedStream(
     tag = p.first;
     if (!p.second) goto handle_unusual;
     switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
-      // required string cluster = 1;
+      // required string name = 1;
       case 1: {
         if (static_cast< ::google::protobuf::uint8>(tag) ==
             static_cast< ::google::protobuf::uint8>(10u /* 10 & 0xFF */)) {
-          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
-                input, this->mutable_cluster()));
-          ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
-            this->cluster().data(), static_cast<int>(this->cluster().length()),
-            ::google::protobuf::internal::WireFormat::PARSE,
-            "elasticfaiss.DeleteShardRequest.cluster");
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
-      // required string name = 2;
-      case 2: {
-        if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(18u /* 18 & 0xFF */)) {
           DO_(::google::protobuf::internal::WireFormatLite::ReadString(
                 input, this->mutable_name()));
           ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
@@ -1354,10 +852,10 @@ bool DeleteShardRequest::MergePartialFromCodedStream(
         break;
       }
 
-      // required int32 idx = 3;
-      case 3: {
+      // required int32 idx = 2;
+      case 2: {
         if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(24u /* 24 & 0xFF */)) {
+            static_cast< ::google::protobuf::uint8>(16u /* 16 & 0xFF */)) {
           set_has_idx();
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
@@ -1395,29 +893,19 @@ void DeleteShardRequest::SerializeWithCachedSizes(
   (void) cached_has_bits;
 
   cached_has_bits = _has_bits_[0];
-  // required string cluster = 1;
+  // required string name = 1;
   if (cached_has_bits & 0x00000001u) {
-    ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
-      this->cluster().data(), static_cast<int>(this->cluster().length()),
-      ::google::protobuf::internal::WireFormat::SERIALIZE,
-      "elasticfaiss.DeleteShardRequest.cluster");
-    ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
-      1, this->cluster(), output);
-  }
-
-  // required string name = 2;
-  if (cached_has_bits & 0x00000002u) {
     ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
       this->name().data(), static_cast<int>(this->name().length()),
       ::google::protobuf::internal::WireFormat::SERIALIZE,
       "elasticfaiss.DeleteShardRequest.name");
     ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
-      2, this->name(), output);
+      1, this->name(), output);
   }
 
-  // required int32 idx = 3;
-  if (cached_has_bits & 0x00000004u) {
-    ::google::protobuf::internal::WireFormatLite::WriteInt32(3, this->idx(), output);
+  // required int32 idx = 2;
+  if (cached_has_bits & 0x00000002u) {
+    ::google::protobuf::internal::WireFormatLite::WriteInt32(2, this->idx(), output);
   }
 
   if (_internal_metadata_.have_unknown_fields()) {
@@ -1435,31 +923,20 @@ void DeleteShardRequest::SerializeWithCachedSizes(
   (void) cached_has_bits;
 
   cached_has_bits = _has_bits_[0];
-  // required string cluster = 1;
+  // required string name = 1;
   if (cached_has_bits & 0x00000001u) {
-    ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
-      this->cluster().data(), static_cast<int>(this->cluster().length()),
-      ::google::protobuf::internal::WireFormat::SERIALIZE,
-      "elasticfaiss.DeleteShardRequest.cluster");
-    target =
-      ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
-        1, this->cluster(), target);
-  }
-
-  // required string name = 2;
-  if (cached_has_bits & 0x00000002u) {
     ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
       this->name().data(), static_cast<int>(this->name().length()),
       ::google::protobuf::internal::WireFormat::SERIALIZE,
       "elasticfaiss.DeleteShardRequest.name");
     target =
       ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
-        2, this->name(), target);
+        1, this->name(), target);
   }
 
-  // required int32 idx = 3;
-  if (cached_has_bits & 0x00000004u) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(3, this->idx(), target);
+  // required int32 idx = 2;
+  if (cached_has_bits & 0x00000002u) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(2, this->idx(), target);
   }
 
   if (_internal_metadata_.have_unknown_fields()) {
@@ -1474,22 +951,15 @@ size_t DeleteShardRequest::RequiredFieldsByteSizeFallback() const {
 // @@protoc_insertion_point(required_fields_byte_size_fallback_start:elasticfaiss.DeleteShardRequest)
   size_t total_size = 0;
 
-  if (has_cluster()) {
-    // required string cluster = 1;
-    total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::StringSize(
-        this->cluster());
-  }
-
   if (has_name()) {
-    // required string name = 2;
+    // required string name = 1;
     total_size += 1 +
       ::google::protobuf::internal::WireFormatLite::StringSize(
         this->name());
   }
 
   if (has_idx()) {
-    // required int32 idx = 3;
+    // required int32 idx = 2;
     total_size += 1 +
       ::google::protobuf::internal::WireFormatLite::Int32Size(
         this->idx());
@@ -1506,18 +976,13 @@ size_t DeleteShardRequest::ByteSizeLong() const {
       ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
         _internal_metadata_.unknown_fields());
   }
-  if (((_has_bits_[0] & 0x00000007) ^ 0x00000007) == 0) {  // All required fields are present.
-    // required string cluster = 1;
-    total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::StringSize(
-        this->cluster());
-
-    // required string name = 2;
+  if (((_has_bits_[0] & 0x00000003) ^ 0x00000003) == 0) {  // All required fields are present.
+    // required string name = 1;
     total_size += 1 +
       ::google::protobuf::internal::WireFormatLite::StringSize(
         this->name());
 
-    // required int32 idx = 3;
+    // required int32 idx = 2;
     total_size += 1 +
       ::google::protobuf::internal::WireFormatLite::Int32Size(
         this->idx());
@@ -1553,16 +1018,12 @@ void DeleteShardRequest::MergeFrom(const DeleteShardRequest& from) {
   (void) cached_has_bits;
 
   cached_has_bits = from._has_bits_[0];
-  if (cached_has_bits & 7u) {
+  if (cached_has_bits & 3u) {
     if (cached_has_bits & 0x00000001u) {
-      set_has_cluster();
-      cluster_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.cluster_);
-    }
-    if (cached_has_bits & 0x00000002u) {
       set_has_name();
       name_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.name_);
     }
-    if (cached_has_bits & 0x00000004u) {
+    if (cached_has_bits & 0x00000002u) {
       idx_ = from.idx_;
     }
     _has_bits_[0] |= cached_has_bits;
@@ -1584,7 +1045,7 @@ void DeleteShardRequest::CopyFrom(const DeleteShardRequest& from) {
 }
 
 bool DeleteShardRequest::IsInitialized() const {
-  if ((_has_bits_[0] & 0x00000007) != 0x00000007) return false;
+  if ((_has_bits_[0] & 0x00000003) != 0x00000003) return false;
   return true;
 }
 
@@ -1594,8 +1055,6 @@ void DeleteShardRequest::Swap(DeleteShardRequest* other) {
 }
 void DeleteShardRequest::InternalSwap(DeleteShardRequest* other) {
   using std::swap;
-  cluster_.Swap(&other->cluster_, &::google::protobuf::internal::GetEmptyStringAlreadyInited(),
-    GetArenaNoVirtual());
   name_.Swap(&other->name_, &::google::protobuf::internal::GetEmptyStringAlreadyInited(),
     GetArenaNoVirtual());
   swap(idx_, other->idx_);
@@ -2019,9 +1478,6 @@ template<> GOOGLE_PROTOBUF_ATTRIBUTE_NOINLINE ::elasticfaiss::CreateShardRequest
 }
 template<> GOOGLE_PROTOBUF_ATTRIBUTE_NOINLINE ::elasticfaiss::CreateShardResponse* Arena::CreateMaybeMessage< ::elasticfaiss::CreateShardResponse >(Arena* arena) {
   return Arena::CreateInternal< ::elasticfaiss::CreateShardResponse >(arena);
-}
-template<> GOOGLE_PROTOBUF_ATTRIBUTE_NOINLINE ::elasticfaiss::WorkNodeInitConf* Arena::CreateMaybeMessage< ::elasticfaiss::WorkNodeInitConf >(Arena* arena) {
-  return Arena::CreateInternal< ::elasticfaiss::WorkNodeInitConf >(arena);
 }
 template<> GOOGLE_PROTOBUF_ATTRIBUTE_NOINLINE ::elasticfaiss::DeleteShardRequest* Arena::CreateMaybeMessage< ::elasticfaiss::DeleteShardRequest >(Arena* arena) {
   return Arena::CreateInternal< ::elasticfaiss::DeleteShardRequest >(arena);

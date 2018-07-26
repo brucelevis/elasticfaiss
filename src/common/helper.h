@@ -9,7 +9,8 @@
 #define SRC_COMMON_HELPER_H_
 
 #include <string>
-#include <strstream>
+#include <sstream>
+#include <functional>
 
 namespace elasticfaiss
 {
@@ -29,6 +30,9 @@ namespace elasticfaiss
         }
         return buffer.str();
     }
+    typedef std::function<void(void)> AsyncFunc;
+
+    void start_bthread_function(const AsyncFunc& func);
 }
 
 

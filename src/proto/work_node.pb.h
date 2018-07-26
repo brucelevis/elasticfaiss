@@ -40,7 +40,7 @@ namespace protobuf_work_5fnode_2eproto {
 struct TableStruct {
   static const ::google::protobuf::internal::ParseTableField entries[];
   static const ::google::protobuf::internal::AuxillaryParseTableField aux[];
-  static const ::google::protobuf::internal::ParseTable schema[5];
+  static const ::google::protobuf::internal::ParseTable schema[4];
   static const ::google::protobuf::internal::FieldMetadata field_metadata[];
   static const ::google::protobuf::internal::SerializationTable serialization_table[];
   static const ::google::protobuf::uint32 offsets[];
@@ -60,9 +60,6 @@ extern DeleteShardRequestDefaultTypeInternal _DeleteShardRequest_default_instanc
 class DeleteShardResponse;
 class DeleteShardResponseDefaultTypeInternal;
 extern DeleteShardResponseDefaultTypeInternal _DeleteShardResponse_default_instance_;
-class WorkNodeInitConf;
-class WorkNodeInitConfDefaultTypeInternal;
-extern WorkNodeInitConfDefaultTypeInternal _WorkNodeInitConf_default_instance_;
 }  // namespace elasticfaiss
 namespace google {
 namespace protobuf {
@@ -70,7 +67,6 @@ template<> ::elasticfaiss::CreateShardRequest* Arena::CreateMaybeMessage<::elast
 template<> ::elasticfaiss::CreateShardResponse* Arena::CreateMaybeMessage<::elasticfaiss::CreateShardResponse>(Arena*);
 template<> ::elasticfaiss::DeleteShardRequest* Arena::CreateMaybeMessage<::elasticfaiss::DeleteShardRequest>(Arena*);
 template<> ::elasticfaiss::DeleteShardResponse* Arena::CreateMaybeMessage<::elasticfaiss::DeleteShardResponse>(Arena*);
-template<> ::elasticfaiss::WorkNodeInitConf* Arena::CreateMaybeMessage<::elasticfaiss::WorkNodeInitConf>(Arena*);
 }  // namespace protobuf
 }  // namespace google
 namespace elasticfaiss {
@@ -171,76 +167,27 @@ class CreateShardRequest : public ::google::protobuf::Message /* @@protoc_insert
 
   // accessors -------------------------------------------------------
 
-  // required string cluster = 1;
-  bool has_cluster() const;
-  void clear_cluster();
-  static const int kClusterFieldNumber = 1;
-  const ::std::string& cluster() const;
-  void set_cluster(const ::std::string& value);
-  #if LANG_CXX11
-  void set_cluster(::std::string&& value);
-  #endif
-  void set_cluster(const char* value);
-  void set_cluster(const char* value, size_t size);
-  ::std::string* mutable_cluster();
-  ::std::string* release_cluster();
-  void set_allocated_cluster(::std::string* cluster);
-
-  // required string shard_nodes = 4;
-  bool has_shard_nodes() const;
-  void clear_shard_nodes();
-  static const int kShardNodesFieldNumber = 4;
-  const ::std::string& shard_nodes() const;
-  void set_shard_nodes(const ::std::string& value);
-  #if LANG_CXX11
-  void set_shard_nodes(::std::string&& value);
-  #endif
-  void set_shard_nodes(const char* value);
-  void set_shard_nodes(const char* value, size_t size);
-  ::std::string* mutable_shard_nodes();
-  ::std::string* release_shard_nodes();
-  void set_allocated_shard_nodes(::std::string* shard_nodes);
-
-  // required .elasticfaiss.IndexConf conf = 2;
+  // required .elasticfaiss.IndexShardConf conf = 1;
   bool has_conf() const;
   void clear_conf();
-  static const int kConfFieldNumber = 2;
+  static const int kConfFieldNumber = 1;
   private:
-  const ::elasticfaiss::IndexConf& _internal_conf() const;
+  const ::elasticfaiss::IndexShardConf& _internal_conf() const;
   public:
-  const ::elasticfaiss::IndexConf& conf() const;
-  ::elasticfaiss::IndexConf* release_conf();
-  ::elasticfaiss::IndexConf* mutable_conf();
-  void set_allocated_conf(::elasticfaiss::IndexConf* conf);
-
-  // required int32 idx = 3;
-  bool has_idx() const;
-  void clear_idx();
-  static const int kIdxFieldNumber = 3;
-  ::google::protobuf::int32 idx() const;
-  void set_idx(::google::protobuf::int32 value);
+  const ::elasticfaiss::IndexShardConf& conf() const;
+  ::elasticfaiss::IndexShardConf* release_conf();
+  ::elasticfaiss::IndexShardConf* mutable_conf();
+  void set_allocated_conf(::elasticfaiss::IndexShardConf* conf);
 
   // @@protoc_insertion_point(class_scope:elasticfaiss.CreateShardRequest)
  private:
-  void set_has_cluster();
-  void clear_has_cluster();
   void set_has_conf();
   void clear_has_conf();
-  void set_has_idx();
-  void clear_has_idx();
-  void set_has_shard_nodes();
-  void clear_has_shard_nodes();
-
-  // helper for ByteSizeLong()
-  size_t RequiredFieldsByteSizeFallback() const;
 
   ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
   ::google::protobuf::internal::HasBits<1> _has_bits_;
   mutable ::google::protobuf::internal::CachedSize _cached_size_;
-  ::google::protobuf::internal::ArenaStringPtr cluster_;
-  ::google::protobuf::internal::ArenaStringPtr shard_nodes_;
-  ::elasticfaiss::IndexConf* conf_;
-  ::google::protobuf::int32 idx_;
+  ::elasticfaiss::IndexShardConf* conf_;
   friend struct ::protobuf_work_5fnode_2eproto::TableStruct;
 };
 // -------------------------------------------------------------------
@@ -377,123 +324,6 @@ class CreateShardResponse : public ::google::protobuf::Message /* @@protoc_inser
 };
 // -------------------------------------------------------------------
 
-class WorkNodeInitConf : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:elasticfaiss.WorkNodeInitConf) */ {
- public:
-  WorkNodeInitConf();
-  virtual ~WorkNodeInitConf();
-
-  WorkNodeInitConf(const WorkNodeInitConf& from);
-
-  inline WorkNodeInitConf& operator=(const WorkNodeInitConf& from) {
-    CopyFrom(from);
-    return *this;
-  }
-  #if LANG_CXX11
-  WorkNodeInitConf(WorkNodeInitConf&& from) noexcept
-    : WorkNodeInitConf() {
-    *this = ::std::move(from);
-  }
-
-  inline WorkNodeInitConf& operator=(WorkNodeInitConf&& from) noexcept {
-    if (GetArenaNoVirtual() == from.GetArenaNoVirtual()) {
-      if (this != &from) InternalSwap(&from);
-    } else {
-      CopyFrom(from);
-    }
-    return *this;
-  }
-  #endif
-  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
-    return _internal_metadata_.unknown_fields();
-  }
-  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
-    return _internal_metadata_.mutable_unknown_fields();
-  }
-
-  static const ::google::protobuf::Descriptor* descriptor();
-  static const WorkNodeInitConf& default_instance();
-
-  static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
-  static inline const WorkNodeInitConf* internal_default_instance() {
-    return reinterpret_cast<const WorkNodeInitConf*>(
-               &_WorkNodeInitConf_default_instance_);
-  }
-  static constexpr int kIndexInFileMessages =
-    2;
-
-  void Swap(WorkNodeInitConf* other);
-  friend void swap(WorkNodeInitConf& a, WorkNodeInitConf& b) {
-    a.Swap(&b);
-  }
-
-  // implements Message ----------------------------------------------
-
-  inline WorkNodeInitConf* New() const final {
-    return CreateMaybeMessage<WorkNodeInitConf>(NULL);
-  }
-
-  WorkNodeInitConf* New(::google::protobuf::Arena* arena) const final {
-    return CreateMaybeMessage<WorkNodeInitConf>(arena);
-  }
-  void CopyFrom(const ::google::protobuf::Message& from) final;
-  void MergeFrom(const ::google::protobuf::Message& from) final;
-  void CopyFrom(const WorkNodeInitConf& from);
-  void MergeFrom(const WorkNodeInitConf& from);
-  void Clear() final;
-  bool IsInitialized() const final;
-
-  size_t ByteSizeLong() const final;
-  bool MergePartialFromCodedStream(
-      ::google::protobuf::io::CodedInputStream* input) final;
-  void SerializeWithCachedSizes(
-      ::google::protobuf::io::CodedOutputStream* output) const final;
-  ::google::protobuf::uint8* InternalSerializeWithCachedSizesToArray(
-      bool deterministic, ::google::protobuf::uint8* target) const final;
-  int GetCachedSize() const final { return _cached_size_.Get(); }
-
-  private:
-  void SharedCtor();
-  void SharedDtor();
-  void SetCachedSize(int size) const final;
-  void InternalSwap(WorkNodeInitConf* other);
-  private:
-  inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
-    return NULL;
-  }
-  inline void* MaybeArenaPtr() const {
-    return NULL;
-  }
-  public:
-
-  ::google::protobuf::Metadata GetMetadata() const final;
-
-  // nested types ----------------------------------------------------
-
-  // accessors -------------------------------------------------------
-
-  // repeated .elasticfaiss.CreateShardRequest shards = 1;
-  int shards_size() const;
-  void clear_shards();
-  static const int kShardsFieldNumber = 1;
-  ::elasticfaiss::CreateShardRequest* mutable_shards(int index);
-  ::google::protobuf::RepeatedPtrField< ::elasticfaiss::CreateShardRequest >*
-      mutable_shards();
-  const ::elasticfaiss::CreateShardRequest& shards(int index) const;
-  ::elasticfaiss::CreateShardRequest* add_shards();
-  const ::google::protobuf::RepeatedPtrField< ::elasticfaiss::CreateShardRequest >&
-      shards() const;
-
-  // @@protoc_insertion_point(class_scope:elasticfaiss.WorkNodeInitConf)
- private:
-
-  ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
-  ::google::protobuf::internal::HasBits<1> _has_bits_;
-  mutable ::google::protobuf::internal::CachedSize _cached_size_;
-  ::google::protobuf::RepeatedPtrField< ::elasticfaiss::CreateShardRequest > shards_;
-  friend struct ::protobuf_work_5fnode_2eproto::TableStruct;
-};
-// -------------------------------------------------------------------
-
 class DeleteShardRequest : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:elasticfaiss.DeleteShardRequest) */ {
  public:
   DeleteShardRequest();
@@ -536,7 +366,7 @@ class DeleteShardRequest : public ::google::protobuf::Message /* @@protoc_insert
                &_DeleteShardRequest_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    3;
+    2;
 
   void Swap(DeleteShardRequest* other);
   friend void swap(DeleteShardRequest& a, DeleteShardRequest& b) {
@@ -588,25 +418,10 @@ class DeleteShardRequest : public ::google::protobuf::Message /* @@protoc_insert
 
   // accessors -------------------------------------------------------
 
-  // required string cluster = 1;
-  bool has_cluster() const;
-  void clear_cluster();
-  static const int kClusterFieldNumber = 1;
-  const ::std::string& cluster() const;
-  void set_cluster(const ::std::string& value);
-  #if LANG_CXX11
-  void set_cluster(::std::string&& value);
-  #endif
-  void set_cluster(const char* value);
-  void set_cluster(const char* value, size_t size);
-  ::std::string* mutable_cluster();
-  ::std::string* release_cluster();
-  void set_allocated_cluster(::std::string* cluster);
-
-  // required string name = 2;
+  // required string name = 1;
   bool has_name() const;
   void clear_name();
-  static const int kNameFieldNumber = 2;
+  static const int kNameFieldNumber = 1;
   const ::std::string& name() const;
   void set_name(const ::std::string& value);
   #if LANG_CXX11
@@ -618,17 +433,15 @@ class DeleteShardRequest : public ::google::protobuf::Message /* @@protoc_insert
   ::std::string* release_name();
   void set_allocated_name(::std::string* name);
 
-  // required int32 idx = 3;
+  // required int32 idx = 2;
   bool has_idx() const;
   void clear_idx();
-  static const int kIdxFieldNumber = 3;
+  static const int kIdxFieldNumber = 2;
   ::google::protobuf::int32 idx() const;
   void set_idx(::google::protobuf::int32 value);
 
   // @@protoc_insertion_point(class_scope:elasticfaiss.DeleteShardRequest)
  private:
-  void set_has_cluster();
-  void clear_has_cluster();
   void set_has_name();
   void clear_has_name();
   void set_has_idx();
@@ -640,7 +453,6 @@ class DeleteShardRequest : public ::google::protobuf::Message /* @@protoc_insert
   ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
   ::google::protobuf::internal::HasBits<1> _has_bits_;
   mutable ::google::protobuf::internal::CachedSize _cached_size_;
-  ::google::protobuf::internal::ArenaStringPtr cluster_;
   ::google::protobuf::internal::ArenaStringPtr name_;
   ::google::protobuf::int32 idx_;
   friend struct ::protobuf_work_5fnode_2eproto::TableStruct;
@@ -689,7 +501,7 @@ class DeleteShardResponse : public ::google::protobuf::Message /* @@protoc_inser
                &_DeleteShardResponse_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    4;
+    3;
 
   void Swap(DeleteShardResponse* other);
   friend void swap(DeleteShardResponse& a, DeleteShardResponse& b) {
@@ -855,108 +667,42 @@ class WorkNodeService_Stub : public WorkNodeService {
 #endif  // __GNUC__
 // CreateShardRequest
 
-// required string cluster = 1;
-inline bool CreateShardRequest::has_cluster() const {
+// required .elasticfaiss.IndexShardConf conf = 1;
+inline bool CreateShardRequest::has_conf() const {
   return (_has_bits_[0] & 0x00000001u) != 0;
 }
-inline void CreateShardRequest::set_has_cluster() {
+inline void CreateShardRequest::set_has_conf() {
   _has_bits_[0] |= 0x00000001u;
 }
-inline void CreateShardRequest::clear_has_cluster() {
+inline void CreateShardRequest::clear_has_conf() {
   _has_bits_[0] &= ~0x00000001u;
 }
-inline void CreateShardRequest::clear_cluster() {
-  cluster_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  clear_has_cluster();
-}
-inline const ::std::string& CreateShardRequest::cluster() const {
-  // @@protoc_insertion_point(field_get:elasticfaiss.CreateShardRequest.cluster)
-  return cluster_.GetNoArena();
-}
-inline void CreateShardRequest::set_cluster(const ::std::string& value) {
-  set_has_cluster();
-  cluster_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
-  // @@protoc_insertion_point(field_set:elasticfaiss.CreateShardRequest.cluster)
-}
-#if LANG_CXX11
-inline void CreateShardRequest::set_cluster(::std::string&& value) {
-  set_has_cluster();
-  cluster_.SetNoArena(
-    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
-  // @@protoc_insertion_point(field_set_rvalue:elasticfaiss.CreateShardRequest.cluster)
-}
-#endif
-inline void CreateShardRequest::set_cluster(const char* value) {
-  GOOGLE_DCHECK(value != NULL);
-  set_has_cluster();
-  cluster_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
-  // @@protoc_insertion_point(field_set_char:elasticfaiss.CreateShardRequest.cluster)
-}
-inline void CreateShardRequest::set_cluster(const char* value, size_t size) {
-  set_has_cluster();
-  cluster_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
-      ::std::string(reinterpret_cast<const char*>(value), size));
-  // @@protoc_insertion_point(field_set_pointer:elasticfaiss.CreateShardRequest.cluster)
-}
-inline ::std::string* CreateShardRequest::mutable_cluster() {
-  set_has_cluster();
-  // @@protoc_insertion_point(field_mutable:elasticfaiss.CreateShardRequest.cluster)
-  return cluster_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-}
-inline ::std::string* CreateShardRequest::release_cluster() {
-  // @@protoc_insertion_point(field_release:elasticfaiss.CreateShardRequest.cluster)
-  if (!has_cluster()) {
-    return NULL;
-  }
-  clear_has_cluster();
-  return cluster_.ReleaseNonDefaultNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-}
-inline void CreateShardRequest::set_allocated_cluster(::std::string* cluster) {
-  if (cluster != NULL) {
-    set_has_cluster();
-  } else {
-    clear_has_cluster();
-  }
-  cluster_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), cluster);
-  // @@protoc_insertion_point(field_set_allocated:elasticfaiss.CreateShardRequest.cluster)
-}
-
-// required .elasticfaiss.IndexConf conf = 2;
-inline bool CreateShardRequest::has_conf() const {
-  return (_has_bits_[0] & 0x00000004u) != 0;
-}
-inline void CreateShardRequest::set_has_conf() {
-  _has_bits_[0] |= 0x00000004u;
-}
-inline void CreateShardRequest::clear_has_conf() {
-  _has_bits_[0] &= ~0x00000004u;
-}
-inline const ::elasticfaiss::IndexConf& CreateShardRequest::_internal_conf() const {
+inline const ::elasticfaiss::IndexShardConf& CreateShardRequest::_internal_conf() const {
   return *conf_;
 }
-inline const ::elasticfaiss::IndexConf& CreateShardRequest::conf() const {
-  const ::elasticfaiss::IndexConf* p = conf_;
+inline const ::elasticfaiss::IndexShardConf& CreateShardRequest::conf() const {
+  const ::elasticfaiss::IndexShardConf* p = conf_;
   // @@protoc_insertion_point(field_get:elasticfaiss.CreateShardRequest.conf)
-  return p != NULL ? *p : *reinterpret_cast<const ::elasticfaiss::IndexConf*>(
-      &::elasticfaiss::_IndexConf_default_instance_);
+  return p != NULL ? *p : *reinterpret_cast<const ::elasticfaiss::IndexShardConf*>(
+      &::elasticfaiss::_IndexShardConf_default_instance_);
 }
-inline ::elasticfaiss::IndexConf* CreateShardRequest::release_conf() {
+inline ::elasticfaiss::IndexShardConf* CreateShardRequest::release_conf() {
   // @@protoc_insertion_point(field_release:elasticfaiss.CreateShardRequest.conf)
   clear_has_conf();
-  ::elasticfaiss::IndexConf* temp = conf_;
+  ::elasticfaiss::IndexShardConf* temp = conf_;
   conf_ = NULL;
   return temp;
 }
-inline ::elasticfaiss::IndexConf* CreateShardRequest::mutable_conf() {
+inline ::elasticfaiss::IndexShardConf* CreateShardRequest::mutable_conf() {
   set_has_conf();
   if (conf_ == NULL) {
-    auto* p = CreateMaybeMessage<::elasticfaiss::IndexConf>(GetArenaNoVirtual());
+    auto* p = CreateMaybeMessage<::elasticfaiss::IndexShardConf>(GetArenaNoVirtual());
     conf_ = p;
   }
   // @@protoc_insertion_point(field_mutable:elasticfaiss.CreateShardRequest.conf)
   return conf_;
 }
-inline void CreateShardRequest::set_allocated_conf(::elasticfaiss::IndexConf* conf) {
+inline void CreateShardRequest::set_allocated_conf(::elasticfaiss::IndexShardConf* conf) {
   ::google::protobuf::Arena* message_arena = GetArenaNoVirtual();
   if (message_arena == NULL) {
     delete reinterpret_cast< ::google::protobuf::MessageLite*>(conf_);
@@ -973,96 +719,6 @@ inline void CreateShardRequest::set_allocated_conf(::elasticfaiss::IndexConf* co
   }
   conf_ = conf;
   // @@protoc_insertion_point(field_set_allocated:elasticfaiss.CreateShardRequest.conf)
-}
-
-// required int32 idx = 3;
-inline bool CreateShardRequest::has_idx() const {
-  return (_has_bits_[0] & 0x00000008u) != 0;
-}
-inline void CreateShardRequest::set_has_idx() {
-  _has_bits_[0] |= 0x00000008u;
-}
-inline void CreateShardRequest::clear_has_idx() {
-  _has_bits_[0] &= ~0x00000008u;
-}
-inline void CreateShardRequest::clear_idx() {
-  idx_ = 0;
-  clear_has_idx();
-}
-inline ::google::protobuf::int32 CreateShardRequest::idx() const {
-  // @@protoc_insertion_point(field_get:elasticfaiss.CreateShardRequest.idx)
-  return idx_;
-}
-inline void CreateShardRequest::set_idx(::google::protobuf::int32 value) {
-  set_has_idx();
-  idx_ = value;
-  // @@protoc_insertion_point(field_set:elasticfaiss.CreateShardRequest.idx)
-}
-
-// required string shard_nodes = 4;
-inline bool CreateShardRequest::has_shard_nodes() const {
-  return (_has_bits_[0] & 0x00000002u) != 0;
-}
-inline void CreateShardRequest::set_has_shard_nodes() {
-  _has_bits_[0] |= 0x00000002u;
-}
-inline void CreateShardRequest::clear_has_shard_nodes() {
-  _has_bits_[0] &= ~0x00000002u;
-}
-inline void CreateShardRequest::clear_shard_nodes() {
-  shard_nodes_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  clear_has_shard_nodes();
-}
-inline const ::std::string& CreateShardRequest::shard_nodes() const {
-  // @@protoc_insertion_point(field_get:elasticfaiss.CreateShardRequest.shard_nodes)
-  return shard_nodes_.GetNoArena();
-}
-inline void CreateShardRequest::set_shard_nodes(const ::std::string& value) {
-  set_has_shard_nodes();
-  shard_nodes_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
-  // @@protoc_insertion_point(field_set:elasticfaiss.CreateShardRequest.shard_nodes)
-}
-#if LANG_CXX11
-inline void CreateShardRequest::set_shard_nodes(::std::string&& value) {
-  set_has_shard_nodes();
-  shard_nodes_.SetNoArena(
-    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
-  // @@protoc_insertion_point(field_set_rvalue:elasticfaiss.CreateShardRequest.shard_nodes)
-}
-#endif
-inline void CreateShardRequest::set_shard_nodes(const char* value) {
-  GOOGLE_DCHECK(value != NULL);
-  set_has_shard_nodes();
-  shard_nodes_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
-  // @@protoc_insertion_point(field_set_char:elasticfaiss.CreateShardRequest.shard_nodes)
-}
-inline void CreateShardRequest::set_shard_nodes(const char* value, size_t size) {
-  set_has_shard_nodes();
-  shard_nodes_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
-      ::std::string(reinterpret_cast<const char*>(value), size));
-  // @@protoc_insertion_point(field_set_pointer:elasticfaiss.CreateShardRequest.shard_nodes)
-}
-inline ::std::string* CreateShardRequest::mutable_shard_nodes() {
-  set_has_shard_nodes();
-  // @@protoc_insertion_point(field_mutable:elasticfaiss.CreateShardRequest.shard_nodes)
-  return shard_nodes_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-}
-inline ::std::string* CreateShardRequest::release_shard_nodes() {
-  // @@protoc_insertion_point(field_release:elasticfaiss.CreateShardRequest.shard_nodes)
-  if (!has_shard_nodes()) {
-    return NULL;
-  }
-  clear_has_shard_nodes();
-  return shard_nodes_.ReleaseNonDefaultNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-}
-inline void CreateShardRequest::set_allocated_shard_nodes(::std::string* shard_nodes) {
-  if (shard_nodes != NULL) {
-    set_has_shard_nodes();
-  } else {
-    clear_has_shard_nodes();
-  }
-  shard_nodes_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), shard_nodes);
-  // @@protoc_insertion_point(field_set_allocated:elasticfaiss.CreateShardRequest.shard_nodes)
 }
 
 // -------------------------------------------------------------------
@@ -1161,117 +817,17 @@ inline void CreateShardResponse::set_allocated_error(::std::string* error) {
 
 // -------------------------------------------------------------------
 
-// WorkNodeInitConf
-
-// repeated .elasticfaiss.CreateShardRequest shards = 1;
-inline int WorkNodeInitConf::shards_size() const {
-  return shards_.size();
-}
-inline void WorkNodeInitConf::clear_shards() {
-  shards_.Clear();
-}
-inline ::elasticfaiss::CreateShardRequest* WorkNodeInitConf::mutable_shards(int index) {
-  // @@protoc_insertion_point(field_mutable:elasticfaiss.WorkNodeInitConf.shards)
-  return shards_.Mutable(index);
-}
-inline ::google::protobuf::RepeatedPtrField< ::elasticfaiss::CreateShardRequest >*
-WorkNodeInitConf::mutable_shards() {
-  // @@protoc_insertion_point(field_mutable_list:elasticfaiss.WorkNodeInitConf.shards)
-  return &shards_;
-}
-inline const ::elasticfaiss::CreateShardRequest& WorkNodeInitConf::shards(int index) const {
-  // @@protoc_insertion_point(field_get:elasticfaiss.WorkNodeInitConf.shards)
-  return shards_.Get(index);
-}
-inline ::elasticfaiss::CreateShardRequest* WorkNodeInitConf::add_shards() {
-  // @@protoc_insertion_point(field_add:elasticfaiss.WorkNodeInitConf.shards)
-  return shards_.Add();
-}
-inline const ::google::protobuf::RepeatedPtrField< ::elasticfaiss::CreateShardRequest >&
-WorkNodeInitConf::shards() const {
-  // @@protoc_insertion_point(field_list:elasticfaiss.WorkNodeInitConf.shards)
-  return shards_;
-}
-
-// -------------------------------------------------------------------
-
 // DeleteShardRequest
 
-// required string cluster = 1;
-inline bool DeleteShardRequest::has_cluster() const {
+// required string name = 1;
+inline bool DeleteShardRequest::has_name() const {
   return (_has_bits_[0] & 0x00000001u) != 0;
 }
-inline void DeleteShardRequest::set_has_cluster() {
+inline void DeleteShardRequest::set_has_name() {
   _has_bits_[0] |= 0x00000001u;
 }
-inline void DeleteShardRequest::clear_has_cluster() {
-  _has_bits_[0] &= ~0x00000001u;
-}
-inline void DeleteShardRequest::clear_cluster() {
-  cluster_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  clear_has_cluster();
-}
-inline const ::std::string& DeleteShardRequest::cluster() const {
-  // @@protoc_insertion_point(field_get:elasticfaiss.DeleteShardRequest.cluster)
-  return cluster_.GetNoArena();
-}
-inline void DeleteShardRequest::set_cluster(const ::std::string& value) {
-  set_has_cluster();
-  cluster_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
-  // @@protoc_insertion_point(field_set:elasticfaiss.DeleteShardRequest.cluster)
-}
-#if LANG_CXX11
-inline void DeleteShardRequest::set_cluster(::std::string&& value) {
-  set_has_cluster();
-  cluster_.SetNoArena(
-    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
-  // @@protoc_insertion_point(field_set_rvalue:elasticfaiss.DeleteShardRequest.cluster)
-}
-#endif
-inline void DeleteShardRequest::set_cluster(const char* value) {
-  GOOGLE_DCHECK(value != NULL);
-  set_has_cluster();
-  cluster_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
-  // @@protoc_insertion_point(field_set_char:elasticfaiss.DeleteShardRequest.cluster)
-}
-inline void DeleteShardRequest::set_cluster(const char* value, size_t size) {
-  set_has_cluster();
-  cluster_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
-      ::std::string(reinterpret_cast<const char*>(value), size));
-  // @@protoc_insertion_point(field_set_pointer:elasticfaiss.DeleteShardRequest.cluster)
-}
-inline ::std::string* DeleteShardRequest::mutable_cluster() {
-  set_has_cluster();
-  // @@protoc_insertion_point(field_mutable:elasticfaiss.DeleteShardRequest.cluster)
-  return cluster_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-}
-inline ::std::string* DeleteShardRequest::release_cluster() {
-  // @@protoc_insertion_point(field_release:elasticfaiss.DeleteShardRequest.cluster)
-  if (!has_cluster()) {
-    return NULL;
-  }
-  clear_has_cluster();
-  return cluster_.ReleaseNonDefaultNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-}
-inline void DeleteShardRequest::set_allocated_cluster(::std::string* cluster) {
-  if (cluster != NULL) {
-    set_has_cluster();
-  } else {
-    clear_has_cluster();
-  }
-  cluster_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), cluster);
-  // @@protoc_insertion_point(field_set_allocated:elasticfaiss.DeleteShardRequest.cluster)
-}
-
-// required string name = 2;
-inline bool DeleteShardRequest::has_name() const {
-  return (_has_bits_[0] & 0x00000002u) != 0;
-}
-inline void DeleteShardRequest::set_has_name() {
-  _has_bits_[0] |= 0x00000002u;
-}
 inline void DeleteShardRequest::clear_has_name() {
-  _has_bits_[0] &= ~0x00000002u;
+  _has_bits_[0] &= ~0x00000001u;
 }
 inline void DeleteShardRequest::clear_name() {
   name_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
@@ -1329,15 +885,15 @@ inline void DeleteShardRequest::set_allocated_name(::std::string* name) {
   // @@protoc_insertion_point(field_set_allocated:elasticfaiss.DeleteShardRequest.name)
 }
 
-// required int32 idx = 3;
+// required int32 idx = 2;
 inline bool DeleteShardRequest::has_idx() const {
-  return (_has_bits_[0] & 0x00000004u) != 0;
+  return (_has_bits_[0] & 0x00000002u) != 0;
 }
 inline void DeleteShardRequest::set_has_idx() {
-  _has_bits_[0] |= 0x00000004u;
+  _has_bits_[0] |= 0x00000002u;
 }
 inline void DeleteShardRequest::clear_has_idx() {
-  _has_bits_[0] &= ~0x00000004u;
+  _has_bits_[0] &= ~0x00000002u;
 }
 inline void DeleteShardRequest::clear_idx() {
   idx_ = 0;
@@ -1450,8 +1006,6 @@ inline void DeleteShardResponse::set_allocated_error(::std::string* error) {
 #ifdef __GNUC__
   #pragma GCC diagnostic pop
 #endif  // __GNUC__
-// -------------------------------------------------------------------
-
 // -------------------------------------------------------------------
 
 // -------------------------------------------------------------------

@@ -204,7 +204,7 @@ COMMON_OBJECTS := $(patsubst %.cpp, %.o, $(COMMON_CPPFILES)) $(patsubst %.c, %.o
 
 CORE_OBJECTS := $(COMMON_OBJECTS)
 
-MASTEROBJ := master/master.o worker/node_service.o worker/shard_service.o proto/master.pb.o proto/work_node.pb.o proto/shard.pb.o main.o
+MASTEROBJ := common/helper.o master/master.o worker/node_service.o worker/shard_service.o proto/master.pb.o proto/work_node.pb.o proto/shard.pb.o main.o
 CLIENTOBJ := counter/client.o  counter/counter.pb.o
 
 #

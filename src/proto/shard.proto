@@ -12,6 +12,7 @@ message Shard{
     required int32    idx  = 2;
     optional bool     is_leader  = 3;
     required int32    state = 4;
+    repeated string   nodes = 5;   //only leader shard contains all nodes id
 }
 
 message IndexConf{
@@ -19,6 +20,12 @@ message IndexConf{
     required string type = 2;
     required int32 number_of_shards = 3;
     required int32 number_of_replicas = 4;
+}
+
+message IndexShardConf{
+    required IndexConf conf = 1;
+    required int32 shard_idx = 2;
+    repeated string nodes = 3;
 }
 
 

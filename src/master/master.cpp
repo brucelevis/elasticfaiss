@@ -16,6 +16,7 @@
 #include <braft/cli.h>
 #include "master.h"
 #include "proto/work_node.pb.h"
+#include "google/protobuf/util/message_differencer.h"
 
 DEFINE_bool(check_term, true, "Check if the leader changed to another term");
 DEFINE_bool(disable_cli, false, "Don't allow raft_cli access this node");
@@ -38,279 +39,170 @@ namespace elasticfaiss
         OP_UPDATE_INDEX = 5,
     };
 
-    int Master::select_nodes4index(const std::string& cluster, int32_t replica_count, const StringSet& current_nodes,
-            std::vector<std::string>& nodes)
+    int Master::allocate_nodes4index(const IndexConf& conf, const StringSet& current_nodes, StringSet& nodes, int limit)
     {
-        std::lock_guard<std::mutex> guard(_cluster_mutex);
-        WorkNodeTable wnodes = _cluster_workers[cluster];
-        int32_t expected_count = replica_count - current_nodes.size();
-        if (wnodes.size() < (size_t) replica_count)
+        //std::lock_guard<std::mutex> guard(_cluster_mutex);
+        ClusterState& c = _cluster_state;
+        int32_t expected_count = conf.number_of_replicas() - current_nodes.size();
+        if (limit > 0 && limit < expected_count)
         {
-            LOG(ERROR) << "No enough nodes in cluster:" << cluster << " to create index with replica:" << replica_count;
+            expected_count = limit;
+        }
+        std::set<WorkNode*> avaliable_nodes;
+        for (int i = 0; i < c.nodes_size(); i++)
+        {
+            WorkNode* node = c.mutable_nodes(i);
+            if (node->state() != WNODE_ACTIVE || current_nodes.count(node->peer_id()) > 0)
+            {
+                continue;
+            }
+            avaliable_nodes.insert(node);
+        }
+        if (avaliable_nodes.size() < (size_t) expected_count)
+        {
+            LOG(ERROR) << "No enough nodes in cluster to create index:" << conf.name() << " with replica:"
+                    << conf.number_of_replicas();
             return -1;
         }
-        while (nodes.size() != (size_t) expected_count && nodes.empty())
+        while (nodes.size() != (size_t) expected_count && !avaliable_nodes.empty())
         {
-            std::string min_weight_node;
+            WorkNode* min_weight_node = NULL;
             int32_t min_shard_count = 0;
-            WorkNodeTable::iterator it = wnodes.begin();
-            while (it != wnodes.end())
+            auto it = avaliable_nodes.begin();
+            while (it != avaliable_nodes.end())
             {
-                WorkNode* node = it->second;
-                if (node->state() != WNODE_ACTIVE || current_nodes.count(node->peer_id()) > 0)
-                {
-                    it = wnodes.erase(it);
-                    continue;
-                }
+                WorkNode* node = *it;
                 if (node->shards_size() == 0)
                 {
-                    nodes.push_back(node->peer_id());
-                    it = wnodes.erase(it);
-                    min_weight_node.clear();
+                    nodes.insert(node->peer_id());
+                    avaliable_nodes.erase(it);
+                    min_weight_node = NULL;
                     break;
                 }
                 if (0 == min_shard_count || min_shard_count < node->shards_size())
                 {
-                    min_weight_node = node->peer_id();
+                    min_weight_node = node;
                     min_shard_count = node->shards_size();
                 }
                 it++;
             }
-            if (!min_weight_node.empty())
+            if (NULL != min_weight_node)
             {
-                nodes.push_back(min_weight_node);
-                wnodes.erase(min_weight_node);
+                nodes.insert(min_weight_node->peer_id());
+                avaliable_nodes.erase(min_weight_node);
             }
         }
         if (nodes.size() != (size_t) expected_count)
         {
-            LOG(ERROR) << "No enough valid nodes in cluster:" << cluster << " to create index with replica:"
-                    << replica_count;
+            LOG(ERROR) << "No enough nodes in cluster to create index:" << conf.name() << " with replica:"
+                    << conf.number_of_replicas();
             nodes.clear();
             return -1;
         }
         return 0;
     }
 
-    int Master::add_index_shard(const std::string& cluster, IndexConf& conf, int32_t idx,
-            const ShardNodeMetaArray& nodes)
+    void Master::check_index_shard(const IndexConf& conf, ShardNodes& snodes)
     {
-        ShardIndexKey key;
-        key.cluster = cluster;
-        key.index = conf.name();
-        key.idx = idx;
-        ShardConfTable::iterator found = _cluster_shard_confs.find(key);
-        if (found == _cluster_shard_confs.end())
+        StringSet all_nodes;
+        StringSet current_nodes;
+        std::set<const WorkNode*> valid_nodes;
+        std::string group_id = shard_cluster_name(conf.name(), snodes.shard_idx);
+        for (const auto node : snodes.nodes)
         {
-            LOG(ERROR) << "No shard config found for :" << cluster << "_" << key.index << "_" << key.idx;
-            return -1;
-        }
-        braft::Configuration& cfg = found->second;
-        std::vector<std::string> new_nodes;
-        StringSet current;
-        for (const auto& node : nodes)
-        {
-            current.insert(node.node_peer);
-        }
-        if (0 == select_nodes4index(cluster, conf.number_of_replicas(), current, new_nodes))
-        {
-            if (nodes[0].is_leader)
+            if (node->state() == WNODE_ACTIVE)
             {
+                valid_nodes.insert(node);
+                current_nodes.insert(node->peer_id());
+            }
+            all_nodes.insert(node->peer_id());
+        }
+        if (!valid_nodes.empty())
+        {
+            LOG(ERROR) << "No valid nodes exist for index:" << group_id;
+            return;
+        }
+        braft::Configuration braft_conf;
+        std::string all_nodes_str = string_join_container(all_nodes, ",");
+        braft_conf.parse_from(all_nodes_str);
 
-            }
-            else
+        braft::cli::CliOptions opt;
+        opt.timeout_ms = 2000;
+        opt.max_retry = 3;
+        if (!snodes.has_leader())
+        {
+            //only handle replica == 2
+            if (valid_nodes.size() == 1 && conf.number_of_replicas() == 2)
             {
+                //promote the left node to leader
+                auto promote_func = [](){
 
+                };
+                start_bthread_function(promote_func);
             }
-        }
-        return -1;
-    }
-
-    int Master::remove_index_shards(const std::string& cluster, IndexConf& conf, int32_t idx,
-            const ShardNodeMetaArray& nodes)
-    {
-        ShardIndexKey key;
-        key.cluster = cluster;
-        key.index = conf.name();
-        key.idx = idx;
-        ShardConfTable::iterator found = _cluster_shard_confs.find(key);
-        if (found == _cluster_shard_confs.end())
-        {
-            LOG(ERROR) << "No shard config found for :" << cluster << "_" << key.index << "_" << key.idx;
-            return -1;
-        }
-        braft::Configuration& cfg = found->second;
-        for (int32_t i = 0; i < nodes.size(); i++)
-        {
-            butil::EndPoint node_peer;
-            butil::str2endpoint(nodes[i].node_peer.c_str(), &node_peer);
-            braft::PeerId id(node_peer);
-            if (!cfg.contains(id))
-            {
-                rpc_delete_index_shard(cluster, conf.name(), idx, nodes[i].node_peer);
-            }
-        }
-        return 0;
-    }
-
-    void Master::check_cluster_index_shard(const std::string& cluster, IndexConf& conf, int32_t idx,  braft::Configuration& cluster_conf,
-                        const ShardNodeMetaArray& nodes)
-    {
-    	StringSet current;
-    	ShardNodeMetaArray valid_nodes;
-        for (int32_t i = 0; i < nodes.size(); i++)
-        {
-            butil::EndPoint node_peer;
-            butil::str2endpoint(nodes[i].node_peer.c_str(), &node_peer);
-            braft::PeerId id(node_peer);
-            if (!cluster_conf.contains(id))
-            {
-                rpc_delete_index_shard(cluster, conf.name(), idx, nodes[i].node_peer);
-            }
-            else
-            {
-            	valid_nodes.push_back(nodes[i]);
-            	current.insert(nodes[i].node_peer);
-            }
-        }
-        if(!valid_nodes.empty())
-        {
-        	LOG(ERROR) << "No valid nodes exist for index:" << cluster << "_" << conf.name() << "_" << idx;
-        	return;
-        }
-        if(!valid_nodes[0].is_leader)
-        {
-        	//reset cluster
         }
         else
         {
-        	if(valid_nodes.size() == conf.number_of_replicas())
-        	{
-        		return;
-        	}
-        	if(valid_nodes.size() < conf.number_of_replicas())
-        	{
-        		std::vector<std::string> new_nodes;
-                if (0 == select_nodes4index(cluster, conf.number_of_replicas(), current, new_nodes))
+            if (valid_nodes.size() == (size_t) conf.number_of_replicas())
+            {
+                return;
+            }
+            if (valid_nodes.size() < (size_t) conf.number_of_replicas())
+            {
+                StringSet new_nodes;
+                if (0 == allocate_nodes4index(conf, current_nodes, new_nodes, 1))
                 {
-                	for(size_t i = 0; i < new_nodes.size(); i++)
-                	{
+                    auto update_peer = [](){
 
-                	}
+                    };
+                    start_bthread_function(update_peer);
                 }
-        	}
-        	else
-        	{
-        		//not possible
-        	}
+            }
         }
     }
 
-    void Master::check_index(const ShardNodeMetaTable& index_nodes)
+    void Master::check_index(RoutineContext& ctx)
     {
-        std::lock_guard<std::mutex> guard(_index_mutex);
-        ClusterIndexConfTable::iterator it = _cluster_index_confs.begin();
-        while (it != _cluster_index_confs.end())
+        std::lock_guard<bthread::Mutex> guard(_cluster_mutex);
+        ShardNodeTable::iterator it = _shard_nodes.begin();
+        while (it != _shard_nodes.end())
         {
-            const std::string& cluster_name = it->first;
-            auto iit = it->second.begin();
-            while (iit != it->second.end())
+            const ShardIndexKey& key = it->first;
+            const std::string& index_name = key.index;
+            ShardNodes& snodes = *(it->second);
+            IndexConf conf;
+            if (!get_index_conf(index_name, conf))
             {
-                const std::string& index_name = iit->first;
-                IndexConf* conf = iit->second;
-                for (int i = 0; i < conf->number_of_shards(); i++)
-                {
-                    ShardIndexKey key;
-                    key.cluster = cluster_name;
-                    key.index = index_name;
-                    key.idx = i;
-
-                    auto found = index_nodes.find(key);
-                    if (found != index_nodes.end())
-                    {
-                        const ShardNodeMetaArray& nodes = found->second;
-                        if (nodes.empty())
-                        {
-                            LOG(ERROR) << "No nodes exist for index:" << cluster_name << "_" << index_name;
-                            continue;
-                        }
-                        if (nodes.size() == conf->number_of_replicas())
-                        {
-                            continue;
-                        }
-
-                        if (nodes.size() < conf->number_of_replicas())
-                        {
-                            add_index_shard(cluster_name, *conf, key.idx, nodes);
-                        }
-                        else
-                        {
-                            remove_index_shards(cluster_name, *conf, key.idx, nodes);
-                        }
-                    }
-                    else
-                    {
-                        LOG(ERROR) << "No nodes exist for index:" << cluster_name << "_" << index_name;
-                    }
-                }
-                iit++;
+                LOG(ERROR) << "No conf exist for index:" << index_name;
+                it++;
+                continue;
             }
+            check_index_shard(conf, snodes);
             it++;
         }
     }
 
-    void Master::check_node_timeout(ShardNodeMetaTable& index_nodes)
+    void Master::check_node_timeout(RoutineContext& ctx)
     {
         int64_t now = butil::gettimeofday_ms();
-        std::lock_guard<std::mutex> guard(_cluster_mutex);
-        ClusterStateTable::iterator it = _cluster_states.begin();
-        while (it != _cluster_states.end())
+        std::lock_guard<bthread::Mutex> guard(_cluster_mutex);
+        ClusterState& s = _cluster_state;
+        for (int i = 0; i < s.nodes_size(); i++)
         {
-            const std::string& cluster_name = it->first;
-            ClusterState* s = it->second;
-            for (int i = 0; i < s->nodes_size(); i++)
+            if (now - s.nodes(i).last_active_ms() > FLAGS_node_heartbeat_timeout_ms)
             {
-                if (now - s->nodes(i).last_active_ms() > FLAGS_node_heartbeat_timeout_ms)
-                {
-                    LOG(INFO) << "Node:" << s->nodes(i).peer_id() << " is timeout.";
-                    s->mutable_nodes(i)->set_state(WNODE_TIMEOUT);
-                }
-                else
-                {
-                    WorkNode* node = s->mutable_nodes(i);
-                    if (node->state() == WNODE_ACTIVE)
-                    {
-                        for (int j = 0; j < node->shards_size(); j++)
-                        {
-                            ShardIndexKey key;
-                            key.cluster = cluster_name;
-                            key.index = node->shards(j).name();
-                            key.idx = node->shards(j).idx();
-                            ShardNodeMeta meta;
-                            meta.node_peer = node->peer_id();
-                            meta.is_leader = node->shards(j).is_leader();
-                            if (node->shards(j).is_leader())
-                            {
-                                index_nodes[key].push_front(meta);
-                            }
-                            else
-                            {
-                                index_nodes[key].push_back(meta);
-                            }
-                        }
-                    }
-                }
+                LOG(INFO) << "Node:" << s.nodes(i).peer_id() << " is timeout.";
+                s.mutable_nodes(i)->set_state(WNODE_TIMEOUT);
             }
-            it++;
         }
     }
 
     void Master::routine()
     {
         LOG(INFO) << "master routine";
-        ShardNodeMetaTable index_nodes;
-        check_node_timeout(index_nodes);
-        check_index(index_nodes);
+        RoutineContext ctx;
+        check_node_timeout(ctx);
+        check_index(ctx);
     }
     void Master::Run()
     {
@@ -322,7 +214,10 @@ namespace elasticfaiss
             {
                 break;
             }
-            routine();
+            if (is_leader())
+            {
+                routine();
+            }
         }
     }
 
@@ -393,12 +288,7 @@ namespace elasticfaiss
             return redirect(response);
         }
         response->set_success(true);
-        std::lock_guard<std::mutex> guard(_cluster_mutex);
-        auto found = _cluster_states.find(request->cluster());
-        if (found != _cluster_states.end())
-        {
-            response->mutable_state()->CopyFrom(*(found->second));
-        }
+        response->mutable_state()->CopyFrom(_cluster_state);
     }
 
     bool Master::is_leader() const
@@ -518,7 +408,7 @@ namespace elasticfaiss
 
     struct SnapshotArg
     {
-            ClusterStateTable states;
+            ClusterState state;
             braft::SnapshotWriter* writer;
             braft::Closure* done;
     };
@@ -533,10 +423,7 @@ namespace elasticfaiss
         LOG(INFO) << "Saving snapshot to " << snapshot_path;
         // Use protobuf to store the snapshot for backward compatibility.
         MasterSnapshot s;
-        for (auto kv : sa->states)
-        {
-            s.add_states()->CopyFrom(*(kv.second));
-        }
+        s.mutable_state()->CopyFrom(sa->state);
         braft::ProtoBufFile pb_file(snapshot_path);
         if (pb_file.save(&s, true) != 0)
         {
@@ -560,8 +447,8 @@ namespace elasticfaiss
         // file.
         SnapshotArg* arg = new SnapshotArg;
         {
-            std::lock_guard<std::mutex> guard(_cluster_mutex);
-            arg->states = _cluster_states;
+            std::lock_guard<bthread::Mutex> guard(_cluster_mutex);
+            arg->state = _cluster_state;
         }
         //arg->value = _value.load(butil::memory_order_relaxed);
         arg->writer = writer;
@@ -588,23 +475,23 @@ namespace elasticfaiss
             return -1;
         }
         {
-            std::lock_guard<std::mutex> guard(_cluster_mutex);
-            _cluster_workers.clear();
-            _cluster_states.clear();
-            LOG(INFO) << "all cluster size:" << s.states_size();
-            for (int i = 0; i < s.states_size(); i++)
+            std::lock_guard<bthread::Mutex> guard(_cluster_mutex);
+            _all_nodes.clear();
+            _cluster_state.Clear();
+            _shard_nodes.clear();
+            _cluster_state = s.state();
+            for (int j = 0; j < s.state().nodes_size(); j++)
             {
-                LOG(INFO) << "cluster:" << s.states(i).name();
-                ClusterState* st = new ClusterState;
-                _cluster_states[s.states(i).name()] = st;
-                st->CopyFrom(s.states(i));
-                for (int j = 0; j < st->nodes_size(); j++)
-                {
-                    LOG(INFO) << "cluster:" << s.states(i).name() << " add node peer:"
-                            << s.states(i).nodes(j).peer_id();
-                    _cluster_workers[s.states(i).name()][s.states(i).nodes(j).peer_id()] = st->mutable_nodes(j);
-                }
+                LOG(INFO) << "cluster add node peer:" << s.state().nodes(j).peer_id();
+                WorkNode* node = _cluster_state.mutable_nodes(j);
+                _all_nodes[s.state().nodes(j).peer_id()] = node;
             }
+            for (int j = 0; j < s.state().nodes_size(); j++)
+            {
+                WorkNode* node = _cluster_state.mutable_nodes(j);
+                update_data_shard_nodes(node, node->shards());
+            }
+            LOG(INFO) << "all cluster node size:" << _cluster_state.nodes_size();
         }
         return 0;
     }
@@ -644,20 +531,12 @@ namespace elasticfaiss
     int Master::handle_node_bootstrap(const ::elasticfaiss::BootstrapRequest* request,
             ::elasticfaiss::BootstrapResponse* response)
     {
-        const std::string& cluster_name = request->cluster();
         const std::string& node_peer = request->node_peer();
-        std::lock_guard<std::mutex> guard(_cluster_mutex);
-        WorkNode* wnode = _cluster_workers[cluster_name][node_peer];
-        ClusterState* cstate = _cluster_states[cluster_name];
-        if (NULL == cstate)
-        {
-            cstate = new ClusterState;
-            _cluster_states[cluster_name] = cstate;
-            cstate->set_name(cluster_name);
-        }
+        std::lock_guard<bthread::Mutex> guard(_cluster_mutex);
+        WorkNode* wnode = _all_nodes[node_peer];
         if (NULL == wnode)
         {
-            wnode = cstate->add_nodes();
+            wnode = _cluster_state.add_nodes();
             wnode->set_peer_id(node_peer);
         }
         int64_t active_ms = request->has_boot_ms() ? request->boot_ms() : butil::gettimeofday_ms();
@@ -670,36 +549,99 @@ namespace elasticfaiss
         }
         return 0;
     }
+
+    void Master::update_data_shard_nodes(const WorkNode* node,
+            const ::google::protobuf::RepeatedPtrField<Shard>& shards)
+    {
+        for (int32_t i = 0; i < shards.size(); i++)
+        {
+            const Shard& shard = shards.Get(i);
+            if (shard.is_leader())
+            {
+                ShardIndexKey key;
+                key.shard_idx = shard.idx();
+                key.index = shard.name();
+                ShardNodes* snodes = _shard_nodes[key];
+                if (NULL == snodes)
+                {
+                    snodes = new ShardNodes;
+                    _shard_nodes[key] = snodes;
+                }
+                snodes->shard_idx = key.shard_idx;
+                snodes->leader = node;
+                for (int32_t j = 0; j < shard.nodes_size(); j++)
+                {
+                    WorkNode* wnode = get_node(shard.nodes(j));
+                    if (NULL != wnode)
+                    {
+                        snodes->nodes.insert(wnode);
+                    }
+                    else
+                    {
+                        LOG(ERROR) << "No node found for peer:" << shard.nodes(j);
+                    }
+                }
+            }
+        }
+    }
+
+    template<typename T>
+    static bool compare_proto_repeated(const ::google::protobuf::RepeatedPtrField<T>& a,
+            const ::google::protobuf::RepeatedPtrField<T>& b)
+    {
+        if (a.size() != b.size())
+        {
+            return false;
+        }
+        for (int i = 0; i < a.size(); i++)
+        {
+            if (!google::protobuf::util::MessageDifferencer::Equals(a.Get(i), b.Get(i)))
+            {
+                return false;
+            }
+        }
+        return true;
+    }
+
     int Master::handle_node_heartbeat(const ::elasticfaiss::NodeHeartbeatRequest* request,
             ::elasticfaiss::NodeHeartbeatResponse* response)
     {
-        const std::string& cluster_name = request->cluster();
         const std::string& node_peer = request->node_peer();
+        std::lock_guard<bthread::Mutex> guard(_cluster_mutex);
+        auto found = _all_nodes.find(node_peer);
+        if (found == _all_nodes.end())
+        {
+            if (NULL != response)
+            {
+                response->set_success(false);
+            }
+            return 0;
+        }
+        WorkNode* wnode = found->second;
+        if (!compare_proto_repeated(wnode->shards(), request->shards()))
+        {
+            for (int32_t i = 0; i < wnode->shards_size(); i++)
+            {
+                const Shard& shard = wnode->shards(i);
+                if (shard.is_leader())
+                {
+                    ShardIndexKey key;
+                    key.index = shard.idx();
+                    key.index = shard.name();
+                    auto found = _shard_nodes.find(key);
+                    if (found != _shard_nodes.end())
+                    {
+                        delete found->second;
+                        _shard_nodes.erase(found);
+                    }
+                }
+            }
+            update_data_shard_nodes(wnode, request->shards());
+        }
 
-        std::lock_guard<std::mutex> guard(_cluster_mutex);
-        auto found = _cluster_workers.find(cluster_name);
-        if (found == _cluster_workers.end())
-        {
-            if (NULL != response)
-            {
-                response->set_success(false);
-            }
-            return 0;
-        }
-        auto found2 = found->second.find(node_peer);
-        if (found2 == found->second.end())
-        {
-            if (NULL != response)
-            {
-                response->set_success(false);
-            }
-            return 0;
-        }
-        else
-        {
-            int64_t active_tms = request->has_active_ms() ? request->active_ms() : butil::gettimeofday_ms();
-            found2->second->set_last_active_ms(active_tms);
-        }
+        wnode->mutable_shards()->CopyFrom(request->shards());
+        int64_t active_tms = request->has_active_ms() ? request->active_ms() : butil::gettimeofday_ms();
+        wnode->set_last_active_ms(active_tms);
         if (NULL != response)
         {
             response->set_success(true);
@@ -707,8 +649,7 @@ namespace elasticfaiss
         return 0;
     }
 
-    int Master::rpc_delete_index_shard(const std::string& cluster, const std::string& name, int32_t idx,
-            const std::string& node)
+    int Master::rpc_delete_index_shard(const std::string& name, int32_t idx, const std::string& node)
     {
         brpc::Channel channel;
         if (channel.Init(node.c_str(), NULL) != 0)
@@ -720,7 +661,6 @@ namespace elasticfaiss
         brpc::Controller cntl;
         cntl.set_timeout_ms(2000);
         DeleteShardRequest request;
-        request.set_cluster(cluster);
         request.set_name(name);
         request.set_idx(idx);
         //request.set_allocated_index_idx()
@@ -739,15 +679,8 @@ namespace elasticfaiss
         return 0;
     }
 
-    int Master::index_shard_add_peer(const std::string& cluster, const IndexConf& conf, int32_t idx,
-            const std::string& node, const std::string& all_nodes)
-    {
-
-        //braft::cli::add_peer();
-    }
-
-    int Master::rpc_create_index_shard(const std::string& cluster, const IndexConf& conf, int32_t idx,
-            const std::string& node, const std::string& all_nodes)
+    int Master::rpc_create_index_shard(const IndexConf& conf, int32_t shard_idx, const std::string& node,
+            const StringSet& nodes)
     {
         brpc::Channel channel;
         if (channel.Init(node.c_str(), NULL) != 0)
@@ -759,11 +692,12 @@ namespace elasticfaiss
         brpc::Controller cntl;
         cntl.set_timeout_ms(2000);
         CreateShardRequest request;
-        request.set_cluster(cluster);
-        request.mutable_conf()->CopyFrom(conf);
-        request.set_shard_nodes(all_nodes);
-        request.set_idx(idx);
-        //request.set_allocated_index_idx()
+        request.mutable_conf()->mutable_conf()->CopyFrom(conf);
+        request.mutable_conf()->set_shard_idx(shard_idx);
+        for (const auto& node : nodes)
+        {
+            request.mutable_conf()->add_nodes(node);
+        }
         CreateShardResponse response;
         stub.create_shard(&cntl, &request, &response, NULL);
         if (cntl.Failed())
@@ -779,27 +713,29 @@ namespace elasticfaiss
         return 0;
     }
 
-    int Master::transaction_create_index(const std::string& cluster, const IndexConf& conf)
+    int Master::transaction_create_index(const IndexConf& conf)
     {
         typedef std::map<ShardIndexKey, std::vector<std::string> > SuccessNodes;
         SuccessNodes success_nodes;
         bool create_index_fail = false;
         for (int32_t i = 0; i < conf.number_of_shards(); i++)
         {
-            std::vector<std::string> nodes;
+            StringSet nodes;
             StringSet empty;
             ShardIndexKey key;
-            key.cluster = cluster;
             key.index = conf.name();
-            key.idx = i;
+            key.shard_idx = i;
 
-            select_nodes4index(cluster, conf.number_of_replicas(), empty, nodes);
+            {
+                std::lock_guard<bthread::Mutex> guard(_cluster_mutex);
+                allocate_nodes4index(conf, empty, nodes);
+            }
+
             if ((int32_t) nodes.size() == conf.number_of_replicas())
             {
-                std::string nodes_str = string_join_container(nodes, ",");
                 for (auto& node : nodes)
                 {
-                    if (0 != rpc_create_index_shard(cluster, conf, i, node, nodes_str))
+                    if (0 != rpc_create_index_shard(conf, i, node, nodes))
                     {
                         create_index_fail = true;
                         break;
@@ -808,12 +744,6 @@ namespace elasticfaiss
                     {
                         success_nodes[key].push_back(node);
                     }
-                }
-                if (!create_index_fail)
-                {
-                    braft::Configuration cfg;
-                    cfg.parse_from(nodes_str);
-                    _cluster_shard_confs[key] = cfg;
                 }
             }
             else
@@ -833,14 +763,12 @@ namespace elasticfaiss
                 const ShardIndexKey& key = it->first;
                 for (size_t i = 0; i < it->second.size(); i++)
                 {
-                    rpc_delete_index_shard(cluster, conf.name(), key.idx, it->second[i]);
+                    rpc_delete_index_shard(conf.name(), key.shard_idx, it->second[i]);
                 }
-                _cluster_shard_confs.erase(key);
                 it++;
             }
             auto closure = new MessagePairClosure<DeleteIndexRequest, DeleteIndexResponse>;
             DeleteIndexRequest& dreq = closure->req;
-            dreq.set_cluster(cluster);
             dreq.set_index_name(conf.name());
             DeleteIndexResponse& dres = closure->res;
             applyRPC(&dreq, OP_DELETE_INDEX, &dres, closure);
@@ -848,24 +776,46 @@ namespace elasticfaiss
         return create_index_fail ? -1 : 0;
     }
 
+    WorkNode* Master::get_node(const std::string& name)
+    {
+        auto found = _all_nodes.find(name);
+        if (found == _all_nodes.end())
+        {
+            return NULL;
+        }
+        return found->second;
+    }
+
+    bool Master::get_index_conf(const std::string& name, IndexConf& conf)
+    {
+        std::lock_guard<bthread::Mutex> guard(_index_mutex);
+        auto found = _data_index_confs.find(name);
+        if (found == _data_index_confs.end())
+        {
+            return false;
+        }
+        conf.CopyFrom(*(found->second));
+        return true;
+    }
+
     int Master::handle_create_index(const ::elasticfaiss::CreateIndexRequest* request,
             ::elasticfaiss::CreateIndexResponse* response)
     {
-        const std::string& cluster_name = request->cluster();
         const std::string& index_name = request->conf().name();
+        const std::string& key = index_name;
         {
-            std::lock_guard<std::mutex> guard(_index_mutex);
-            IndexConf* conf = _cluster_index_confs[cluster_name][index_name];
+            std::lock_guard<bthread::Mutex> guard(_index_mutex);
+            IndexConf* conf = _data_index_confs[key];
             if (NULL == conf)
             {
                 conf = new IndexConf;
                 conf->CopyFrom(request->conf());
-                _cluster_index_confs[cluster_name][index_name] = conf;
+                _data_index_confs[key] = conf;
             }
         }
         if (NULL != response)  //leader peer do later work
         {
-            int ret = transaction_create_index(cluster_name, request->conf());
+            int ret = transaction_create_index(request->conf());
             if (0 != ret)
             {
                 response->set_success(false);
@@ -881,52 +831,41 @@ namespace elasticfaiss
     int Master::handle_delete_index(const ::elasticfaiss::DeleteIndexRequest* request,
             ::elasticfaiss::DeleteIndexResponse* response)
     {
-        const std::string& cluster_name = request->cluster();
         const std::string& index_name = request->index_name();
+        const std::string& key = index_name;
+        int32_t num_of_shards = 0;
+        std::vector<ShardNodes> to_delete;
         {
-            std::lock_guard<std::mutex> guard(_index_mutex);
-            IndexConfTable& t = _cluster_index_confs[cluster_name];
-            IndexConfTable::iterator found = t.find(index_name);
-            if (found != t.end())
+            std::lock_guard<bthread::Mutex> guard(_index_mutex);
+            auto found = _data_index_confs.find(key);
+            if (found != _data_index_confs.end())
             {
                 IndexConf* conf = found->second;
-                for (int32_t i = 0; i < conf->number_of_shards(); i++)
+                num_of_shards = conf->number_of_shards();
+                for (int32_t i = 0; i < num_of_shards; i++)
                 {
                     ShardIndexKey key;
-                    key.cluster = cluster_name;
                     key.index = index_name;
-                    key.idx = i;
-                    _cluster_shard_confs.erase(key);
+                    key.shard_idx = i;
+                    ShardNodeTable::iterator found = _shard_nodes.find(key);
+                    if (found != _shard_nodes.end())
+                    {
+                        to_delete.push_back(*found->second);
+                    }
                 }
-                delete found->second;
-                t.erase(found);
+                delete conf;
+                _data_index_confs.erase(found);
             }
         }
         if (NULL != response)
         {
             response->set_success(true);
-            typedef std::pair<std::string, int32_t> NodeWithIdx;
-            typedef std::vector<NodeWithIdx> NodeWithIdxArray;
-            NodeWithIdxArray to_delete;
+            for (auto& snode : to_delete)
             {
-                std::lock_guard<std::mutex> guard(_index_mutex);
-                WorkNodeTable& nodes = _cluster_workers[cluster_name];
-                for (auto& kv : nodes)
+                for (auto& node : snode.nodes)
                 {
-                    const std::string& peer_id = kv.first;
-                    WorkNode* node = kv.second;
-                    for (int i = 0; i < node->shards_size(); i++)
-                    {
-                        if (node->shards(i).name() == index_name)
-                        {
-                            to_delete.push_back(std::make_pair(peer_id, node->shards(i).idx()));
-                        }
-                    }
+                    rpc_delete_index_shard(index_name, snode.shard_idx, node->peer_id());
                 }
-            }
-            for (auto& node_idx : to_delete)
-            {
-                rpc_delete_index_shard(cluster_name, index_name, node_idx.second, node_idx.first);
             }
         }
         return 0;

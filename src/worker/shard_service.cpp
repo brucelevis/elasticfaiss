@@ -13,27 +13,29 @@ namespace elasticfaiss
 {
     ShardManager g_shards;
 
-    std::string cluster_group_name(const std::string& cluster, const std::string& index, int32_t shard_idx)
+    std::string shard_cluster_name(const std::string& index, int32_t shard_idx)
     {
         std::stringstream cluster_group;
-        cluster_group << cluster << "_" << index << shard_idx;
+        cluster_group << index << "_" << shard_idx;
         return cluster_group.str();
     }
-    int ShardNode::start(const CreateShardRequest& req)
+    int ShardNode::start(const IndexShardConf& req)
     {
         braft::NodeOptions node_options;
-        if (node_options.initial_conf.parse_from(req.shard_nodes()) != 0)
+        std::string nodes_str = string_join_container(req.nodes(), ",");
+        //node_options.initial_conf.add_peer(req.nodes_size())
+        if (node_options.initial_conf.parse_from(nodes_str) != 0)
         {
-            LOG(ERROR) << "Fail to parse configuration `" << req.shard_nodes() << '\'';
+            LOG(ERROR) << "Fail to parse configuration '" << nodes_str << "'";
             return -1;
         }
         _init_conf = req;
-        std::string index_group = cluster_group_name(req.cluster(), req.conf().name(), req.idx());
+        std::string index_group = shard_cluster_name(req.conf().name(), req.shard_idx());
         node_options.election_timeout_ms = g_election_timeout_ms;
         node_options.fsm = this;
         node_options.node_owns_fsm = false;
         node_options.snapshot_interval_s = FLAGS_shard_snapshot_interval;
-        std::string prefix = "local://" + g_home + "/shards/" + req.cluster() + "/" + index_group;
+        std::string prefix = "local://" + g_home + "/shards/" + index_group;
         node_options.log_uri = prefix + "/log";
         node_options.raft_meta_uri = prefix + "/raft_meta";
         node_options.snapshot_uri = prefix + "/snapshot";
@@ -47,6 +49,7 @@ namespace elasticfaiss
             return -1;
         }
         _node = node;
+        _state = SHARD_ACTIVE;
         return 0;
     }
     void ShardNode::on_apply(braft::Iterator& iter)
@@ -61,42 +64,18 @@ namespace elasticfaiss
     {
         return 0;
     }
-    int ShardManager::sync_shards_info()
+    int ShardManager::load_shards(const BootstrapResponse& conf)
     {
-        _init_conf.Clear();
-        auto it = _shards.begin();
-        while (it != _shards.end())
+        for (int i = 0; i < conf.shards_size(); i++)
         {
-            ShardNode* node = it->second;
-            const CreateShardRequest& conf = node->get_init_conf();
-            _init_conf.add_shards()->CopyFrom(conf);
-            it++;
-        }
-        braft::ProtoBufFile pb_file(_init_conf_path);
-        if (pb_file.save(&_init_conf, true) != 0)
-        {
-            LOG(ERROR) << "Fail to save shards info pb_file";
-            return -1;
+            create_shard(conf.shards(i));
         }
         return 0;
     }
-    int ShardManager::load_shards()
-    {
-        braft::ProtoBufFile pb_file(_init_conf_path);
-        if (pb_file.load(&_init_conf) != 0)
-        {
-            return 0;
-        }
-        for (int i = 0; i < _init_conf.shards_size(); i++)
-        {
-            create_shard(_init_conf.shards(i));
-        }
-        return 0;
-    }
-    int ShardManager::init()
+    int ShardManager::init(const BootstrapResponse& conf)
     {
         _init_conf_path = g_home + "/shards/shards.pb";
-        return load_shards();
+        return load_shards(conf);
     }
 
     void ShardManager::fill_heartbeat_request(NodeHeartbeatRequest& req)
@@ -107,22 +86,21 @@ namespace elasticfaiss
         {
             ShardNode* node = it->second;
             Shard* shard = req.add_shards();
-            shard->set_name(node->get_init_conf().conf().name());
-            shard->set_idx(node->get_init_conf().idx());
+            shard->set_idx(node->get_init_conf().shard_idx());
             shard->set_is_leader(node->is_leader());
             shard->set_state(node->get_state());
             it++;
         }
     }
 
-    int ShardManager::create_shard(const CreateShardRequest& req)
+    int ShardManager::create_shard(const IndexShardConf& req)
     {
         std::lock_guard<std::mutex> guard(_shards_mutex);
-        ShardNodeId id(req.conf().name(), req.idx());
+        ShardNodeId id(req.conf().name(), req.shard_idx());
         ShardNodeTable::iterator found = _shards.find(id);
         if (found != _shards.end())
         {
-            LOG(ERROR) << "Duplicate index with name:" << req.conf().name() << " & idx:" << req.idx();
+            LOG(ERROR) << "Duplicate index with name:" << req.conf().name() << " & idx:" << req.shard_idx();
             return -1;
         }
         ShardNode* node = new ShardNode;
@@ -133,7 +111,6 @@ namespace elasticfaiss
             return -1;
         }
         _shards.insert(ShardNodeTable::value_type(id, node));
-        sync_shards_info();
         return 0;
     }
 
@@ -151,7 +128,6 @@ namespace elasticfaiss
         node->shutdown();
         delete node;
         _shards.erase(found);
-        sync_shards_info();
         return 0;
     }
 }
