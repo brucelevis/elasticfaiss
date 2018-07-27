@@ -23,13 +23,14 @@ namespace elasticfaiss
         private:
             butil::WaitableEvent _bg_event;
             std::atomic<bool> _running;
+            std::atomic<bool> _inited;
             BootstrapResponse _boot_res;
             void Run();
             int report_bootstrap();
             void report_heartbeat();
         public:
             explicit WorkNodeServiceImpl()
-                    : butil::SimpleThread("node_background"), _bg_event(false, false), _running(false)
+                    : butil::SimpleThread("node_background"), _bg_event(false, false), _running(false),_inited(false)
             {
             }
             int init();

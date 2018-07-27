@@ -71,21 +71,12 @@ int main(int argc, char* argv[])
     elasticfaiss::WorkNodeServiceImpl node_service;
     if (FLAGS_data)
     {
-        auto start_node_func = [&]()
+        if (server.AddService(&node_service, brpc::SERVER_DOESNT_OWN_SERVICE) != 0)
         {
-            if(0 != node_service.init())
-            {
-                LOG(ERROR) << "Fail to init shards service.";
-                return;
-            }
-            if (server.AddService(&node_service, brpc::SERVER_DOESNT_OWN_SERVICE) != 0)
-            {
-                LOG(ERROR) << "Fail to add node service";
-                return;
-            }
-            node_service.Start();
-        };
-        elasticfaiss::start_bthread_function(start_node_func);
+            LOG(ERROR) << "Fail to add node service";
+            return -1;
+        }
+        node_service.Start();
     }
     if (FLAGS_proxy)
     {

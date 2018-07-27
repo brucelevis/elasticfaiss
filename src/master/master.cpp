@@ -199,7 +199,7 @@ namespace elasticfaiss
 
     void Master::routine()
     {
-        LOG(INFO) << "master routine";
+        //LOG(INFO) << "master routine";
         RoutineContext ctx;
         check_node_timeout(ctx);
         check_index(ctx);
@@ -538,6 +538,7 @@ namespace elasticfaiss
         {
             wnode = _cluster_state.add_nodes();
             wnode->set_peer_id(node_peer);
+            _all_nodes[node_peer] = wnode;
         }
         int64_t active_ms = request->has_boot_ms() ? request->boot_ms() : butil::gettimeofday_ms();
         wnode->set_last_active_ms(active_ms);
@@ -611,6 +612,7 @@ namespace elasticfaiss
         auto found = _all_nodes.find(node_peer);
         if (found == _all_nodes.end())
         {
+            LOG(ERROR) << "No node found for peer:" << node_peer;
             if (NULL != response)
             {
                 response->set_success(false);

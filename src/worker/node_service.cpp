@@ -21,8 +21,18 @@ namespace elasticfaiss
 {
     void WorkNodeServiceImpl::Run()
     {
-        _running = true;
         braft::rtb::update_configuration(g_master_group, g_masters);
+        butil::TimeDelta retry_init_time = butil::TimeDelta::FromMilliseconds(1500);
+        _running = true;
+        while(0 != init())
+        {
+            if (!_running)
+            {
+                return;
+            }
+            _bg_event.TimedWait(retry_init_time);
+        }
+        _inited = true;
         butil::TimeDelta wtime = butil::TimeDelta::FromMilliseconds(3000);
         while (_running)
         {
@@ -40,14 +50,14 @@ namespace elasticfaiss
     {
         if (cntl.Failed())
         {
-            LOG(ERROR) << "Fail to send request to " << leader << " : " << cntl.ErrorText();
+            LOG(ERROR) << "Fail to send request with response type:" << response.GetTypeName() << " to " << leader << " : " << cntl.ErrorText();
             // Clear leadership since this RPC failed.
             braft::rtb::update_leader(g_master_group, braft::PeerId());
             return true;
         }
         if (!response.success())
         {
-            LOG(ERROR) << "Fail to send request to " << leader << ", redirecting to "
+            LOG(ERROR) << "Fail to send request with response type:" << response.GetTypeName() << " to " << leader << ", redirecting to "
                     << (response.has_redirect() ? response.redirect() : "nowhere");
             // Update route table since we have redirect information
             return true;;
@@ -68,6 +78,9 @@ namespace elasticfaiss
     int WorkNodeServiceImpl::report_bootstrap()
     {
         braft::PeerId leader;
+        braft::Configuration master_conf;
+        master_conf.parse_from(g_masters);
+        braft::rtb::update_configuration(g_master_group, master_conf);
         if (braft::rtb::select_leader(g_master_group, &leader) != 0)
         {
             butil::Status st = braft::rtb::refresh_leader(g_master_group, 2000);
@@ -76,8 +89,9 @@ namespace elasticfaiss
                 LOG(ERROR) << "Fail to refresh_leader : " << st;
                 return -1;
             }
+            return 0;
         }
-
+        LOG(INFO) << "Master leader is " << leader;
         // Now we known who is the leader, construct Stub and then sending
         // rpc
         brpc::Channel channel;
@@ -151,7 +165,7 @@ namespace elasticfaiss
             ::google::protobuf::Closure* done)
     {
         brpc::ClosureGuard done_guard(done);
-        if (0 != g_shards.create_shard(request->conf()))
+        if (_inited && 0 != g_shards.create_shard(request->conf()))
         {
             response->set_success(false);
         }
@@ -166,7 +180,7 @@ namespace elasticfaiss
             ::google::protobuf::Closure* done)
     {
         brpc::ClosureGuard done_guard(done);
-        if (0 != g_shards.remove_shard(*request))
+        if (_inited && 0 != g_shards.remove_shard(*request))
         {
             response->set_success(false);
         }
