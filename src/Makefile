@@ -62,6 +62,13 @@ LEVELDB_INCLUDE=${LEVELDB_PATH}
 LEVELDB_LIBPATH=${LEVELDB_PATH}/out-static
 DEP_LIBS+= ${LEVELDB_LIBA}
 
+ROCKSDB_VER=5.14.2
+ROCKSDB_PATH=${LIB_PATH}/rocksdb-${ROCKSDB_VER}
+ROCKSDB_REMOTE_FILE=https://github.com/facebook/rocksdb/archive/v${ROCKSDB_VER}.tar.gz
+ROCKSDB_FILE=${ROCKSDB_PATH}.tar.gz
+ROCKSDB_LIBA=${ROCKSDB_PATH}/librocksdb.a
+DEP_LIBS+= ${ROCKSDB_LIBA}
+
 GFLAGS_VER=2.2.1
 GFLAGS_PATH=${LIB_PATH}/gflags-${GFLAGS_VER}
 GFLAGS_FILE=${GFLAGS_PATH}.tar.gz
@@ -132,7 +139,7 @@ CXXFLAGS=-Wall -std=c++11 -g ${OPT}  -fPIC -D__STDC_FORMAT_MACROS -D__STDC_LIMIT
 CCFLAGS=-Wall -std=gnu99 ${OPT} -fPIC -pedantic -g -D__STDC_FORMAT_MACROS -DBRPC_WITH_GLOG=0 -DGFLAGS_NS=google 
 LDFLAGS=-g
 
-INCS=-I./ -I${GFLAGS_INCLUDE} -I${GLOG_INCLUDE} -I${LEVELDB_INCLUDE} -I${BRPC_INCLUDE} -I${BRAFT_INCLUDE} -I${BRAFT_PATH}/build -I${FAISS_INCLUDE} -I${PROTOBUF_INCLUDE}
+INCS=-I./ -I${ROCKSDB_PATH}/include -I${GFLAGS_INCLUDE} -I${GLOG_INCLUDE} -I${LEVELDB_INCLUDE} -I${BRPC_INCLUDE} -I${BRAFT_INCLUDE} -I${BRAFT_PATH}/build -I${FAISS_INCLUDE} -I${PROTOBUF_INCLUDE}
 
 ARDB_CC=$(QUIET_CC)$(CC) $(CCFLAGS)
 #ARDB_CXX=$(QUIET_CXX)$(CXX) $(CXXFLAGS)
@@ -204,7 +211,7 @@ COMMON_OBJECTS := $(patsubst %.cpp, %.o, $(COMMON_CPPFILES)) $(patsubst %.c, %.o
 
 CORE_OBJECTS := $(COMMON_OBJECTS)
 
-MASTEROBJ := common/helper.o master/master.o worker/node_service.o worker/shard_service.o proto/master.pb.o proto/work_node.pb.o proto/shard.pb.o main.o
+MASTEROBJ := common/helper.o master/master.o worker/local_db.o worker/node_service.o worker/shard_service.o proto/master.pb.o proto/work_node.pb.o proto/shard.pb.o main.o
 CLIENTOBJ := counter/client.o  counter/counter.pb.o
 
 #
@@ -224,10 +231,7 @@ $(DIST_LIBA):$(STORAGE_ENGINE_OBJ) $(CORE_OBJECTS)
 lib: $(DEP_LIBS) 
 
 master: ${MASTEROBJ}
-	${ARDB_LD} -o tserver $(MASTEROBJ) $(LIBS)
-
-client: ${CLIENTOBJ}
-	${ARDB_LD} -o tclient $(CLIENTOBJ) $(LIBS)
+	${ARDB_LD} -o elasticfaiss $(MASTEROBJ) $(LIBS)
 
 .PHONY: jemalloc
 jemalloc: $(JEMALLOC_LIBA)
@@ -267,6 +271,32 @@ ${SNAPPY_FILE}:
 	cd ${LIB_PATH} && \
 	wget -O ${SNAPPY_FILE} ${SNAPPY_REMOTE_FILE} && \
 	echo "<<<<< Done dowloading Snappy"
+
+.PHONY: rocksdb
+rocksdb: $(ROCKSDB_LIBA) rocksdb_flags
+
+.PHONY: rocksdb_flags
+rocksdb_flags:
+	$(eval ROCKSDB_LDFLAGS=$(shell grep PLATFORM_LDFLAGS $(ROCKSDB_PATH)/make_config.mk | cut -d '=' -f2 | sed 's/\-lsnappy//' | sed 's/\-lrt//' | sed 's/\-lpthread//'))
+	$(eval LIBS+=$(ROCKSDB_LDFLAGS))
+
+$(ROCKSDB_LIBA): $(ROCKSDB_PATH)
+	@echo ">>>>> Building ROCKSDB" && \
+	cd ${ROCKSDB_PATH} && \
+	CXXFLAGS="-I${SNAPPY_PATH}" CFLAGS="-I${SNAPPY_PATH}" LDFLAGS="${SNAPPY_PATH}/.libs" USE_RTTI=1 $(MAKE) static_lib && \
+	echo "<<<<< Done building ROCKSDB"
+
+$(ROCKSDB_PATH): ${ROCKSDB_FILE}
+	@echo ">>>>> Unpacking ROCKSDB" && \
+	cd ${LIB_PATH} && \
+	tar zxf ${ROCKSDB_FILE} && \
+	echo "<<<<< Done unpacking ROCKSDB"
+
+${ROCKSDB_FILE}:
+	@echo ">>>>> Dowloading RocksDB" && \
+	cd ${LIB_PATH} && \
+	wget -O ${ROCKSDB_FILE} ${ROCKSDB_REMOTE_FILE} && \
+	echo "<<<<< Done dowloading RocksDB"
 
 .PHONY: leveldb
 leveldb: $(LEVELDB_LIBA)
@@ -417,7 +447,7 @@ ${FAISS_FILE}:
 	echo "<<<<< Done dowloading faiss"
 
 .PHONY: deps
-deps: jemalloc leveldb gflags glog brpc braft protobuf gen_proto
+deps: jemalloc snappy leveldb gflags glog brpc braft protobuf rocksdb gen_proto
 
 .PHONY: gen_proto
 gen_proto:

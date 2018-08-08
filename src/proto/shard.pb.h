@@ -88,184 +88,6 @@ inline bool ShardState_Parse(
 }
 // ===================================================================
 
-class Shard : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:elasticfaiss.Shard) */ {
- public:
-  Shard();
-  virtual ~Shard();
-
-  Shard(const Shard& from);
-
-  inline Shard& operator=(const Shard& from) {
-    CopyFrom(from);
-    return *this;
-  }
-  #if LANG_CXX11
-  Shard(Shard&& from) noexcept
-    : Shard() {
-    *this = ::std::move(from);
-  }
-
-  inline Shard& operator=(Shard&& from) noexcept {
-    if (GetArenaNoVirtual() == from.GetArenaNoVirtual()) {
-      if (this != &from) InternalSwap(&from);
-    } else {
-      CopyFrom(from);
-    }
-    return *this;
-  }
-  #endif
-  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
-    return _internal_metadata_.unknown_fields();
-  }
-  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
-    return _internal_metadata_.mutable_unknown_fields();
-  }
-
-  static const ::google::protobuf::Descriptor* descriptor();
-  static const Shard& default_instance();
-
-  static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
-  static inline const Shard* internal_default_instance() {
-    return reinterpret_cast<const Shard*>(
-               &_Shard_default_instance_);
-  }
-  static constexpr int kIndexInFileMessages =
-    0;
-
-  void Swap(Shard* other);
-  friend void swap(Shard& a, Shard& b) {
-    a.Swap(&b);
-  }
-
-  // implements Message ----------------------------------------------
-
-  inline Shard* New() const final {
-    return CreateMaybeMessage<Shard>(NULL);
-  }
-
-  Shard* New(::google::protobuf::Arena* arena) const final {
-    return CreateMaybeMessage<Shard>(arena);
-  }
-  void CopyFrom(const ::google::protobuf::Message& from) final;
-  void MergeFrom(const ::google::protobuf::Message& from) final;
-  void CopyFrom(const Shard& from);
-  void MergeFrom(const Shard& from);
-  void Clear() final;
-  bool IsInitialized() const final;
-
-  size_t ByteSizeLong() const final;
-  bool MergePartialFromCodedStream(
-      ::google::protobuf::io::CodedInputStream* input) final;
-  void SerializeWithCachedSizes(
-      ::google::protobuf::io::CodedOutputStream* output) const final;
-  ::google::protobuf::uint8* InternalSerializeWithCachedSizesToArray(
-      bool deterministic, ::google::protobuf::uint8* target) const final;
-  int GetCachedSize() const final { return _cached_size_.Get(); }
-
-  private:
-  void SharedCtor();
-  void SharedDtor();
-  void SetCachedSize(int size) const final;
-  void InternalSwap(Shard* other);
-  private:
-  inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
-    return NULL;
-  }
-  inline void* MaybeArenaPtr() const {
-    return NULL;
-  }
-  public:
-
-  ::google::protobuf::Metadata GetMetadata() const final;
-
-  // nested types ----------------------------------------------------
-
-  // accessors -------------------------------------------------------
-
-  // repeated string nodes = 5;
-  int nodes_size() const;
-  void clear_nodes();
-  static const int kNodesFieldNumber = 5;
-  const ::std::string& nodes(int index) const;
-  ::std::string* mutable_nodes(int index);
-  void set_nodes(int index, const ::std::string& value);
-  #if LANG_CXX11
-  void set_nodes(int index, ::std::string&& value);
-  #endif
-  void set_nodes(int index, const char* value);
-  void set_nodes(int index, const char* value, size_t size);
-  ::std::string* add_nodes();
-  void add_nodes(const ::std::string& value);
-  #if LANG_CXX11
-  void add_nodes(::std::string&& value);
-  #endif
-  void add_nodes(const char* value);
-  void add_nodes(const char* value, size_t size);
-  const ::google::protobuf::RepeatedPtrField< ::std::string>& nodes() const;
-  ::google::protobuf::RepeatedPtrField< ::std::string>* mutable_nodes();
-
-  // required string name = 1;
-  bool has_name() const;
-  void clear_name();
-  static const int kNameFieldNumber = 1;
-  const ::std::string& name() const;
-  void set_name(const ::std::string& value);
-  #if LANG_CXX11
-  void set_name(::std::string&& value);
-  #endif
-  void set_name(const char* value);
-  void set_name(const char* value, size_t size);
-  ::std::string* mutable_name();
-  ::std::string* release_name();
-  void set_allocated_name(::std::string* name);
-
-  // required int32 idx = 2;
-  bool has_idx() const;
-  void clear_idx();
-  static const int kIdxFieldNumber = 2;
-  ::google::protobuf::int32 idx() const;
-  void set_idx(::google::protobuf::int32 value);
-
-  // optional bool is_leader = 3;
-  bool has_is_leader() const;
-  void clear_is_leader();
-  static const int kIsLeaderFieldNumber = 3;
-  bool is_leader() const;
-  void set_is_leader(bool value);
-
-  // required int32 state = 4;
-  bool has_state() const;
-  void clear_state();
-  static const int kStateFieldNumber = 4;
-  ::google::protobuf::int32 state() const;
-  void set_state(::google::protobuf::int32 value);
-
-  // @@protoc_insertion_point(class_scope:elasticfaiss.Shard)
- private:
-  void set_has_name();
-  void clear_has_name();
-  void set_has_idx();
-  void clear_has_idx();
-  void set_has_is_leader();
-  void clear_has_is_leader();
-  void set_has_state();
-  void clear_has_state();
-
-  // helper for ByteSizeLong()
-  size_t RequiredFieldsByteSizeFallback() const;
-
-  ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
-  ::google::protobuf::internal::HasBits<1> _has_bits_;
-  mutable ::google::protobuf::internal::CachedSize _cached_size_;
-  ::google::protobuf::RepeatedPtrField< ::std::string> nodes_;
-  ::google::protobuf::internal::ArenaStringPtr name_;
-  ::google::protobuf::int32 idx_;
-  bool is_leader_;
-  ::google::protobuf::int32 state_;
-  friend struct ::protobuf_shard_2eproto::TableStruct;
-};
-// -------------------------------------------------------------------
-
 class IndexConf : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:elasticfaiss.IndexConf) */ {
  public:
   IndexConf();
@@ -308,7 +130,7 @@ class IndexConf : public ::google::protobuf::Message /* @@protoc_insertion_point
                &_IndexConf_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    1;
+    0;
 
   void Swap(IndexConf* other);
   friend void swap(IndexConf& a, IndexConf& b) {
@@ -425,6 +247,184 @@ class IndexConf : public ::google::protobuf::Message /* @@protoc_insertion_point
   ::google::protobuf::internal::ArenaStringPtr type_;
   ::google::protobuf::int32 number_of_shards_;
   ::google::protobuf::int32 number_of_replicas_;
+  friend struct ::protobuf_shard_2eproto::TableStruct;
+};
+// -------------------------------------------------------------------
+
+class Shard : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:elasticfaiss.Shard) */ {
+ public:
+  Shard();
+  virtual ~Shard();
+
+  Shard(const Shard& from);
+
+  inline Shard& operator=(const Shard& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  #if LANG_CXX11
+  Shard(Shard&& from) noexcept
+    : Shard() {
+    *this = ::std::move(from);
+  }
+
+  inline Shard& operator=(Shard&& from) noexcept {
+    if (GetArenaNoVirtual() == from.GetArenaNoVirtual()) {
+      if (this != &from) InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+  #endif
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _internal_metadata_.unknown_fields();
+  }
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return _internal_metadata_.mutable_unknown_fields();
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const Shard& default_instance();
+
+  static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
+  static inline const Shard* internal_default_instance() {
+    return reinterpret_cast<const Shard*>(
+               &_Shard_default_instance_);
+  }
+  static constexpr int kIndexInFileMessages =
+    1;
+
+  void Swap(Shard* other);
+  friend void swap(Shard& a, Shard& b) {
+    a.Swap(&b);
+  }
+
+  // implements Message ----------------------------------------------
+
+  inline Shard* New() const final {
+    return CreateMaybeMessage<Shard>(NULL);
+  }
+
+  Shard* New(::google::protobuf::Arena* arena) const final {
+    return CreateMaybeMessage<Shard>(arena);
+  }
+  void CopyFrom(const ::google::protobuf::Message& from) final;
+  void MergeFrom(const ::google::protobuf::Message& from) final;
+  void CopyFrom(const Shard& from);
+  void MergeFrom(const Shard& from);
+  void Clear() final;
+  bool IsInitialized() const final;
+
+  size_t ByteSizeLong() const final;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input) final;
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const final;
+  ::google::protobuf::uint8* InternalSerializeWithCachedSizesToArray(
+      bool deterministic, ::google::protobuf::uint8* target) const final;
+  int GetCachedSize() const final { return _cached_size_.Get(); }
+
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const final;
+  void InternalSwap(Shard* other);
+  private:
+  inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
+    return NULL;
+  }
+  inline void* MaybeArenaPtr() const {
+    return NULL;
+  }
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const final;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // repeated string nodes = 5;
+  int nodes_size() const;
+  void clear_nodes();
+  static const int kNodesFieldNumber = 5;
+  const ::std::string& nodes(int index) const;
+  ::std::string* mutable_nodes(int index);
+  void set_nodes(int index, const ::std::string& value);
+  #if LANG_CXX11
+  void set_nodes(int index, ::std::string&& value);
+  #endif
+  void set_nodes(int index, const char* value);
+  void set_nodes(int index, const char* value, size_t size);
+  ::std::string* add_nodes();
+  void add_nodes(const ::std::string& value);
+  #if LANG_CXX11
+  void add_nodes(::std::string&& value);
+  #endif
+  void add_nodes(const char* value);
+  void add_nodes(const char* value, size_t size);
+  const ::google::protobuf::RepeatedPtrField< ::std::string>& nodes() const;
+  ::google::protobuf::RepeatedPtrField< ::std::string>* mutable_nodes();
+
+  // required string name = 1;
+  bool has_name() const;
+  void clear_name();
+  static const int kNameFieldNumber = 1;
+  const ::std::string& name() const;
+  void set_name(const ::std::string& value);
+  #if LANG_CXX11
+  void set_name(::std::string&& value);
+  #endif
+  void set_name(const char* value);
+  void set_name(const char* value, size_t size);
+  ::std::string* mutable_name();
+  ::std::string* release_name();
+  void set_allocated_name(::std::string* name);
+
+  // required int32 idx = 2;
+  bool has_idx() const;
+  void clear_idx();
+  static const int kIdxFieldNumber = 2;
+  ::google::protobuf::int32 idx() const;
+  void set_idx(::google::protobuf::int32 value);
+
+  // optional bool is_leader = 3;
+  bool has_is_leader() const;
+  void clear_is_leader();
+  static const int kIsLeaderFieldNumber = 3;
+  bool is_leader() const;
+  void set_is_leader(bool value);
+
+  // optional int32 state = 4;
+  bool has_state() const;
+  void clear_state();
+  static const int kStateFieldNumber = 4;
+  ::google::protobuf::int32 state() const;
+  void set_state(::google::protobuf::int32 value);
+
+  // @@protoc_insertion_point(class_scope:elasticfaiss.Shard)
+ private:
+  void set_has_name();
+  void clear_has_name();
+  void set_has_idx();
+  void clear_has_idx();
+  void set_has_is_leader();
+  void clear_has_is_leader();
+  void set_has_state();
+  void clear_has_state();
+
+  // helper for ByteSizeLong()
+  size_t RequiredFieldsByteSizeFallback() const;
+
+  ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
+  ::google::protobuf::internal::HasBits<1> _has_bits_;
+  mutable ::google::protobuf::internal::CachedSize _cached_size_;
+  ::google::protobuf::RepeatedPtrField< ::std::string> nodes_;
+  ::google::protobuf::internal::ArenaStringPtr name_;
+  ::google::protobuf::int32 idx_;
+  bool is_leader_;
+  ::google::protobuf::int32 state_;
   friend struct ::protobuf_shard_2eproto::TableStruct;
 };
 // -------------------------------------------------------------------
@@ -642,217 +642,6 @@ class ShardService_Stub : public ShardService {
   #pragma GCC diagnostic push
   #pragma GCC diagnostic ignored "-Wstrict-aliasing"
 #endif  // __GNUC__
-// Shard
-
-// required string name = 1;
-inline bool Shard::has_name() const {
-  return (_has_bits_[0] & 0x00000001u) != 0;
-}
-inline void Shard::set_has_name() {
-  _has_bits_[0] |= 0x00000001u;
-}
-inline void Shard::clear_has_name() {
-  _has_bits_[0] &= ~0x00000001u;
-}
-inline void Shard::clear_name() {
-  name_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  clear_has_name();
-}
-inline const ::std::string& Shard::name() const {
-  // @@protoc_insertion_point(field_get:elasticfaiss.Shard.name)
-  return name_.GetNoArena();
-}
-inline void Shard::set_name(const ::std::string& value) {
-  set_has_name();
-  name_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
-  // @@protoc_insertion_point(field_set:elasticfaiss.Shard.name)
-}
-#if LANG_CXX11
-inline void Shard::set_name(::std::string&& value) {
-  set_has_name();
-  name_.SetNoArena(
-    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
-  // @@protoc_insertion_point(field_set_rvalue:elasticfaiss.Shard.name)
-}
-#endif
-inline void Shard::set_name(const char* value) {
-  GOOGLE_DCHECK(value != NULL);
-  set_has_name();
-  name_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
-  // @@protoc_insertion_point(field_set_char:elasticfaiss.Shard.name)
-}
-inline void Shard::set_name(const char* value, size_t size) {
-  set_has_name();
-  name_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
-      ::std::string(reinterpret_cast<const char*>(value), size));
-  // @@protoc_insertion_point(field_set_pointer:elasticfaiss.Shard.name)
-}
-inline ::std::string* Shard::mutable_name() {
-  set_has_name();
-  // @@protoc_insertion_point(field_mutable:elasticfaiss.Shard.name)
-  return name_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-}
-inline ::std::string* Shard::release_name() {
-  // @@protoc_insertion_point(field_release:elasticfaiss.Shard.name)
-  if (!has_name()) {
-    return NULL;
-  }
-  clear_has_name();
-  return name_.ReleaseNonDefaultNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-}
-inline void Shard::set_allocated_name(::std::string* name) {
-  if (name != NULL) {
-    set_has_name();
-  } else {
-    clear_has_name();
-  }
-  name_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), name);
-  // @@protoc_insertion_point(field_set_allocated:elasticfaiss.Shard.name)
-}
-
-// required int32 idx = 2;
-inline bool Shard::has_idx() const {
-  return (_has_bits_[0] & 0x00000002u) != 0;
-}
-inline void Shard::set_has_idx() {
-  _has_bits_[0] |= 0x00000002u;
-}
-inline void Shard::clear_has_idx() {
-  _has_bits_[0] &= ~0x00000002u;
-}
-inline void Shard::clear_idx() {
-  idx_ = 0;
-  clear_has_idx();
-}
-inline ::google::protobuf::int32 Shard::idx() const {
-  // @@protoc_insertion_point(field_get:elasticfaiss.Shard.idx)
-  return idx_;
-}
-inline void Shard::set_idx(::google::protobuf::int32 value) {
-  set_has_idx();
-  idx_ = value;
-  // @@protoc_insertion_point(field_set:elasticfaiss.Shard.idx)
-}
-
-// optional bool is_leader = 3;
-inline bool Shard::has_is_leader() const {
-  return (_has_bits_[0] & 0x00000004u) != 0;
-}
-inline void Shard::set_has_is_leader() {
-  _has_bits_[0] |= 0x00000004u;
-}
-inline void Shard::clear_has_is_leader() {
-  _has_bits_[0] &= ~0x00000004u;
-}
-inline void Shard::clear_is_leader() {
-  is_leader_ = false;
-  clear_has_is_leader();
-}
-inline bool Shard::is_leader() const {
-  // @@protoc_insertion_point(field_get:elasticfaiss.Shard.is_leader)
-  return is_leader_;
-}
-inline void Shard::set_is_leader(bool value) {
-  set_has_is_leader();
-  is_leader_ = value;
-  // @@protoc_insertion_point(field_set:elasticfaiss.Shard.is_leader)
-}
-
-// required int32 state = 4;
-inline bool Shard::has_state() const {
-  return (_has_bits_[0] & 0x00000008u) != 0;
-}
-inline void Shard::set_has_state() {
-  _has_bits_[0] |= 0x00000008u;
-}
-inline void Shard::clear_has_state() {
-  _has_bits_[0] &= ~0x00000008u;
-}
-inline void Shard::clear_state() {
-  state_ = 0;
-  clear_has_state();
-}
-inline ::google::protobuf::int32 Shard::state() const {
-  // @@protoc_insertion_point(field_get:elasticfaiss.Shard.state)
-  return state_;
-}
-inline void Shard::set_state(::google::protobuf::int32 value) {
-  set_has_state();
-  state_ = value;
-  // @@protoc_insertion_point(field_set:elasticfaiss.Shard.state)
-}
-
-// repeated string nodes = 5;
-inline int Shard::nodes_size() const {
-  return nodes_.size();
-}
-inline void Shard::clear_nodes() {
-  nodes_.Clear();
-}
-inline const ::std::string& Shard::nodes(int index) const {
-  // @@protoc_insertion_point(field_get:elasticfaiss.Shard.nodes)
-  return nodes_.Get(index);
-}
-inline ::std::string* Shard::mutable_nodes(int index) {
-  // @@protoc_insertion_point(field_mutable:elasticfaiss.Shard.nodes)
-  return nodes_.Mutable(index);
-}
-inline void Shard::set_nodes(int index, const ::std::string& value) {
-  // @@protoc_insertion_point(field_set:elasticfaiss.Shard.nodes)
-  nodes_.Mutable(index)->assign(value);
-}
-#if LANG_CXX11
-inline void Shard::set_nodes(int index, ::std::string&& value) {
-  // @@protoc_insertion_point(field_set:elasticfaiss.Shard.nodes)
-  nodes_.Mutable(index)->assign(std::move(value));
-}
-#endif
-inline void Shard::set_nodes(int index, const char* value) {
-  GOOGLE_DCHECK(value != NULL);
-  nodes_.Mutable(index)->assign(value);
-  // @@protoc_insertion_point(field_set_char:elasticfaiss.Shard.nodes)
-}
-inline void Shard::set_nodes(int index, const char* value, size_t size) {
-  nodes_.Mutable(index)->assign(
-    reinterpret_cast<const char*>(value), size);
-  // @@protoc_insertion_point(field_set_pointer:elasticfaiss.Shard.nodes)
-}
-inline ::std::string* Shard::add_nodes() {
-  // @@protoc_insertion_point(field_add_mutable:elasticfaiss.Shard.nodes)
-  return nodes_.Add();
-}
-inline void Shard::add_nodes(const ::std::string& value) {
-  nodes_.Add()->assign(value);
-  // @@protoc_insertion_point(field_add:elasticfaiss.Shard.nodes)
-}
-#if LANG_CXX11
-inline void Shard::add_nodes(::std::string&& value) {
-  nodes_.Add(std::move(value));
-  // @@protoc_insertion_point(field_add:elasticfaiss.Shard.nodes)
-}
-#endif
-inline void Shard::add_nodes(const char* value) {
-  GOOGLE_DCHECK(value != NULL);
-  nodes_.Add()->assign(value);
-  // @@protoc_insertion_point(field_add_char:elasticfaiss.Shard.nodes)
-}
-inline void Shard::add_nodes(const char* value, size_t size) {
-  nodes_.Add()->assign(reinterpret_cast<const char*>(value), size);
-  // @@protoc_insertion_point(field_add_pointer:elasticfaiss.Shard.nodes)
-}
-inline const ::google::protobuf::RepeatedPtrField< ::std::string>&
-Shard::nodes() const {
-  // @@protoc_insertion_point(field_list:elasticfaiss.Shard.nodes)
-  return nodes_;
-}
-inline ::google::protobuf::RepeatedPtrField< ::std::string>*
-Shard::mutable_nodes() {
-  // @@protoc_insertion_point(field_mutable_list:elasticfaiss.Shard.nodes)
-  return &nodes_;
-}
-
-// -------------------------------------------------------------------
-
 // IndexConf
 
 // required string name = 1;
@@ -1033,6 +822,217 @@ inline void IndexConf::set_number_of_replicas(::google::protobuf::int32 value) {
   set_has_number_of_replicas();
   number_of_replicas_ = value;
   // @@protoc_insertion_point(field_set:elasticfaiss.IndexConf.number_of_replicas)
+}
+
+// -------------------------------------------------------------------
+
+// Shard
+
+// required string name = 1;
+inline bool Shard::has_name() const {
+  return (_has_bits_[0] & 0x00000001u) != 0;
+}
+inline void Shard::set_has_name() {
+  _has_bits_[0] |= 0x00000001u;
+}
+inline void Shard::clear_has_name() {
+  _has_bits_[0] &= ~0x00000001u;
+}
+inline void Shard::clear_name() {
+  name_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  clear_has_name();
+}
+inline const ::std::string& Shard::name() const {
+  // @@protoc_insertion_point(field_get:elasticfaiss.Shard.name)
+  return name_.GetNoArena();
+}
+inline void Shard::set_name(const ::std::string& value) {
+  set_has_name();
+  name_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
+  // @@protoc_insertion_point(field_set:elasticfaiss.Shard.name)
+}
+#if LANG_CXX11
+inline void Shard::set_name(::std::string&& value) {
+  set_has_name();
+  name_.SetNoArena(
+    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
+  // @@protoc_insertion_point(field_set_rvalue:elasticfaiss.Shard.name)
+}
+#endif
+inline void Shard::set_name(const char* value) {
+  GOOGLE_DCHECK(value != NULL);
+  set_has_name();
+  name_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
+  // @@protoc_insertion_point(field_set_char:elasticfaiss.Shard.name)
+}
+inline void Shard::set_name(const char* value, size_t size) {
+  set_has_name();
+  name_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+      ::std::string(reinterpret_cast<const char*>(value), size));
+  // @@protoc_insertion_point(field_set_pointer:elasticfaiss.Shard.name)
+}
+inline ::std::string* Shard::mutable_name() {
+  set_has_name();
+  // @@protoc_insertion_point(field_mutable:elasticfaiss.Shard.name)
+  return name_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline ::std::string* Shard::release_name() {
+  // @@protoc_insertion_point(field_release:elasticfaiss.Shard.name)
+  if (!has_name()) {
+    return NULL;
+  }
+  clear_has_name();
+  return name_.ReleaseNonDefaultNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline void Shard::set_allocated_name(::std::string* name) {
+  if (name != NULL) {
+    set_has_name();
+  } else {
+    clear_has_name();
+  }
+  name_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), name);
+  // @@protoc_insertion_point(field_set_allocated:elasticfaiss.Shard.name)
+}
+
+// required int32 idx = 2;
+inline bool Shard::has_idx() const {
+  return (_has_bits_[0] & 0x00000002u) != 0;
+}
+inline void Shard::set_has_idx() {
+  _has_bits_[0] |= 0x00000002u;
+}
+inline void Shard::clear_has_idx() {
+  _has_bits_[0] &= ~0x00000002u;
+}
+inline void Shard::clear_idx() {
+  idx_ = 0;
+  clear_has_idx();
+}
+inline ::google::protobuf::int32 Shard::idx() const {
+  // @@protoc_insertion_point(field_get:elasticfaiss.Shard.idx)
+  return idx_;
+}
+inline void Shard::set_idx(::google::protobuf::int32 value) {
+  set_has_idx();
+  idx_ = value;
+  // @@protoc_insertion_point(field_set:elasticfaiss.Shard.idx)
+}
+
+// optional bool is_leader = 3;
+inline bool Shard::has_is_leader() const {
+  return (_has_bits_[0] & 0x00000004u) != 0;
+}
+inline void Shard::set_has_is_leader() {
+  _has_bits_[0] |= 0x00000004u;
+}
+inline void Shard::clear_has_is_leader() {
+  _has_bits_[0] &= ~0x00000004u;
+}
+inline void Shard::clear_is_leader() {
+  is_leader_ = false;
+  clear_has_is_leader();
+}
+inline bool Shard::is_leader() const {
+  // @@protoc_insertion_point(field_get:elasticfaiss.Shard.is_leader)
+  return is_leader_;
+}
+inline void Shard::set_is_leader(bool value) {
+  set_has_is_leader();
+  is_leader_ = value;
+  // @@protoc_insertion_point(field_set:elasticfaiss.Shard.is_leader)
+}
+
+// optional int32 state = 4;
+inline bool Shard::has_state() const {
+  return (_has_bits_[0] & 0x00000008u) != 0;
+}
+inline void Shard::set_has_state() {
+  _has_bits_[0] |= 0x00000008u;
+}
+inline void Shard::clear_has_state() {
+  _has_bits_[0] &= ~0x00000008u;
+}
+inline void Shard::clear_state() {
+  state_ = 0;
+  clear_has_state();
+}
+inline ::google::protobuf::int32 Shard::state() const {
+  // @@protoc_insertion_point(field_get:elasticfaiss.Shard.state)
+  return state_;
+}
+inline void Shard::set_state(::google::protobuf::int32 value) {
+  set_has_state();
+  state_ = value;
+  // @@protoc_insertion_point(field_set:elasticfaiss.Shard.state)
+}
+
+// repeated string nodes = 5;
+inline int Shard::nodes_size() const {
+  return nodes_.size();
+}
+inline void Shard::clear_nodes() {
+  nodes_.Clear();
+}
+inline const ::std::string& Shard::nodes(int index) const {
+  // @@protoc_insertion_point(field_get:elasticfaiss.Shard.nodes)
+  return nodes_.Get(index);
+}
+inline ::std::string* Shard::mutable_nodes(int index) {
+  // @@protoc_insertion_point(field_mutable:elasticfaiss.Shard.nodes)
+  return nodes_.Mutable(index);
+}
+inline void Shard::set_nodes(int index, const ::std::string& value) {
+  // @@protoc_insertion_point(field_set:elasticfaiss.Shard.nodes)
+  nodes_.Mutable(index)->assign(value);
+}
+#if LANG_CXX11
+inline void Shard::set_nodes(int index, ::std::string&& value) {
+  // @@protoc_insertion_point(field_set:elasticfaiss.Shard.nodes)
+  nodes_.Mutable(index)->assign(std::move(value));
+}
+#endif
+inline void Shard::set_nodes(int index, const char* value) {
+  GOOGLE_DCHECK(value != NULL);
+  nodes_.Mutable(index)->assign(value);
+  // @@protoc_insertion_point(field_set_char:elasticfaiss.Shard.nodes)
+}
+inline void Shard::set_nodes(int index, const char* value, size_t size) {
+  nodes_.Mutable(index)->assign(
+    reinterpret_cast<const char*>(value), size);
+  // @@protoc_insertion_point(field_set_pointer:elasticfaiss.Shard.nodes)
+}
+inline ::std::string* Shard::add_nodes() {
+  // @@protoc_insertion_point(field_add_mutable:elasticfaiss.Shard.nodes)
+  return nodes_.Add();
+}
+inline void Shard::add_nodes(const ::std::string& value) {
+  nodes_.Add()->assign(value);
+  // @@protoc_insertion_point(field_add:elasticfaiss.Shard.nodes)
+}
+#if LANG_CXX11
+inline void Shard::add_nodes(::std::string&& value) {
+  nodes_.Add(std::move(value));
+  // @@protoc_insertion_point(field_add:elasticfaiss.Shard.nodes)
+}
+#endif
+inline void Shard::add_nodes(const char* value) {
+  GOOGLE_DCHECK(value != NULL);
+  nodes_.Add()->assign(value);
+  // @@protoc_insertion_point(field_add_char:elasticfaiss.Shard.nodes)
+}
+inline void Shard::add_nodes(const char* value, size_t size) {
+  nodes_.Add()->assign(reinterpret_cast<const char*>(value), size);
+  // @@protoc_insertion_point(field_add_pointer:elasticfaiss.Shard.nodes)
+}
+inline const ::google::protobuf::RepeatedPtrField< ::std::string>&
+Shard::nodes() const {
+  // @@protoc_insertion_point(field_list:elasticfaiss.Shard.nodes)
+  return nodes_;
+}
+inline ::google::protobuf::RepeatedPtrField< ::std::string>*
+Shard::mutable_nodes() {
+  // @@protoc_insertion_point(field_mutable_list:elasticfaiss.Shard.nodes)
+  return &nodes_;
 }
 
 // -------------------------------------------------------------------

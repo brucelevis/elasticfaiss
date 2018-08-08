@@ -30,7 +30,7 @@ namespace elasticfaiss
             void report_heartbeat();
         public:
             explicit WorkNodeServiceImpl()
-                    : butil::SimpleThread("node_background"), _bg_event(false, false), _running(false),_inited(false)
+                    : butil::SimpleThread("node_background"), _bg_event(false, false), _running(false), _inited(false)
             {
             }
             int init();
@@ -41,6 +41,11 @@ namespace elasticfaiss
             void delete_shard(::google::protobuf::RpcController* controller,
                     const ::elasticfaiss::DeleteShardRequest* request, ::elasticfaiss::DeleteShardResponse* response,
                     ::google::protobuf::Closure* done);
+            void rebuild(::google::protobuf::RpcController* controller,
+                    const ::elasticfaiss::ShardRebuildRequest* request, ::elasticfaiss::ShardRebuildResponse* response,
+                    ::google::protobuf::Closure* done);
+            void put(::google::protobuf::RpcController* controller, const ::elasticfaiss::ShardPutRequest* request,
+                    ::elasticfaiss::ShardPutResponse* response, ::google::protobuf::Closure* done);
             BootstrapResponse& get_boost_response()
             {
                 return _boot_res;

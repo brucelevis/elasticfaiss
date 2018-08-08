@@ -1,0 +1,15 @@
+*.o
+*.so
+*.a
+/.svn
+/.libs
+elasticfaiss*
+*.bak
+snappy-*/
+gperftools-*/
+jemalloc-*/
+leveldb-*/
+/Debug
+testdb/
+~*
+core

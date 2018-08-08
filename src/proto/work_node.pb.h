@@ -40,7 +40,7 @@ namespace protobuf_work_5fnode_2eproto {
 struct TableStruct {
   static const ::google::protobuf::internal::ParseTableField entries[];
   static const ::google::protobuf::internal::AuxillaryParseTableField aux[];
-  static const ::google::protobuf::internal::ParseTable schema[4];
+  static const ::google::protobuf::internal::ParseTable schema[8];
   static const ::google::protobuf::internal::FieldMetadata field_metadata[];
   static const ::google::protobuf::internal::SerializationTable serialization_table[];
   static const ::google::protobuf::uint32 offsets[];
@@ -60,6 +60,18 @@ extern DeleteShardRequestDefaultTypeInternal _DeleteShardRequest_default_instanc
 class DeleteShardResponse;
 class DeleteShardResponseDefaultTypeInternal;
 extern DeleteShardResponseDefaultTypeInternal _DeleteShardResponse_default_instance_;
+class ShardPutRequest;
+class ShardPutRequestDefaultTypeInternal;
+extern ShardPutRequestDefaultTypeInternal _ShardPutRequest_default_instance_;
+class ShardPutResponse;
+class ShardPutResponseDefaultTypeInternal;
+extern ShardPutResponseDefaultTypeInternal _ShardPutResponse_default_instance_;
+class ShardRebuildRequest;
+class ShardRebuildRequestDefaultTypeInternal;
+extern ShardRebuildRequestDefaultTypeInternal _ShardRebuildRequest_default_instance_;
+class ShardRebuildResponse;
+class ShardRebuildResponseDefaultTypeInternal;
+extern ShardRebuildResponseDefaultTypeInternal _ShardRebuildResponse_default_instance_;
 }  // namespace elasticfaiss
 namespace google {
 namespace protobuf {
@@ -67,6 +79,10 @@ template<> ::elasticfaiss::CreateShardRequest* Arena::CreateMaybeMessage<::elast
 template<> ::elasticfaiss::CreateShardResponse* Arena::CreateMaybeMessage<::elasticfaiss::CreateShardResponse>(Arena*);
 template<> ::elasticfaiss::DeleteShardRequest* Arena::CreateMaybeMessage<::elasticfaiss::DeleteShardRequest>(Arena*);
 template<> ::elasticfaiss::DeleteShardResponse* Arena::CreateMaybeMessage<::elasticfaiss::DeleteShardResponse>(Arena*);
+template<> ::elasticfaiss::ShardPutRequest* Arena::CreateMaybeMessage<::elasticfaiss::ShardPutRequest>(Arena*);
+template<> ::elasticfaiss::ShardPutResponse* Arena::CreateMaybeMessage<::elasticfaiss::ShardPutResponse>(Arena*);
+template<> ::elasticfaiss::ShardRebuildRequest* Arena::CreateMaybeMessage<::elasticfaiss::ShardRebuildRequest>(Arena*);
+template<> ::elasticfaiss::ShardRebuildResponse* Arena::CreateMaybeMessage<::elasticfaiss::ShardRebuildResponse>(Arena*);
 }  // namespace protobuf
 }  // namespace google
 namespace elasticfaiss {
@@ -589,6 +605,576 @@ class DeleteShardResponse : public ::google::protobuf::Message /* @@protoc_inser
   bool success_;
   friend struct ::protobuf_work_5fnode_2eproto::TableStruct;
 };
+// -------------------------------------------------------------------
+
+class ShardPutRequest : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:elasticfaiss.ShardPutRequest) */ {
+ public:
+  ShardPutRequest();
+  virtual ~ShardPutRequest();
+
+  ShardPutRequest(const ShardPutRequest& from);
+
+  inline ShardPutRequest& operator=(const ShardPutRequest& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  #if LANG_CXX11
+  ShardPutRequest(ShardPutRequest&& from) noexcept
+    : ShardPutRequest() {
+    *this = ::std::move(from);
+  }
+
+  inline ShardPutRequest& operator=(ShardPutRequest&& from) noexcept {
+    if (GetArenaNoVirtual() == from.GetArenaNoVirtual()) {
+      if (this != &from) InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+  #endif
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _internal_metadata_.unknown_fields();
+  }
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return _internal_metadata_.mutable_unknown_fields();
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const ShardPutRequest& default_instance();
+
+  static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
+  static inline const ShardPutRequest* internal_default_instance() {
+    return reinterpret_cast<const ShardPutRequest*>(
+               &_ShardPutRequest_default_instance_);
+  }
+  static constexpr int kIndexInFileMessages =
+    4;
+
+  void Swap(ShardPutRequest* other);
+  friend void swap(ShardPutRequest& a, ShardPutRequest& b) {
+    a.Swap(&b);
+  }
+
+  // implements Message ----------------------------------------------
+
+  inline ShardPutRequest* New() const final {
+    return CreateMaybeMessage<ShardPutRequest>(NULL);
+  }
+
+  ShardPutRequest* New(::google::protobuf::Arena* arena) const final {
+    return CreateMaybeMessage<ShardPutRequest>(arena);
+  }
+  void CopyFrom(const ::google::protobuf::Message& from) final;
+  void MergeFrom(const ::google::protobuf::Message& from) final;
+  void CopyFrom(const ShardPutRequest& from);
+  void MergeFrom(const ShardPutRequest& from);
+  void Clear() final;
+  bool IsInitialized() const final;
+
+  size_t ByteSizeLong() const final;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input) final;
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const final;
+  ::google::protobuf::uint8* InternalSerializeWithCachedSizesToArray(
+      bool deterministic, ::google::protobuf::uint8* target) const final;
+  int GetCachedSize() const final { return _cached_size_.Get(); }
+
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const final;
+  void InternalSwap(ShardPutRequest* other);
+  private:
+  inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
+    return NULL;
+  }
+  inline void* MaybeArenaPtr() const {
+    return NULL;
+  }
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const final;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // required string name = 1;
+  bool has_name() const;
+  void clear_name();
+  static const int kNameFieldNumber = 1;
+  const ::std::string& name() const;
+  void set_name(const ::std::string& value);
+  #if LANG_CXX11
+  void set_name(::std::string&& value);
+  #endif
+  void set_name(const char* value);
+  void set_name(const char* value, size_t size);
+  ::std::string* mutable_name();
+  ::std::string* release_name();
+  void set_allocated_name(::std::string* name);
+
+  // required int32 idx = 2;
+  bool has_idx() const;
+  void clear_idx();
+  static const int kIdxFieldNumber = 2;
+  ::google::protobuf::int32 idx() const;
+  void set_idx(::google::protobuf::int32 value);
+
+  // @@protoc_insertion_point(class_scope:elasticfaiss.ShardPutRequest)
+ private:
+  void set_has_name();
+  void clear_has_name();
+  void set_has_idx();
+  void clear_has_idx();
+
+  // helper for ByteSizeLong()
+  size_t RequiredFieldsByteSizeFallback() const;
+
+  ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
+  ::google::protobuf::internal::HasBits<1> _has_bits_;
+  mutable ::google::protobuf::internal::CachedSize _cached_size_;
+  ::google::protobuf::internal::ArenaStringPtr name_;
+  ::google::protobuf::int32 idx_;
+  friend struct ::protobuf_work_5fnode_2eproto::TableStruct;
+};
+// -------------------------------------------------------------------
+
+class ShardPutResponse : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:elasticfaiss.ShardPutResponse) */ {
+ public:
+  ShardPutResponse();
+  virtual ~ShardPutResponse();
+
+  ShardPutResponse(const ShardPutResponse& from);
+
+  inline ShardPutResponse& operator=(const ShardPutResponse& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  #if LANG_CXX11
+  ShardPutResponse(ShardPutResponse&& from) noexcept
+    : ShardPutResponse() {
+    *this = ::std::move(from);
+  }
+
+  inline ShardPutResponse& operator=(ShardPutResponse&& from) noexcept {
+    if (GetArenaNoVirtual() == from.GetArenaNoVirtual()) {
+      if (this != &from) InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+  #endif
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _internal_metadata_.unknown_fields();
+  }
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return _internal_metadata_.mutable_unknown_fields();
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const ShardPutResponse& default_instance();
+
+  static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
+  static inline const ShardPutResponse* internal_default_instance() {
+    return reinterpret_cast<const ShardPutResponse*>(
+               &_ShardPutResponse_default_instance_);
+  }
+  static constexpr int kIndexInFileMessages =
+    5;
+
+  void Swap(ShardPutResponse* other);
+  friend void swap(ShardPutResponse& a, ShardPutResponse& b) {
+    a.Swap(&b);
+  }
+
+  // implements Message ----------------------------------------------
+
+  inline ShardPutResponse* New() const final {
+    return CreateMaybeMessage<ShardPutResponse>(NULL);
+  }
+
+  ShardPutResponse* New(::google::protobuf::Arena* arena) const final {
+    return CreateMaybeMessage<ShardPutResponse>(arena);
+  }
+  void CopyFrom(const ::google::protobuf::Message& from) final;
+  void MergeFrom(const ::google::protobuf::Message& from) final;
+  void CopyFrom(const ShardPutResponse& from);
+  void MergeFrom(const ShardPutResponse& from);
+  void Clear() final;
+  bool IsInitialized() const final;
+
+  size_t ByteSizeLong() const final;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input) final;
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const final;
+  ::google::protobuf::uint8* InternalSerializeWithCachedSizesToArray(
+      bool deterministic, ::google::protobuf::uint8* target) const final;
+  int GetCachedSize() const final { return _cached_size_.Get(); }
+
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const final;
+  void InternalSwap(ShardPutResponse* other);
+  private:
+  inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
+    return NULL;
+  }
+  inline void* MaybeArenaPtr() const {
+    return NULL;
+  }
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const final;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // optional string redirect = 2;
+  bool has_redirect() const;
+  void clear_redirect();
+  static const int kRedirectFieldNumber = 2;
+  const ::std::string& redirect() const;
+  void set_redirect(const ::std::string& value);
+  #if LANG_CXX11
+  void set_redirect(::std::string&& value);
+  #endif
+  void set_redirect(const char* value);
+  void set_redirect(const char* value, size_t size);
+  ::std::string* mutable_redirect();
+  ::std::string* release_redirect();
+  void set_allocated_redirect(::std::string* redirect);
+
+  // optional string error = 3;
+  bool has_error() const;
+  void clear_error();
+  static const int kErrorFieldNumber = 3;
+  const ::std::string& error() const;
+  void set_error(const ::std::string& value);
+  #if LANG_CXX11
+  void set_error(::std::string&& value);
+  #endif
+  void set_error(const char* value);
+  void set_error(const char* value, size_t size);
+  ::std::string* mutable_error();
+  ::std::string* release_error();
+  void set_allocated_error(::std::string* error);
+
+  // required bool success = 1;
+  bool has_success() const;
+  void clear_success();
+  static const int kSuccessFieldNumber = 1;
+  bool success() const;
+  void set_success(bool value);
+
+  // @@protoc_insertion_point(class_scope:elasticfaiss.ShardPutResponse)
+ private:
+  void set_has_success();
+  void clear_has_success();
+  void set_has_redirect();
+  void clear_has_redirect();
+  void set_has_error();
+  void clear_has_error();
+
+  ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
+  ::google::protobuf::internal::HasBits<1> _has_bits_;
+  mutable ::google::protobuf::internal::CachedSize _cached_size_;
+  ::google::protobuf::internal::ArenaStringPtr redirect_;
+  ::google::protobuf::internal::ArenaStringPtr error_;
+  bool success_;
+  friend struct ::protobuf_work_5fnode_2eproto::TableStruct;
+};
+// -------------------------------------------------------------------
+
+class ShardRebuildRequest : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:elasticfaiss.ShardRebuildRequest) */ {
+ public:
+  ShardRebuildRequest();
+  virtual ~ShardRebuildRequest();
+
+  ShardRebuildRequest(const ShardRebuildRequest& from);
+
+  inline ShardRebuildRequest& operator=(const ShardRebuildRequest& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  #if LANG_CXX11
+  ShardRebuildRequest(ShardRebuildRequest&& from) noexcept
+    : ShardRebuildRequest() {
+    *this = ::std::move(from);
+  }
+
+  inline ShardRebuildRequest& operator=(ShardRebuildRequest&& from) noexcept {
+    if (GetArenaNoVirtual() == from.GetArenaNoVirtual()) {
+      if (this != &from) InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+  #endif
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _internal_metadata_.unknown_fields();
+  }
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return _internal_metadata_.mutable_unknown_fields();
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const ShardRebuildRequest& default_instance();
+
+  static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
+  static inline const ShardRebuildRequest* internal_default_instance() {
+    return reinterpret_cast<const ShardRebuildRequest*>(
+               &_ShardRebuildRequest_default_instance_);
+  }
+  static constexpr int kIndexInFileMessages =
+    6;
+
+  void Swap(ShardRebuildRequest* other);
+  friend void swap(ShardRebuildRequest& a, ShardRebuildRequest& b) {
+    a.Swap(&b);
+  }
+
+  // implements Message ----------------------------------------------
+
+  inline ShardRebuildRequest* New() const final {
+    return CreateMaybeMessage<ShardRebuildRequest>(NULL);
+  }
+
+  ShardRebuildRequest* New(::google::protobuf::Arena* arena) const final {
+    return CreateMaybeMessage<ShardRebuildRequest>(arena);
+  }
+  void CopyFrom(const ::google::protobuf::Message& from) final;
+  void MergeFrom(const ::google::protobuf::Message& from) final;
+  void CopyFrom(const ShardRebuildRequest& from);
+  void MergeFrom(const ShardRebuildRequest& from);
+  void Clear() final;
+  bool IsInitialized() const final;
+
+  size_t ByteSizeLong() const final;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input) final;
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const final;
+  ::google::protobuf::uint8* InternalSerializeWithCachedSizesToArray(
+      bool deterministic, ::google::protobuf::uint8* target) const final;
+  int GetCachedSize() const final { return _cached_size_.Get(); }
+
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const final;
+  void InternalSwap(ShardRebuildRequest* other);
+  private:
+  inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
+    return NULL;
+  }
+  inline void* MaybeArenaPtr() const {
+    return NULL;
+  }
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const final;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // required string name = 1;
+  bool has_name() const;
+  void clear_name();
+  static const int kNameFieldNumber = 1;
+  const ::std::string& name() const;
+  void set_name(const ::std::string& value);
+  #if LANG_CXX11
+  void set_name(::std::string&& value);
+  #endif
+  void set_name(const char* value);
+  void set_name(const char* value, size_t size);
+  ::std::string* mutable_name();
+  ::std::string* release_name();
+  void set_allocated_name(::std::string* name);
+
+  // required int32 idx = 2;
+  bool has_idx() const;
+  void clear_idx();
+  static const int kIdxFieldNumber = 2;
+  ::google::protobuf::int32 idx() const;
+  void set_idx(::google::protobuf::int32 value);
+
+  // @@protoc_insertion_point(class_scope:elasticfaiss.ShardRebuildRequest)
+ private:
+  void set_has_name();
+  void clear_has_name();
+  void set_has_idx();
+  void clear_has_idx();
+
+  // helper for ByteSizeLong()
+  size_t RequiredFieldsByteSizeFallback() const;
+
+  ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
+  ::google::protobuf::internal::HasBits<1> _has_bits_;
+  mutable ::google::protobuf::internal::CachedSize _cached_size_;
+  ::google::protobuf::internal::ArenaStringPtr name_;
+  ::google::protobuf::int32 idx_;
+  friend struct ::protobuf_work_5fnode_2eproto::TableStruct;
+};
+// -------------------------------------------------------------------
+
+class ShardRebuildResponse : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:elasticfaiss.ShardRebuildResponse) */ {
+ public:
+  ShardRebuildResponse();
+  virtual ~ShardRebuildResponse();
+
+  ShardRebuildResponse(const ShardRebuildResponse& from);
+
+  inline ShardRebuildResponse& operator=(const ShardRebuildResponse& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  #if LANG_CXX11
+  ShardRebuildResponse(ShardRebuildResponse&& from) noexcept
+    : ShardRebuildResponse() {
+    *this = ::std::move(from);
+  }
+
+  inline ShardRebuildResponse& operator=(ShardRebuildResponse&& from) noexcept {
+    if (GetArenaNoVirtual() == from.GetArenaNoVirtual()) {
+      if (this != &from) InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+  #endif
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _internal_metadata_.unknown_fields();
+  }
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return _internal_metadata_.mutable_unknown_fields();
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const ShardRebuildResponse& default_instance();
+
+  static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
+  static inline const ShardRebuildResponse* internal_default_instance() {
+    return reinterpret_cast<const ShardRebuildResponse*>(
+               &_ShardRebuildResponse_default_instance_);
+  }
+  static constexpr int kIndexInFileMessages =
+    7;
+
+  void Swap(ShardRebuildResponse* other);
+  friend void swap(ShardRebuildResponse& a, ShardRebuildResponse& b) {
+    a.Swap(&b);
+  }
+
+  // implements Message ----------------------------------------------
+
+  inline ShardRebuildResponse* New() const final {
+    return CreateMaybeMessage<ShardRebuildResponse>(NULL);
+  }
+
+  ShardRebuildResponse* New(::google::protobuf::Arena* arena) const final {
+    return CreateMaybeMessage<ShardRebuildResponse>(arena);
+  }
+  void CopyFrom(const ::google::protobuf::Message& from) final;
+  void MergeFrom(const ::google::protobuf::Message& from) final;
+  void CopyFrom(const ShardRebuildResponse& from);
+  void MergeFrom(const ShardRebuildResponse& from);
+  void Clear() final;
+  bool IsInitialized() const final;
+
+  size_t ByteSizeLong() const final;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input) final;
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const final;
+  ::google::protobuf::uint8* InternalSerializeWithCachedSizesToArray(
+      bool deterministic, ::google::protobuf::uint8* target) const final;
+  int GetCachedSize() const final { return _cached_size_.Get(); }
+
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const final;
+  void InternalSwap(ShardRebuildResponse* other);
+  private:
+  inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
+    return NULL;
+  }
+  inline void* MaybeArenaPtr() const {
+    return NULL;
+  }
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const final;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // optional string redirect = 2;
+  bool has_redirect() const;
+  void clear_redirect();
+  static const int kRedirectFieldNumber = 2;
+  const ::std::string& redirect() const;
+  void set_redirect(const ::std::string& value);
+  #if LANG_CXX11
+  void set_redirect(::std::string&& value);
+  #endif
+  void set_redirect(const char* value);
+  void set_redirect(const char* value, size_t size);
+  ::std::string* mutable_redirect();
+  ::std::string* release_redirect();
+  void set_allocated_redirect(::std::string* redirect);
+
+  // optional string error = 3;
+  bool has_error() const;
+  void clear_error();
+  static const int kErrorFieldNumber = 3;
+  const ::std::string& error() const;
+  void set_error(const ::std::string& value);
+  #if LANG_CXX11
+  void set_error(::std::string&& value);
+  #endif
+  void set_error(const char* value);
+  void set_error(const char* value, size_t size);
+  ::std::string* mutable_error();
+  ::std::string* release_error();
+  void set_allocated_error(::std::string* error);
+
+  // required bool success = 1;
+  bool has_success() const;
+  void clear_success();
+  static const int kSuccessFieldNumber = 1;
+  bool success() const;
+  void set_success(bool value);
+
+  // @@protoc_insertion_point(class_scope:elasticfaiss.ShardRebuildResponse)
+ private:
+  void set_has_success();
+  void clear_has_success();
+  void set_has_redirect();
+  void clear_has_redirect();
+  void set_has_error();
+  void clear_has_error();
+
+  ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
+  ::google::protobuf::internal::HasBits<1> _has_bits_;
+  mutable ::google::protobuf::internal::CachedSize _cached_size_;
+  ::google::protobuf::internal::ArenaStringPtr redirect_;
+  ::google::protobuf::internal::ArenaStringPtr error_;
+  bool success_;
+  friend struct ::protobuf_work_5fnode_2eproto::TableStruct;
+};
 // ===================================================================
 
 class WorkNodeService_Stub;
@@ -611,6 +1197,14 @@ class WorkNodeService : public ::google::protobuf::Service {
   virtual void delete_shard(::google::protobuf::RpcController* controller,
                        const ::elasticfaiss::DeleteShardRequest* request,
                        ::elasticfaiss::DeleteShardResponse* response,
+                       ::google::protobuf::Closure* done);
+  virtual void rebuild(::google::protobuf::RpcController* controller,
+                       const ::elasticfaiss::ShardRebuildRequest* request,
+                       ::elasticfaiss::ShardRebuildResponse* response,
+                       ::google::protobuf::Closure* done);
+  virtual void put(::google::protobuf::RpcController* controller,
+                       const ::elasticfaiss::ShardPutRequest* request,
+                       ::elasticfaiss::ShardPutResponse* response,
                        ::google::protobuf::Closure* done);
 
   // implements Service ----------------------------------------------
@@ -648,6 +1242,14 @@ class WorkNodeService_Stub : public WorkNodeService {
   void delete_shard(::google::protobuf::RpcController* controller,
                        const ::elasticfaiss::DeleteShardRequest* request,
                        ::elasticfaiss::DeleteShardResponse* response,
+                       ::google::protobuf::Closure* done);
+  void rebuild(::google::protobuf::RpcController* controller,
+                       const ::elasticfaiss::ShardRebuildRequest* request,
+                       ::elasticfaiss::ShardRebuildResponse* response,
+                       ::google::protobuf::Closure* done);
+  void put(::google::protobuf::RpcController* controller,
+                       const ::elasticfaiss::ShardPutRequest* request,
+                       ::elasticfaiss::ShardPutResponse* response,
                        ::google::protobuf::Closure* done);
  private:
   ::google::protobuf::RpcChannel* channel_;
@@ -1003,9 +1605,525 @@ inline void DeleteShardResponse::set_allocated_error(::std::string* error) {
   // @@protoc_insertion_point(field_set_allocated:elasticfaiss.DeleteShardResponse.error)
 }
 
+// -------------------------------------------------------------------
+
+// ShardPutRequest
+
+// required string name = 1;
+inline bool ShardPutRequest::has_name() const {
+  return (_has_bits_[0] & 0x00000001u) != 0;
+}
+inline void ShardPutRequest::set_has_name() {
+  _has_bits_[0] |= 0x00000001u;
+}
+inline void ShardPutRequest::clear_has_name() {
+  _has_bits_[0] &= ~0x00000001u;
+}
+inline void ShardPutRequest::clear_name() {
+  name_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  clear_has_name();
+}
+inline const ::std::string& ShardPutRequest::name() const {
+  // @@protoc_insertion_point(field_get:elasticfaiss.ShardPutRequest.name)
+  return name_.GetNoArena();
+}
+inline void ShardPutRequest::set_name(const ::std::string& value) {
+  set_has_name();
+  name_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
+  // @@protoc_insertion_point(field_set:elasticfaiss.ShardPutRequest.name)
+}
+#if LANG_CXX11
+inline void ShardPutRequest::set_name(::std::string&& value) {
+  set_has_name();
+  name_.SetNoArena(
+    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
+  // @@protoc_insertion_point(field_set_rvalue:elasticfaiss.ShardPutRequest.name)
+}
+#endif
+inline void ShardPutRequest::set_name(const char* value) {
+  GOOGLE_DCHECK(value != NULL);
+  set_has_name();
+  name_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
+  // @@protoc_insertion_point(field_set_char:elasticfaiss.ShardPutRequest.name)
+}
+inline void ShardPutRequest::set_name(const char* value, size_t size) {
+  set_has_name();
+  name_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+      ::std::string(reinterpret_cast<const char*>(value), size));
+  // @@protoc_insertion_point(field_set_pointer:elasticfaiss.ShardPutRequest.name)
+}
+inline ::std::string* ShardPutRequest::mutable_name() {
+  set_has_name();
+  // @@protoc_insertion_point(field_mutable:elasticfaiss.ShardPutRequest.name)
+  return name_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline ::std::string* ShardPutRequest::release_name() {
+  // @@protoc_insertion_point(field_release:elasticfaiss.ShardPutRequest.name)
+  if (!has_name()) {
+    return NULL;
+  }
+  clear_has_name();
+  return name_.ReleaseNonDefaultNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline void ShardPutRequest::set_allocated_name(::std::string* name) {
+  if (name != NULL) {
+    set_has_name();
+  } else {
+    clear_has_name();
+  }
+  name_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), name);
+  // @@protoc_insertion_point(field_set_allocated:elasticfaiss.ShardPutRequest.name)
+}
+
+// required int32 idx = 2;
+inline bool ShardPutRequest::has_idx() const {
+  return (_has_bits_[0] & 0x00000002u) != 0;
+}
+inline void ShardPutRequest::set_has_idx() {
+  _has_bits_[0] |= 0x00000002u;
+}
+inline void ShardPutRequest::clear_has_idx() {
+  _has_bits_[0] &= ~0x00000002u;
+}
+inline void ShardPutRequest::clear_idx() {
+  idx_ = 0;
+  clear_has_idx();
+}
+inline ::google::protobuf::int32 ShardPutRequest::idx() const {
+  // @@protoc_insertion_point(field_get:elasticfaiss.ShardPutRequest.idx)
+  return idx_;
+}
+inline void ShardPutRequest::set_idx(::google::protobuf::int32 value) {
+  set_has_idx();
+  idx_ = value;
+  // @@protoc_insertion_point(field_set:elasticfaiss.ShardPutRequest.idx)
+}
+
+// -------------------------------------------------------------------
+
+// ShardPutResponse
+
+// required bool success = 1;
+inline bool ShardPutResponse::has_success() const {
+  return (_has_bits_[0] & 0x00000004u) != 0;
+}
+inline void ShardPutResponse::set_has_success() {
+  _has_bits_[0] |= 0x00000004u;
+}
+inline void ShardPutResponse::clear_has_success() {
+  _has_bits_[0] &= ~0x00000004u;
+}
+inline void ShardPutResponse::clear_success() {
+  success_ = false;
+  clear_has_success();
+}
+inline bool ShardPutResponse::success() const {
+  // @@protoc_insertion_point(field_get:elasticfaiss.ShardPutResponse.success)
+  return success_;
+}
+inline void ShardPutResponse::set_success(bool value) {
+  set_has_success();
+  success_ = value;
+  // @@protoc_insertion_point(field_set:elasticfaiss.ShardPutResponse.success)
+}
+
+// optional string redirect = 2;
+inline bool ShardPutResponse::has_redirect() const {
+  return (_has_bits_[0] & 0x00000001u) != 0;
+}
+inline void ShardPutResponse::set_has_redirect() {
+  _has_bits_[0] |= 0x00000001u;
+}
+inline void ShardPutResponse::clear_has_redirect() {
+  _has_bits_[0] &= ~0x00000001u;
+}
+inline void ShardPutResponse::clear_redirect() {
+  redirect_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  clear_has_redirect();
+}
+inline const ::std::string& ShardPutResponse::redirect() const {
+  // @@protoc_insertion_point(field_get:elasticfaiss.ShardPutResponse.redirect)
+  return redirect_.GetNoArena();
+}
+inline void ShardPutResponse::set_redirect(const ::std::string& value) {
+  set_has_redirect();
+  redirect_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
+  // @@protoc_insertion_point(field_set:elasticfaiss.ShardPutResponse.redirect)
+}
+#if LANG_CXX11
+inline void ShardPutResponse::set_redirect(::std::string&& value) {
+  set_has_redirect();
+  redirect_.SetNoArena(
+    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
+  // @@protoc_insertion_point(field_set_rvalue:elasticfaiss.ShardPutResponse.redirect)
+}
+#endif
+inline void ShardPutResponse::set_redirect(const char* value) {
+  GOOGLE_DCHECK(value != NULL);
+  set_has_redirect();
+  redirect_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
+  // @@protoc_insertion_point(field_set_char:elasticfaiss.ShardPutResponse.redirect)
+}
+inline void ShardPutResponse::set_redirect(const char* value, size_t size) {
+  set_has_redirect();
+  redirect_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+      ::std::string(reinterpret_cast<const char*>(value), size));
+  // @@protoc_insertion_point(field_set_pointer:elasticfaiss.ShardPutResponse.redirect)
+}
+inline ::std::string* ShardPutResponse::mutable_redirect() {
+  set_has_redirect();
+  // @@protoc_insertion_point(field_mutable:elasticfaiss.ShardPutResponse.redirect)
+  return redirect_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline ::std::string* ShardPutResponse::release_redirect() {
+  // @@protoc_insertion_point(field_release:elasticfaiss.ShardPutResponse.redirect)
+  if (!has_redirect()) {
+    return NULL;
+  }
+  clear_has_redirect();
+  return redirect_.ReleaseNonDefaultNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline void ShardPutResponse::set_allocated_redirect(::std::string* redirect) {
+  if (redirect != NULL) {
+    set_has_redirect();
+  } else {
+    clear_has_redirect();
+  }
+  redirect_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), redirect);
+  // @@protoc_insertion_point(field_set_allocated:elasticfaiss.ShardPutResponse.redirect)
+}
+
+// optional string error = 3;
+inline bool ShardPutResponse::has_error() const {
+  return (_has_bits_[0] & 0x00000002u) != 0;
+}
+inline void ShardPutResponse::set_has_error() {
+  _has_bits_[0] |= 0x00000002u;
+}
+inline void ShardPutResponse::clear_has_error() {
+  _has_bits_[0] &= ~0x00000002u;
+}
+inline void ShardPutResponse::clear_error() {
+  error_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  clear_has_error();
+}
+inline const ::std::string& ShardPutResponse::error() const {
+  // @@protoc_insertion_point(field_get:elasticfaiss.ShardPutResponse.error)
+  return error_.GetNoArena();
+}
+inline void ShardPutResponse::set_error(const ::std::string& value) {
+  set_has_error();
+  error_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
+  // @@protoc_insertion_point(field_set:elasticfaiss.ShardPutResponse.error)
+}
+#if LANG_CXX11
+inline void ShardPutResponse::set_error(::std::string&& value) {
+  set_has_error();
+  error_.SetNoArena(
+    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
+  // @@protoc_insertion_point(field_set_rvalue:elasticfaiss.ShardPutResponse.error)
+}
+#endif
+inline void ShardPutResponse::set_error(const char* value) {
+  GOOGLE_DCHECK(value != NULL);
+  set_has_error();
+  error_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
+  // @@protoc_insertion_point(field_set_char:elasticfaiss.ShardPutResponse.error)
+}
+inline void ShardPutResponse::set_error(const char* value, size_t size) {
+  set_has_error();
+  error_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+      ::std::string(reinterpret_cast<const char*>(value), size));
+  // @@protoc_insertion_point(field_set_pointer:elasticfaiss.ShardPutResponse.error)
+}
+inline ::std::string* ShardPutResponse::mutable_error() {
+  set_has_error();
+  // @@protoc_insertion_point(field_mutable:elasticfaiss.ShardPutResponse.error)
+  return error_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline ::std::string* ShardPutResponse::release_error() {
+  // @@protoc_insertion_point(field_release:elasticfaiss.ShardPutResponse.error)
+  if (!has_error()) {
+    return NULL;
+  }
+  clear_has_error();
+  return error_.ReleaseNonDefaultNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline void ShardPutResponse::set_allocated_error(::std::string* error) {
+  if (error != NULL) {
+    set_has_error();
+  } else {
+    clear_has_error();
+  }
+  error_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), error);
+  // @@protoc_insertion_point(field_set_allocated:elasticfaiss.ShardPutResponse.error)
+}
+
+// -------------------------------------------------------------------
+
+// ShardRebuildRequest
+
+// required string name = 1;
+inline bool ShardRebuildRequest::has_name() const {
+  return (_has_bits_[0] & 0x00000001u) != 0;
+}
+inline void ShardRebuildRequest::set_has_name() {
+  _has_bits_[0] |= 0x00000001u;
+}
+inline void ShardRebuildRequest::clear_has_name() {
+  _has_bits_[0] &= ~0x00000001u;
+}
+inline void ShardRebuildRequest::clear_name() {
+  name_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  clear_has_name();
+}
+inline const ::std::string& ShardRebuildRequest::name() const {
+  // @@protoc_insertion_point(field_get:elasticfaiss.ShardRebuildRequest.name)
+  return name_.GetNoArena();
+}
+inline void ShardRebuildRequest::set_name(const ::std::string& value) {
+  set_has_name();
+  name_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
+  // @@protoc_insertion_point(field_set:elasticfaiss.ShardRebuildRequest.name)
+}
+#if LANG_CXX11
+inline void ShardRebuildRequest::set_name(::std::string&& value) {
+  set_has_name();
+  name_.SetNoArena(
+    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
+  // @@protoc_insertion_point(field_set_rvalue:elasticfaiss.ShardRebuildRequest.name)
+}
+#endif
+inline void ShardRebuildRequest::set_name(const char* value) {
+  GOOGLE_DCHECK(value != NULL);
+  set_has_name();
+  name_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
+  // @@protoc_insertion_point(field_set_char:elasticfaiss.ShardRebuildRequest.name)
+}
+inline void ShardRebuildRequest::set_name(const char* value, size_t size) {
+  set_has_name();
+  name_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+      ::std::string(reinterpret_cast<const char*>(value), size));
+  // @@protoc_insertion_point(field_set_pointer:elasticfaiss.ShardRebuildRequest.name)
+}
+inline ::std::string* ShardRebuildRequest::mutable_name() {
+  set_has_name();
+  // @@protoc_insertion_point(field_mutable:elasticfaiss.ShardRebuildRequest.name)
+  return name_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline ::std::string* ShardRebuildRequest::release_name() {
+  // @@protoc_insertion_point(field_release:elasticfaiss.ShardRebuildRequest.name)
+  if (!has_name()) {
+    return NULL;
+  }
+  clear_has_name();
+  return name_.ReleaseNonDefaultNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline void ShardRebuildRequest::set_allocated_name(::std::string* name) {
+  if (name != NULL) {
+    set_has_name();
+  } else {
+    clear_has_name();
+  }
+  name_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), name);
+  // @@protoc_insertion_point(field_set_allocated:elasticfaiss.ShardRebuildRequest.name)
+}
+
+// required int32 idx = 2;
+inline bool ShardRebuildRequest::has_idx() const {
+  return (_has_bits_[0] & 0x00000002u) != 0;
+}
+inline void ShardRebuildRequest::set_has_idx() {
+  _has_bits_[0] |= 0x00000002u;
+}
+inline void ShardRebuildRequest::clear_has_idx() {
+  _has_bits_[0] &= ~0x00000002u;
+}
+inline void ShardRebuildRequest::clear_idx() {
+  idx_ = 0;
+  clear_has_idx();
+}
+inline ::google::protobuf::int32 ShardRebuildRequest::idx() const {
+  // @@protoc_insertion_point(field_get:elasticfaiss.ShardRebuildRequest.idx)
+  return idx_;
+}
+inline void ShardRebuildRequest::set_idx(::google::protobuf::int32 value) {
+  set_has_idx();
+  idx_ = value;
+  // @@protoc_insertion_point(field_set:elasticfaiss.ShardRebuildRequest.idx)
+}
+
+// -------------------------------------------------------------------
+
+// ShardRebuildResponse
+
+// required bool success = 1;
+inline bool ShardRebuildResponse::has_success() const {
+  return (_has_bits_[0] & 0x00000004u) != 0;
+}
+inline void ShardRebuildResponse::set_has_success() {
+  _has_bits_[0] |= 0x00000004u;
+}
+inline void ShardRebuildResponse::clear_has_success() {
+  _has_bits_[0] &= ~0x00000004u;
+}
+inline void ShardRebuildResponse::clear_success() {
+  success_ = false;
+  clear_has_success();
+}
+inline bool ShardRebuildResponse::success() const {
+  // @@protoc_insertion_point(field_get:elasticfaiss.ShardRebuildResponse.success)
+  return success_;
+}
+inline void ShardRebuildResponse::set_success(bool value) {
+  set_has_success();
+  success_ = value;
+  // @@protoc_insertion_point(field_set:elasticfaiss.ShardRebuildResponse.success)
+}
+
+// optional string redirect = 2;
+inline bool ShardRebuildResponse::has_redirect() const {
+  return (_has_bits_[0] & 0x00000001u) != 0;
+}
+inline void ShardRebuildResponse::set_has_redirect() {
+  _has_bits_[0] |= 0x00000001u;
+}
+inline void ShardRebuildResponse::clear_has_redirect() {
+  _has_bits_[0] &= ~0x00000001u;
+}
+inline void ShardRebuildResponse::clear_redirect() {
+  redirect_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  clear_has_redirect();
+}
+inline const ::std::string& ShardRebuildResponse::redirect() const {
+  // @@protoc_insertion_point(field_get:elasticfaiss.ShardRebuildResponse.redirect)
+  return redirect_.GetNoArena();
+}
+inline void ShardRebuildResponse::set_redirect(const ::std::string& value) {
+  set_has_redirect();
+  redirect_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
+  // @@protoc_insertion_point(field_set:elasticfaiss.ShardRebuildResponse.redirect)
+}
+#if LANG_CXX11
+inline void ShardRebuildResponse::set_redirect(::std::string&& value) {
+  set_has_redirect();
+  redirect_.SetNoArena(
+    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
+  // @@protoc_insertion_point(field_set_rvalue:elasticfaiss.ShardRebuildResponse.redirect)
+}
+#endif
+inline void ShardRebuildResponse::set_redirect(const char* value) {
+  GOOGLE_DCHECK(value != NULL);
+  set_has_redirect();
+  redirect_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
+  // @@protoc_insertion_point(field_set_char:elasticfaiss.ShardRebuildResponse.redirect)
+}
+inline void ShardRebuildResponse::set_redirect(const char* value, size_t size) {
+  set_has_redirect();
+  redirect_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+      ::std::string(reinterpret_cast<const char*>(value), size));
+  // @@protoc_insertion_point(field_set_pointer:elasticfaiss.ShardRebuildResponse.redirect)
+}
+inline ::std::string* ShardRebuildResponse::mutable_redirect() {
+  set_has_redirect();
+  // @@protoc_insertion_point(field_mutable:elasticfaiss.ShardRebuildResponse.redirect)
+  return redirect_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline ::std::string* ShardRebuildResponse::release_redirect() {
+  // @@protoc_insertion_point(field_release:elasticfaiss.ShardRebuildResponse.redirect)
+  if (!has_redirect()) {
+    return NULL;
+  }
+  clear_has_redirect();
+  return redirect_.ReleaseNonDefaultNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline void ShardRebuildResponse::set_allocated_redirect(::std::string* redirect) {
+  if (redirect != NULL) {
+    set_has_redirect();
+  } else {
+    clear_has_redirect();
+  }
+  redirect_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), redirect);
+  // @@protoc_insertion_point(field_set_allocated:elasticfaiss.ShardRebuildResponse.redirect)
+}
+
+// optional string error = 3;
+inline bool ShardRebuildResponse::has_error() const {
+  return (_has_bits_[0] & 0x00000002u) != 0;
+}
+inline void ShardRebuildResponse::set_has_error() {
+  _has_bits_[0] |= 0x00000002u;
+}
+inline void ShardRebuildResponse::clear_has_error() {
+  _has_bits_[0] &= ~0x00000002u;
+}
+inline void ShardRebuildResponse::clear_error() {
+  error_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  clear_has_error();
+}
+inline const ::std::string& ShardRebuildResponse::error() const {
+  // @@protoc_insertion_point(field_get:elasticfaiss.ShardRebuildResponse.error)
+  return error_.GetNoArena();
+}
+inline void ShardRebuildResponse::set_error(const ::std::string& value) {
+  set_has_error();
+  error_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
+  // @@protoc_insertion_point(field_set:elasticfaiss.ShardRebuildResponse.error)
+}
+#if LANG_CXX11
+inline void ShardRebuildResponse::set_error(::std::string&& value) {
+  set_has_error();
+  error_.SetNoArena(
+    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
+  // @@protoc_insertion_point(field_set_rvalue:elasticfaiss.ShardRebuildResponse.error)
+}
+#endif
+inline void ShardRebuildResponse::set_error(const char* value) {
+  GOOGLE_DCHECK(value != NULL);
+  set_has_error();
+  error_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
+  // @@protoc_insertion_point(field_set_char:elasticfaiss.ShardRebuildResponse.error)
+}
+inline void ShardRebuildResponse::set_error(const char* value, size_t size) {
+  set_has_error();
+  error_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+      ::std::string(reinterpret_cast<const char*>(value), size));
+  // @@protoc_insertion_point(field_set_pointer:elasticfaiss.ShardRebuildResponse.error)
+}
+inline ::std::string* ShardRebuildResponse::mutable_error() {
+  set_has_error();
+  // @@protoc_insertion_point(field_mutable:elasticfaiss.ShardRebuildResponse.error)
+  return error_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline ::std::string* ShardRebuildResponse::release_error() {
+  // @@protoc_insertion_point(field_release:elasticfaiss.ShardRebuildResponse.error)
+  if (!has_error()) {
+    return NULL;
+  }
+  clear_has_error();
+  return error_.ReleaseNonDefaultNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline void ShardRebuildResponse::set_allocated_error(::std::string* error) {
+  if (error != NULL) {
+    set_has_error();
+  } else {
+    clear_has_error();
+  }
+  error_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), error);
+  // @@protoc_insertion_point(field_set_allocated:elasticfaiss.ShardRebuildResponse.error)
+}
+
 #ifdef __GNUC__
   #pragma GCC diagnostic pop
 #endif  // __GNUC__
+// -------------------------------------------------------------------
+
+// -------------------------------------------------------------------
+
+// -------------------------------------------------------------------
+
+// -------------------------------------------------------------------
+
 // -------------------------------------------------------------------
 
 // -------------------------------------------------------------------

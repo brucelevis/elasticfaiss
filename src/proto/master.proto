@@ -6,7 +6,10 @@ import "shard.proto";
 
 
 message ClusterSettings{
-   
+   optional int32 shard_allocation_after_timeout_secs = 1  [default = 60];
+   optional int32 total_shards_per_node               = 2  [default = -1];
+   optional int32 index_rpc_timeout_ms                = 3  [default = 10000];
+   optional int32 index_rpc_max_retry                 = 4  [default = 2];
 }
 
 enum WorkNodeState{
@@ -14,12 +17,17 @@ enum WorkNodeState{
     WNODE_TIMEOUT = 2;
 }
 
+enum NodeRole{
+    NODE_DATA  = 1; 
+    NODE_PROXY = 2;
+}
+
 message WorkNode{
     required string peer_id = 1;
     optional int64 last_active_ms = 2;
     optional int64 last_state_ms  = 3;
     repeated Shard shards = 4;
-    required int32 state = 5;
+    optional int32 state = 5;
 }
 
 message ClusterState{
@@ -30,6 +38,7 @@ message ClusterState{
 message MasterSnapshot{
     optional  ClusterState state = 1;
     repeated  IndexConf index = 2;
+    optional  ClusterSettings settings = 3;
 }
 
 message BootstrapRequest {
@@ -96,10 +105,34 @@ message UpdateIndexResponse {
     optional string error = 3;
 };
 
+message UpdateNodeRequest {
+    required string peer_id = 1;
+    optional int32  state = 2;
+    required int64  state_ms  = 3;
+    repeated Shard  shards = 4;
+};
+
+message UpdateNodeResponse {
+    required bool success = 1;
+    optional string redirect = 2;
+    optional string error = 3;
+};
+
+message UpdateClusterSettingRequest {
+    required ClusterSettings settings = 1;
+};
+
+message UpdateClusterSettingResponse {
+    required bool success = 1;
+    optional string redirect = 2;
+    optional string error = 3;
+};
+
 
 service MasterService {
     rpc bootstrap(BootstrapRequest) returns (BootstrapResponse);
     rpc node_heartbeat(NodeHeartbeatRequest) returns (NodeHeartbeatResponse);
+    rpc cluster_setting(UpdateClusterSettingRequest) returns (UpdateClusterSettingResponse);
     rpc get_cluster_state(GetClusterStateRequest) returns (GetClusterStateResponse);
     
     rpc create_index(CreateIndexRequest) returns (CreateIndexResponse);

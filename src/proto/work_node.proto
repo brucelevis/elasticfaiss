@@ -23,9 +23,34 @@ message DeleteShardResponse {
     optional string error = 3;
 };
 
+message ShardPutRequest {
+    required string name = 1;
+    required int32  idx = 2;
+};
+
+message ShardPutResponse {
+    required bool success = 1;
+    optional string redirect = 2;
+    optional string error = 3;
+};
+
+message ShardRebuildRequest {
+    required string name = 1;
+    required int32  idx = 2;
+};
+
+message ShardRebuildResponse {
+    required bool success = 1;
+    optional string redirect = 2;
+    optional string error = 3;
+};
+
 service WorkNodeService {
     rpc create_shard(CreateShardRequest) returns (CreateShardResponse);
     rpc delete_shard(DeleteShardRequest) returns (DeleteShardResponse);
+    
+    rpc rebuild(ShardRebuildRequest) returns (ShardRebuildResponse);
+    rpc put(ShardPutRequest) returns (ShardPutResponse);
 };
 
 

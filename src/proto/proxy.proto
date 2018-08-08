@@ -1,9 +1,0 @@
-syntax="proto2";
-package elasticfaiss;
-option cc_generic_services = true;
-
-
-
-
-service ProxyService {    
-};

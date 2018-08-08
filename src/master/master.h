@@ -61,33 +61,15 @@ namespace elasticfaiss
             google::protobuf::Closure* _done;
     };
 
-    struct ShardIndexKey
-    {
-            std::string index;
-            int32_t shard_idx;
-            ShardIndexKey()
-                    : shard_idx(0)
-            {
-            }
-            bool operator<(const ShardIndexKey& other) const
-            {
-                int ret = index.compare(other.index);
-                if (0 != ret)
-                {
-                    return ret < 0 ? true : false;
-                }
-                return shard_idx < other.shard_idx;
-            }
-    };
-
     typedef std::unordered_map<std::string, WorkNode*> WorkNodeTable;
     //typedef std::unordered_map<std::string, ClusterState*> ClusterStateTable;
-    typedef std::map<ShardIndexKey, ShardNodes*> ShardNodeTable;
+    typedef std::map<ShardIndexKey, ShardNodes> ShardNodeTable;
     typedef std::map<std::string, IndexConf*> DataIndexConfTable;
 
     struct RoutineContext
     {
             bool need_check_index;
+            ShardNodeTable shard_nodes;
             RoutineContext()
                     : need_check_index(true)
             {
@@ -155,6 +137,8 @@ namespace elasticfaiss
                     ::elasticfaiss::DeleteIndexResponse* response, ::google::protobuf::Closure* done);
             void update_index(const ::elasticfaiss::UpdateIndexRequest* request,
                     ::elasticfaiss::UpdateIndexResponse* response, ::google::protobuf::Closure* done);
+            void cluster_setting(const ::elasticfaiss::UpdateClusterSettingRequest* request,
+                    ::elasticfaiss::UpdateClusterSettingResponse* response, ::google::protobuf::Closure* done);
 
             bool is_leader() const;
 
@@ -178,10 +162,15 @@ namespace elasticfaiss
                 }
             }
         private:
+            void update_node_state(WorkNode* node, int32_t new_state);
+            void update_node_shards(WorkNode* node, const std::vector<Shard>& shards);
+            void replace_shard_node(const IndexConf& conf, int32_t shard_idx, const StringSet& all_nodes,
+                    const StringSet& active_nodes, const std::string& new_node, const std::string& remove_node);
+            void reset_shard_cluster(const ShardIndexKey& shard, const StringSet& nodes);
             WorkNode* get_node(const std::string& name);
             bool get_index_conf(const std::string& name, IndexConf& conf);
-            void update_data_shard_nodes(const WorkNode* node,
-                    const ::google::protobuf::RepeatedPtrField<Shard>& shards);
+            void update_data_shard_nodes(const WorkNode* node, ShardNodeTable& shard_nodes);
+            void update_data_shard_nodes(ShardNodeTable& shard_nodes);
             int transaction_create_index(const IndexConf& conf);
             int rpc_delete_index_shard(const std::string& name, int32_t idx, const std::string& node);
             int rpc_create_index_shard(const IndexConf& conf, int32_t shard_idx, const std::string& node,
@@ -219,22 +208,31 @@ namespace elasticfaiss
                     ::elasticfaiss::DeleteIndexResponse* response);
             int handle_update_index(const ::elasticfaiss::UpdateIndexRequest* request,
                     ::elasticfaiss::UpdateIndexResponse* response);
+            int handle_update_node(const ::elasticfaiss::UpdateNodeRequest* request,
+                    ::elasticfaiss::UpdateNodeResponse* response);
+            int handle_update_settings(const ::elasticfaiss::UpdateClusterSettingRequest* request,
+                    ::elasticfaiss::UpdateClusterSettingResponse* response);
+
+            void get_cluster_settings(ClusterSettings& settings);
 
         private:
             braft::Node* volatile _node;
             butil::atomic<int64_t> _leader_term;
             butil::WaitableEvent _routine_event;
 
+            ClusterSettings _settings;
+            bthread::Mutex _settings_mutex;
+
             WorkNodeTable _all_nodes;
             ClusterState _cluster_state;
             DataIndexConfTable _data_index_confs;
-            ShardNodeTable _shard_nodes;
-            //DataShardConfTable _data_shard_confs;
+
             bthread::Mutex _cluster_mutex;
             bthread::Mutex _index_mutex;
 
             bool _check_term;
             std::atomic<bool> _running;
+            std::atomic<bool> _cluster_altering;
     };
 
     template<typename REQ, typename RES>
@@ -293,6 +291,12 @@ namespace elasticfaiss
                     ::google::protobuf::Closure* done)
             {
                 return _master->update_index(request, response, done);
+            }
+            void cluster_setting(::google::protobuf::RpcController* controller,
+                    const ::elasticfaiss::UpdateClusterSettingRequest* request,
+                    ::elasticfaiss::UpdateClusterSettingResponse* response, ::google::protobuf::Closure* done)
+            {
+                return _master->cluster_setting(request, response, done);
             }
         private:
             Master* _master;

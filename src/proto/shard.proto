@@ -7,19 +7,19 @@ enum ShardState{
     SHARD_ACTIVE  =  2;
 }
 
-message Shard{
-    required string   name = 1;
-    required int32    idx  = 2;
-    optional bool     is_leader  = 3;
-    required int32    state = 4;
-    repeated string   nodes = 5;   //only leader shard contains all nodes id
-}
-
 message IndexConf{
     required string name = 1;
     required string type = 2;
     required int32 number_of_shards = 3;
     required int32 number_of_replicas = 4;
+}
+
+message Shard{
+    required string   name = 1;
+    required int32    idx  = 2;
+    optional bool     is_leader  = 3;
+    optional int32    state = 4;
+    repeated string   nodes = 5;   //only leader shard contains all nodes id
 }
 
 message IndexShardConf{

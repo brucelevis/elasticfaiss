@@ -43,6 +43,26 @@ class DeleteShardResponseDefaultTypeInternal {
   ::google::protobuf::internal::ExplicitlyConstructed<DeleteShardResponse>
       _instance;
 } _DeleteShardResponse_default_instance_;
+class ShardPutRequestDefaultTypeInternal {
+ public:
+  ::google::protobuf::internal::ExplicitlyConstructed<ShardPutRequest>
+      _instance;
+} _ShardPutRequest_default_instance_;
+class ShardPutResponseDefaultTypeInternal {
+ public:
+  ::google::protobuf::internal::ExplicitlyConstructed<ShardPutResponse>
+      _instance;
+} _ShardPutResponse_default_instance_;
+class ShardRebuildRequestDefaultTypeInternal {
+ public:
+  ::google::protobuf::internal::ExplicitlyConstructed<ShardRebuildRequest>
+      _instance;
+} _ShardRebuildRequest_default_instance_;
+class ShardRebuildResponseDefaultTypeInternal {
+ public:
+  ::google::protobuf::internal::ExplicitlyConstructed<ShardRebuildResponse>
+      _instance;
+} _ShardRebuildResponse_default_instance_;
 }  // namespace elasticfaiss
 namespace protobuf_work_5fnode_2eproto {
 static void InitDefaultsCreateShardRequest() {
@@ -102,14 +122,74 @@ static void InitDefaultsDeleteShardResponse() {
 ::google::protobuf::internal::SCCInfo<0> scc_info_DeleteShardResponse =
     {{ATOMIC_VAR_INIT(::google::protobuf::internal::SCCInfoBase::kUninitialized), 0, InitDefaultsDeleteShardResponse}, {}};
 
+static void InitDefaultsShardPutRequest() {
+  GOOGLE_PROTOBUF_VERIFY_VERSION;
+
+  {
+    void* ptr = &::elasticfaiss::_ShardPutRequest_default_instance_;
+    new (ptr) ::elasticfaiss::ShardPutRequest();
+    ::google::protobuf::internal::OnShutdownDestroyMessage(ptr);
+  }
+  ::elasticfaiss::ShardPutRequest::InitAsDefaultInstance();
+}
+
+::google::protobuf::internal::SCCInfo<0> scc_info_ShardPutRequest =
+    {{ATOMIC_VAR_INIT(::google::protobuf::internal::SCCInfoBase::kUninitialized), 0, InitDefaultsShardPutRequest}, {}};
+
+static void InitDefaultsShardPutResponse() {
+  GOOGLE_PROTOBUF_VERIFY_VERSION;
+
+  {
+    void* ptr = &::elasticfaiss::_ShardPutResponse_default_instance_;
+    new (ptr) ::elasticfaiss::ShardPutResponse();
+    ::google::protobuf::internal::OnShutdownDestroyMessage(ptr);
+  }
+  ::elasticfaiss::ShardPutResponse::InitAsDefaultInstance();
+}
+
+::google::protobuf::internal::SCCInfo<0> scc_info_ShardPutResponse =
+    {{ATOMIC_VAR_INIT(::google::protobuf::internal::SCCInfoBase::kUninitialized), 0, InitDefaultsShardPutResponse}, {}};
+
+static void InitDefaultsShardRebuildRequest() {
+  GOOGLE_PROTOBUF_VERIFY_VERSION;
+
+  {
+    void* ptr = &::elasticfaiss::_ShardRebuildRequest_default_instance_;
+    new (ptr) ::elasticfaiss::ShardRebuildRequest();
+    ::google::protobuf::internal::OnShutdownDestroyMessage(ptr);
+  }
+  ::elasticfaiss::ShardRebuildRequest::InitAsDefaultInstance();
+}
+
+::google::protobuf::internal::SCCInfo<0> scc_info_ShardRebuildRequest =
+    {{ATOMIC_VAR_INIT(::google::protobuf::internal::SCCInfoBase::kUninitialized), 0, InitDefaultsShardRebuildRequest}, {}};
+
+static void InitDefaultsShardRebuildResponse() {
+  GOOGLE_PROTOBUF_VERIFY_VERSION;
+
+  {
+    void* ptr = &::elasticfaiss::_ShardRebuildResponse_default_instance_;
+    new (ptr) ::elasticfaiss::ShardRebuildResponse();
+    ::google::protobuf::internal::OnShutdownDestroyMessage(ptr);
+  }
+  ::elasticfaiss::ShardRebuildResponse::InitAsDefaultInstance();
+}
+
+::google::protobuf::internal::SCCInfo<0> scc_info_ShardRebuildResponse =
+    {{ATOMIC_VAR_INIT(::google::protobuf::internal::SCCInfoBase::kUninitialized), 0, InitDefaultsShardRebuildResponse}, {}};
+
 void InitDefaults() {
   ::google::protobuf::internal::InitSCC(&scc_info_CreateShardRequest.base);
   ::google::protobuf::internal::InitSCC(&scc_info_CreateShardResponse.base);
   ::google::protobuf::internal::InitSCC(&scc_info_DeleteShardRequest.base);
   ::google::protobuf::internal::InitSCC(&scc_info_DeleteShardResponse.base);
+  ::google::protobuf::internal::InitSCC(&scc_info_ShardPutRequest.base);
+  ::google::protobuf::internal::InitSCC(&scc_info_ShardPutResponse.base);
+  ::google::protobuf::internal::InitSCC(&scc_info_ShardRebuildRequest.base);
+  ::google::protobuf::internal::InitSCC(&scc_info_ShardRebuildResponse.base);
 }
 
-::google::protobuf::Metadata file_level_metadata[4];
+::google::protobuf::Metadata file_level_metadata[8];
 const ::google::protobuf::ServiceDescriptor* file_level_service_descriptors[1];
 
 const ::google::protobuf::uint32 TableStruct::offsets[] GOOGLE_PROTOBUF_ATTRIBUTE_SECTION_VARIABLE(protodesc_cold) = {
@@ -147,12 +227,56 @@ const ::google::protobuf::uint32 TableStruct::offsets[] GOOGLE_PROTOBUF_ATTRIBUT
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::elasticfaiss::DeleteShardResponse, error_),
   1,
   0,
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::elasticfaiss::ShardPutRequest, _has_bits_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::elasticfaiss::ShardPutRequest, _internal_metadata_),
+  ~0u,  // no _extensions_
+  ~0u,  // no _oneof_case_
+  ~0u,  // no _weak_field_map_
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::elasticfaiss::ShardPutRequest, name_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::elasticfaiss::ShardPutRequest, idx_),
+  0,
+  1,
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::elasticfaiss::ShardPutResponse, _has_bits_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::elasticfaiss::ShardPutResponse, _internal_metadata_),
+  ~0u,  // no _extensions_
+  ~0u,  // no _oneof_case_
+  ~0u,  // no _weak_field_map_
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::elasticfaiss::ShardPutResponse, success_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::elasticfaiss::ShardPutResponse, redirect_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::elasticfaiss::ShardPutResponse, error_),
+  2,
+  0,
+  1,
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::elasticfaiss::ShardRebuildRequest, _has_bits_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::elasticfaiss::ShardRebuildRequest, _internal_metadata_),
+  ~0u,  // no _extensions_
+  ~0u,  // no _oneof_case_
+  ~0u,  // no _weak_field_map_
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::elasticfaiss::ShardRebuildRequest, name_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::elasticfaiss::ShardRebuildRequest, idx_),
+  0,
+  1,
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::elasticfaiss::ShardRebuildResponse, _has_bits_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::elasticfaiss::ShardRebuildResponse, _internal_metadata_),
+  ~0u,  // no _extensions_
+  ~0u,  // no _oneof_case_
+  ~0u,  // no _weak_field_map_
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::elasticfaiss::ShardRebuildResponse, success_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::elasticfaiss::ShardRebuildResponse, redirect_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::elasticfaiss::ShardRebuildResponse, error_),
+  2,
+  0,
+  1,
 };
 static const ::google::protobuf::internal::MigrationSchema schemas[] GOOGLE_PROTOBUF_ATTRIBUTE_SECTION_VARIABLE(protodesc_cold) = {
   { 0, 6, sizeof(::elasticfaiss::CreateShardRequest)},
   { 7, 14, sizeof(::elasticfaiss::CreateShardResponse)},
   { 16, 23, sizeof(::elasticfaiss::DeleteShardRequest)},
   { 25, 32, sizeof(::elasticfaiss::DeleteShardResponse)},
+  { 34, 41, sizeof(::elasticfaiss::ShardPutRequest)},
+  { 43, 51, sizeof(::elasticfaiss::ShardPutResponse)},
+  { 54, 61, sizeof(::elasticfaiss::ShardRebuildRequest)},
+  { 63, 71, sizeof(::elasticfaiss::ShardRebuildResponse)},
 };
 
 static ::google::protobuf::Message const * const file_default_instances[] = {
@@ -160,6 +284,10 @@ static ::google::protobuf::Message const * const file_default_instances[] = {
   reinterpret_cast<const ::google::protobuf::Message*>(&::elasticfaiss::_CreateShardResponse_default_instance_),
   reinterpret_cast<const ::google::protobuf::Message*>(&::elasticfaiss::_DeleteShardRequest_default_instance_),
   reinterpret_cast<const ::google::protobuf::Message*>(&::elasticfaiss::_DeleteShardResponse_default_instance_),
+  reinterpret_cast<const ::google::protobuf::Message*>(&::elasticfaiss::_ShardPutRequest_default_instance_),
+  reinterpret_cast<const ::google::protobuf::Message*>(&::elasticfaiss::_ShardPutResponse_default_instance_),
+  reinterpret_cast<const ::google::protobuf::Message*>(&::elasticfaiss::_ShardRebuildRequest_default_instance_),
+  reinterpret_cast<const ::google::protobuf::Message*>(&::elasticfaiss::_ShardRebuildResponse_default_instance_),
 };
 
 void protobuf_AssignDescriptors() {
@@ -177,7 +305,7 @@ void protobuf_AssignDescriptorsOnce() {
 void protobuf_RegisterTypes(const ::std::string&) GOOGLE_PROTOBUF_ATTRIBUTE_COLD;
 void protobuf_RegisterTypes(const ::std::string&) {
   protobuf_AssignDescriptorsOnce();
-  ::google::protobuf::internal::RegisterAllTypes(file_level_metadata, 4);
+  ::google::protobuf::internal::RegisterAllTypes(file_level_metadata, 8);
 }
 
 void AddDescriptorsImpl() {
@@ -189,15 +317,25 @@ void AddDescriptorsImpl() {
       "ShardResponse\022\017\n\007success\030\001 \002(\010\022\r\n\005error\030"
       "\003 \001(\t\"/\n\022DeleteShardRequest\022\014\n\004name\030\001 \002("
       "\t\022\013\n\003idx\030\002 \002(\005\"5\n\023DeleteShardResponse\022\017\n"
-      "\007success\030\001 \002(\010\022\r\n\005error\030\003 \001(\t2\273\001\n\017WorkNo"
+      "\007success\030\001 \002(\010\022\r\n\005error\030\003 \001(\t\",\n\017ShardPu"
+      "tRequest\022\014\n\004name\030\001 \002(\t\022\013\n\003idx\030\002 \002(\005\"D\n\020S"
+      "hardPutResponse\022\017\n\007success\030\001 \002(\010\022\020\n\010redi"
+      "rect\030\002 \001(\t\022\r\n\005error\030\003 \001(\t\"0\n\023ShardRebuil"
+      "dRequest\022\014\n\004name\030\001 \002(\t\022\013\n\003idx\030\002 \002(\005\"H\n\024S"
+      "hardRebuildResponse\022\017\n\007success\030\001 \002(\010\022\020\n\010"
+      "redirect\030\002 \001(\t\022\r\n\005error\030\003 \001(\t2\323\002\n\017WorkNo"
       "deService\022S\n\014create_shard\022 .elasticfaiss"
       ".CreateShardRequest\032!.elasticfaiss.Creat"
       "eShardResponse\022S\n\014delete_shard\022 .elastic"
       "faiss.DeleteShardRequest\032!.elasticfaiss."
-      "DeleteShardResponseB\003\200\001\001"
+      "DeleteShardResponse\022P\n\007rebuild\022!.elastic"
+      "faiss.ShardRebuildRequest\032\".elasticfaiss"
+      ".ShardRebuildResponse\022D\n\003put\022\035.elasticfa"
+      "iss.ShardPutRequest\032\036.elasticfaiss.Shard"
+      "PutResponseB\003\200\001\001"
   };
   ::google::protobuf::DescriptorPool::InternalAddGeneratedFile(
-      descriptor, 464);
+      descriptor, 856);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "work_node.proto", &protobuf_RegisterTypes);
   ::protobuf_shard_2eproto::AddDescriptors();
@@ -1361,6 +1499,1344 @@ void DeleteShardResponse::InternalSwap(DeleteShardResponse* other) {
 
 // ===================================================================
 
+void ShardPutRequest::InitAsDefaultInstance() {
+}
+#if !defined(_MSC_VER) || _MSC_VER >= 1900
+const int ShardPutRequest::kNameFieldNumber;
+const int ShardPutRequest::kIdxFieldNumber;
+#endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
+
+ShardPutRequest::ShardPutRequest()
+  : ::google::protobuf::Message(), _internal_metadata_(NULL) {
+  ::google::protobuf::internal::InitSCC(
+      &protobuf_work_5fnode_2eproto::scc_info_ShardPutRequest.base);
+  SharedCtor();
+  // @@protoc_insertion_point(constructor:elasticfaiss.ShardPutRequest)
+}
+ShardPutRequest::ShardPutRequest(const ShardPutRequest& from)
+  : ::google::protobuf::Message(),
+      _internal_metadata_(NULL),
+      _has_bits_(from._has_bits_) {
+  _internal_metadata_.MergeFrom(from._internal_metadata_);
+  name_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  if (from.has_name()) {
+    name_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.name_);
+  }
+  idx_ = from.idx_;
+  // @@protoc_insertion_point(copy_constructor:elasticfaiss.ShardPutRequest)
+}
+
+void ShardPutRequest::SharedCtor() {
+  name_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  idx_ = 0;
+}
+
+ShardPutRequest::~ShardPutRequest() {
+  // @@protoc_insertion_point(destructor:elasticfaiss.ShardPutRequest)
+  SharedDtor();
+}
+
+void ShardPutRequest::SharedDtor() {
+  name_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+
+void ShardPutRequest::SetCachedSize(int size) const {
+  _cached_size_.Set(size);
+}
+const ::google::protobuf::Descriptor* ShardPutRequest::descriptor() {
+  ::protobuf_work_5fnode_2eproto::protobuf_AssignDescriptorsOnce();
+  return ::protobuf_work_5fnode_2eproto::file_level_metadata[kIndexInFileMessages].descriptor;
+}
+
+const ShardPutRequest& ShardPutRequest::default_instance() {
+  ::google::protobuf::internal::InitSCC(&protobuf_work_5fnode_2eproto::scc_info_ShardPutRequest.base);
+  return *internal_default_instance();
+}
+
+
+void ShardPutRequest::Clear() {
+// @@protoc_insertion_point(message_clear_start:elasticfaiss.ShardPutRequest)
+  ::google::protobuf::uint32 cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  cached_has_bits = _has_bits_[0];
+  if (cached_has_bits & 0x00000001u) {
+    name_.ClearNonDefaultToEmptyNoArena();
+  }
+  idx_ = 0;
+  _has_bits_.Clear();
+  _internal_metadata_.Clear();
+}
+
+bool ShardPutRequest::MergePartialFromCodedStream(
+    ::google::protobuf::io::CodedInputStream* input) {
+#define DO_(EXPRESSION) if (!GOOGLE_PREDICT_TRUE(EXPRESSION)) goto failure
+  ::google::protobuf::uint32 tag;
+  // @@protoc_insertion_point(parse_start:elasticfaiss.ShardPutRequest)
+  for (;;) {
+    ::std::pair<::google::protobuf::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(127u);
+    tag = p.first;
+    if (!p.second) goto handle_unusual;
+    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
+      // required string name = 1;
+      case 1: {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(10u /* 10 & 0xFF */)) {
+          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
+                input, this->mutable_name()));
+          ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
+            this->name().data(), static_cast<int>(this->name().length()),
+            ::google::protobuf::internal::WireFormat::PARSE,
+            "elasticfaiss.ShardPutRequest.name");
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      // required int32 idx = 2;
+      case 2: {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(16u /* 16 & 0xFF */)) {
+          set_has_idx();
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
+                 input, &idx_)));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      default: {
+      handle_unusual:
+        if (tag == 0) {
+          goto success;
+        }
+        DO_(::google::protobuf::internal::WireFormat::SkipField(
+              input, tag, _internal_metadata_.mutable_unknown_fields()));
+        break;
+      }
+    }
+  }
+success:
+  // @@protoc_insertion_point(parse_success:elasticfaiss.ShardPutRequest)
+  return true;
+failure:
+  // @@protoc_insertion_point(parse_failure:elasticfaiss.ShardPutRequest)
+  return false;
+#undef DO_
+}
+
+void ShardPutRequest::SerializeWithCachedSizes(
+    ::google::protobuf::io::CodedOutputStream* output) const {
+  // @@protoc_insertion_point(serialize_start:elasticfaiss.ShardPutRequest)
+  ::google::protobuf::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  cached_has_bits = _has_bits_[0];
+  // required string name = 1;
+  if (cached_has_bits & 0x00000001u) {
+    ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
+      this->name().data(), static_cast<int>(this->name().length()),
+      ::google::protobuf::internal::WireFormat::SERIALIZE,
+      "elasticfaiss.ShardPutRequest.name");
+    ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
+      1, this->name(), output);
+  }
+
+  // required int32 idx = 2;
+  if (cached_has_bits & 0x00000002u) {
+    ::google::protobuf::internal::WireFormatLite::WriteInt32(2, this->idx(), output);
+  }
+
+  if (_internal_metadata_.have_unknown_fields()) {
+    ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
+        _internal_metadata_.unknown_fields(), output);
+  }
+  // @@protoc_insertion_point(serialize_end:elasticfaiss.ShardPutRequest)
+}
+
+::google::protobuf::uint8* ShardPutRequest::InternalSerializeWithCachedSizesToArray(
+    bool deterministic, ::google::protobuf::uint8* target) const {
+  (void)deterministic; // Unused
+  // @@protoc_insertion_point(serialize_to_array_start:elasticfaiss.ShardPutRequest)
+  ::google::protobuf::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  cached_has_bits = _has_bits_[0];
+  // required string name = 1;
+  if (cached_has_bits & 0x00000001u) {
+    ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
+      this->name().data(), static_cast<int>(this->name().length()),
+      ::google::protobuf::internal::WireFormat::SERIALIZE,
+      "elasticfaiss.ShardPutRequest.name");
+    target =
+      ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
+        1, this->name(), target);
+  }
+
+  // required int32 idx = 2;
+  if (cached_has_bits & 0x00000002u) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(2, this->idx(), target);
+  }
+
+  if (_internal_metadata_.have_unknown_fields()) {
+    target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
+        _internal_metadata_.unknown_fields(), target);
+  }
+  // @@protoc_insertion_point(serialize_to_array_end:elasticfaiss.ShardPutRequest)
+  return target;
+}
+
+size_t ShardPutRequest::RequiredFieldsByteSizeFallback() const {
+// @@protoc_insertion_point(required_fields_byte_size_fallback_start:elasticfaiss.ShardPutRequest)
+  size_t total_size = 0;
+
+  if (has_name()) {
+    // required string name = 1;
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::StringSize(
+        this->name());
+  }
+
+  if (has_idx()) {
+    // required int32 idx = 2;
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::Int32Size(
+        this->idx());
+  }
+
+  return total_size;
+}
+size_t ShardPutRequest::ByteSizeLong() const {
+// @@protoc_insertion_point(message_byte_size_start:elasticfaiss.ShardPutRequest)
+  size_t total_size = 0;
+
+  if (_internal_metadata_.have_unknown_fields()) {
+    total_size +=
+      ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
+        _internal_metadata_.unknown_fields());
+  }
+  if (((_has_bits_[0] & 0x00000003) ^ 0x00000003) == 0) {  // All required fields are present.
+    // required string name = 1;
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::StringSize(
+        this->name());
+
+    // required int32 idx = 2;
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::Int32Size(
+        this->idx());
+
+  } else {
+    total_size += RequiredFieldsByteSizeFallback();
+  }
+  int cached_size = ::google::protobuf::internal::ToCachedSize(total_size);
+  SetCachedSize(cached_size);
+  return total_size;
+}
+
+void ShardPutRequest::MergeFrom(const ::google::protobuf::Message& from) {
+// @@protoc_insertion_point(generalized_merge_from_start:elasticfaiss.ShardPutRequest)
+  GOOGLE_DCHECK_NE(&from, this);
+  const ShardPutRequest* source =
+      ::google::protobuf::internal::DynamicCastToGenerated<const ShardPutRequest>(
+          &from);
+  if (source == NULL) {
+  // @@protoc_insertion_point(generalized_merge_from_cast_fail:elasticfaiss.ShardPutRequest)
+    ::google::protobuf::internal::ReflectionOps::Merge(from, this);
+  } else {
+  // @@protoc_insertion_point(generalized_merge_from_cast_success:elasticfaiss.ShardPutRequest)
+    MergeFrom(*source);
+  }
+}
+
+void ShardPutRequest::MergeFrom(const ShardPutRequest& from) {
+// @@protoc_insertion_point(class_specific_merge_from_start:elasticfaiss.ShardPutRequest)
+  GOOGLE_DCHECK_NE(&from, this);
+  _internal_metadata_.MergeFrom(from._internal_metadata_);
+  ::google::protobuf::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  cached_has_bits = from._has_bits_[0];
+  if (cached_has_bits & 3u) {
+    if (cached_has_bits & 0x00000001u) {
+      set_has_name();
+      name_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.name_);
+    }
+    if (cached_has_bits & 0x00000002u) {
+      idx_ = from.idx_;
+    }
+    _has_bits_[0] |= cached_has_bits;
+  }
+}
+
+void ShardPutRequest::CopyFrom(const ::google::protobuf::Message& from) {
+// @@protoc_insertion_point(generalized_copy_from_start:elasticfaiss.ShardPutRequest)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+void ShardPutRequest::CopyFrom(const ShardPutRequest& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:elasticfaiss.ShardPutRequest)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+bool ShardPutRequest::IsInitialized() const {
+  if ((_has_bits_[0] & 0x00000003) != 0x00000003) return false;
+  return true;
+}
+
+void ShardPutRequest::Swap(ShardPutRequest* other) {
+  if (other == this) return;
+  InternalSwap(other);
+}
+void ShardPutRequest::InternalSwap(ShardPutRequest* other) {
+  using std::swap;
+  name_.Swap(&other->name_, &::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+    GetArenaNoVirtual());
+  swap(idx_, other->idx_);
+  swap(_has_bits_[0], other->_has_bits_[0]);
+  _internal_metadata_.Swap(&other->_internal_metadata_);
+}
+
+::google::protobuf::Metadata ShardPutRequest::GetMetadata() const {
+  protobuf_work_5fnode_2eproto::protobuf_AssignDescriptorsOnce();
+  return ::protobuf_work_5fnode_2eproto::file_level_metadata[kIndexInFileMessages];
+}
+
+
+// ===================================================================
+
+void ShardPutResponse::InitAsDefaultInstance() {
+}
+#if !defined(_MSC_VER) || _MSC_VER >= 1900
+const int ShardPutResponse::kSuccessFieldNumber;
+const int ShardPutResponse::kRedirectFieldNumber;
+const int ShardPutResponse::kErrorFieldNumber;
+#endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
+
+ShardPutResponse::ShardPutResponse()
+  : ::google::protobuf::Message(), _internal_metadata_(NULL) {
+  ::google::protobuf::internal::InitSCC(
+      &protobuf_work_5fnode_2eproto::scc_info_ShardPutResponse.base);
+  SharedCtor();
+  // @@protoc_insertion_point(constructor:elasticfaiss.ShardPutResponse)
+}
+ShardPutResponse::ShardPutResponse(const ShardPutResponse& from)
+  : ::google::protobuf::Message(),
+      _internal_metadata_(NULL),
+      _has_bits_(from._has_bits_) {
+  _internal_metadata_.MergeFrom(from._internal_metadata_);
+  redirect_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  if (from.has_redirect()) {
+    redirect_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.redirect_);
+  }
+  error_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  if (from.has_error()) {
+    error_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.error_);
+  }
+  success_ = from.success_;
+  // @@protoc_insertion_point(copy_constructor:elasticfaiss.ShardPutResponse)
+}
+
+void ShardPutResponse::SharedCtor() {
+  redirect_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  error_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  success_ = false;
+}
+
+ShardPutResponse::~ShardPutResponse() {
+  // @@protoc_insertion_point(destructor:elasticfaiss.ShardPutResponse)
+  SharedDtor();
+}
+
+void ShardPutResponse::SharedDtor() {
+  redirect_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  error_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+
+void ShardPutResponse::SetCachedSize(int size) const {
+  _cached_size_.Set(size);
+}
+const ::google::protobuf::Descriptor* ShardPutResponse::descriptor() {
+  ::protobuf_work_5fnode_2eproto::protobuf_AssignDescriptorsOnce();
+  return ::protobuf_work_5fnode_2eproto::file_level_metadata[kIndexInFileMessages].descriptor;
+}
+
+const ShardPutResponse& ShardPutResponse::default_instance() {
+  ::google::protobuf::internal::InitSCC(&protobuf_work_5fnode_2eproto::scc_info_ShardPutResponse.base);
+  return *internal_default_instance();
+}
+
+
+void ShardPutResponse::Clear() {
+// @@protoc_insertion_point(message_clear_start:elasticfaiss.ShardPutResponse)
+  ::google::protobuf::uint32 cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  cached_has_bits = _has_bits_[0];
+  if (cached_has_bits & 3u) {
+    if (cached_has_bits & 0x00000001u) {
+      redirect_.ClearNonDefaultToEmptyNoArena();
+    }
+    if (cached_has_bits & 0x00000002u) {
+      error_.ClearNonDefaultToEmptyNoArena();
+    }
+  }
+  success_ = false;
+  _has_bits_.Clear();
+  _internal_metadata_.Clear();
+}
+
+bool ShardPutResponse::MergePartialFromCodedStream(
+    ::google::protobuf::io::CodedInputStream* input) {
+#define DO_(EXPRESSION) if (!GOOGLE_PREDICT_TRUE(EXPRESSION)) goto failure
+  ::google::protobuf::uint32 tag;
+  // @@protoc_insertion_point(parse_start:elasticfaiss.ShardPutResponse)
+  for (;;) {
+    ::std::pair<::google::protobuf::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(127u);
+    tag = p.first;
+    if (!p.second) goto handle_unusual;
+    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
+      // required bool success = 1;
+      case 1: {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(8u /* 8 & 0xFF */)) {
+          set_has_success();
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   bool, ::google::protobuf::internal::WireFormatLite::TYPE_BOOL>(
+                 input, &success_)));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      // optional string redirect = 2;
+      case 2: {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(18u /* 18 & 0xFF */)) {
+          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
+                input, this->mutable_redirect()));
+          ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
+            this->redirect().data(), static_cast<int>(this->redirect().length()),
+            ::google::protobuf::internal::WireFormat::PARSE,
+            "elasticfaiss.ShardPutResponse.redirect");
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      // optional string error = 3;
+      case 3: {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(26u /* 26 & 0xFF */)) {
+          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
+                input, this->mutable_error()));
+          ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
+            this->error().data(), static_cast<int>(this->error().length()),
+            ::google::protobuf::internal::WireFormat::PARSE,
+            "elasticfaiss.ShardPutResponse.error");
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      default: {
+      handle_unusual:
+        if (tag == 0) {
+          goto success;
+        }
+        DO_(::google::protobuf::internal::WireFormat::SkipField(
+              input, tag, _internal_metadata_.mutable_unknown_fields()));
+        break;
+      }
+    }
+  }
+success:
+  // @@protoc_insertion_point(parse_success:elasticfaiss.ShardPutResponse)
+  return true;
+failure:
+  // @@protoc_insertion_point(parse_failure:elasticfaiss.ShardPutResponse)
+  return false;
+#undef DO_
+}
+
+void ShardPutResponse::SerializeWithCachedSizes(
+    ::google::protobuf::io::CodedOutputStream* output) const {
+  // @@protoc_insertion_point(serialize_start:elasticfaiss.ShardPutResponse)
+  ::google::protobuf::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  cached_has_bits = _has_bits_[0];
+  // required bool success = 1;
+  if (cached_has_bits & 0x00000004u) {
+    ::google::protobuf::internal::WireFormatLite::WriteBool(1, this->success(), output);
+  }
+
+  // optional string redirect = 2;
+  if (cached_has_bits & 0x00000001u) {
+    ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
+      this->redirect().data(), static_cast<int>(this->redirect().length()),
+      ::google::protobuf::internal::WireFormat::SERIALIZE,
+      "elasticfaiss.ShardPutResponse.redirect");
+    ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
+      2, this->redirect(), output);
+  }
+
+  // optional string error = 3;
+  if (cached_has_bits & 0x00000002u) {
+    ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
+      this->error().data(), static_cast<int>(this->error().length()),
+      ::google::protobuf::internal::WireFormat::SERIALIZE,
+      "elasticfaiss.ShardPutResponse.error");
+    ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
+      3, this->error(), output);
+  }
+
+  if (_internal_metadata_.have_unknown_fields()) {
+    ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
+        _internal_metadata_.unknown_fields(), output);
+  }
+  // @@protoc_insertion_point(serialize_end:elasticfaiss.ShardPutResponse)
+}
+
+::google::protobuf::uint8* ShardPutResponse::InternalSerializeWithCachedSizesToArray(
+    bool deterministic, ::google::protobuf::uint8* target) const {
+  (void)deterministic; // Unused
+  // @@protoc_insertion_point(serialize_to_array_start:elasticfaiss.ShardPutResponse)
+  ::google::protobuf::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  cached_has_bits = _has_bits_[0];
+  // required bool success = 1;
+  if (cached_has_bits & 0x00000004u) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteBoolToArray(1, this->success(), target);
+  }
+
+  // optional string redirect = 2;
+  if (cached_has_bits & 0x00000001u) {
+    ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
+      this->redirect().data(), static_cast<int>(this->redirect().length()),
+      ::google::protobuf::internal::WireFormat::SERIALIZE,
+      "elasticfaiss.ShardPutResponse.redirect");
+    target =
+      ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
+        2, this->redirect(), target);
+  }
+
+  // optional string error = 3;
+  if (cached_has_bits & 0x00000002u) {
+    ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
+      this->error().data(), static_cast<int>(this->error().length()),
+      ::google::protobuf::internal::WireFormat::SERIALIZE,
+      "elasticfaiss.ShardPutResponse.error");
+    target =
+      ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
+        3, this->error(), target);
+  }
+
+  if (_internal_metadata_.have_unknown_fields()) {
+    target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
+        _internal_metadata_.unknown_fields(), target);
+  }
+  // @@protoc_insertion_point(serialize_to_array_end:elasticfaiss.ShardPutResponse)
+  return target;
+}
+
+size_t ShardPutResponse::ByteSizeLong() const {
+// @@protoc_insertion_point(message_byte_size_start:elasticfaiss.ShardPutResponse)
+  size_t total_size = 0;
+
+  if (_internal_metadata_.have_unknown_fields()) {
+    total_size +=
+      ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
+        _internal_metadata_.unknown_fields());
+  }
+  // required bool success = 1;
+  if (has_success()) {
+    total_size += 1 + 1;
+  }
+  if (_has_bits_[0 / 32] & 3u) {
+    // optional string redirect = 2;
+    if (has_redirect()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::StringSize(
+          this->redirect());
+    }
+
+    // optional string error = 3;
+    if (has_error()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::StringSize(
+          this->error());
+    }
+
+  }
+  int cached_size = ::google::protobuf::internal::ToCachedSize(total_size);
+  SetCachedSize(cached_size);
+  return total_size;
+}
+
+void ShardPutResponse::MergeFrom(const ::google::protobuf::Message& from) {
+// @@protoc_insertion_point(generalized_merge_from_start:elasticfaiss.ShardPutResponse)
+  GOOGLE_DCHECK_NE(&from, this);
+  const ShardPutResponse* source =
+      ::google::protobuf::internal::DynamicCastToGenerated<const ShardPutResponse>(
+          &from);
+  if (source == NULL) {
+  // @@protoc_insertion_point(generalized_merge_from_cast_fail:elasticfaiss.ShardPutResponse)
+    ::google::protobuf::internal::ReflectionOps::Merge(from, this);
+  } else {
+  // @@protoc_insertion_point(generalized_merge_from_cast_success:elasticfaiss.ShardPutResponse)
+    MergeFrom(*source);
+  }
+}
+
+void ShardPutResponse::MergeFrom(const ShardPutResponse& from) {
+// @@protoc_insertion_point(class_specific_merge_from_start:elasticfaiss.ShardPutResponse)
+  GOOGLE_DCHECK_NE(&from, this);
+  _internal_metadata_.MergeFrom(from._internal_metadata_);
+  ::google::protobuf::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  cached_has_bits = from._has_bits_[0];
+  if (cached_has_bits & 7u) {
+    if (cached_has_bits & 0x00000001u) {
+      set_has_redirect();
+      redirect_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.redirect_);
+    }
+    if (cached_has_bits & 0x00000002u) {
+      set_has_error();
+      error_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.error_);
+    }
+    if (cached_has_bits & 0x00000004u) {
+      success_ = from.success_;
+    }
+    _has_bits_[0] |= cached_has_bits;
+  }
+}
+
+void ShardPutResponse::CopyFrom(const ::google::protobuf::Message& from) {
+// @@protoc_insertion_point(generalized_copy_from_start:elasticfaiss.ShardPutResponse)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+void ShardPutResponse::CopyFrom(const ShardPutResponse& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:elasticfaiss.ShardPutResponse)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+bool ShardPutResponse::IsInitialized() const {
+  if ((_has_bits_[0] & 0x00000004) != 0x00000004) return false;
+  return true;
+}
+
+void ShardPutResponse::Swap(ShardPutResponse* other) {
+  if (other == this) return;
+  InternalSwap(other);
+}
+void ShardPutResponse::InternalSwap(ShardPutResponse* other) {
+  using std::swap;
+  redirect_.Swap(&other->redirect_, &::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+    GetArenaNoVirtual());
+  error_.Swap(&other->error_, &::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+    GetArenaNoVirtual());
+  swap(success_, other->success_);
+  swap(_has_bits_[0], other->_has_bits_[0]);
+  _internal_metadata_.Swap(&other->_internal_metadata_);
+}
+
+::google::protobuf::Metadata ShardPutResponse::GetMetadata() const {
+  protobuf_work_5fnode_2eproto::protobuf_AssignDescriptorsOnce();
+  return ::protobuf_work_5fnode_2eproto::file_level_metadata[kIndexInFileMessages];
+}
+
+
+// ===================================================================
+
+void ShardRebuildRequest::InitAsDefaultInstance() {
+}
+#if !defined(_MSC_VER) || _MSC_VER >= 1900
+const int ShardRebuildRequest::kNameFieldNumber;
+const int ShardRebuildRequest::kIdxFieldNumber;
+#endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
+
+ShardRebuildRequest::ShardRebuildRequest()
+  : ::google::protobuf::Message(), _internal_metadata_(NULL) {
+  ::google::protobuf::internal::InitSCC(
+      &protobuf_work_5fnode_2eproto::scc_info_ShardRebuildRequest.base);
+  SharedCtor();
+  // @@protoc_insertion_point(constructor:elasticfaiss.ShardRebuildRequest)
+}
+ShardRebuildRequest::ShardRebuildRequest(const ShardRebuildRequest& from)
+  : ::google::protobuf::Message(),
+      _internal_metadata_(NULL),
+      _has_bits_(from._has_bits_) {
+  _internal_metadata_.MergeFrom(from._internal_metadata_);
+  name_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  if (from.has_name()) {
+    name_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.name_);
+  }
+  idx_ = from.idx_;
+  // @@protoc_insertion_point(copy_constructor:elasticfaiss.ShardRebuildRequest)
+}
+
+void ShardRebuildRequest::SharedCtor() {
+  name_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  idx_ = 0;
+}
+
+ShardRebuildRequest::~ShardRebuildRequest() {
+  // @@protoc_insertion_point(destructor:elasticfaiss.ShardRebuildRequest)
+  SharedDtor();
+}
+
+void ShardRebuildRequest::SharedDtor() {
+  name_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+
+void ShardRebuildRequest::SetCachedSize(int size) const {
+  _cached_size_.Set(size);
+}
+const ::google::protobuf::Descriptor* ShardRebuildRequest::descriptor() {
+  ::protobuf_work_5fnode_2eproto::protobuf_AssignDescriptorsOnce();
+  return ::protobuf_work_5fnode_2eproto::file_level_metadata[kIndexInFileMessages].descriptor;
+}
+
+const ShardRebuildRequest& ShardRebuildRequest::default_instance() {
+  ::google::protobuf::internal::InitSCC(&protobuf_work_5fnode_2eproto::scc_info_ShardRebuildRequest.base);
+  return *internal_default_instance();
+}
+
+
+void ShardRebuildRequest::Clear() {
+// @@protoc_insertion_point(message_clear_start:elasticfaiss.ShardRebuildRequest)
+  ::google::protobuf::uint32 cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  cached_has_bits = _has_bits_[0];
+  if (cached_has_bits & 0x00000001u) {
+    name_.ClearNonDefaultToEmptyNoArena();
+  }
+  idx_ = 0;
+  _has_bits_.Clear();
+  _internal_metadata_.Clear();
+}
+
+bool ShardRebuildRequest::MergePartialFromCodedStream(
+    ::google::protobuf::io::CodedInputStream* input) {
+#define DO_(EXPRESSION) if (!GOOGLE_PREDICT_TRUE(EXPRESSION)) goto failure
+  ::google::protobuf::uint32 tag;
+  // @@protoc_insertion_point(parse_start:elasticfaiss.ShardRebuildRequest)
+  for (;;) {
+    ::std::pair<::google::protobuf::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(127u);
+    tag = p.first;
+    if (!p.second) goto handle_unusual;
+    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
+      // required string name = 1;
+      case 1: {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(10u /* 10 & 0xFF */)) {
+          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
+                input, this->mutable_name()));
+          ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
+            this->name().data(), static_cast<int>(this->name().length()),
+            ::google::protobuf::internal::WireFormat::PARSE,
+            "elasticfaiss.ShardRebuildRequest.name");
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      // required int32 idx = 2;
+      case 2: {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(16u /* 16 & 0xFF */)) {
+          set_has_idx();
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
+                 input, &idx_)));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      default: {
+      handle_unusual:
+        if (tag == 0) {
+          goto success;
+        }
+        DO_(::google::protobuf::internal::WireFormat::SkipField(
+              input, tag, _internal_metadata_.mutable_unknown_fields()));
+        break;
+      }
+    }
+  }
+success:
+  // @@protoc_insertion_point(parse_success:elasticfaiss.ShardRebuildRequest)
+  return true;
+failure:
+  // @@protoc_insertion_point(parse_failure:elasticfaiss.ShardRebuildRequest)
+  return false;
+#undef DO_
+}
+
+void ShardRebuildRequest::SerializeWithCachedSizes(
+    ::google::protobuf::io::CodedOutputStream* output) const {
+  // @@protoc_insertion_point(serialize_start:elasticfaiss.ShardRebuildRequest)
+  ::google::protobuf::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  cached_has_bits = _has_bits_[0];
+  // required string name = 1;
+  if (cached_has_bits & 0x00000001u) {
+    ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
+      this->name().data(), static_cast<int>(this->name().length()),
+      ::google::protobuf::internal::WireFormat::SERIALIZE,
+      "elasticfaiss.ShardRebuildRequest.name");
+    ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
+      1, this->name(), output);
+  }
+
+  // required int32 idx = 2;
+  if (cached_has_bits & 0x00000002u) {
+    ::google::protobuf::internal::WireFormatLite::WriteInt32(2, this->idx(), output);
+  }
+
+  if (_internal_metadata_.have_unknown_fields()) {
+    ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
+        _internal_metadata_.unknown_fields(), output);
+  }
+  // @@protoc_insertion_point(serialize_end:elasticfaiss.ShardRebuildRequest)
+}
+
+::google::protobuf::uint8* ShardRebuildRequest::InternalSerializeWithCachedSizesToArray(
+    bool deterministic, ::google::protobuf::uint8* target) const {
+  (void)deterministic; // Unused
+  // @@protoc_insertion_point(serialize_to_array_start:elasticfaiss.ShardRebuildRequest)
+  ::google::protobuf::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  cached_has_bits = _has_bits_[0];
+  // required string name = 1;
+  if (cached_has_bits & 0x00000001u) {
+    ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
+      this->name().data(), static_cast<int>(this->name().length()),
+      ::google::protobuf::internal::WireFormat::SERIALIZE,
+      "elasticfaiss.ShardRebuildRequest.name");
+    target =
+      ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
+        1, this->name(), target);
+  }
+
+  // required int32 idx = 2;
+  if (cached_has_bits & 0x00000002u) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(2, this->idx(), target);
+  }
+
+  if (_internal_metadata_.have_unknown_fields()) {
+    target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
+        _internal_metadata_.unknown_fields(), target);
+  }
+  // @@protoc_insertion_point(serialize_to_array_end:elasticfaiss.ShardRebuildRequest)
+  return target;
+}
+
+size_t ShardRebuildRequest::RequiredFieldsByteSizeFallback() const {
+// @@protoc_insertion_point(required_fields_byte_size_fallback_start:elasticfaiss.ShardRebuildRequest)
+  size_t total_size = 0;
+
+  if (has_name()) {
+    // required string name = 1;
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::StringSize(
+        this->name());
+  }
+
+  if (has_idx()) {
+    // required int32 idx = 2;
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::Int32Size(
+        this->idx());
+  }
+
+  return total_size;
+}
+size_t ShardRebuildRequest::ByteSizeLong() const {
+// @@protoc_insertion_point(message_byte_size_start:elasticfaiss.ShardRebuildRequest)
+  size_t total_size = 0;
+
+  if (_internal_metadata_.have_unknown_fields()) {
+    total_size +=
+      ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
+        _internal_metadata_.unknown_fields());
+  }
+  if (((_has_bits_[0] & 0x00000003) ^ 0x00000003) == 0) {  // All required fields are present.
+    // required string name = 1;
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::StringSize(
+        this->name());
+
+    // required int32 idx = 2;
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::Int32Size(
+        this->idx());
+
+  } else {
+    total_size += RequiredFieldsByteSizeFallback();
+  }
+  int cached_size = ::google::protobuf::internal::ToCachedSize(total_size);
+  SetCachedSize(cached_size);
+  return total_size;
+}
+
+void ShardRebuildRequest::MergeFrom(const ::google::protobuf::Message& from) {
+// @@protoc_insertion_point(generalized_merge_from_start:elasticfaiss.ShardRebuildRequest)
+  GOOGLE_DCHECK_NE(&from, this);
+  const ShardRebuildRequest* source =
+      ::google::protobuf::internal::DynamicCastToGenerated<const ShardRebuildRequest>(
+          &from);
+  if (source == NULL) {
+  // @@protoc_insertion_point(generalized_merge_from_cast_fail:elasticfaiss.ShardRebuildRequest)
+    ::google::protobuf::internal::ReflectionOps::Merge(from, this);
+  } else {
+  // @@protoc_insertion_point(generalized_merge_from_cast_success:elasticfaiss.ShardRebuildRequest)
+    MergeFrom(*source);
+  }
+}
+
+void ShardRebuildRequest::MergeFrom(const ShardRebuildRequest& from) {
+// @@protoc_insertion_point(class_specific_merge_from_start:elasticfaiss.ShardRebuildRequest)
+  GOOGLE_DCHECK_NE(&from, this);
+  _internal_metadata_.MergeFrom(from._internal_metadata_);
+  ::google::protobuf::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  cached_has_bits = from._has_bits_[0];
+  if (cached_has_bits & 3u) {
+    if (cached_has_bits & 0x00000001u) {
+      set_has_name();
+      name_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.name_);
+    }
+    if (cached_has_bits & 0x00000002u) {
+      idx_ = from.idx_;
+    }
+    _has_bits_[0] |= cached_has_bits;
+  }
+}
+
+void ShardRebuildRequest::CopyFrom(const ::google::protobuf::Message& from) {
+// @@protoc_insertion_point(generalized_copy_from_start:elasticfaiss.ShardRebuildRequest)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+void ShardRebuildRequest::CopyFrom(const ShardRebuildRequest& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:elasticfaiss.ShardRebuildRequest)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+bool ShardRebuildRequest::IsInitialized() const {
+  if ((_has_bits_[0] & 0x00000003) != 0x00000003) return false;
+  return true;
+}
+
+void ShardRebuildRequest::Swap(ShardRebuildRequest* other) {
+  if (other == this) return;
+  InternalSwap(other);
+}
+void ShardRebuildRequest::InternalSwap(ShardRebuildRequest* other) {
+  using std::swap;
+  name_.Swap(&other->name_, &::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+    GetArenaNoVirtual());
+  swap(idx_, other->idx_);
+  swap(_has_bits_[0], other->_has_bits_[0]);
+  _internal_metadata_.Swap(&other->_internal_metadata_);
+}
+
+::google::protobuf::Metadata ShardRebuildRequest::GetMetadata() const {
+  protobuf_work_5fnode_2eproto::protobuf_AssignDescriptorsOnce();
+  return ::protobuf_work_5fnode_2eproto::file_level_metadata[kIndexInFileMessages];
+}
+
+
+// ===================================================================
+
+void ShardRebuildResponse::InitAsDefaultInstance() {
+}
+#if !defined(_MSC_VER) || _MSC_VER >= 1900
+const int ShardRebuildResponse::kSuccessFieldNumber;
+const int ShardRebuildResponse::kRedirectFieldNumber;
+const int ShardRebuildResponse::kErrorFieldNumber;
+#endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
+
+ShardRebuildResponse::ShardRebuildResponse()
+  : ::google::protobuf::Message(), _internal_metadata_(NULL) {
+  ::google::protobuf::internal::InitSCC(
+      &protobuf_work_5fnode_2eproto::scc_info_ShardRebuildResponse.base);
+  SharedCtor();
+  // @@protoc_insertion_point(constructor:elasticfaiss.ShardRebuildResponse)
+}
+ShardRebuildResponse::ShardRebuildResponse(const ShardRebuildResponse& from)
+  : ::google::protobuf::Message(),
+      _internal_metadata_(NULL),
+      _has_bits_(from._has_bits_) {
+  _internal_metadata_.MergeFrom(from._internal_metadata_);
+  redirect_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  if (from.has_redirect()) {
+    redirect_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.redirect_);
+  }
+  error_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  if (from.has_error()) {
+    error_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.error_);
+  }
+  success_ = from.success_;
+  // @@protoc_insertion_point(copy_constructor:elasticfaiss.ShardRebuildResponse)
+}
+
+void ShardRebuildResponse::SharedCtor() {
+  redirect_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  error_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  success_ = false;
+}
+
+ShardRebuildResponse::~ShardRebuildResponse() {
+  // @@protoc_insertion_point(destructor:elasticfaiss.ShardRebuildResponse)
+  SharedDtor();
+}
+
+void ShardRebuildResponse::SharedDtor() {
+  redirect_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  error_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+
+void ShardRebuildResponse::SetCachedSize(int size) const {
+  _cached_size_.Set(size);
+}
+const ::google::protobuf::Descriptor* ShardRebuildResponse::descriptor() {
+  ::protobuf_work_5fnode_2eproto::protobuf_AssignDescriptorsOnce();
+  return ::protobuf_work_5fnode_2eproto::file_level_metadata[kIndexInFileMessages].descriptor;
+}
+
+const ShardRebuildResponse& ShardRebuildResponse::default_instance() {
+  ::google::protobuf::internal::InitSCC(&protobuf_work_5fnode_2eproto::scc_info_ShardRebuildResponse.base);
+  return *internal_default_instance();
+}
+
+
+void ShardRebuildResponse::Clear() {
+// @@protoc_insertion_point(message_clear_start:elasticfaiss.ShardRebuildResponse)
+  ::google::protobuf::uint32 cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  cached_has_bits = _has_bits_[0];
+  if (cached_has_bits & 3u) {
+    if (cached_has_bits & 0x00000001u) {
+      redirect_.ClearNonDefaultToEmptyNoArena();
+    }
+    if (cached_has_bits & 0x00000002u) {
+      error_.ClearNonDefaultToEmptyNoArena();
+    }
+  }
+  success_ = false;
+  _has_bits_.Clear();
+  _internal_metadata_.Clear();
+}
+
+bool ShardRebuildResponse::MergePartialFromCodedStream(
+    ::google::protobuf::io::CodedInputStream* input) {
+#define DO_(EXPRESSION) if (!GOOGLE_PREDICT_TRUE(EXPRESSION)) goto failure
+  ::google::protobuf::uint32 tag;
+  // @@protoc_insertion_point(parse_start:elasticfaiss.ShardRebuildResponse)
+  for (;;) {
+    ::std::pair<::google::protobuf::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(127u);
+    tag = p.first;
+    if (!p.second) goto handle_unusual;
+    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
+      // required bool success = 1;
+      case 1: {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(8u /* 8 & 0xFF */)) {
+          set_has_success();
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   bool, ::google::protobuf::internal::WireFormatLite::TYPE_BOOL>(
+                 input, &success_)));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      // optional string redirect = 2;
+      case 2: {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(18u /* 18 & 0xFF */)) {
+          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
+                input, this->mutable_redirect()));
+          ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
+            this->redirect().data(), static_cast<int>(this->redirect().length()),
+            ::google::protobuf::internal::WireFormat::PARSE,
+            "elasticfaiss.ShardRebuildResponse.redirect");
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      // optional string error = 3;
+      case 3: {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(26u /* 26 & 0xFF */)) {
+          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
+                input, this->mutable_error()));
+          ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
+            this->error().data(), static_cast<int>(this->error().length()),
+            ::google::protobuf::internal::WireFormat::PARSE,
+            "elasticfaiss.ShardRebuildResponse.error");
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      default: {
+      handle_unusual:
+        if (tag == 0) {
+          goto success;
+        }
+        DO_(::google::protobuf::internal::WireFormat::SkipField(
+              input, tag, _internal_metadata_.mutable_unknown_fields()));
+        break;
+      }
+    }
+  }
+success:
+  // @@protoc_insertion_point(parse_success:elasticfaiss.ShardRebuildResponse)
+  return true;
+failure:
+  // @@protoc_insertion_point(parse_failure:elasticfaiss.ShardRebuildResponse)
+  return false;
+#undef DO_
+}
+
+void ShardRebuildResponse::SerializeWithCachedSizes(
+    ::google::protobuf::io::CodedOutputStream* output) const {
+  // @@protoc_insertion_point(serialize_start:elasticfaiss.ShardRebuildResponse)
+  ::google::protobuf::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  cached_has_bits = _has_bits_[0];
+  // required bool success = 1;
+  if (cached_has_bits & 0x00000004u) {
+    ::google::protobuf::internal::WireFormatLite::WriteBool(1, this->success(), output);
+  }
+
+  // optional string redirect = 2;
+  if (cached_has_bits & 0x00000001u) {
+    ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
+      this->redirect().data(), static_cast<int>(this->redirect().length()),
+      ::google::protobuf::internal::WireFormat::SERIALIZE,
+      "elasticfaiss.ShardRebuildResponse.redirect");
+    ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
+      2, this->redirect(), output);
+  }
+
+  // optional string error = 3;
+  if (cached_has_bits & 0x00000002u) {
+    ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
+      this->error().data(), static_cast<int>(this->error().length()),
+      ::google::protobuf::internal::WireFormat::SERIALIZE,
+      "elasticfaiss.ShardRebuildResponse.error");
+    ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
+      3, this->error(), output);
+  }
+
+  if (_internal_metadata_.have_unknown_fields()) {
+    ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
+        _internal_metadata_.unknown_fields(), output);
+  }
+  // @@protoc_insertion_point(serialize_end:elasticfaiss.ShardRebuildResponse)
+}
+
+::google::protobuf::uint8* ShardRebuildResponse::InternalSerializeWithCachedSizesToArray(
+    bool deterministic, ::google::protobuf::uint8* target) const {
+  (void)deterministic; // Unused
+  // @@protoc_insertion_point(serialize_to_array_start:elasticfaiss.ShardRebuildResponse)
+  ::google::protobuf::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  cached_has_bits = _has_bits_[0];
+  // required bool success = 1;
+  if (cached_has_bits & 0x00000004u) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteBoolToArray(1, this->success(), target);
+  }
+
+  // optional string redirect = 2;
+  if (cached_has_bits & 0x00000001u) {
+    ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
+      this->redirect().data(), static_cast<int>(this->redirect().length()),
+      ::google::protobuf::internal::WireFormat::SERIALIZE,
+      "elasticfaiss.ShardRebuildResponse.redirect");
+    target =
+      ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
+        2, this->redirect(), target);
+  }
+
+  // optional string error = 3;
+  if (cached_has_bits & 0x00000002u) {
+    ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
+      this->error().data(), static_cast<int>(this->error().length()),
+      ::google::protobuf::internal::WireFormat::SERIALIZE,
+      "elasticfaiss.ShardRebuildResponse.error");
+    target =
+      ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
+        3, this->error(), target);
+  }
+
+  if (_internal_metadata_.have_unknown_fields()) {
+    target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
+        _internal_metadata_.unknown_fields(), target);
+  }
+  // @@protoc_insertion_point(serialize_to_array_end:elasticfaiss.ShardRebuildResponse)
+  return target;
+}
+
+size_t ShardRebuildResponse::ByteSizeLong() const {
+// @@protoc_insertion_point(message_byte_size_start:elasticfaiss.ShardRebuildResponse)
+  size_t total_size = 0;
+
+  if (_internal_metadata_.have_unknown_fields()) {
+    total_size +=
+      ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
+        _internal_metadata_.unknown_fields());
+  }
+  // required bool success = 1;
+  if (has_success()) {
+    total_size += 1 + 1;
+  }
+  if (_has_bits_[0 / 32] & 3u) {
+    // optional string redirect = 2;
+    if (has_redirect()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::StringSize(
+          this->redirect());
+    }
+
+    // optional string error = 3;
+    if (has_error()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::StringSize(
+          this->error());
+    }
+
+  }
+  int cached_size = ::google::protobuf::internal::ToCachedSize(total_size);
+  SetCachedSize(cached_size);
+  return total_size;
+}
+
+void ShardRebuildResponse::MergeFrom(const ::google::protobuf::Message& from) {
+// @@protoc_insertion_point(generalized_merge_from_start:elasticfaiss.ShardRebuildResponse)
+  GOOGLE_DCHECK_NE(&from, this);
+  const ShardRebuildResponse* source =
+      ::google::protobuf::internal::DynamicCastToGenerated<const ShardRebuildResponse>(
+          &from);
+  if (source == NULL) {
+  // @@protoc_insertion_point(generalized_merge_from_cast_fail:elasticfaiss.ShardRebuildResponse)
+    ::google::protobuf::internal::ReflectionOps::Merge(from, this);
+  } else {
+  // @@protoc_insertion_point(generalized_merge_from_cast_success:elasticfaiss.ShardRebuildResponse)
+    MergeFrom(*source);
+  }
+}
+
+void ShardRebuildResponse::MergeFrom(const ShardRebuildResponse& from) {
+// @@protoc_insertion_point(class_specific_merge_from_start:elasticfaiss.ShardRebuildResponse)
+  GOOGLE_DCHECK_NE(&from, this);
+  _internal_metadata_.MergeFrom(from._internal_metadata_);
+  ::google::protobuf::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  cached_has_bits = from._has_bits_[0];
+  if (cached_has_bits & 7u) {
+    if (cached_has_bits & 0x00000001u) {
+      set_has_redirect();
+      redirect_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.redirect_);
+    }
+    if (cached_has_bits & 0x00000002u) {
+      set_has_error();
+      error_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.error_);
+    }
+    if (cached_has_bits & 0x00000004u) {
+      success_ = from.success_;
+    }
+    _has_bits_[0] |= cached_has_bits;
+  }
+}
+
+void ShardRebuildResponse::CopyFrom(const ::google::protobuf::Message& from) {
+// @@protoc_insertion_point(generalized_copy_from_start:elasticfaiss.ShardRebuildResponse)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+void ShardRebuildResponse::CopyFrom(const ShardRebuildResponse& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:elasticfaiss.ShardRebuildResponse)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+bool ShardRebuildResponse::IsInitialized() const {
+  if ((_has_bits_[0] & 0x00000004) != 0x00000004) return false;
+  return true;
+}
+
+void ShardRebuildResponse::Swap(ShardRebuildResponse* other) {
+  if (other == this) return;
+  InternalSwap(other);
+}
+void ShardRebuildResponse::InternalSwap(ShardRebuildResponse* other) {
+  using std::swap;
+  redirect_.Swap(&other->redirect_, &::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+    GetArenaNoVirtual());
+  error_.Swap(&other->error_, &::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+    GetArenaNoVirtual());
+  swap(success_, other->success_);
+  swap(_has_bits_[0], other->_has_bits_[0]);
+  _internal_metadata_.Swap(&other->_internal_metadata_);
+}
+
+::google::protobuf::Metadata ShardRebuildResponse::GetMetadata() const {
+  protobuf_work_5fnode_2eproto::protobuf_AssignDescriptorsOnce();
+  return ::protobuf_work_5fnode_2eproto::file_level_metadata[kIndexInFileMessages];
+}
+
+
+// ===================================================================
+
 WorkNodeService::~WorkNodeService() {}
 
 const ::google::protobuf::ServiceDescriptor* WorkNodeService::descriptor() {
@@ -1388,6 +2864,22 @@ void WorkNodeService::delete_shard(::google::protobuf::RpcController* controller
   done->Run();
 }
 
+void WorkNodeService::rebuild(::google::protobuf::RpcController* controller,
+                         const ::elasticfaiss::ShardRebuildRequest*,
+                         ::elasticfaiss::ShardRebuildResponse*,
+                         ::google::protobuf::Closure* done) {
+  controller->SetFailed("Method rebuild() not implemented.");
+  done->Run();
+}
+
+void WorkNodeService::put(::google::protobuf::RpcController* controller,
+                         const ::elasticfaiss::ShardPutRequest*,
+                         ::elasticfaiss::ShardPutResponse*,
+                         ::google::protobuf::Closure* done) {
+  controller->SetFailed("Method put() not implemented.");
+  done->Run();
+}
+
 void WorkNodeService::CallMethod(const ::google::protobuf::MethodDescriptor* method,
                              ::google::protobuf::RpcController* controller,
                              const ::google::protobuf::Message* request,
@@ -1407,6 +2899,18 @@ void WorkNodeService::CallMethod(const ::google::protobuf::MethodDescriptor* met
              ::google::protobuf::down_cast< ::elasticfaiss::DeleteShardResponse*>(response),
              done);
       break;
+    case 2:
+      rebuild(controller,
+             ::google::protobuf::down_cast<const ::elasticfaiss::ShardRebuildRequest*>(request),
+             ::google::protobuf::down_cast< ::elasticfaiss::ShardRebuildResponse*>(response),
+             done);
+      break;
+    case 3:
+      put(controller,
+             ::google::protobuf::down_cast<const ::elasticfaiss::ShardPutRequest*>(request),
+             ::google::protobuf::down_cast< ::elasticfaiss::ShardPutResponse*>(response),
+             done);
+      break;
     default:
       GOOGLE_LOG(FATAL) << "Bad method index; this should never happen.";
       break;
@@ -1421,6 +2925,10 @@ const ::google::protobuf::Message& WorkNodeService::GetRequestPrototype(
       return ::elasticfaiss::CreateShardRequest::default_instance();
     case 1:
       return ::elasticfaiss::DeleteShardRequest::default_instance();
+    case 2:
+      return ::elasticfaiss::ShardRebuildRequest::default_instance();
+    case 3:
+      return ::elasticfaiss::ShardPutRequest::default_instance();
     default:
       GOOGLE_LOG(FATAL) << "Bad method index; this should never happen.";
       return *::google::protobuf::MessageFactory::generated_factory()
@@ -1436,6 +2944,10 @@ const ::google::protobuf::Message& WorkNodeService::GetResponsePrototype(
       return ::elasticfaiss::CreateShardResponse::default_instance();
     case 1:
       return ::elasticfaiss::DeleteShardResponse::default_instance();
+    case 2:
+      return ::elasticfaiss::ShardRebuildResponse::default_instance();
+    case 3:
+      return ::elasticfaiss::ShardPutResponse::default_instance();
     default:
       GOOGLE_LOG(FATAL) << "Bad method index; this should never happen.";
       return *::google::protobuf::MessageFactory::generated_factory()
@@ -1468,6 +2980,20 @@ void WorkNodeService_Stub::delete_shard(::google::protobuf::RpcController* contr
   channel_->CallMethod(descriptor()->method(1),
                        controller, request, response, done);
 }
+void WorkNodeService_Stub::rebuild(::google::protobuf::RpcController* controller,
+                              const ::elasticfaiss::ShardRebuildRequest* request,
+                              ::elasticfaiss::ShardRebuildResponse* response,
+                              ::google::protobuf::Closure* done) {
+  channel_->CallMethod(descriptor()->method(2),
+                       controller, request, response, done);
+}
+void WorkNodeService_Stub::put(::google::protobuf::RpcController* controller,
+                              const ::elasticfaiss::ShardPutRequest* request,
+                              ::elasticfaiss::ShardPutResponse* response,
+                              ::google::protobuf::Closure* done) {
+  channel_->CallMethod(descriptor()->method(3),
+                       controller, request, response, done);
+}
 
 // @@protoc_insertion_point(namespace_scope)
 }  // namespace elasticfaiss
@@ -1484,6 +3010,18 @@ template<> GOOGLE_PROTOBUF_ATTRIBUTE_NOINLINE ::elasticfaiss::DeleteShardRequest
 }
 template<> GOOGLE_PROTOBUF_ATTRIBUTE_NOINLINE ::elasticfaiss::DeleteShardResponse* Arena::CreateMaybeMessage< ::elasticfaiss::DeleteShardResponse >(Arena* arena) {
   return Arena::CreateInternal< ::elasticfaiss::DeleteShardResponse >(arena);
+}
+template<> GOOGLE_PROTOBUF_ATTRIBUTE_NOINLINE ::elasticfaiss::ShardPutRequest* Arena::CreateMaybeMessage< ::elasticfaiss::ShardPutRequest >(Arena* arena) {
+  return Arena::CreateInternal< ::elasticfaiss::ShardPutRequest >(arena);
+}
+template<> GOOGLE_PROTOBUF_ATTRIBUTE_NOINLINE ::elasticfaiss::ShardPutResponse* Arena::CreateMaybeMessage< ::elasticfaiss::ShardPutResponse >(Arena* arena) {
+  return Arena::CreateInternal< ::elasticfaiss::ShardPutResponse >(arena);
+}
+template<> GOOGLE_PROTOBUF_ATTRIBUTE_NOINLINE ::elasticfaiss::ShardRebuildRequest* Arena::CreateMaybeMessage< ::elasticfaiss::ShardRebuildRequest >(Arena* arena) {
+  return Arena::CreateInternal< ::elasticfaiss::ShardRebuildRequest >(arena);
+}
+template<> GOOGLE_PROTOBUF_ATTRIBUTE_NOINLINE ::elasticfaiss::ShardRebuildResponse* Arena::CreateMaybeMessage< ::elasticfaiss::ShardRebuildResponse >(Arena* arena) {
+  return Arena::CreateInternal< ::elasticfaiss::ShardRebuildResponse >(arena);
 }
 }  // namespace protobuf
 }  // namespace google

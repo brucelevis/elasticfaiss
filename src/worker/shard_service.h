@@ -14,45 +14,11 @@
 #include "proto/work_node.pb.h"
 #include "proto/master.pb.h"
 #include "common/elasticfaiss.h"
+#include "rocksdb/db.h"
 #include <mutex>
 
 namespace elasticfaiss
 {
-
-    struct ShardNodeId
-    {
-            std::string name;
-            int32_t idx;
-            ShardNodeId(const std::string& n = "", int32_t i = 0)
-                    : name(n), idx(i)
-            {
-            }
-            bool operator<(const ShardNodeId& other) const
-            {
-                int ret = name.compare(other.name);
-                if (0 != ret)
-                {
-                    return ret < 0 ? true : false;
-                }
-                return idx < other.idx;
-            }
-    };
-
-//    struct ShardNodeMeta
-//    {
-//            std::string node_peer;
-//            bool is_leader;
-//            ShardNodeMeta()
-//                    : is_leader(false)
-//            {
-//            }
-//
-//            bool operator<(const ShardNodeMeta& other) const
-//            {
-//                return node_peer < other.node_peer;
-//            }
-//    };
-
     struct ShardConfig
     {
             const IndexConf* index_conf;
@@ -68,11 +34,12 @@ namespace elasticfaiss
 
     struct ShardNodes
     {
+            int64_t state_ms;
             int32_t shard_idx;
             const WorkNode* leader;
             std::set<const WorkNode*> nodes;
             ShardNodes()
-                    : shard_idx(0), leader(NULL)
+                    : state_ms(-1), shard_idx(0), leader(NULL)
             {
             }
             bool has_leader() const
@@ -82,6 +49,13 @@ namespace elasticfaiss
                     return false;
                 }
                 return leader->state() == WNODE_ACTIVE;
+            }
+            void clear()
+            {
+                shard_idx = 0;
+                leader = NULL;
+                nodes.clear();
+                state_ms = -1;
             }
     };
 
@@ -115,6 +89,8 @@ namespace elasticfaiss
                 return _state;
             }
 
+            bool list_peers(std::vector<std::string>& ids);
+
             // Shut this node down.
             void shutdown()
             {
@@ -123,6 +99,7 @@ namespace elasticfaiss
                     _node->shutdown(NULL);
                 }
             }
+            void remove_db();
 
             // Blocking this thread until the node is eventually down.
             void join()
@@ -141,7 +118,7 @@ namespace elasticfaiss
             void on_leader_start(int64_t term)
             {
                 _leader_term.store(term, butil::memory_order_release);
-                LOG(INFO) << "Node becomes leader";
+                LOG(INFO) << "Node becomes leader for " << _node->node_id().group_id;
             }
             void on_leader_stop(const butil::Status& status)
             {
@@ -151,11 +128,11 @@ namespace elasticfaiss
 
             void on_shutdown()
             {
-                LOG(INFO) << "This node is down";
+                LOG(INFO) << "This node is down for " << _node->node_id().group_id;
             }
             void on_error(const ::braft::Error& e)
             {
-                LOG(ERROR) << "Met raft error " << e;
+                LOG(ERROR) << "Meet raft error " << e;
             }
             void on_configuration_committed(const ::braft::Configuration& conf)
             {
@@ -176,14 +153,35 @@ namespace elasticfaiss
             braft::Node* volatile _node;
             butil::atomic<int64_t> _leader_term;
             ShardState _state;
+            std::shared_ptr<rocksdb::ColumnFamilyHandle> _db;
+    };
+
+    struct ShardIndexKey
+    {
+            std::string index;
+            int32_t shard_idx;
+            ShardIndexKey(const std::string& n = "", int32_t idx = -1)
+                    : index(n), shard_idx(idx)
+            {
+            }
+            bool operator<(const ShardIndexKey& other) const
+            {
+                int ret = index.compare(other.index);
+                if (0 != ret)
+                {
+                    return ret < 0 ? true : false;
+                }
+                return shard_idx < other.shard_idx;
+            }
+            std::string to_string() const;
     };
 
     class ShardManager
     {
         private:
-            typedef std::map<ShardNodeId, ShardNode*> ShardNodeTable;
+            typedef std::map<ShardIndexKey, ShardNode*> ShardNodeTable;
             std::string _init_conf_path;
-            std::mutex _shards_mutex;
+            bthread::Mutex _shards_mutex;
             ShardNodeTable _shards;
             int load_shards(const BootstrapResponse& conf);
         public:
@@ -196,11 +194,6 @@ namespace elasticfaiss
     std::string shard_cluster_name(const std::string& index, int32_t shard_idx);
 
     extern ShardManager g_shards;
-
-    class ShardServiceImpl
-    {
-        private:
-    };
 }
 
 #endif /* SRC_WORKER_SHARD_SERVICE_H_ */

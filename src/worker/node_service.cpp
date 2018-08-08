@@ -14,8 +14,7 @@
 #include <braft/route_table.h>
 #include "proto/master.pb.h"
 #include "shard_service.h"
-
-
+#include "local_db.h"
 
 namespace elasticfaiss
 {
@@ -67,6 +66,10 @@ namespace elasticfaiss
 
     int WorkNodeServiceImpl::init()
     {
+        if(!g_local_db.is_inited() && 0 != g_local_db.init())
+        {
+            return -1;
+        }
         if(0 != report_bootstrap())
         {
             LOG(ERROR) << "Fail to report boot to master.";
@@ -87,9 +90,8 @@ namespace elasticfaiss
             if (!st.ok())
             {
                 LOG(ERROR) << "Fail to refresh_leader : " << st;
-                return -1;
             }
-            return 0;
+            return -1;
         }
         LOG(INFO) << "Master leader is " << leader;
         // Now we known who is the leader, construct Stub and then sending
@@ -160,6 +162,17 @@ namespace elasticfaiss
             Join();
         }
     }
+    void WorkNodeServiceImpl::rebuild(::google::protobuf::RpcController* controller,
+            const ::elasticfaiss::ShardRebuildRequest* request, ::elasticfaiss::ShardRebuildResponse* response,
+            ::google::protobuf::Closure* done)
+    {
+
+    }
+    void WorkNodeServiceImpl::put(::google::protobuf::RpcController* controller, const ::elasticfaiss::ShardPutRequest* request,
+            ::elasticfaiss::ShardPutResponse* response, ::google::protobuf::Closure* done)
+    {
+
+    }
     void WorkNodeServiceImpl::create_shard(::google::protobuf::RpcController* controller,
             const ::elasticfaiss::CreateShardRequest* request, ::elasticfaiss::CreateShardResponse* response,
             ::google::protobuf::Closure* done)
@@ -168,11 +181,13 @@ namespace elasticfaiss
         if (_inited && 0 != g_shards.create_shard(request->conf()))
         {
             response->set_success(false);
+            LOG(ERROR) << "Fail to create shard:" << request->conf().conf().name() << "_" << request->conf().shard_idx();
         }
         else
         {
             response->set_success(true);
-            report_heartbeat();
+            LOG(INFO) << "Success to create shard:" << request->conf().conf().name() << "_" << request->conf().shard_idx();
+            //report_heartbeat();
         }
     }
     void WorkNodeServiceImpl::delete_shard(::google::protobuf::RpcController* controller,
@@ -186,6 +201,7 @@ namespace elasticfaiss
         }
         else
         {
+            //report_heartbeat();
             response->set_success(true);
         }
     }

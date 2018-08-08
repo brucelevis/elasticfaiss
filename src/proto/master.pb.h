@@ -41,7 +41,7 @@ namespace protobuf_master_2eproto {
 struct TableStruct {
   static const ::google::protobuf::internal::ParseTableField entries[];
   static const ::google::protobuf::internal::AuxillaryParseTableField aux[];
-  static const ::google::protobuf::internal::ParseTable schema[16];
+  static const ::google::protobuf::internal::ParseTable schema[20];
   static const ::google::protobuf::internal::FieldMetadata field_metadata[];
   static const ::google::protobuf::internal::SerializationTable serialization_table[];
   static const ::google::protobuf::uint32 offsets[];
@@ -88,12 +88,24 @@ extern NodeHeartbeatRequestDefaultTypeInternal _NodeHeartbeatRequest_default_ins
 class NodeHeartbeatResponse;
 class NodeHeartbeatResponseDefaultTypeInternal;
 extern NodeHeartbeatResponseDefaultTypeInternal _NodeHeartbeatResponse_default_instance_;
+class UpdateClusterSettingRequest;
+class UpdateClusterSettingRequestDefaultTypeInternal;
+extern UpdateClusterSettingRequestDefaultTypeInternal _UpdateClusterSettingRequest_default_instance_;
+class UpdateClusterSettingResponse;
+class UpdateClusterSettingResponseDefaultTypeInternal;
+extern UpdateClusterSettingResponseDefaultTypeInternal _UpdateClusterSettingResponse_default_instance_;
 class UpdateIndexRequest;
 class UpdateIndexRequestDefaultTypeInternal;
 extern UpdateIndexRequestDefaultTypeInternal _UpdateIndexRequest_default_instance_;
 class UpdateIndexResponse;
 class UpdateIndexResponseDefaultTypeInternal;
 extern UpdateIndexResponseDefaultTypeInternal _UpdateIndexResponse_default_instance_;
+class UpdateNodeRequest;
+class UpdateNodeRequestDefaultTypeInternal;
+extern UpdateNodeRequestDefaultTypeInternal _UpdateNodeRequest_default_instance_;
+class UpdateNodeResponse;
+class UpdateNodeResponseDefaultTypeInternal;
+extern UpdateNodeResponseDefaultTypeInternal _UpdateNodeResponse_default_instance_;
 class WorkNode;
 class WorkNodeDefaultTypeInternal;
 extern WorkNodeDefaultTypeInternal _WorkNode_default_instance_;
@@ -113,8 +125,12 @@ template<> ::elasticfaiss::GetClusterStateResponse* Arena::CreateMaybeMessage<::
 template<> ::elasticfaiss::MasterSnapshot* Arena::CreateMaybeMessage<::elasticfaiss::MasterSnapshot>(Arena*);
 template<> ::elasticfaiss::NodeHeartbeatRequest* Arena::CreateMaybeMessage<::elasticfaiss::NodeHeartbeatRequest>(Arena*);
 template<> ::elasticfaiss::NodeHeartbeatResponse* Arena::CreateMaybeMessage<::elasticfaiss::NodeHeartbeatResponse>(Arena*);
+template<> ::elasticfaiss::UpdateClusterSettingRequest* Arena::CreateMaybeMessage<::elasticfaiss::UpdateClusterSettingRequest>(Arena*);
+template<> ::elasticfaiss::UpdateClusterSettingResponse* Arena::CreateMaybeMessage<::elasticfaiss::UpdateClusterSettingResponse>(Arena*);
 template<> ::elasticfaiss::UpdateIndexRequest* Arena::CreateMaybeMessage<::elasticfaiss::UpdateIndexRequest>(Arena*);
 template<> ::elasticfaiss::UpdateIndexResponse* Arena::CreateMaybeMessage<::elasticfaiss::UpdateIndexResponse>(Arena*);
+template<> ::elasticfaiss::UpdateNodeRequest* Arena::CreateMaybeMessage<::elasticfaiss::UpdateNodeRequest>(Arena*);
+template<> ::elasticfaiss::UpdateNodeResponse* Arena::CreateMaybeMessage<::elasticfaiss::UpdateNodeResponse>(Arena*);
 template<> ::elasticfaiss::WorkNode* Arena::CreateMaybeMessage<::elasticfaiss::WorkNode>(Arena*);
 }  // namespace protobuf
 }  // namespace google
@@ -138,6 +154,25 @@ inline bool WorkNodeState_Parse(
     const ::std::string& name, WorkNodeState* value) {
   return ::google::protobuf::internal::ParseNamedEnum<WorkNodeState>(
     WorkNodeState_descriptor(), name, value);
+}
+enum NodeRole {
+  NODE_DATA = 1,
+  NODE_PROXY = 2
+};
+bool NodeRole_IsValid(int value);
+const NodeRole NodeRole_MIN = NODE_DATA;
+const NodeRole NodeRole_MAX = NODE_PROXY;
+const int NodeRole_ARRAYSIZE = NodeRole_MAX + 1;
+
+const ::google::protobuf::EnumDescriptor* NodeRole_descriptor();
+inline const ::std::string& NodeRole_Name(NodeRole value) {
+  return ::google::protobuf::internal::NameOfEnum(
+    NodeRole_descriptor(), value);
+}
+inline bool NodeRole_Parse(
+    const ::std::string& name, NodeRole* value) {
+  return ::google::protobuf::internal::ParseNamedEnum<NodeRole>(
+    NodeRole_descriptor(), name, value);
 }
 // ===================================================================
 
@@ -235,12 +270,52 @@ class ClusterSettings : public ::google::protobuf::Message /* @@protoc_insertion
 
   // accessors -------------------------------------------------------
 
+  // optional int32 shard_allocation_after_timeout_secs = 1 [default = 60];
+  bool has_shard_allocation_after_timeout_secs() const;
+  void clear_shard_allocation_after_timeout_secs();
+  static const int kShardAllocationAfterTimeoutSecsFieldNumber = 1;
+  ::google::protobuf::int32 shard_allocation_after_timeout_secs() const;
+  void set_shard_allocation_after_timeout_secs(::google::protobuf::int32 value);
+
+  // optional int32 total_shards_per_node = 2 [default = -1];
+  bool has_total_shards_per_node() const;
+  void clear_total_shards_per_node();
+  static const int kTotalShardsPerNodeFieldNumber = 2;
+  ::google::protobuf::int32 total_shards_per_node() const;
+  void set_total_shards_per_node(::google::protobuf::int32 value);
+
+  // optional int32 index_rpc_timeout_ms = 3 [default = 10000];
+  bool has_index_rpc_timeout_ms() const;
+  void clear_index_rpc_timeout_ms();
+  static const int kIndexRpcTimeoutMsFieldNumber = 3;
+  ::google::protobuf::int32 index_rpc_timeout_ms() const;
+  void set_index_rpc_timeout_ms(::google::protobuf::int32 value);
+
+  // optional int32 index_rpc_max_retry = 4 [default = 2];
+  bool has_index_rpc_max_retry() const;
+  void clear_index_rpc_max_retry();
+  static const int kIndexRpcMaxRetryFieldNumber = 4;
+  ::google::protobuf::int32 index_rpc_max_retry() const;
+  void set_index_rpc_max_retry(::google::protobuf::int32 value);
+
   // @@protoc_insertion_point(class_scope:elasticfaiss.ClusterSettings)
  private:
+  void set_has_shard_allocation_after_timeout_secs();
+  void clear_has_shard_allocation_after_timeout_secs();
+  void set_has_total_shards_per_node();
+  void clear_has_total_shards_per_node();
+  void set_has_index_rpc_timeout_ms();
+  void clear_has_index_rpc_timeout_ms();
+  void set_has_index_rpc_max_retry();
+  void clear_has_index_rpc_max_retry();
 
   ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
   ::google::protobuf::internal::HasBits<1> _has_bits_;
   mutable ::google::protobuf::internal::CachedSize _cached_size_;
+  ::google::protobuf::int32 shard_allocation_after_timeout_secs_;
+  ::google::protobuf::int32 total_shards_per_node_;
+  ::google::protobuf::int32 index_rpc_timeout_ms_;
+  ::google::protobuf::int32 index_rpc_max_retry_;
   friend struct ::protobuf_master_2eproto::TableStruct;
 };
 // -------------------------------------------------------------------
@@ -380,7 +455,7 @@ class WorkNode : public ::google::protobuf::Message /* @@protoc_insertion_point(
   ::google::protobuf::int64 last_state_ms() const;
   void set_last_state_ms(::google::protobuf::int64 value);
 
-  // required int32 state = 5;
+  // optional int32 state = 5;
   bool has_state() const;
   void clear_state();
   static const int kStateFieldNumber = 5;
@@ -397,9 +472,6 @@ class WorkNode : public ::google::protobuf::Message /* @@protoc_insertion_point(
   void clear_has_last_state_ms();
   void set_has_state();
   void clear_has_state();
-
-  // helper for ByteSizeLong()
-  size_t RequiredFieldsByteSizeFallback() const;
 
   ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
   ::google::protobuf::internal::HasBits<1> _has_bits_;
@@ -658,16 +730,31 @@ class MasterSnapshot : public ::google::protobuf::Message /* @@protoc_insertion_
   ::elasticfaiss::ClusterState* mutable_state();
   void set_allocated_state(::elasticfaiss::ClusterState* state);
 
+  // optional .elasticfaiss.ClusterSettings settings = 3;
+  bool has_settings() const;
+  void clear_settings();
+  static const int kSettingsFieldNumber = 3;
+  private:
+  const ::elasticfaiss::ClusterSettings& _internal_settings() const;
+  public:
+  const ::elasticfaiss::ClusterSettings& settings() const;
+  ::elasticfaiss::ClusterSettings* release_settings();
+  ::elasticfaiss::ClusterSettings* mutable_settings();
+  void set_allocated_settings(::elasticfaiss::ClusterSettings* settings);
+
   // @@protoc_insertion_point(class_scope:elasticfaiss.MasterSnapshot)
  private:
   void set_has_state();
   void clear_has_state();
+  void set_has_settings();
+  void clear_has_settings();
 
   ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
   ::google::protobuf::internal::HasBits<1> _has_bits_;
   mutable ::google::protobuf::internal::CachedSize _cached_size_;
   ::google::protobuf::RepeatedPtrField< ::elasticfaiss::IndexConf > index_;
   ::elasticfaiss::ClusterState* state_;
+  ::elasticfaiss::ClusterSettings* settings_;
   friend struct ::protobuf_master_2eproto::TableStruct;
 };
 // -------------------------------------------------------------------
@@ -2329,6 +2416,583 @@ class UpdateIndexResponse : public ::google::protobuf::Message /* @@protoc_inser
   bool success_;
   friend struct ::protobuf_master_2eproto::TableStruct;
 };
+// -------------------------------------------------------------------
+
+class UpdateNodeRequest : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:elasticfaiss.UpdateNodeRequest) */ {
+ public:
+  UpdateNodeRequest();
+  virtual ~UpdateNodeRequest();
+
+  UpdateNodeRequest(const UpdateNodeRequest& from);
+
+  inline UpdateNodeRequest& operator=(const UpdateNodeRequest& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  #if LANG_CXX11
+  UpdateNodeRequest(UpdateNodeRequest&& from) noexcept
+    : UpdateNodeRequest() {
+    *this = ::std::move(from);
+  }
+
+  inline UpdateNodeRequest& operator=(UpdateNodeRequest&& from) noexcept {
+    if (GetArenaNoVirtual() == from.GetArenaNoVirtual()) {
+      if (this != &from) InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+  #endif
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _internal_metadata_.unknown_fields();
+  }
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return _internal_metadata_.mutable_unknown_fields();
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const UpdateNodeRequest& default_instance();
+
+  static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
+  static inline const UpdateNodeRequest* internal_default_instance() {
+    return reinterpret_cast<const UpdateNodeRequest*>(
+               &_UpdateNodeRequest_default_instance_);
+  }
+  static constexpr int kIndexInFileMessages =
+    16;
+
+  void Swap(UpdateNodeRequest* other);
+  friend void swap(UpdateNodeRequest& a, UpdateNodeRequest& b) {
+    a.Swap(&b);
+  }
+
+  // implements Message ----------------------------------------------
+
+  inline UpdateNodeRequest* New() const final {
+    return CreateMaybeMessage<UpdateNodeRequest>(NULL);
+  }
+
+  UpdateNodeRequest* New(::google::protobuf::Arena* arena) const final {
+    return CreateMaybeMessage<UpdateNodeRequest>(arena);
+  }
+  void CopyFrom(const ::google::protobuf::Message& from) final;
+  void MergeFrom(const ::google::protobuf::Message& from) final;
+  void CopyFrom(const UpdateNodeRequest& from);
+  void MergeFrom(const UpdateNodeRequest& from);
+  void Clear() final;
+  bool IsInitialized() const final;
+
+  size_t ByteSizeLong() const final;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input) final;
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const final;
+  ::google::protobuf::uint8* InternalSerializeWithCachedSizesToArray(
+      bool deterministic, ::google::protobuf::uint8* target) const final;
+  int GetCachedSize() const final { return _cached_size_.Get(); }
+
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const final;
+  void InternalSwap(UpdateNodeRequest* other);
+  private:
+  inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
+    return NULL;
+  }
+  inline void* MaybeArenaPtr() const {
+    return NULL;
+  }
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const final;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // repeated .elasticfaiss.Shard shards = 4;
+  int shards_size() const;
+  void clear_shards();
+  static const int kShardsFieldNumber = 4;
+  ::elasticfaiss::Shard* mutable_shards(int index);
+  ::google::protobuf::RepeatedPtrField< ::elasticfaiss::Shard >*
+      mutable_shards();
+  const ::elasticfaiss::Shard& shards(int index) const;
+  ::elasticfaiss::Shard* add_shards();
+  const ::google::protobuf::RepeatedPtrField< ::elasticfaiss::Shard >&
+      shards() const;
+
+  // required string peer_id = 1;
+  bool has_peer_id() const;
+  void clear_peer_id();
+  static const int kPeerIdFieldNumber = 1;
+  const ::std::string& peer_id() const;
+  void set_peer_id(const ::std::string& value);
+  #if LANG_CXX11
+  void set_peer_id(::std::string&& value);
+  #endif
+  void set_peer_id(const char* value);
+  void set_peer_id(const char* value, size_t size);
+  ::std::string* mutable_peer_id();
+  ::std::string* release_peer_id();
+  void set_allocated_peer_id(::std::string* peer_id);
+
+  // required int64 state_ms = 3;
+  bool has_state_ms() const;
+  void clear_state_ms();
+  static const int kStateMsFieldNumber = 3;
+  ::google::protobuf::int64 state_ms() const;
+  void set_state_ms(::google::protobuf::int64 value);
+
+  // optional int32 state = 2;
+  bool has_state() const;
+  void clear_state();
+  static const int kStateFieldNumber = 2;
+  ::google::protobuf::int32 state() const;
+  void set_state(::google::protobuf::int32 value);
+
+  // @@protoc_insertion_point(class_scope:elasticfaiss.UpdateNodeRequest)
+ private:
+  void set_has_peer_id();
+  void clear_has_peer_id();
+  void set_has_state();
+  void clear_has_state();
+  void set_has_state_ms();
+  void clear_has_state_ms();
+
+  // helper for ByteSizeLong()
+  size_t RequiredFieldsByteSizeFallback() const;
+
+  ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
+  ::google::protobuf::internal::HasBits<1> _has_bits_;
+  mutable ::google::protobuf::internal::CachedSize _cached_size_;
+  ::google::protobuf::RepeatedPtrField< ::elasticfaiss::Shard > shards_;
+  ::google::protobuf::internal::ArenaStringPtr peer_id_;
+  ::google::protobuf::int64 state_ms_;
+  ::google::protobuf::int32 state_;
+  friend struct ::protobuf_master_2eproto::TableStruct;
+};
+// -------------------------------------------------------------------
+
+class UpdateNodeResponse : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:elasticfaiss.UpdateNodeResponse) */ {
+ public:
+  UpdateNodeResponse();
+  virtual ~UpdateNodeResponse();
+
+  UpdateNodeResponse(const UpdateNodeResponse& from);
+
+  inline UpdateNodeResponse& operator=(const UpdateNodeResponse& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  #if LANG_CXX11
+  UpdateNodeResponse(UpdateNodeResponse&& from) noexcept
+    : UpdateNodeResponse() {
+    *this = ::std::move(from);
+  }
+
+  inline UpdateNodeResponse& operator=(UpdateNodeResponse&& from) noexcept {
+    if (GetArenaNoVirtual() == from.GetArenaNoVirtual()) {
+      if (this != &from) InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+  #endif
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _internal_metadata_.unknown_fields();
+  }
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return _internal_metadata_.mutable_unknown_fields();
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const UpdateNodeResponse& default_instance();
+
+  static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
+  static inline const UpdateNodeResponse* internal_default_instance() {
+    return reinterpret_cast<const UpdateNodeResponse*>(
+               &_UpdateNodeResponse_default_instance_);
+  }
+  static constexpr int kIndexInFileMessages =
+    17;
+
+  void Swap(UpdateNodeResponse* other);
+  friend void swap(UpdateNodeResponse& a, UpdateNodeResponse& b) {
+    a.Swap(&b);
+  }
+
+  // implements Message ----------------------------------------------
+
+  inline UpdateNodeResponse* New() const final {
+    return CreateMaybeMessage<UpdateNodeResponse>(NULL);
+  }
+
+  UpdateNodeResponse* New(::google::protobuf::Arena* arena) const final {
+    return CreateMaybeMessage<UpdateNodeResponse>(arena);
+  }
+  void CopyFrom(const ::google::protobuf::Message& from) final;
+  void MergeFrom(const ::google::protobuf::Message& from) final;
+  void CopyFrom(const UpdateNodeResponse& from);
+  void MergeFrom(const UpdateNodeResponse& from);
+  void Clear() final;
+  bool IsInitialized() const final;
+
+  size_t ByteSizeLong() const final;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input) final;
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const final;
+  ::google::protobuf::uint8* InternalSerializeWithCachedSizesToArray(
+      bool deterministic, ::google::protobuf::uint8* target) const final;
+  int GetCachedSize() const final { return _cached_size_.Get(); }
+
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const final;
+  void InternalSwap(UpdateNodeResponse* other);
+  private:
+  inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
+    return NULL;
+  }
+  inline void* MaybeArenaPtr() const {
+    return NULL;
+  }
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const final;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // optional string redirect = 2;
+  bool has_redirect() const;
+  void clear_redirect();
+  static const int kRedirectFieldNumber = 2;
+  const ::std::string& redirect() const;
+  void set_redirect(const ::std::string& value);
+  #if LANG_CXX11
+  void set_redirect(::std::string&& value);
+  #endif
+  void set_redirect(const char* value);
+  void set_redirect(const char* value, size_t size);
+  ::std::string* mutable_redirect();
+  ::std::string* release_redirect();
+  void set_allocated_redirect(::std::string* redirect);
+
+  // optional string error = 3;
+  bool has_error() const;
+  void clear_error();
+  static const int kErrorFieldNumber = 3;
+  const ::std::string& error() const;
+  void set_error(const ::std::string& value);
+  #if LANG_CXX11
+  void set_error(::std::string&& value);
+  #endif
+  void set_error(const char* value);
+  void set_error(const char* value, size_t size);
+  ::std::string* mutable_error();
+  ::std::string* release_error();
+  void set_allocated_error(::std::string* error);
+
+  // required bool success = 1;
+  bool has_success() const;
+  void clear_success();
+  static const int kSuccessFieldNumber = 1;
+  bool success() const;
+  void set_success(bool value);
+
+  // @@protoc_insertion_point(class_scope:elasticfaiss.UpdateNodeResponse)
+ private:
+  void set_has_success();
+  void clear_has_success();
+  void set_has_redirect();
+  void clear_has_redirect();
+  void set_has_error();
+  void clear_has_error();
+
+  ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
+  ::google::protobuf::internal::HasBits<1> _has_bits_;
+  mutable ::google::protobuf::internal::CachedSize _cached_size_;
+  ::google::protobuf::internal::ArenaStringPtr redirect_;
+  ::google::protobuf::internal::ArenaStringPtr error_;
+  bool success_;
+  friend struct ::protobuf_master_2eproto::TableStruct;
+};
+// -------------------------------------------------------------------
+
+class UpdateClusterSettingRequest : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:elasticfaiss.UpdateClusterSettingRequest) */ {
+ public:
+  UpdateClusterSettingRequest();
+  virtual ~UpdateClusterSettingRequest();
+
+  UpdateClusterSettingRequest(const UpdateClusterSettingRequest& from);
+
+  inline UpdateClusterSettingRequest& operator=(const UpdateClusterSettingRequest& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  #if LANG_CXX11
+  UpdateClusterSettingRequest(UpdateClusterSettingRequest&& from) noexcept
+    : UpdateClusterSettingRequest() {
+    *this = ::std::move(from);
+  }
+
+  inline UpdateClusterSettingRequest& operator=(UpdateClusterSettingRequest&& from) noexcept {
+    if (GetArenaNoVirtual() == from.GetArenaNoVirtual()) {
+      if (this != &from) InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+  #endif
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _internal_metadata_.unknown_fields();
+  }
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return _internal_metadata_.mutable_unknown_fields();
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const UpdateClusterSettingRequest& default_instance();
+
+  static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
+  static inline const UpdateClusterSettingRequest* internal_default_instance() {
+    return reinterpret_cast<const UpdateClusterSettingRequest*>(
+               &_UpdateClusterSettingRequest_default_instance_);
+  }
+  static constexpr int kIndexInFileMessages =
+    18;
+
+  void Swap(UpdateClusterSettingRequest* other);
+  friend void swap(UpdateClusterSettingRequest& a, UpdateClusterSettingRequest& b) {
+    a.Swap(&b);
+  }
+
+  // implements Message ----------------------------------------------
+
+  inline UpdateClusterSettingRequest* New() const final {
+    return CreateMaybeMessage<UpdateClusterSettingRequest>(NULL);
+  }
+
+  UpdateClusterSettingRequest* New(::google::protobuf::Arena* arena) const final {
+    return CreateMaybeMessage<UpdateClusterSettingRequest>(arena);
+  }
+  void CopyFrom(const ::google::protobuf::Message& from) final;
+  void MergeFrom(const ::google::protobuf::Message& from) final;
+  void CopyFrom(const UpdateClusterSettingRequest& from);
+  void MergeFrom(const UpdateClusterSettingRequest& from);
+  void Clear() final;
+  bool IsInitialized() const final;
+
+  size_t ByteSizeLong() const final;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input) final;
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const final;
+  ::google::protobuf::uint8* InternalSerializeWithCachedSizesToArray(
+      bool deterministic, ::google::protobuf::uint8* target) const final;
+  int GetCachedSize() const final { return _cached_size_.Get(); }
+
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const final;
+  void InternalSwap(UpdateClusterSettingRequest* other);
+  private:
+  inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
+    return NULL;
+  }
+  inline void* MaybeArenaPtr() const {
+    return NULL;
+  }
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const final;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // required .elasticfaiss.ClusterSettings settings = 1;
+  bool has_settings() const;
+  void clear_settings();
+  static const int kSettingsFieldNumber = 1;
+  private:
+  const ::elasticfaiss::ClusterSettings& _internal_settings() const;
+  public:
+  const ::elasticfaiss::ClusterSettings& settings() const;
+  ::elasticfaiss::ClusterSettings* release_settings();
+  ::elasticfaiss::ClusterSettings* mutable_settings();
+  void set_allocated_settings(::elasticfaiss::ClusterSettings* settings);
+
+  // @@protoc_insertion_point(class_scope:elasticfaiss.UpdateClusterSettingRequest)
+ private:
+  void set_has_settings();
+  void clear_has_settings();
+
+  ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
+  ::google::protobuf::internal::HasBits<1> _has_bits_;
+  mutable ::google::protobuf::internal::CachedSize _cached_size_;
+  ::elasticfaiss::ClusterSettings* settings_;
+  friend struct ::protobuf_master_2eproto::TableStruct;
+};
+// -------------------------------------------------------------------
+
+class UpdateClusterSettingResponse : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:elasticfaiss.UpdateClusterSettingResponse) */ {
+ public:
+  UpdateClusterSettingResponse();
+  virtual ~UpdateClusterSettingResponse();
+
+  UpdateClusterSettingResponse(const UpdateClusterSettingResponse& from);
+
+  inline UpdateClusterSettingResponse& operator=(const UpdateClusterSettingResponse& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  #if LANG_CXX11
+  UpdateClusterSettingResponse(UpdateClusterSettingResponse&& from) noexcept
+    : UpdateClusterSettingResponse() {
+    *this = ::std::move(from);
+  }
+
+  inline UpdateClusterSettingResponse& operator=(UpdateClusterSettingResponse&& from) noexcept {
+    if (GetArenaNoVirtual() == from.GetArenaNoVirtual()) {
+      if (this != &from) InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+  #endif
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _internal_metadata_.unknown_fields();
+  }
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return _internal_metadata_.mutable_unknown_fields();
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const UpdateClusterSettingResponse& default_instance();
+
+  static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
+  static inline const UpdateClusterSettingResponse* internal_default_instance() {
+    return reinterpret_cast<const UpdateClusterSettingResponse*>(
+               &_UpdateClusterSettingResponse_default_instance_);
+  }
+  static constexpr int kIndexInFileMessages =
+    19;
+
+  void Swap(UpdateClusterSettingResponse* other);
+  friend void swap(UpdateClusterSettingResponse& a, UpdateClusterSettingResponse& b) {
+    a.Swap(&b);
+  }
+
+  // implements Message ----------------------------------------------
+
+  inline UpdateClusterSettingResponse* New() const final {
+    return CreateMaybeMessage<UpdateClusterSettingResponse>(NULL);
+  }
+
+  UpdateClusterSettingResponse* New(::google::protobuf::Arena* arena) const final {
+    return CreateMaybeMessage<UpdateClusterSettingResponse>(arena);
+  }
+  void CopyFrom(const ::google::protobuf::Message& from) final;
+  void MergeFrom(const ::google::protobuf::Message& from) final;
+  void CopyFrom(const UpdateClusterSettingResponse& from);
+  void MergeFrom(const UpdateClusterSettingResponse& from);
+  void Clear() final;
+  bool IsInitialized() const final;
+
+  size_t ByteSizeLong() const final;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input) final;
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const final;
+  ::google::protobuf::uint8* InternalSerializeWithCachedSizesToArray(
+      bool deterministic, ::google::protobuf::uint8* target) const final;
+  int GetCachedSize() const final { return _cached_size_.Get(); }
+
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const final;
+  void InternalSwap(UpdateClusterSettingResponse* other);
+  private:
+  inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
+    return NULL;
+  }
+  inline void* MaybeArenaPtr() const {
+    return NULL;
+  }
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const final;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // optional string redirect = 2;
+  bool has_redirect() const;
+  void clear_redirect();
+  static const int kRedirectFieldNumber = 2;
+  const ::std::string& redirect() const;
+  void set_redirect(const ::std::string& value);
+  #if LANG_CXX11
+  void set_redirect(::std::string&& value);
+  #endif
+  void set_redirect(const char* value);
+  void set_redirect(const char* value, size_t size);
+  ::std::string* mutable_redirect();
+  ::std::string* release_redirect();
+  void set_allocated_redirect(::std::string* redirect);
+
+  // optional string error = 3;
+  bool has_error() const;
+  void clear_error();
+  static const int kErrorFieldNumber = 3;
+  const ::std::string& error() const;
+  void set_error(const ::std::string& value);
+  #if LANG_CXX11
+  void set_error(::std::string&& value);
+  #endif
+  void set_error(const char* value);
+  void set_error(const char* value, size_t size);
+  ::std::string* mutable_error();
+  ::std::string* release_error();
+  void set_allocated_error(::std::string* error);
+
+  // required bool success = 1;
+  bool has_success() const;
+  void clear_success();
+  static const int kSuccessFieldNumber = 1;
+  bool success() const;
+  void set_success(bool value);
+
+  // @@protoc_insertion_point(class_scope:elasticfaiss.UpdateClusterSettingResponse)
+ private:
+  void set_has_success();
+  void clear_has_success();
+  void set_has_redirect();
+  void clear_has_redirect();
+  void set_has_error();
+  void clear_has_error();
+
+  ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
+  ::google::protobuf::internal::HasBits<1> _has_bits_;
+  mutable ::google::protobuf::internal::CachedSize _cached_size_;
+  ::google::protobuf::internal::ArenaStringPtr redirect_;
+  ::google::protobuf::internal::ArenaStringPtr error_;
+  bool success_;
+  friend struct ::protobuf_master_2eproto::TableStruct;
+};
 // ===================================================================
 
 class MasterService_Stub;
@@ -2351,6 +3015,10 @@ class MasterService : public ::google::protobuf::Service {
   virtual void node_heartbeat(::google::protobuf::RpcController* controller,
                        const ::elasticfaiss::NodeHeartbeatRequest* request,
                        ::elasticfaiss::NodeHeartbeatResponse* response,
+                       ::google::protobuf::Closure* done);
+  virtual void cluster_setting(::google::protobuf::RpcController* controller,
+                       const ::elasticfaiss::UpdateClusterSettingRequest* request,
+                       ::elasticfaiss::UpdateClusterSettingResponse* response,
                        ::google::protobuf::Closure* done);
   virtual void get_cluster_state(::google::protobuf::RpcController* controller,
                        const ::elasticfaiss::GetClusterStateRequest* request,
@@ -2405,6 +3073,10 @@ class MasterService_Stub : public MasterService {
                        const ::elasticfaiss::NodeHeartbeatRequest* request,
                        ::elasticfaiss::NodeHeartbeatResponse* response,
                        ::google::protobuf::Closure* done);
+  void cluster_setting(::google::protobuf::RpcController* controller,
+                       const ::elasticfaiss::UpdateClusterSettingRequest* request,
+                       ::elasticfaiss::UpdateClusterSettingResponse* response,
+                       ::google::protobuf::Closure* done);
   void get_cluster_state(::google::protobuf::RpcController* controller,
                        const ::elasticfaiss::GetClusterStateRequest* request,
                        ::elasticfaiss::GetClusterStateResponse* response,
@@ -2438,6 +3110,102 @@ class MasterService_Stub : public MasterService {
   #pragma GCC diagnostic ignored "-Wstrict-aliasing"
 #endif  // __GNUC__
 // ClusterSettings
+
+// optional int32 shard_allocation_after_timeout_secs = 1 [default = 60];
+inline bool ClusterSettings::has_shard_allocation_after_timeout_secs() const {
+  return (_has_bits_[0] & 0x00000001u) != 0;
+}
+inline void ClusterSettings::set_has_shard_allocation_after_timeout_secs() {
+  _has_bits_[0] |= 0x00000001u;
+}
+inline void ClusterSettings::clear_has_shard_allocation_after_timeout_secs() {
+  _has_bits_[0] &= ~0x00000001u;
+}
+inline void ClusterSettings::clear_shard_allocation_after_timeout_secs() {
+  shard_allocation_after_timeout_secs_ = 60;
+  clear_has_shard_allocation_after_timeout_secs();
+}
+inline ::google::protobuf::int32 ClusterSettings::shard_allocation_after_timeout_secs() const {
+  // @@protoc_insertion_point(field_get:elasticfaiss.ClusterSettings.shard_allocation_after_timeout_secs)
+  return shard_allocation_after_timeout_secs_;
+}
+inline void ClusterSettings::set_shard_allocation_after_timeout_secs(::google::protobuf::int32 value) {
+  set_has_shard_allocation_after_timeout_secs();
+  shard_allocation_after_timeout_secs_ = value;
+  // @@protoc_insertion_point(field_set:elasticfaiss.ClusterSettings.shard_allocation_after_timeout_secs)
+}
+
+// optional int32 total_shards_per_node = 2 [default = -1];
+inline bool ClusterSettings::has_total_shards_per_node() const {
+  return (_has_bits_[0] & 0x00000002u) != 0;
+}
+inline void ClusterSettings::set_has_total_shards_per_node() {
+  _has_bits_[0] |= 0x00000002u;
+}
+inline void ClusterSettings::clear_has_total_shards_per_node() {
+  _has_bits_[0] &= ~0x00000002u;
+}
+inline void ClusterSettings::clear_total_shards_per_node() {
+  total_shards_per_node_ = -1;
+  clear_has_total_shards_per_node();
+}
+inline ::google::protobuf::int32 ClusterSettings::total_shards_per_node() const {
+  // @@protoc_insertion_point(field_get:elasticfaiss.ClusterSettings.total_shards_per_node)
+  return total_shards_per_node_;
+}
+inline void ClusterSettings::set_total_shards_per_node(::google::protobuf::int32 value) {
+  set_has_total_shards_per_node();
+  total_shards_per_node_ = value;
+  // @@protoc_insertion_point(field_set:elasticfaiss.ClusterSettings.total_shards_per_node)
+}
+
+// optional int32 index_rpc_timeout_ms = 3 [default = 10000];
+inline bool ClusterSettings::has_index_rpc_timeout_ms() const {
+  return (_has_bits_[0] & 0x00000004u) != 0;
+}
+inline void ClusterSettings::set_has_index_rpc_timeout_ms() {
+  _has_bits_[0] |= 0x00000004u;
+}
+inline void ClusterSettings::clear_has_index_rpc_timeout_ms() {
+  _has_bits_[0] &= ~0x00000004u;
+}
+inline void ClusterSettings::clear_index_rpc_timeout_ms() {
+  index_rpc_timeout_ms_ = 10000;
+  clear_has_index_rpc_timeout_ms();
+}
+inline ::google::protobuf::int32 ClusterSettings::index_rpc_timeout_ms() const {
+  // @@protoc_insertion_point(field_get:elasticfaiss.ClusterSettings.index_rpc_timeout_ms)
+  return index_rpc_timeout_ms_;
+}
+inline void ClusterSettings::set_index_rpc_timeout_ms(::google::protobuf::int32 value) {
+  set_has_index_rpc_timeout_ms();
+  index_rpc_timeout_ms_ = value;
+  // @@protoc_insertion_point(field_set:elasticfaiss.ClusterSettings.index_rpc_timeout_ms)
+}
+
+// optional int32 index_rpc_max_retry = 4 [default = 2];
+inline bool ClusterSettings::has_index_rpc_max_retry() const {
+  return (_has_bits_[0] & 0x00000008u) != 0;
+}
+inline void ClusterSettings::set_has_index_rpc_max_retry() {
+  _has_bits_[0] |= 0x00000008u;
+}
+inline void ClusterSettings::clear_has_index_rpc_max_retry() {
+  _has_bits_[0] &= ~0x00000008u;
+}
+inline void ClusterSettings::clear_index_rpc_max_retry() {
+  index_rpc_max_retry_ = 2;
+  clear_has_index_rpc_max_retry();
+}
+inline ::google::protobuf::int32 ClusterSettings::index_rpc_max_retry() const {
+  // @@protoc_insertion_point(field_get:elasticfaiss.ClusterSettings.index_rpc_max_retry)
+  return index_rpc_max_retry_;
+}
+inline void ClusterSettings::set_index_rpc_max_retry(::google::protobuf::int32 value) {
+  set_has_index_rpc_max_retry();
+  index_rpc_max_retry_ = value;
+  // @@protoc_insertion_point(field_set:elasticfaiss.ClusterSettings.index_rpc_max_retry)
+}
 
 // -------------------------------------------------------------------
 
@@ -2584,7 +3352,7 @@ WorkNode::shards() const {
   return shards_;
 }
 
-// required int32 state = 5;
+// optional int32 state = 5;
 inline bool WorkNode::has_state() const {
   return (_has_bits_[0] & 0x00000008u) != 0;
 }
@@ -2753,6 +3521,64 @@ inline const ::google::protobuf::RepeatedPtrField< ::elasticfaiss::IndexConf >&
 MasterSnapshot::index() const {
   // @@protoc_insertion_point(field_list:elasticfaiss.MasterSnapshot.index)
   return index_;
+}
+
+// optional .elasticfaiss.ClusterSettings settings = 3;
+inline bool MasterSnapshot::has_settings() const {
+  return (_has_bits_[0] & 0x00000002u) != 0;
+}
+inline void MasterSnapshot::set_has_settings() {
+  _has_bits_[0] |= 0x00000002u;
+}
+inline void MasterSnapshot::clear_has_settings() {
+  _has_bits_[0] &= ~0x00000002u;
+}
+inline void MasterSnapshot::clear_settings() {
+  if (settings_ != NULL) settings_->Clear();
+  clear_has_settings();
+}
+inline const ::elasticfaiss::ClusterSettings& MasterSnapshot::_internal_settings() const {
+  return *settings_;
+}
+inline const ::elasticfaiss::ClusterSettings& MasterSnapshot::settings() const {
+  const ::elasticfaiss::ClusterSettings* p = settings_;
+  // @@protoc_insertion_point(field_get:elasticfaiss.MasterSnapshot.settings)
+  return p != NULL ? *p : *reinterpret_cast<const ::elasticfaiss::ClusterSettings*>(
+      &::elasticfaiss::_ClusterSettings_default_instance_);
+}
+inline ::elasticfaiss::ClusterSettings* MasterSnapshot::release_settings() {
+  // @@protoc_insertion_point(field_release:elasticfaiss.MasterSnapshot.settings)
+  clear_has_settings();
+  ::elasticfaiss::ClusterSettings* temp = settings_;
+  settings_ = NULL;
+  return temp;
+}
+inline ::elasticfaiss::ClusterSettings* MasterSnapshot::mutable_settings() {
+  set_has_settings();
+  if (settings_ == NULL) {
+    auto* p = CreateMaybeMessage<::elasticfaiss::ClusterSettings>(GetArenaNoVirtual());
+    settings_ = p;
+  }
+  // @@protoc_insertion_point(field_mutable:elasticfaiss.MasterSnapshot.settings)
+  return settings_;
+}
+inline void MasterSnapshot::set_allocated_settings(::elasticfaiss::ClusterSettings* settings) {
+  ::google::protobuf::Arena* message_arena = GetArenaNoVirtual();
+  if (message_arena == NULL) {
+    delete settings_;
+  }
+  if (settings) {
+    ::google::protobuf::Arena* submessage_arena = NULL;
+    if (message_arena != submessage_arena) {
+      settings = ::google::protobuf::internal::GetOwnedMessage(
+          message_arena, settings, submessage_arena);
+    }
+    set_has_settings();
+  } else {
+    clear_has_settings();
+  }
+  settings_ = settings;
+  // @@protoc_insertion_point(field_set_allocated:elasticfaiss.MasterSnapshot.settings)
 }
 
 // -------------------------------------------------------------------
@@ -4133,9 +4959,544 @@ inline void UpdateIndexResponse::set_allocated_error(::std::string* error) {
   // @@protoc_insertion_point(field_set_allocated:elasticfaiss.UpdateIndexResponse.error)
 }
 
+// -------------------------------------------------------------------
+
+// UpdateNodeRequest
+
+// required string peer_id = 1;
+inline bool UpdateNodeRequest::has_peer_id() const {
+  return (_has_bits_[0] & 0x00000001u) != 0;
+}
+inline void UpdateNodeRequest::set_has_peer_id() {
+  _has_bits_[0] |= 0x00000001u;
+}
+inline void UpdateNodeRequest::clear_has_peer_id() {
+  _has_bits_[0] &= ~0x00000001u;
+}
+inline void UpdateNodeRequest::clear_peer_id() {
+  peer_id_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  clear_has_peer_id();
+}
+inline const ::std::string& UpdateNodeRequest::peer_id() const {
+  // @@protoc_insertion_point(field_get:elasticfaiss.UpdateNodeRequest.peer_id)
+  return peer_id_.GetNoArena();
+}
+inline void UpdateNodeRequest::set_peer_id(const ::std::string& value) {
+  set_has_peer_id();
+  peer_id_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
+  // @@protoc_insertion_point(field_set:elasticfaiss.UpdateNodeRequest.peer_id)
+}
+#if LANG_CXX11
+inline void UpdateNodeRequest::set_peer_id(::std::string&& value) {
+  set_has_peer_id();
+  peer_id_.SetNoArena(
+    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
+  // @@protoc_insertion_point(field_set_rvalue:elasticfaiss.UpdateNodeRequest.peer_id)
+}
+#endif
+inline void UpdateNodeRequest::set_peer_id(const char* value) {
+  GOOGLE_DCHECK(value != NULL);
+  set_has_peer_id();
+  peer_id_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
+  // @@protoc_insertion_point(field_set_char:elasticfaiss.UpdateNodeRequest.peer_id)
+}
+inline void UpdateNodeRequest::set_peer_id(const char* value, size_t size) {
+  set_has_peer_id();
+  peer_id_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+      ::std::string(reinterpret_cast<const char*>(value), size));
+  // @@protoc_insertion_point(field_set_pointer:elasticfaiss.UpdateNodeRequest.peer_id)
+}
+inline ::std::string* UpdateNodeRequest::mutable_peer_id() {
+  set_has_peer_id();
+  // @@protoc_insertion_point(field_mutable:elasticfaiss.UpdateNodeRequest.peer_id)
+  return peer_id_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline ::std::string* UpdateNodeRequest::release_peer_id() {
+  // @@protoc_insertion_point(field_release:elasticfaiss.UpdateNodeRequest.peer_id)
+  if (!has_peer_id()) {
+    return NULL;
+  }
+  clear_has_peer_id();
+  return peer_id_.ReleaseNonDefaultNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline void UpdateNodeRequest::set_allocated_peer_id(::std::string* peer_id) {
+  if (peer_id != NULL) {
+    set_has_peer_id();
+  } else {
+    clear_has_peer_id();
+  }
+  peer_id_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), peer_id);
+  // @@protoc_insertion_point(field_set_allocated:elasticfaiss.UpdateNodeRequest.peer_id)
+}
+
+// optional int32 state = 2;
+inline bool UpdateNodeRequest::has_state() const {
+  return (_has_bits_[0] & 0x00000004u) != 0;
+}
+inline void UpdateNodeRequest::set_has_state() {
+  _has_bits_[0] |= 0x00000004u;
+}
+inline void UpdateNodeRequest::clear_has_state() {
+  _has_bits_[0] &= ~0x00000004u;
+}
+inline void UpdateNodeRequest::clear_state() {
+  state_ = 0;
+  clear_has_state();
+}
+inline ::google::protobuf::int32 UpdateNodeRequest::state() const {
+  // @@protoc_insertion_point(field_get:elasticfaiss.UpdateNodeRequest.state)
+  return state_;
+}
+inline void UpdateNodeRequest::set_state(::google::protobuf::int32 value) {
+  set_has_state();
+  state_ = value;
+  // @@protoc_insertion_point(field_set:elasticfaiss.UpdateNodeRequest.state)
+}
+
+// required int64 state_ms = 3;
+inline bool UpdateNodeRequest::has_state_ms() const {
+  return (_has_bits_[0] & 0x00000002u) != 0;
+}
+inline void UpdateNodeRequest::set_has_state_ms() {
+  _has_bits_[0] |= 0x00000002u;
+}
+inline void UpdateNodeRequest::clear_has_state_ms() {
+  _has_bits_[0] &= ~0x00000002u;
+}
+inline void UpdateNodeRequest::clear_state_ms() {
+  state_ms_ = GOOGLE_LONGLONG(0);
+  clear_has_state_ms();
+}
+inline ::google::protobuf::int64 UpdateNodeRequest::state_ms() const {
+  // @@protoc_insertion_point(field_get:elasticfaiss.UpdateNodeRequest.state_ms)
+  return state_ms_;
+}
+inline void UpdateNodeRequest::set_state_ms(::google::protobuf::int64 value) {
+  set_has_state_ms();
+  state_ms_ = value;
+  // @@protoc_insertion_point(field_set:elasticfaiss.UpdateNodeRequest.state_ms)
+}
+
+// repeated .elasticfaiss.Shard shards = 4;
+inline int UpdateNodeRequest::shards_size() const {
+  return shards_.size();
+}
+inline ::elasticfaiss::Shard* UpdateNodeRequest::mutable_shards(int index) {
+  // @@protoc_insertion_point(field_mutable:elasticfaiss.UpdateNodeRequest.shards)
+  return shards_.Mutable(index);
+}
+inline ::google::protobuf::RepeatedPtrField< ::elasticfaiss::Shard >*
+UpdateNodeRequest::mutable_shards() {
+  // @@protoc_insertion_point(field_mutable_list:elasticfaiss.UpdateNodeRequest.shards)
+  return &shards_;
+}
+inline const ::elasticfaiss::Shard& UpdateNodeRequest::shards(int index) const {
+  // @@protoc_insertion_point(field_get:elasticfaiss.UpdateNodeRequest.shards)
+  return shards_.Get(index);
+}
+inline ::elasticfaiss::Shard* UpdateNodeRequest::add_shards() {
+  // @@protoc_insertion_point(field_add:elasticfaiss.UpdateNodeRequest.shards)
+  return shards_.Add();
+}
+inline const ::google::protobuf::RepeatedPtrField< ::elasticfaiss::Shard >&
+UpdateNodeRequest::shards() const {
+  // @@protoc_insertion_point(field_list:elasticfaiss.UpdateNodeRequest.shards)
+  return shards_;
+}
+
+// -------------------------------------------------------------------
+
+// UpdateNodeResponse
+
+// required bool success = 1;
+inline bool UpdateNodeResponse::has_success() const {
+  return (_has_bits_[0] & 0x00000004u) != 0;
+}
+inline void UpdateNodeResponse::set_has_success() {
+  _has_bits_[0] |= 0x00000004u;
+}
+inline void UpdateNodeResponse::clear_has_success() {
+  _has_bits_[0] &= ~0x00000004u;
+}
+inline void UpdateNodeResponse::clear_success() {
+  success_ = false;
+  clear_has_success();
+}
+inline bool UpdateNodeResponse::success() const {
+  // @@protoc_insertion_point(field_get:elasticfaiss.UpdateNodeResponse.success)
+  return success_;
+}
+inline void UpdateNodeResponse::set_success(bool value) {
+  set_has_success();
+  success_ = value;
+  // @@protoc_insertion_point(field_set:elasticfaiss.UpdateNodeResponse.success)
+}
+
+// optional string redirect = 2;
+inline bool UpdateNodeResponse::has_redirect() const {
+  return (_has_bits_[0] & 0x00000001u) != 0;
+}
+inline void UpdateNodeResponse::set_has_redirect() {
+  _has_bits_[0] |= 0x00000001u;
+}
+inline void UpdateNodeResponse::clear_has_redirect() {
+  _has_bits_[0] &= ~0x00000001u;
+}
+inline void UpdateNodeResponse::clear_redirect() {
+  redirect_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  clear_has_redirect();
+}
+inline const ::std::string& UpdateNodeResponse::redirect() const {
+  // @@protoc_insertion_point(field_get:elasticfaiss.UpdateNodeResponse.redirect)
+  return redirect_.GetNoArena();
+}
+inline void UpdateNodeResponse::set_redirect(const ::std::string& value) {
+  set_has_redirect();
+  redirect_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
+  // @@protoc_insertion_point(field_set:elasticfaiss.UpdateNodeResponse.redirect)
+}
+#if LANG_CXX11
+inline void UpdateNodeResponse::set_redirect(::std::string&& value) {
+  set_has_redirect();
+  redirect_.SetNoArena(
+    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
+  // @@protoc_insertion_point(field_set_rvalue:elasticfaiss.UpdateNodeResponse.redirect)
+}
+#endif
+inline void UpdateNodeResponse::set_redirect(const char* value) {
+  GOOGLE_DCHECK(value != NULL);
+  set_has_redirect();
+  redirect_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
+  // @@protoc_insertion_point(field_set_char:elasticfaiss.UpdateNodeResponse.redirect)
+}
+inline void UpdateNodeResponse::set_redirect(const char* value, size_t size) {
+  set_has_redirect();
+  redirect_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+      ::std::string(reinterpret_cast<const char*>(value), size));
+  // @@protoc_insertion_point(field_set_pointer:elasticfaiss.UpdateNodeResponse.redirect)
+}
+inline ::std::string* UpdateNodeResponse::mutable_redirect() {
+  set_has_redirect();
+  // @@protoc_insertion_point(field_mutable:elasticfaiss.UpdateNodeResponse.redirect)
+  return redirect_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline ::std::string* UpdateNodeResponse::release_redirect() {
+  // @@protoc_insertion_point(field_release:elasticfaiss.UpdateNodeResponse.redirect)
+  if (!has_redirect()) {
+    return NULL;
+  }
+  clear_has_redirect();
+  return redirect_.ReleaseNonDefaultNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline void UpdateNodeResponse::set_allocated_redirect(::std::string* redirect) {
+  if (redirect != NULL) {
+    set_has_redirect();
+  } else {
+    clear_has_redirect();
+  }
+  redirect_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), redirect);
+  // @@protoc_insertion_point(field_set_allocated:elasticfaiss.UpdateNodeResponse.redirect)
+}
+
+// optional string error = 3;
+inline bool UpdateNodeResponse::has_error() const {
+  return (_has_bits_[0] & 0x00000002u) != 0;
+}
+inline void UpdateNodeResponse::set_has_error() {
+  _has_bits_[0] |= 0x00000002u;
+}
+inline void UpdateNodeResponse::clear_has_error() {
+  _has_bits_[0] &= ~0x00000002u;
+}
+inline void UpdateNodeResponse::clear_error() {
+  error_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  clear_has_error();
+}
+inline const ::std::string& UpdateNodeResponse::error() const {
+  // @@protoc_insertion_point(field_get:elasticfaiss.UpdateNodeResponse.error)
+  return error_.GetNoArena();
+}
+inline void UpdateNodeResponse::set_error(const ::std::string& value) {
+  set_has_error();
+  error_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
+  // @@protoc_insertion_point(field_set:elasticfaiss.UpdateNodeResponse.error)
+}
+#if LANG_CXX11
+inline void UpdateNodeResponse::set_error(::std::string&& value) {
+  set_has_error();
+  error_.SetNoArena(
+    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
+  // @@protoc_insertion_point(field_set_rvalue:elasticfaiss.UpdateNodeResponse.error)
+}
+#endif
+inline void UpdateNodeResponse::set_error(const char* value) {
+  GOOGLE_DCHECK(value != NULL);
+  set_has_error();
+  error_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
+  // @@protoc_insertion_point(field_set_char:elasticfaiss.UpdateNodeResponse.error)
+}
+inline void UpdateNodeResponse::set_error(const char* value, size_t size) {
+  set_has_error();
+  error_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+      ::std::string(reinterpret_cast<const char*>(value), size));
+  // @@protoc_insertion_point(field_set_pointer:elasticfaiss.UpdateNodeResponse.error)
+}
+inline ::std::string* UpdateNodeResponse::mutable_error() {
+  set_has_error();
+  // @@protoc_insertion_point(field_mutable:elasticfaiss.UpdateNodeResponse.error)
+  return error_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline ::std::string* UpdateNodeResponse::release_error() {
+  // @@protoc_insertion_point(field_release:elasticfaiss.UpdateNodeResponse.error)
+  if (!has_error()) {
+    return NULL;
+  }
+  clear_has_error();
+  return error_.ReleaseNonDefaultNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline void UpdateNodeResponse::set_allocated_error(::std::string* error) {
+  if (error != NULL) {
+    set_has_error();
+  } else {
+    clear_has_error();
+  }
+  error_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), error);
+  // @@protoc_insertion_point(field_set_allocated:elasticfaiss.UpdateNodeResponse.error)
+}
+
+// -------------------------------------------------------------------
+
+// UpdateClusterSettingRequest
+
+// required .elasticfaiss.ClusterSettings settings = 1;
+inline bool UpdateClusterSettingRequest::has_settings() const {
+  return (_has_bits_[0] & 0x00000001u) != 0;
+}
+inline void UpdateClusterSettingRequest::set_has_settings() {
+  _has_bits_[0] |= 0x00000001u;
+}
+inline void UpdateClusterSettingRequest::clear_has_settings() {
+  _has_bits_[0] &= ~0x00000001u;
+}
+inline void UpdateClusterSettingRequest::clear_settings() {
+  if (settings_ != NULL) settings_->Clear();
+  clear_has_settings();
+}
+inline const ::elasticfaiss::ClusterSettings& UpdateClusterSettingRequest::_internal_settings() const {
+  return *settings_;
+}
+inline const ::elasticfaiss::ClusterSettings& UpdateClusterSettingRequest::settings() const {
+  const ::elasticfaiss::ClusterSettings* p = settings_;
+  // @@protoc_insertion_point(field_get:elasticfaiss.UpdateClusterSettingRequest.settings)
+  return p != NULL ? *p : *reinterpret_cast<const ::elasticfaiss::ClusterSettings*>(
+      &::elasticfaiss::_ClusterSettings_default_instance_);
+}
+inline ::elasticfaiss::ClusterSettings* UpdateClusterSettingRequest::release_settings() {
+  // @@protoc_insertion_point(field_release:elasticfaiss.UpdateClusterSettingRequest.settings)
+  clear_has_settings();
+  ::elasticfaiss::ClusterSettings* temp = settings_;
+  settings_ = NULL;
+  return temp;
+}
+inline ::elasticfaiss::ClusterSettings* UpdateClusterSettingRequest::mutable_settings() {
+  set_has_settings();
+  if (settings_ == NULL) {
+    auto* p = CreateMaybeMessage<::elasticfaiss::ClusterSettings>(GetArenaNoVirtual());
+    settings_ = p;
+  }
+  // @@protoc_insertion_point(field_mutable:elasticfaiss.UpdateClusterSettingRequest.settings)
+  return settings_;
+}
+inline void UpdateClusterSettingRequest::set_allocated_settings(::elasticfaiss::ClusterSettings* settings) {
+  ::google::protobuf::Arena* message_arena = GetArenaNoVirtual();
+  if (message_arena == NULL) {
+    delete settings_;
+  }
+  if (settings) {
+    ::google::protobuf::Arena* submessage_arena = NULL;
+    if (message_arena != submessage_arena) {
+      settings = ::google::protobuf::internal::GetOwnedMessage(
+          message_arena, settings, submessage_arena);
+    }
+    set_has_settings();
+  } else {
+    clear_has_settings();
+  }
+  settings_ = settings;
+  // @@protoc_insertion_point(field_set_allocated:elasticfaiss.UpdateClusterSettingRequest.settings)
+}
+
+// -------------------------------------------------------------------
+
+// UpdateClusterSettingResponse
+
+// required bool success = 1;
+inline bool UpdateClusterSettingResponse::has_success() const {
+  return (_has_bits_[0] & 0x00000004u) != 0;
+}
+inline void UpdateClusterSettingResponse::set_has_success() {
+  _has_bits_[0] |= 0x00000004u;
+}
+inline void UpdateClusterSettingResponse::clear_has_success() {
+  _has_bits_[0] &= ~0x00000004u;
+}
+inline void UpdateClusterSettingResponse::clear_success() {
+  success_ = false;
+  clear_has_success();
+}
+inline bool UpdateClusterSettingResponse::success() const {
+  // @@protoc_insertion_point(field_get:elasticfaiss.UpdateClusterSettingResponse.success)
+  return success_;
+}
+inline void UpdateClusterSettingResponse::set_success(bool value) {
+  set_has_success();
+  success_ = value;
+  // @@protoc_insertion_point(field_set:elasticfaiss.UpdateClusterSettingResponse.success)
+}
+
+// optional string redirect = 2;
+inline bool UpdateClusterSettingResponse::has_redirect() const {
+  return (_has_bits_[0] & 0x00000001u) != 0;
+}
+inline void UpdateClusterSettingResponse::set_has_redirect() {
+  _has_bits_[0] |= 0x00000001u;
+}
+inline void UpdateClusterSettingResponse::clear_has_redirect() {
+  _has_bits_[0] &= ~0x00000001u;
+}
+inline void UpdateClusterSettingResponse::clear_redirect() {
+  redirect_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  clear_has_redirect();
+}
+inline const ::std::string& UpdateClusterSettingResponse::redirect() const {
+  // @@protoc_insertion_point(field_get:elasticfaiss.UpdateClusterSettingResponse.redirect)
+  return redirect_.GetNoArena();
+}
+inline void UpdateClusterSettingResponse::set_redirect(const ::std::string& value) {
+  set_has_redirect();
+  redirect_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
+  // @@protoc_insertion_point(field_set:elasticfaiss.UpdateClusterSettingResponse.redirect)
+}
+#if LANG_CXX11
+inline void UpdateClusterSettingResponse::set_redirect(::std::string&& value) {
+  set_has_redirect();
+  redirect_.SetNoArena(
+    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
+  // @@protoc_insertion_point(field_set_rvalue:elasticfaiss.UpdateClusterSettingResponse.redirect)
+}
+#endif
+inline void UpdateClusterSettingResponse::set_redirect(const char* value) {
+  GOOGLE_DCHECK(value != NULL);
+  set_has_redirect();
+  redirect_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
+  // @@protoc_insertion_point(field_set_char:elasticfaiss.UpdateClusterSettingResponse.redirect)
+}
+inline void UpdateClusterSettingResponse::set_redirect(const char* value, size_t size) {
+  set_has_redirect();
+  redirect_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+      ::std::string(reinterpret_cast<const char*>(value), size));
+  // @@protoc_insertion_point(field_set_pointer:elasticfaiss.UpdateClusterSettingResponse.redirect)
+}
+inline ::std::string* UpdateClusterSettingResponse::mutable_redirect() {
+  set_has_redirect();
+  // @@protoc_insertion_point(field_mutable:elasticfaiss.UpdateClusterSettingResponse.redirect)
+  return redirect_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline ::std::string* UpdateClusterSettingResponse::release_redirect() {
+  // @@protoc_insertion_point(field_release:elasticfaiss.UpdateClusterSettingResponse.redirect)
+  if (!has_redirect()) {
+    return NULL;
+  }
+  clear_has_redirect();
+  return redirect_.ReleaseNonDefaultNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline void UpdateClusterSettingResponse::set_allocated_redirect(::std::string* redirect) {
+  if (redirect != NULL) {
+    set_has_redirect();
+  } else {
+    clear_has_redirect();
+  }
+  redirect_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), redirect);
+  // @@protoc_insertion_point(field_set_allocated:elasticfaiss.UpdateClusterSettingResponse.redirect)
+}
+
+// optional string error = 3;
+inline bool UpdateClusterSettingResponse::has_error() const {
+  return (_has_bits_[0] & 0x00000002u) != 0;
+}
+inline void UpdateClusterSettingResponse::set_has_error() {
+  _has_bits_[0] |= 0x00000002u;
+}
+inline void UpdateClusterSettingResponse::clear_has_error() {
+  _has_bits_[0] &= ~0x00000002u;
+}
+inline void UpdateClusterSettingResponse::clear_error() {
+  error_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  clear_has_error();
+}
+inline const ::std::string& UpdateClusterSettingResponse::error() const {
+  // @@protoc_insertion_point(field_get:elasticfaiss.UpdateClusterSettingResponse.error)
+  return error_.GetNoArena();
+}
+inline void UpdateClusterSettingResponse::set_error(const ::std::string& value) {
+  set_has_error();
+  error_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
+  // @@protoc_insertion_point(field_set:elasticfaiss.UpdateClusterSettingResponse.error)
+}
+#if LANG_CXX11
+inline void UpdateClusterSettingResponse::set_error(::std::string&& value) {
+  set_has_error();
+  error_.SetNoArena(
+    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
+  // @@protoc_insertion_point(field_set_rvalue:elasticfaiss.UpdateClusterSettingResponse.error)
+}
+#endif
+inline void UpdateClusterSettingResponse::set_error(const char* value) {
+  GOOGLE_DCHECK(value != NULL);
+  set_has_error();
+  error_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
+  // @@protoc_insertion_point(field_set_char:elasticfaiss.UpdateClusterSettingResponse.error)
+}
+inline void UpdateClusterSettingResponse::set_error(const char* value, size_t size) {
+  set_has_error();
+  error_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+      ::std::string(reinterpret_cast<const char*>(value), size));
+  // @@protoc_insertion_point(field_set_pointer:elasticfaiss.UpdateClusterSettingResponse.error)
+}
+inline ::std::string* UpdateClusterSettingResponse::mutable_error() {
+  set_has_error();
+  // @@protoc_insertion_point(field_mutable:elasticfaiss.UpdateClusterSettingResponse.error)
+  return error_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline ::std::string* UpdateClusterSettingResponse::release_error() {
+  // @@protoc_insertion_point(field_release:elasticfaiss.UpdateClusterSettingResponse.error)
+  if (!has_error()) {
+    return NULL;
+  }
+  clear_has_error();
+  return error_.ReleaseNonDefaultNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline void UpdateClusterSettingResponse::set_allocated_error(::std::string* error) {
+  if (error != NULL) {
+    set_has_error();
+  } else {
+    clear_has_error();
+  }
+  error_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), error);
+  // @@protoc_insertion_point(field_set_allocated:elasticfaiss.UpdateClusterSettingResponse.error)
+}
+
 #ifdef __GNUC__
   #pragma GCC diagnostic pop
 #endif  // __GNUC__
+// -------------------------------------------------------------------
+
+// -------------------------------------------------------------------
+
+// -------------------------------------------------------------------
+
+// -------------------------------------------------------------------
+
 // -------------------------------------------------------------------
 
 // -------------------------------------------------------------------
@@ -4178,6 +5539,11 @@ template <> struct is_proto_enum< ::elasticfaiss::WorkNodeState> : ::std::true_t
 template <>
 inline const EnumDescriptor* GetEnumDescriptor< ::elasticfaiss::WorkNodeState>() {
   return ::elasticfaiss::WorkNodeState_descriptor();
+}
+template <> struct is_proto_enum< ::elasticfaiss::NodeRole> : ::std::true_type {};
+template <>
+inline const EnumDescriptor* GetEnumDescriptor< ::elasticfaiss::NodeRole>() {
+  return ::elasticfaiss::NodeRole_descriptor();
 }
 
 }  // namespace protobuf
